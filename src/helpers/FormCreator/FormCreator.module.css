@@ -1,0 +1,8 @@
+.errorMsg input {
+    color: red;
+    border: 2px solid red;
+}
+
+.errorMsg div {
+    color: red;
+}

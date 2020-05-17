@@ -1,0 +1,23 @@
+.logoSlogan {
+    display: flex;
+
+}
+
+.logoSloganText {
+    color: #636363;
+    font-weight: bold;
+    font-size: 27px;
+    font-family: "Roboto";
+    margin-left: 7px;
+}
+
+.logoSloganTextDot {
+    color: #007bff;
+}
+
+.logoDescription {
+    color: #989ea5;
+    font-weight: bolder;
+    font-size: 17px;
+    font-family: "Roboto";
+}
