@@ -6,11 +6,13 @@ import authReducer from "./reducers/authReducer";
 import thunk from "redux-thunk";
 import {reducer as formReducer} from "redux-form"
 import doctorReducer from "./reducers/doctorReducer";
+import registerReducer from "./reducers/registerReducer";
 // import appReducer from "./appReducer";
 
 const reducers = combineReducers({
     doctorReducer,
     authReducer,
+    registerReducer,
     form: formReducer,
     // appReducer
 });

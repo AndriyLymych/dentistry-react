@@ -8,6 +8,7 @@ import {Route, Switch} from "react-router-dom";
 import AboutUs from "./components/AboutUs/AboutUs";
 import Login from "./components/Login/Login";
 import OurDoctorsContainer from "./components/OurDoctors/OurDoctorsContainer";
+import Register from "./components/Register/Register";
 
 class App extends React.Component {
 
@@ -20,6 +21,7 @@ class App extends React.Component {
                         <Route path='/' exact render={() => <Main/>}/>
                         <Route path='/about-us' render={() => <AboutUs/>}/>
                         <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/register' render={() => <Register/>}/>
                         <Route path='/our-doctors' render={() => <OurDoctorsContainer/>}/>
                     </Switch>
 
