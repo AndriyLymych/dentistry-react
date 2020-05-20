@@ -17,6 +17,7 @@ import {withRouter} from "react-router-dom";
 import {initializeApp} from "./redux/reducers/appReducer";
 import {compose} from "redux";
 import Preloader from "./components/Preloader/Preloader";
+import MyProfileContainer from "./components/MyProfile/MyProfileContainer";
 
 
 class App extends React.Component {
@@ -44,6 +45,7 @@ class App extends React.Component {
                         <Route path='/our-doctors/:id' render={() => <DoctorProfileContainer/>}/>
                         <Route path='/our-services' exact render={() => <OurServicesContainer/>}/>
                         <Route path='/our-services/:id' render={() => <ServiceProfileContainer/>}/>
+                        <Route path='/my-profile/:id' render={() => <MyProfileContainer/>}/>
                     </Switch>
 
                     <Footer/>

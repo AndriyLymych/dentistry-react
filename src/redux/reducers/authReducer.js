@@ -78,14 +78,22 @@ export const logout = () => async dispatch => {
 
     const token = checkAccessTokenPresent();
 
-    await authAPI.logout(token);
+    if (token) {
 
-    localStorage.removeItem(tokenEnum.access_token);
-    localStorage.removeItem(tokenEnum.refresh_token);
+        await authAPI.logout(token);
 
-    dispatch(setMeDates(null));
+        localStorage.removeItem(tokenEnum.access_token);
+        localStorage.removeItem(tokenEnum.refresh_token);
 
-    dispatch(setIsAuth(false));
+        dispatch(setMeDates(null));
+
+        dispatch(setIsAuth(false));
+
+    } else {
+        console.log('no token')
+    }
+
+
 
 };
 

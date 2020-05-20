@@ -6,7 +6,7 @@ export const medicalServicesAPI = {
             return await axiosInstance.get('/services')
 
         } catch (e) {
-            alert(e.message)
+            console.log(e.message)
         }
 
 
@@ -17,7 +17,7 @@ export const medicalServicesAPI = {
             return await axiosInstance.get(`/services/${id}`)
 
         } catch (e) {
-            alert(e.message)
+            console.log(e.message)
         }
 
     }

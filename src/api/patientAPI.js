@@ -7,7 +7,7 @@ export const patientAPI = {
             return await axiosInstance.post(`/patients`, registerData)
 
         } catch (e) {
-            alert(e.message)
+            console.log(e.message)
         }
 
     }

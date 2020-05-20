@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import style from './NavMenu.module.css';
 
-const NavMenu = ({isAuth,me,logout}) => {
+const NavMenu = ({isAuth, me, logout}) => {
 
 
     return (
@@ -18,9 +18,10 @@ const NavMenu = ({isAuth,me,logout}) => {
                     <div>
                         <button><NavLink to={'/login'}>Увійти</NavLink></button>
                         <button><NavLink to={'/register'}>Реєстрація</NavLink></button>
-                    </div>:
+                    </div> :
                     <div>
-                        <div>hello, {me.name} {me.surname}</div>
+                        <div>Вітаємо, {me.name} {me.middleName}</div>
+                        <button><NavLink to={`/my-profile/${me.id}`}>Особистий кабінет</NavLink></button>
                         <button onClick={logout()}>logaut</button>
                     </div>
             }

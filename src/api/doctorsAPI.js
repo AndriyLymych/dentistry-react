@@ -7,7 +7,7 @@ export const doctorsAPI = {
             return axiosInstance.get('/doctors')
 
         } catch (e) {
-            alert(e.message)
+            console.log(e.message)
         }
 
     },
@@ -17,7 +17,7 @@ export const doctorsAPI = {
             return axiosInstance.get(`/doctors/${id}`)
 
         } catch (e) {
-            alert(e.message)
+            console.log(e.message)
         }
 
     }

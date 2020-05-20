@@ -11,7 +11,7 @@ export const authAPI = {
 
         } catch (e) {
 
-            alert(e.message)
+            console.log(e.message)
 
         }
     },
