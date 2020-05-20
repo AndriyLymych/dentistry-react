@@ -3,7 +3,10 @@ import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {registerPatient,getGenders} from "../../redux/reducers/registerReducer";
 import RegisterForm from "./RegisterForm/RegisterForm";
-import {getAllGenders, getIsRegisterSuccess} from "../../redux/selectors/registerSelectors";
+import {
+    getAllGendersSelector,
+    getIsRegisterSuccessSelector
+} from "../../redux/selectors/registerSelectors";
 
 const RegisterReduxForm = reduxForm({
     form: 'register'
@@ -43,8 +46,8 @@ class Register extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isRegisterSuccess: getIsRegisterSuccess(state),
-        genders: getAllGenders(state)
+        isRegisterSuccess: getIsRegisterSuccessSelector(state),
+        genders: getAllGendersSelector(state)
     }
 }
 

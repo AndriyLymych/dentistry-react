@@ -1,13 +1,12 @@
 import {authAPI} from "../../api/authAPI";
 import {stopSubmit} from "redux-form";
-import {setAuthDates} from "../../helpers/actionCreators/authAC";
+import {SET_IS_AUTH, SET_ME_INFO} from "../../constant/actionTypes/authAC";
+import {tokenEnum} from "../../constant/authConstant/token.enum";
+import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 
-export const SET_AUTH_DATE = 'dentistry-react/appReducer/set-auth-dates';
 
 const initialState = {
-    id: null,
-    access_token: '',
-    refresh_token: '',
+    me: null,
     isAuth: false
 };
 
@@ -15,11 +14,17 @@ const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case SET_AUTH_DATE :
+        case SET_ME_INFO :
 
             return {
                 ...state,
-                ...action.payload
+                me: action.payload
+            };
+
+        case SET_IS_AUTH :
+            return {
+                ...state,
+                isAuth: action.payload
             };
 
 
@@ -29,24 +34,58 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
+const setMeDates = payload => ({type: SET_ME_INFO, payload});
+const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
+
+export const getMeInfo = () => async dispatch => {
+    const token = checkAccessTokenPresent();
+
+    if (token) {
+
+        const meDates = await authAPI.meInfo(token);
+
+        dispatch(setMeDates(meDates.data));
+        dispatch(setIsAuth(true));
+
+    } else {
+        console.log('no token')
+    }
+};
 
 export const login = (email, password) => async dispatch => {
 
-    const authDates = await authAPI.login(email, password);
-    console.log(authDates.data);
-    dispatch(setAuthDates(authDates.data.id, authDates.data.access_token, authDates.data.refresh_token, true))
+    const authResult = await authAPI.login(email, password);
 
-    // if (res.resultCode === 0) {
-    //
-    //     dispatch(setAuthDates());
-    //
-    // } else {
-    //
-    //     if (res.resultCode === 10) {
-    //         dispatch(getCaptcha())
-    //     }
-    //     dispatch(stopSubmit('login', {_error: res.messages}))
-    // }
+    localStorage.setItem(tokenEnum.access_token, authResult.data[tokenEnum.access_token]);
+    localStorage.setItem(tokenEnum.refresh_token, authResult.data[tokenEnum.refresh_token]);
+
+    const token = checkAccessTokenPresent();
+
+    if (token) {
+
+        const meDates = await authAPI.meInfo(token);
+
+        dispatch(setMeDates(meDates.data));
+        dispatch(setIsAuth(true));
+
+    } else {
+        console.log('no token')
+    }
+
+};
+
+export const logout = () => async dispatch => {
+
+    const token = checkAccessTokenPresent();
+
+    await authAPI.logout(token);
+
+    localStorage.removeItem(tokenEnum.access_token);
+    localStorage.removeItem(tokenEnum.refresh_token);
+
+    dispatch(setMeDates(null));
+
+    dispatch(setIsAuth(false));
 
 };
 

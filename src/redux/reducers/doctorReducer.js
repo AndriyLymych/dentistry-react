@@ -9,7 +9,6 @@ const initialState = {
 };
 
 
-
 const doctorReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_DOCTORS :
@@ -32,15 +31,15 @@ export const setDoctors = doctors => ({type: SET_DOCTORS, doctors});
 
 export const setIsLoading = isLoading => ({type: SET_IS_LOADING, isLoading});
 
-//TODO async await
-export const getDoctors = () => dispatch => {
+export const getDoctors = () => async dispatch => {
     dispatch(setIsLoading(true));
 
-    doctorsAPI.getDoctors().then(res => {
-        dispatch(setIsLoading(false));
-        console.log(res.data);
-        dispatch(setDoctors(res.data));
-    })
+    let doctors = await doctorsAPI.getDoctors();
+
+    dispatch(setDoctors(doctors.data));
+
+    dispatch(setIsLoading(false));
+
 };
 
 export default doctorReducer

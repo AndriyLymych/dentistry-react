@@ -1,19 +1,21 @@
 import React from "react";
+import Preloader from "../Preloader/Preloader";
+import OurDoctorsCard from "./OurDoctorsCard/OurDoctorsCard";
 
-const OurDoctors = (props) => {
+const OurDoctors = ({isLoading, doctors}) => {
     return (
         <div>
-            <div>Лікарі:</div>
+            {
+                isLoading ?
+                    <Preloader/> :
 
-            {props.doctors.map(doctor =>
-                <div key={doctor.id}>
-                    <h1>{doctor.name}</h1>
-                    <h1>{doctor.surname}</h1>
-                    <img src={doctor.avatar} alt="" height={'100px'} width={'100px'}/>
-                    <div>{doctor.UserSpeciality.label}</div>
-                </div>
-            )}
-        </div>
+                    <div>
+                        <div>Нашы лыкары</div>
+                        {doctors.map(doctor => <OurDoctorsCard key={doctor.id} doctor={doctor}/>)}
+                    </div>
+
+            }
+            </div>
     )
 }
 

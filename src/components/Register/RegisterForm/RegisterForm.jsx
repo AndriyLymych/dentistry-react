@@ -3,7 +3,8 @@ import {Field} from 'redux-form'
 
 const RegisterForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting,genders} = props
+    const {handleSubmit, pristine, reset, submitting,genders} = props;
+
     return (
         <form onSubmit={handleSubmit}>
             <div>

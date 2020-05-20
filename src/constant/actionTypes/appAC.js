@@ -1,0 +1,1 @@
+export const INITIALIZED_PROGRESS = 'dentistry-react/appReducer/initialized-progress';

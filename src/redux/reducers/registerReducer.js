@@ -39,9 +39,11 @@ export const setGenders = payload => ({type: SET_GENDERS, payload});
 
 export const registerPatient = payload => async dispatch => {
 
+    dispatch(setIsRegisterSuccess(true));
+
     await patientAPI.registerPatient(payload);
 
-    dispatch(setIsRegisterSuccess(true));
+    dispatch(setIsRegisterSuccess(false));
 
 };
 
