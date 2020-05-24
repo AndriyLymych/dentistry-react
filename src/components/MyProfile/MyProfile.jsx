@@ -1,5 +1,6 @@
 import React from "react";
 import {NavLink, Redirect} from "react-router-dom";
+import MyReceptionsContainer from "../MyReceptions/MyReceptionsContainer";
 
 const MyProfile = ({id,isAuth,me}) => {
     // TODO input type data
@@ -19,6 +20,7 @@ const MyProfile = ({id,isAuth,me}) => {
 
                     <Redirect to={'/login'}/>
             }
+            <MyReceptionsContainer/>
         </div>
     )
 };

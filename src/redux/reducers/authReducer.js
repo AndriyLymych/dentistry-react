@@ -3,6 +3,7 @@ import {stopSubmit} from "redux-form";
 import {SET_IS_AUTH, SET_ME_INFO} from "../../constant/actionTypes/authAC";
 import {tokenEnum} from "../../constant/authConstant/token.enum";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
+import {setInitializedProgress} from "./appReducer";
 
 
 const initialState = {
@@ -38,6 +39,7 @@ const setMeDates = payload => ({type: SET_ME_INFO, payload});
 const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
 
 export const getMeInfo = () => async dispatch => {
+
     const token = checkAccessTokenPresent();
 
     if (token) {
@@ -56,21 +58,19 @@ export const login = (email, password) => async dispatch => {
 
     const authResult = await authAPI.login(email, password);
 
+
     localStorage.setItem(tokenEnum.access_token, authResult.data[tokenEnum.access_token]);
     localStorage.setItem(tokenEnum.refresh_token, authResult.data[tokenEnum.refresh_token]);
 
     const token = checkAccessTokenPresent();
+//TODO при частій логінації meDates = undefined
 
-    if (token) {
+    const meDates = await authAPI.meInfo(token);
 
-        const meDates = await authAPI.meInfo(token);
 
-        dispatch(setMeDates(meDates.data));
-        dispatch(setIsAuth(true));
+    dispatch(setMeDates(meDates.data));
+    dispatch(setIsAuth(true));
 
-    } else {
-        console.log('no token')
-    }
 
 };
 
@@ -78,20 +78,14 @@ export const logout = () => async dispatch => {
 
     const token = checkAccessTokenPresent();
 
-    if (token) {
+    await authAPI.logout(token);
 
-        await authAPI.logout(token);
+    localStorage.removeItem(tokenEnum.access_token);
+    localStorage.removeItem(tokenEnum.refresh_token);
 
-        localStorage.removeItem(tokenEnum.access_token);
-        localStorage.removeItem(tokenEnum.refresh_token);
+    dispatch(setIsAuth(false));
 
-        dispatch(setMeDates(null));
-
-        dispatch(setIsAuth(false));
-
-    } else {
-        console.log('no token')
-    }
+    dispatch(setMeDates(null));
 
 
 

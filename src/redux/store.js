@@ -8,6 +8,8 @@ import serviceReducer from "./reducers/serviceReducer";
 import serviceProfileReducer from "./reducers/serviceProfileReducer";
 import doctorProfileReducer from "./reducers/doctorProfileReducer";
 import appReducer from "./reducers/appReducer";
+import myReceptionReducer from "./reducers/myReceptionReducer";
+import receptionReducer from "./reducers/receptionReducer";
 
 const reducers = combineReducers({
     doctorReducer,
@@ -17,7 +19,9 @@ const reducers = combineReducers({
     serviceProfileReducer,
     form: formReducer,
     doctorProfileReducer,
-    appReducer
+    appReducer,
+    myReceptionReducer,
+    receptionReducer
 });
 
 
@@ -28,5 +32,3 @@ const store = createStore(reducers, /* preloadedState, */ composeEnhancers(apply
 
 
 export default store
-
-window.state = store.getState();

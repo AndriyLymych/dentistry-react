@@ -32,6 +32,7 @@ export const setDoctors = doctors => ({type: SET_DOCTORS, doctors});
 export const setIsLoading = isLoading => ({type: SET_IS_LOADING, isLoading});
 
 export const getDoctors = () => async dispatch => {
+
     dispatch(setIsLoading(true));
 
     let doctors = await doctorsAPI.getDoctors();

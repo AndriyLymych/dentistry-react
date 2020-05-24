@@ -2,6 +2,7 @@ import {SET_SERVICE_PROFILE, SET_LOADING_PROGRESS} from "../../constant/actionTy
 import {medicalServicesAPI} from "../../api/medicalServicesAPI";
 
 const initialState = {
+    services: [],
     serviceProfile: [],
     isLoading: false
 };
@@ -27,8 +28,8 @@ const serviceProfileReducer = (state = initialState, action) => {
     }
 };
 
-const setServiceProfile = payload => ({type:SET_SERVICE_PROFILE,payload});
-const isServiceProfileLoading = payload => ({type:SET_LOADING_PROGRESS,payload});
+const setServiceProfile = payload => ({type: SET_SERVICE_PROFILE, payload});
+const isServiceProfileLoading = payload => ({type: SET_LOADING_PROGRESS, payload});
 
 export const getServiceProfile = id => async dispatch => {
 
@@ -41,7 +42,7 @@ export const getServiceProfile = id => async dispatch => {
     dispatch(isServiceProfileLoading(false));
 
 
-
 };
+
 
 export default serviceProfileReducer;

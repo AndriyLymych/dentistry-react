@@ -22,7 +22,7 @@ const NavMenu = ({isAuth, me, logout}) => {
                     <div>
                         <div>Вітаємо, {me.name} {me.middleName}</div>
                         <button><NavLink to={`/my-profile/${me.id}`}>Особистий кабінет</NavLink></button>
-                        <button onClick={logout()}>logaut</button>
+                        <button onClick={logout}>logaut</button>
                     </div>
             }
         </div>

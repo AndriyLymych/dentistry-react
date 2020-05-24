@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 
     return {
         isAuth: isAuthSelector(state),
-        me: meInfoSelector(state)
+        me: meInfoSelector(state),
     }
 };
 

@@ -36,7 +36,7 @@ export const authAPI = {
 
         try {
 
-            return axiosInstance.post(`auth/logout`, {
+            return axiosInstance.post(`auth/logout`, {},{
                 headers: {
                     [headerEnum.AUTHORIZATION]: access_token
                 }

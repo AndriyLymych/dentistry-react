@@ -38,6 +38,7 @@ export const setGenders = payload => ({type: SET_GENDERS, payload});
 
 
 export const registerPatient = payload => async dispatch => {
+    //TODO поправити умову в компоненті реєстрації
 
     dispatch(setIsRegisterSuccess(true));
 
