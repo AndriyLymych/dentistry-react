@@ -45,6 +45,7 @@ const DoctorProfile = (
                         <div>
                             <img src={avatar} alt="ava"/>
 
+
                         </div>
                         <p>{name}</p>
                         <p>{middleName}</p>
