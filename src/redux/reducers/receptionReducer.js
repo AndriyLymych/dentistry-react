@@ -1,4 +1,3 @@
-import {patientAPI} from "../../api/patientAPI";
 import {SET_IS_RECEPTION_SUCCESS} from "../../constant/actionTypes/receptionAC";
 import {receptionAPI} from "../../api/receptionAPI";
 

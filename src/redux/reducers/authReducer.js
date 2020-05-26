@@ -3,7 +3,6 @@ import {stopSubmit} from "redux-form";
 import {SET_IS_AUTH, SET_ME_INFO} from "../../constant/actionTypes/authAC";
 import {tokenEnum} from "../../constant/authConstant/token.enum";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
-import {setInitializedProgress} from "./appReducer";
 
 
 const initialState = {

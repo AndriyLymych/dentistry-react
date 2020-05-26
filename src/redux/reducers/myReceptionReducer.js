@@ -1,5 +1,4 @@
 import {SET_MY_RECEPTIONS, SET_LOADING_PROGRESS} from "../../constant/actionTypes/myReceptionsAC";
-import {SET_IS_AUTH, SET_ME_INFO} from "../../constant/actionTypes/authAC";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {receptionAPI} from "../../api/receptionAPI";
 
