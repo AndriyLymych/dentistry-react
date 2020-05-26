@@ -3,8 +3,7 @@ import Preloader from "../../../Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 import CommentCard from "./CommentCard/CommentCard";
 import style from './DoctoreProfile.module.css'
-import {reduxForm} from "redux-form";
-import RegisterForm from "../../../Register/RegisterForm/RegisterForm";
+import {reduxForm,} from "redux-form";
 import CommentForm from "./CommentForm/CommentForm";
 
 const CommentReduxForm = reduxForm({
@@ -24,12 +23,17 @@ const DoctorProfile = (
         commentInfo,
         pageCount,
         currentPage,
-        onChangePage
+        onChangePage,
+        sendComment,
+        doctorId,
+        isAuth
 
 
     }) => {
 
-    console.log(currentPage + 1);
+    const onSendComment = data => {
+        sendComment(data, doctorId)
+    };
 
     return (
         <div>
@@ -57,8 +61,10 @@ const DoctorProfile = (
                             isLoadingComments ?
                                 <Preloader/> :
                                 <div>
-                                    <CommentReduxForm className={style.area}/>
+                                    <CommentReduxForm onSubmit={onSendComment} isAuth={isAuth}/>
                                     <div>
+
+                                        <br/>
                                         {
                                             commentInfo.map(
                                                 comment =>
@@ -71,7 +77,7 @@ const DoctorProfile = (
                                             )
                                         }
                                     </div>
-                                    {currentPage>1?
+                                    {currentPage > 1 ?
                                         <button onClick={() => {
                                             onChangePage(currentPage = currentPage - 1)
                                         }}>Показати попередні</button>

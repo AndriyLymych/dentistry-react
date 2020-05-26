@@ -5,11 +5,12 @@ import {isLoadingProfileSelector, doctorProfileSelector} from "../../../../redux
 import {getDoctorProfile} from "../../../../redux/reducers/doctorProfileReducer";
 import {withRouter} from "react-router-dom";
 import DoctorProfile from "./DoctorProfile";
-import {getCommentsFromDB} from "../../../../redux/reducers/commentReducer";
+import {getCommentsFromDB, sendComment} from "../../../../redux/reducers/commentReducer";
 import {
     commentInfoSelector, commentsCountOnPageSelector, currentPageSelector,
     isLoadingCommentsSelector, pageCountSelector,
 } from "../../../../redux/selectors/commentSelectors";
+import {isAuthSelector} from "../../../../redux/selectors/authSelectors";
 
 
 
@@ -25,6 +26,7 @@ class DoctorProfileContainer extends React.Component {
         this.props.getCommentsFromDB(id,this.props.commentsCountOnPage,this.props.currentPage);
 
     }
+
 
     onChangePage = page => {
         const id = this.props.match.params.id;
@@ -43,6 +45,9 @@ class DoctorProfileContainer extends React.Component {
             currentPage={this.props.currentPage}
             getNewPortionOfComments={this.props.getCommentsFromDB}
             onChangePage={this.onChangePage}
+            doctorId={this.props.match.params.id}
+            sendComment={this.props.sendComment}
+            isAuth={this.props.isAuth}
         />
     }
 
@@ -57,9 +62,10 @@ const mapStateToProps = state => {
         pageCount: pageCountSelector(state),
         commentsCountOnPage: commentsCountOnPageSelector(state),
         currentPage: currentPageSelector(state),
+        isAuth: isAuthSelector(state)
     }
 };
 
 const DoctorProfileContainerWithRouter = withRouter(DoctorProfileContainer);
 
-export default compose(connect(mapStateToProps, {getDoctorProfile,getCommentsFromDB})(DoctorProfileContainerWithRouter));
+export default compose(connect(mapStateToProps, {getDoctorProfile,getCommentsFromDB,sendComment})(DoctorProfileContainerWithRouter));

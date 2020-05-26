@@ -1,9 +1,11 @@
 import {
+    ADD_NEW_COMMENT,
     SET_COMMENT_INFO, SET_CURRENT_PAGE,
     SET_LOADING_PROGRESS,
     SET_TOTAL_PAGES_COUNT
 } from "../../constant/actionTypes/commentAC";
 import {commentAPI} from "../../api/commentAPI";
+import {reset} from "redux-form";
 
 
 const initialState = {
@@ -38,6 +40,7 @@ const commentReducer = (
                 currentPage: action.payload
             };
 
+
         case SET_LOADING_PROGRESS:
             return {
                 ...state,
@@ -57,6 +60,8 @@ export const setIsLoading = payload => ({type: SET_LOADING_PROGRESS, payload});
 
 export const setCurrentPage = payload => ({type: SET_CURRENT_PAGE, payload});
 
+export const addNewComment = payload => ({type: ADD_NEW_COMMENT, payload});
+
 
 export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async dispatch => {
 
@@ -71,6 +76,17 @@ export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async
     dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
 
     dispatch(setIsLoading(false));
+
+};
+
+export const sendComment = (data, doctor_id) => async dispatch => {
+
+
+ const comment = await commentAPI.postComment(data, doctor_id);
+
+    dispatch(setCommentInfo(comment.data));
+
+    dispatch(reset('comment'))
 
 };
 
