@@ -1,5 +1,4 @@
 import {
-    ADD_NEW_COMMENT,
     SET_COMMENT_INFO, SET_CURRENT_PAGE,
     SET_LOADING_PROGRESS,
     SET_TOTAL_PAGES_COUNT
@@ -11,7 +10,7 @@ import {reset} from "redux-form";
 const initialState = {
     commentInfo: [],
     pageCount: 0,
-    commentsCountOnPage: 3,
+    commentsCountOnPage: 5,
     currentPage: 1,
     isLoading: false
 };
@@ -60,8 +59,6 @@ export const setIsLoading = payload => ({type: SET_LOADING_PROGRESS, payload});
 
 export const setCurrentPage = payload => ({type: SET_CURRENT_PAGE, payload});
 
-export const addNewComment = payload => ({type: ADD_NEW_COMMENT, payload});
-
 
 export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async dispatch => {
 
@@ -82,11 +79,18 @@ export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async
 export const sendComment = (data, doctor_id) => async dispatch => {
 
 
- const comment = await commentAPI.postComment(data, doctor_id);
+    const comment = await commentAPI.postComment(data, doctor_id);
 
     dispatch(setCommentInfo(comment.data));
 
     dispatch(reset('comment'))
+
+};
+export const deleteChosenComment = (comment_id, doctorId) => async dispatch => {
+
+
+    const comment = await commentAPI.deleteComment(comment_id, doctorId);
+    dispatch(setCommentInfo(comment.data));
 
 };
 

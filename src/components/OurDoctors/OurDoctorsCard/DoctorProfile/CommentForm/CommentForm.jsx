@@ -1,5 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import style from './CommentForm.module.css';
 
 const CommentForm = props => {
 
@@ -12,7 +13,9 @@ const CommentForm = props => {
                     {
                         isAuth?
                             <div>
+                            <div>
                                 <label>Напишіть відгук</label>
+                            </div>
 
                                 <Field
 
@@ -21,18 +24,11 @@ const CommentForm = props => {
                                     placeholder="Введіть ваше повыдомлення..."
                                     autoFocus={true}
                                 />
-                                <div>
-                                    <button type="submit" disabled={pristine || submitting}>
-                                        Надіслати
-                                    </button>
-                                    <button type="button" disabled={pristine || submitting} onClick={reset}>
-                                        Очистити текст
-                                    </button>
-                                </div>
+
                             </div>
                            :
                             <div>
-                                <div color={'red'}>Залишати коментары можуть лиш авторизованы користувачы</div>
+                                <div className={style.noAuth}>Залишати коментары можуть лиш авторизованы користувачы</div>
                                 <Field
                                     component="textarea"
                                     disabled
@@ -40,6 +36,22 @@ const CommentForm = props => {
                             </div>
 
                     }
+
+                <div>
+                    {isAuth ?
+                        <div>
+                            <button type="submit" disabled={pristine || submitting}>
+                                Надіслати
+                            </button>
+                            <button type="button" disabled={pristine || submitting} onClick={reset}>
+                                Очистити текст
+                            </button>
+                        </div>:
+                        <button type="submit" disabled>
+                            Надіслати
+                        </button>
+                    }
+                </div>
                 </div>
 
 

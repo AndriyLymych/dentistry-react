@@ -31,5 +31,22 @@ export const commentAPI = {
         }
 
     },
+    deleteComment: async (comment_id,doctor_id) => {
+
+        try {
+            const token = checkAccessTokenPresent();
+
+            return await axiosInstance.delete(`/comments/${comment_id}?doc=${doctor_id}`, {
+                headers: {
+
+                    [headerEnum.AUTHORIZATION]: token
+                }
+            })
+        } catch (e) {
+
+            console.log(e.message)
+
+        }
+    }
 
 };

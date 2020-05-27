@@ -26,13 +26,19 @@ const DoctorProfile = (
         onChangePage,
         sendComment,
         doctorId,
-        isAuth
+        isAuth,
+        me,
+        deleteChosenComment
 
 
     }) => {
 
     const onSendComment = data => {
         sendComment(data, doctorId)
+    };
+
+    const onCommentDelete = (comment_id, doctor_id) => {
+        deleteChosenComment(comment_id, doctor_id)
     };
 
     return (
@@ -69,10 +75,13 @@ const DoctorProfile = (
                                             commentInfo.map(
                                                 comment =>
                                                     <CommentCard
+                                                        commentId={comment.id}
                                                         commentText={comment.commentText}
                                                         commentTime={comment.created_at}
                                                         commentator={comment["Commentator"]}
-
+                                                        isOwner={me.id === comment.user_id}
+                                                        onCommentDelete={onCommentDelete}
+                                                        doctorId={doctorId}
                                                     />
                                             )
                                         }

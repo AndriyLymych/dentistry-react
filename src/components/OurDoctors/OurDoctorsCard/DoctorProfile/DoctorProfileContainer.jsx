@@ -5,15 +5,12 @@ import {isLoadingProfileSelector, doctorProfileSelector} from "../../../../redux
 import {getDoctorProfile} from "../../../../redux/reducers/doctorProfileReducer";
 import {withRouter} from "react-router-dom";
 import DoctorProfile from "./DoctorProfile";
-import {getCommentsFromDB, sendComment} from "../../../../redux/reducers/commentReducer";
+import {deleteChosenComment, getCommentsFromDB, sendComment} from "../../../../redux/reducers/commentReducer";
 import {
     commentInfoSelector, commentsCountOnPageSelector, currentPageSelector,
     isLoadingCommentsSelector, pageCountSelector,
 } from "../../../../redux/selectors/commentSelectors";
-import {isAuthSelector} from "../../../../redux/selectors/authSelectors";
-
-
-
+import {isAuthSelector, meInfoSelector} from "../../../../redux/selectors/authSelectors";
 
 
 class DoctorProfileContainer extends React.Component {
@@ -23,7 +20,7 @@ class DoctorProfileContainer extends React.Component {
         const id = this.props.match.params.id;
 
         this.props.getDoctorProfile(id);
-        this.props.getCommentsFromDB(id,this.props.commentsCountOnPage,this.props.currentPage);
+        this.props.getCommentsFromDB(id, this.props.commentsCountOnPage, this.props.currentPage);
 
     }
 
@@ -31,9 +28,10 @@ class DoctorProfileContainer extends React.Component {
     onChangePage = page => {
         const id = this.props.match.params.id;
 
-        this.props.getCommentsFromDB(id,this.props.commentsCountOnPage, page)
+        this.props.getCommentsFromDB(id, this.props.commentsCountOnPage, page)
 
     };
+
     render() {
         return <DoctorProfile
             doctorProfile={this.props.doctorProfile}
@@ -48,6 +46,8 @@ class DoctorProfileContainer extends React.Component {
             doctorId={this.props.match.params.id}
             sendComment={this.props.sendComment}
             isAuth={this.props.isAuth}
+            me={this.props.me}
+            deleteChosenComment={this.props.deleteChosenComment}
         />
     }
 
@@ -62,10 +62,16 @@ const mapStateToProps = state => {
         pageCount: pageCountSelector(state),
         commentsCountOnPage: commentsCountOnPageSelector(state),
         currentPage: currentPageSelector(state),
-        isAuth: isAuthSelector(state)
+        isAuth: isAuthSelector(state),
+        me: meInfoSelector(state)
     }
 };
 
 const DoctorProfileContainerWithRouter = withRouter(DoctorProfileContainer);
 
-export default compose(connect(mapStateToProps, {getDoctorProfile,getCommentsFromDB,sendComment})(DoctorProfileContainerWithRouter));
+export default compose(connect(mapStateToProps, {
+    getDoctorProfile,
+    getCommentsFromDB,
+    sendComment,
+    deleteChosenComment
+})(DoctorProfileContainerWithRouter));
