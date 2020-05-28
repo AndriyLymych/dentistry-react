@@ -5,12 +5,17 @@ import {isLoadingProfileSelector, doctorProfileSelector} from "../../../../redux
 import {getDoctorProfile} from "../../../../redux/reducers/doctorProfileReducer";
 import {withRouter} from "react-router-dom";
 import DoctorProfile from "./DoctorProfile";
-import {deleteChosenComment, getCommentsFromDB, sendComment} from "../../../../redux/reducers/commentReducer";
+import {
+    deleteChosenComment,
+    editChosenComment,
+    getCommentsFromDB,
+    sendComment
+} from "../../../../redux/reducers/commentReducer";
 import {
     commentInfoSelector, commentsCountOnPageSelector, currentPageSelector,
     isLoadingCommentsSelector, pageCountSelector,
 } from "../../../../redux/selectors/commentSelectors";
-import {isAuthSelector, meInfoSelector} from "../../../../redux/selectors/authSelectors";
+import {isAuthSelector, meInfoSelector, myIDSelector} from "../../../../redux/selectors/authSelectors";
 
 
 class DoctorProfileContainer extends React.Component {
@@ -46,8 +51,9 @@ class DoctorProfileContainer extends React.Component {
             doctorId={this.props.match.params.id}
             sendComment={this.props.sendComment}
             isAuth={this.props.isAuth}
-            me={this.props.me}
+            myID={this.props.myID}
             deleteChosenComment={this.props.deleteChosenComment}
+            editChosenComment={this.props.editChosenComment}
         />
     }
 
@@ -63,7 +69,7 @@ const mapStateToProps = state => {
         commentsCountOnPage: commentsCountOnPageSelector(state),
         currentPage: currentPageSelector(state),
         isAuth: isAuthSelector(state),
-        me: meInfoSelector(state)
+        myID: myIDSelector(state)
     }
 };
 
@@ -73,5 +79,6 @@ export default compose(connect(mapStateToProps, {
     getDoctorProfile,
     getCommentsFromDB,
     sendComment,
-    deleteChosenComment
+    deleteChosenComment,
+    editChosenComment
 })(DoctorProfileContainerWithRouter));

@@ -5,6 +5,7 @@ import CommentCard from "./CommentCard/CommentCard";
 import style from './DoctoreProfile.module.css'
 import {reduxForm,} from "redux-form";
 import CommentForm from "./CommentForm/CommentForm";
+import {configs} from "../../../../config/configs";
 
 const CommentReduxForm = reduxForm({
     form: 'comment'
@@ -17,7 +18,9 @@ const DoctorProfile = (
             name,
             middleName,
             surname,
-            avatar
+            avatar,
+            age,
+            city
         },
         isLoadingComments,
         commentInfo,
@@ -27,8 +30,9 @@ const DoctorProfile = (
         sendComment,
         doctorId,
         isAuth,
-        me,
-        deleteChosenComment
+        myID,
+        deleteChosenComment,
+        editChosenComment
 
 
     }) => {
@@ -52,14 +56,14 @@ const DoctorProfile = (
                             </button>
                         </NavLink>
 
-                        <div>
-                            <img src={avatar} alt="ava"/>
-
-
+                        <div >
+                            <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`} alt="ava"/>
                         </div>
-                        <p>{name}</p>
-                        <p>{middleName}</p>
-                        <p>{surname}</p>
+                        <h2>{name}</h2>
+                        <h2>{middleName}</h2>
+                        <h2>{surname}</h2>
+                        <h3>{age}</h3>
+                        <h4>{city}</h4>
 
                         <br/><br/><br/><br/>
 
@@ -79,9 +83,11 @@ const DoctorProfile = (
                                                         commentText={comment.commentText}
                                                         commentTime={comment.created_at}
                                                         commentator={comment["Commentator"]}
-                                                        isOwner={me.id === comment.user_id}
+                                                        isOwner={myID === comment.user_id}
                                                         onCommentDelete={onCommentDelete}
                                                         doctorId={doctorId}
+                                                        editChosenComment={editChosenComment}
+                                                        isAuth={isAuth}
                                                     />
                                             )
                                         }

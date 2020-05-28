@@ -9,14 +9,8 @@ import {receptionPatient} from "../../redux/reducers/receptionReducer";
 import {isAuthSelector, meInfoSelector} from "../../redux/selectors/authSelectors";
 
 let ReceptionReduxForm = reduxForm({
-    form: 'reception',
-    // initialValues: {
-    //     email: connect(state => {state.authReducer.email}),
-    //     name: 'Bla bla bla',
-    //     middle_name:'sss',
-    //     surname:'mmm',
-    //     age:12
-    // }
+    form: 'reception'
+
 })(ReceptionForm);
 
 ReceptionReduxForm = connect(
@@ -29,7 +23,8 @@ ReceptionReduxForm = connect(
 
 class Reception extends React.Component {
     componentDidMount() {
-        this.props.getServicesFromDB()
+       this.props.getServicesFromDB();
+
     }
 
     render() {

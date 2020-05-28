@@ -94,4 +94,13 @@ export const deleteChosenComment = (comment_id, doctorId) => async dispatch => {
 
 };
 
+export const editChosenComment = (comment_id, doctorId, newComment) => async dispatch => {
+
+
+    const comment = await commentAPI.editComment(comment_id, doctorId, newComment);
+    console.log(comment);
+    dispatch(setCommentInfo(comment.data));
+
+};
+
 export default commentReducer

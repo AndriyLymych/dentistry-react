@@ -3,8 +3,10 @@
 }
 .edit{
     color: green;
+    background: transparent;
 }
 
 .delete{
     color: red;
+    background: transparent;
 }

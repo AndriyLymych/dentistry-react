@@ -1,19 +1,26 @@
 import React from "react";
 import Preloader from "../Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
-const MyReceptions = ({isLoading,receptions,isAuth}) =>{
+const MyReceptions = ({isLoading, receptions, isAuth}) => {
     return (
         <div>
-            {isLoading && isAuth  ? <Preloader/>:
+            {isLoading && isAuth ? <Preloader/> :
                 <div>
-                    <ul>
-
-                        {/*<input id="datetime" type="datetime-local"/>*/}
-                        <div>{receptions.map(item=><div>
-                            <div>{item.phone_number}</div>
-                            <div>{item.name}</div>
-                        </div>)}</div>
-                    </ul>
+                    {
+                        receptions.length > 0 ?
+                            <div>{receptions.map(item=><div>
+                                <div> Послуга: {item.MedicalService.service}</div>
+                                <div>Ціна: {item.MedicalService.price}</div>
+                                <div>Час: {item.date}</div>
+                            </div>)}</div>:
+                           <div>
+                               <div>У вас немає активних записів.Запишіться на прийом</div>
+                               <NavLink to={'/reception-service'}>
+                                   <button>Записатися на прийом</button>
+                               </NavLink>
+                           </div>
+                    }
                 </div>
 
             }

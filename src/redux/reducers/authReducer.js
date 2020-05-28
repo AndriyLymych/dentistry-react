@@ -1,11 +1,12 @@
 import {authAPI} from "../../api/authAPI";
 import {stopSubmit} from "redux-form";
-import {SET_IS_AUTH, SET_ME_INFO} from "../../constant/actionTypes/authAC";
+import {SET_IS_AUTH, SET_ME_INFO, SET_MY_ID} from "../../constant/actionTypes/authAC";
 import {tokenEnum} from "../../constant/authConstant/token.enum";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 
 
 const initialState = {
+    myID: null,
     me: null,
     isAuth: false
 };
@@ -19,6 +20,12 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 me: action.payload
+            };
+        case SET_MY_ID :
+
+            return {
+                ...state,
+                myID: action.payload
             };
 
         case SET_IS_AUTH :
@@ -35,6 +42,7 @@ const authReducer = (state = initialState, action) => {
 };
 
 const setMeDates = payload => ({type: SET_ME_INFO, payload});
+const setMyID = payload => ({type: SET_MY_ID, payload});
 const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
 
 export const getMeInfo = () => async dispatch => {
@@ -46,6 +54,7 @@ export const getMeInfo = () => async dispatch => {
         const meDates = await authAPI.meInfo(token);
 
         dispatch(setMeDates(meDates.data));
+        dispatch(setMyID(meDates.data.id));
         dispatch(setIsAuth(true));
 
     } else {
@@ -62,11 +71,11 @@ export const login = (email, password) => async dispatch => {
     localStorage.setItem(tokenEnum.refresh_token, authResult.data[tokenEnum.refresh_token]);
 
     const token = checkAccessTokenPresent();
-//TODO при частій логінації meDates = undefined
+//TODO при частій логінації meDates === undefined
 
     const meDates = await authAPI.meInfo(token);
 
-
+    dispatch(setMyID(meDates.data.id));
     dispatch(setMeDates(meDates.data));
     dispatch(setIsAuth(true));
 
@@ -85,7 +94,6 @@ export const logout = () => async dispatch => {
     dispatch(setIsAuth(false));
 
     dispatch(setMeDates(null));
-
 
 
 };

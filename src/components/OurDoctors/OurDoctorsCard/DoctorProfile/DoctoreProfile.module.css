@@ -1,3 +1,7 @@
 .area{
     resize: none;
 }
+.avatarBlock{
+    height: 400px;
+    width: 400px;
+}

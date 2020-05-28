@@ -5,3 +5,6 @@ export const isAuthSelector = state => {
 export const meInfoSelector = state => {
     return state.authReducer.me
 };
+export const myIDSelector = state => {
+    return state.authReducer.myID
+};

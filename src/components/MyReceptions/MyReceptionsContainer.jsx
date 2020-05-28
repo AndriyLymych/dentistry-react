@@ -22,6 +22,7 @@ class MyReceptionsContainer extends React.Component {
         return (
             <MyReceptions isAuth={this.props.isAuth} receptions={this.props.receptions}
                           isLoading={this.props.isLoading}/>
+
         )
     }
 }

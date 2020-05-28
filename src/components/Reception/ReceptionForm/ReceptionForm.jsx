@@ -155,7 +155,7 @@ const ReceptionForm = props => {
             <Field name="service_id" component="select">
                 <option disabled>Выберіть послугу</option>
                 {
-                    services.map(service => <option value={service.id}>{service.service}</option>)
+                    services.map(service => <option value={{service_id:service.id}}>{service.service}</option>)
                 }
 
             </Field>

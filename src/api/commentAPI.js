@@ -31,7 +31,7 @@ export const commentAPI = {
         }
 
     },
-    deleteComment: async (comment_id,doctor_id) => {
+    deleteComment: async (comment_id, doctor_id) => {
 
         try {
             const token = checkAccessTokenPresent();
@@ -42,6 +42,27 @@ export const commentAPI = {
                     [headerEnum.AUTHORIZATION]: token
                 }
             })
+        } catch (e) {
+
+            console.log(e.message)
+
+        }
+    },
+
+    editComment: async (comment_id, doctor_id, newComment) => {
+
+        try {
+            const token = checkAccessTokenPresent();
+
+            return await axiosInstance.put(
+                `/comments/${comment_id}?doc=${doctor_id}`,
+                {commentText: newComment},
+                {
+                    headers: {
+
+                        [headerEnum.AUTHORIZATION]: token
+                    }
+                })
         } catch (e) {
 
             console.log(e.message)

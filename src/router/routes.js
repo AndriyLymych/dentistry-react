@@ -8,7 +8,6 @@ import DoctorProfileContainer from "../components/OurDoctors/OurDoctorsCard/Doct
 import OurServicesContainer from "../components/OurServices/OurServicesContainer";
 import ServiceProfileContainer from "../components/OurServices/ServiceCard/ServiceProfile/ServiceProfileContainer";
 import MyProfileContainer from "../components/MyProfile/MyProfileContainer";
-import MyReceptionsContainer from "../components/MyReceptions/MyReceptionsContainer";
 import React from "react";
 import Reception from "../components/Reception/Reception";
 
@@ -24,8 +23,7 @@ const routes = ()=> {
             <Route path='/our-doctors/:id' render={() => <DoctorProfileContainer/>}/>
             <Route path='/our-services' exact render={() => <OurServicesContainer/>}/>
             <Route path='/our-services/:id' render={() => <ServiceProfileContainer/>}/>
-            <Route path='/my-profile/:id'  render={() => <MyProfileContainer/>}/>
-            <Route path='/my-profile/:id/my-receptions' exact render={() => <MyReceptionsContainer/>}/>
+            <Route path='/my-profile'  render={() => <MyProfileContainer/>}/>
             <Route path='/reception-service'  render={() => <Reception/>}/>
         </Switch>
     )
