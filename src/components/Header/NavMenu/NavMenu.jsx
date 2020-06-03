@@ -16,8 +16,14 @@ const NavMenu = ({isAuth, me, logout}) => {
             {
                 !isAuth ?
                     <div>
-                        <button><NavLink to={'/login'}>Увійти</NavLink></button>
-                        <button><NavLink to={'/register'}>Реєстрація</NavLink></button>
+                        <div>
+                            <button><NavLink to={'/login'}>Увійти</NavLink></button>
+                            <button><NavLink to={'/register'}>Реєстрація</NavLink></button>
+                        </div>
+
+                        <div>
+                            <NavLink to={'/forgot-password'}><span>Забули пароль?</span></NavLink>
+                        </div>
                     </div> :
                     <div>
                         <div>Вітаємо, {me.name} {me.middleName}</div>

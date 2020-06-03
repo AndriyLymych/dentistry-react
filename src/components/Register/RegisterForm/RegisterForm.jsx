@@ -96,7 +96,7 @@ const RegisterForm = props => {
                         genders.map(
                             gender =>
                                 <label key={gender.id}>
-                                    <Field name="gender_id" component="input" type="radio" value={gender.id}/>{' '}
+                                    <Field name="gender_id" component="input" type="radio" value={gender.id}/>
                                     {gender.label}
                                 </label>
 

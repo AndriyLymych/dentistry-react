@@ -6,19 +6,13 @@ import {getServicesFromDB} from "../../redux/reducers/serviceReducer";
 import {getServicesSelector} from "../../redux/selectors/serviceSelector";
 import {getIsReceptionSuccess} from "../../redux/selectors/receptionSelectors";
 import {receptionPatient} from "../../redux/reducers/receptionReducer";
-import {isAuthSelector, meInfoSelector} from "../../redux/selectors/authSelectors";
+import {isAuthSelector} from "../../redux/selectors/authSelectors";
 
 let ReceptionReduxForm = reduxForm({
     form: 'reception'
 
 })(ReceptionForm);
 
-ReceptionReduxForm = connect(
-    state => ({
-        initialValues: meInfoSelector(state)
-    })
-
-)(ReceptionReduxForm);
 
 
 class Reception extends React.Component {

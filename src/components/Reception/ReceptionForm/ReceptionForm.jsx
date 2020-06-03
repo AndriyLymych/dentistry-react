@@ -3,10 +3,22 @@ import {Field} from 'redux-form'
 
 const ReceptionForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting, services,isAuth} = props;
+    const {handleSubmit, pristine, reset, submitting, services} = props;
     return (
         <form onSubmit={handleSubmit}>
+            <div>
+                <div>
+                    <label>Як до Вас звертатися:</label>
+                    <div>
+                        <Field
+                            name="name"
+                            component="input"
+                            placeholder="Як до Вас звертатися..."
+                        />
+                    </div>
+                </div>
 
+            </div>
             <div>
                 <label>Номер телефону:</label>
                 <div>
@@ -18,31 +30,19 @@ const ReceptionForm = props => {
                     />
                 </div>
             </div>
-            {
-                !isAuth ?
-                    <div>
-                        <label>Електронна пошта:</label>
-                        <div>
-                            <Field
-                                name="email"
-                                component="input"
-                                type="email"
-                                placeholder="Введіть ваш емейл..."
-                            />
-                        </div>
-                    </div>:
-                    <div>
-                        <label>Електронна пошта:</label>
-                        <div>
-                            <Field
-                                name="email"
-                                component="input"
-                                type="email"
-                                disabled
-                            />
-                        </div>
-                    </div>
-            }
+            <div>
+                <label>Електронна пошта:</label>
+                <div>
+                    <Field
+                        name="email"
+                        component="input"
+                        type="email"
+                        placeholder="Введіть ваш емейл..."
+                    />
+                </div>
+            </div>
+
+
             <div>
                 <label>Час прийому:</label>
                 <div>
@@ -54,108 +54,17 @@ const ReceptionForm = props => {
                     />
                 </div>
             </div>
-            {
-                !isAuth ?
-                    <div>
-                        <div>
-                            <label>Ім'я:</label>
-                            <div>
-                                <Field
-                                    name="name"
-                                    component="input"
-                                    placeholder="Введіть ваше ім'я..."
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <label>По батькові:</label>
-                            <div>
-                                <Field
-                                    name="middleName"
-                                    component="input"
-                                    placeholder="Введіть ваше по батькові..."
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label>Прізвище:</label>
-                            <div>
-                                <Field
-                                    name="surname"
-                                    component="input"
-                                    placeholder="Введіть ваше прізвище..."
-                                />
-                            </div>
-                        </div>
 
 
-                        <div>
-                            <label>Вік:</label>
-                            <div>
-                                <Field
-                                    name="age"
-                                    component="input"
-                                    placeholder="Введіть ваше вік..."
-                                />
-                            </div>
-                        </div>
-                    </div>:
 
-                    <div>
-                        <div>
-                            <label>Ім'я:</label>
-                            <div>
-                                <Field
-                                    name="name"
-                                    component="input"
-                                    disabled
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <label>По-батькові:</label>
-                            <div>
-                                <Field
-                                    name="middleName"
-                                    component="input"
-                                    disabled
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label>Прізвище:</label>
-                            <div>
-                                <Field
-                                    name="surname"
-                                    component="input"
-                                    disabled
-                                />
-                            </div>
-                        </div>
-
-
-                        <div>
-                            <label>Вік:</label>
-                            <div>
-                                <Field
-                                    name="age"
-                                    component="input"
-                                    disabled
-                                />
-                            </div>
-                        </div>
-                    </div>
-            }
 
 
             <label>Послуга:</label>
 
             <Field name="service_id" component="select">
-                <option disabled>Выберіть послугу</option>
+                <option disabled >Выберіть послугу</option>
                 {
-                    services.map(service => <option value={{service_id:service.id}}>{service.service}</option>)
+                    services.map(service => <option value={service.id}>{service.service}</option>)
                 }
 
             </Field>

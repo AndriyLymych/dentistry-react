@@ -1,7 +1,7 @@
 import React from "react";
 import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {registerPatient,getGenders} from "../../redux/reducers/registerReducer";
+import {registerPatient, getGenders} from "../../redux/reducers/registerReducer";
 import RegisterForm from "./RegisterForm/RegisterForm";
 import {
     getAllGendersSelector,
@@ -14,18 +14,18 @@ const RegisterReduxForm = reduxForm({
 
 
 class Register extends React.Component {
+
     componentDidMount() {
         this.props.getGenders()
     }
 
+
     render() {
-        let {registerPatient, isRegisterSuccess} = this.props;
+        const {registerPatient, isRegisterSuccess} = this.props;
 
         const onSubmit = data => {
             registerPatient(data)
         };
-
-
         return (
             <div>
                 {
@@ -47,9 +47,9 @@ class Register extends React.Component {
 const mapStateToProps = state => {
     return {
         isRegisterSuccess: getIsRegisterSuccessSelector(state),
-        genders: getAllGendersSelector(state)
+        genders: getAllGendersSelector(state),
     }
 }
 
 
-export default connect(mapStateToProps, {registerPatient,getGenders})(Register)
+export default connect(mapStateToProps, {registerPatient, getGenders})(Register)

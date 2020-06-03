@@ -36,7 +36,7 @@ export const authAPI = {
 
         try {
 
-            return axiosInstance.post(`auth/logout`, {},{
+            return axiosInstance.post(`auth/logout`, {}, {
                 headers: {
                     [headerEnum.AUTHORIZATION]: access_token
                 }
@@ -45,4 +45,32 @@ export const authAPI = {
             console.log(e.message);
         }
     },
+
+    changePassword: (access_token, data) => {
+
+        try {
+
+            return axiosInstance.put(`auth/password-change`, data, {
+                headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+        } catch (e) {
+            console.log(e.message);
+        }
+    },
+    sendEmailForChangePassword: data => {
+        try {
+            return axiosInstance.post('auth/password-refresh', data)
+        } catch (e) {
+            console.log(e.message);
+        }
+    },
+    resetPassword: (data,token) => {
+        try {
+            return axiosInstance.put(`auth/password-refresh/${token}`, data)
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
 };

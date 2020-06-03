@@ -1,6 +1,12 @@
 import {authAPI} from "../../api/authAPI";
 import {stopSubmit} from "redux-form";
-import {SET_IS_AUTH, SET_ME_INFO, SET_MY_ID} from "../../constant/actionTypes/authAC";
+
+import {
+    SET_IS_AUTH,
+    SET_IS_PASSWORD_CHANGED,
+    SET_ME_INFO,
+    SET_MY_ID
+} from "../../constant/actionTypes/authAC";
 import {tokenEnum} from "../../constant/authConstant/token.enum";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 
@@ -8,7 +14,8 @@ import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 const initialState = {
     myID: null,
     me: null,
-    isAuth: false
+    isAuth: false,
+    isPasswordChanged: false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -33,6 +40,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: action.payload
             };
+        case SET_IS_PASSWORD_CHANGED :
+            return {
+                ...state,
+                isPasswordChanged: action.payload
+            };
 
 
         default :
@@ -44,6 +56,7 @@ const authReducer = (state = initialState, action) => {
 const setMeDates = payload => ({type: SET_ME_INFO, payload});
 const setMyID = payload => ({type: SET_MY_ID, payload});
 const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
+const setIsPasswordChanged = payload => ({type: SET_IS_PASSWORD_CHANGED, payload});
 
 export const getMeInfo = () => async dispatch => {
 
@@ -66,20 +79,20 @@ export const login = (email, password) => async dispatch => {
 
     const authResult = await authAPI.login(email, password);
 
+    if (authResult) {
 
-    localStorage.setItem(tokenEnum.access_token, authResult.data[tokenEnum.access_token]);
-    localStorage.setItem(tokenEnum.refresh_token, authResult.data[tokenEnum.refresh_token]);
+        localStorage.setItem(tokenEnum.access_token, authResult.data[tokenEnum.access_token]);
+        localStorage.setItem(tokenEnum.refresh_token, authResult.data[tokenEnum.refresh_token]);
+        const token = checkAccessTokenPresent();
 
-    const token = checkAccessTokenPresent();
-//TODO при частій логінації meDates === undefined
+        //TODO при частій логінації meDates === undefined
 
-    const meDates = await authAPI.meInfo(token);
+        const meDates = await authAPI.meInfo(token);
 
-    dispatch(setMyID(meDates.data.id));
-    dispatch(setMeDates(meDates.data));
-    dispatch(setIsAuth(true));
-
-
+        dispatch(setMyID(meDates.data.id));
+        dispatch(setMeDates(meDates.data));
+        dispatch(setIsAuth(true));
+    }
 };
 
 export const logout = () => async dispatch => {
@@ -95,6 +108,31 @@ export const logout = () => async dispatch => {
 
     dispatch(setMeDates(null));
 
+
+};
+
+export const changeUserPassword = data => async dispatch => {
+
+    const token = checkAccessTokenPresent();
+
+    if (token) {
+        await authAPI.changePassword(token, data);
+
+        dispatch(setIsPasswordChanged(true));
+    } else {
+        console.log('no token');
+    }
+};
+
+export const sendEmailForChangeForgotPassword = email => async () => {
+
+    await authAPI.sendEmailForChangePassword(email);
+
+};
+
+export const resetUserPassword = (data,token) => async () => {
+
+    await authAPI.resetPassword(data,token);
 
 };
 

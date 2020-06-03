@@ -10,6 +10,9 @@ import ServiceProfileContainer from "../components/OurServices/ServiceCard/Servi
 import MyProfileContainer from "../components/MyProfile/MyProfileContainer";
 import React from "react";
 import Reception from "../components/Reception/Reception";
+import SendMailForRememberPassword
+    from "../components/ForgotPassword/SendMailForRememberPassword/SendMailForRememberPassword";
+import ResetPassword from "../components/ForgotPassword/ResetPassword/ResetPassword";
 
 const routes = ()=> {
     return (
@@ -25,6 +28,9 @@ const routes = ()=> {
             <Route path='/our-services/:id' render={() => <ServiceProfileContainer/>}/>
             <Route path='/my-profile'  render={() => <MyProfileContainer/>}/>
             <Route path='/reception-service'  render={() => <Reception/>}/>
+            <Route path='/forgot-password'  render={() => <SendMailForRememberPassword/>}/>
+            <Route path='/auth/password-refresh/:token'  render={() => <ResetPassword/>}/>
+            <Route path='*'  render={() => <h1>404 error</h1>}/>
         </Switch>
     )
 };
