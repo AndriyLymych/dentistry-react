@@ -38,7 +38,7 @@ const MyProfile = ({
                                 <Route path={`/my-profile/my-receptions`} exact
                                        render={() => <MyReceptionsContainer/>}/>
                             }
-                            <Route path={`/my-profile/info`} exact render={() => <MyProfileInfo me={me}/>}/>
+                            <Route path={`/my-profile/info`} exact render={() => <MyProfileInfo me={me} avatar={me.avatar}/>}/>
                             <Route path={`/my-profile/change-password`} exact
                                    render={() => <ChangePasswordContainer/>}/>
                             <Route path={`/my-profile`} render={() => <Redirect to={`/my-profile/info`}/>}/>

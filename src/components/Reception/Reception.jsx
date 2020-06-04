@@ -8,7 +8,7 @@ import {getIsReceptionSuccess} from "../../redux/selectors/receptionSelectors";
 import {receptionPatient} from "../../redux/reducers/receptionReducer";
 import {isAuthSelector} from "../../redux/selectors/authSelectors";
 
-let ReceptionReduxForm = reduxForm({
+const ReceptionReduxForm = reduxForm({
     form: 'reception'
 
 })(ReceptionForm);

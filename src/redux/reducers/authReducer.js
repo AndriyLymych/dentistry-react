@@ -9,13 +9,15 @@ import {
 } from "../../constant/actionTypes/authAC";
 import {tokenEnum} from "../../constant/authConstant/token.enum";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
+import {userAPI} from "../../api/userAPI";
 
 
 const initialState = {
     myID: null,
     me: null,
     isAuth: false,
-    isPasswordChanged: false
+    isPasswordChanged: false,
+    isUpdate:false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -130,11 +132,27 @@ export const sendEmailForChangeForgotPassword = email => async () => {
 
 };
 
-export const resetUserPassword = (data,token) => async () => {
+export const resetUserPassword = (data, token) => async () => {
 
-    await authAPI.resetPassword(data,token);
+    await authAPI.resetPassword(data, token);
 
 };
 
+export const updateUserDates = data => async dispatch => {
+
+    const token = checkAccessTokenPresent();
+    console.log(token);
+    if (token) {
+
+        await userAPI.updateProfileInfo(token,data);
+        const meDates = await authAPI.meInfo(token);
+        dispatch(setMeDates(meDates.data))
+
+    } else {
+        console.log('no token');
+    }
+
+
+};
 
 export default authReducer
