@@ -13,3 +13,6 @@ export const myIDSelector = state => {
 export const isPasswordChangedSelector = state => {
     return state.authReducer.isPasswordChanged
 };
+export const isProfileUpdateSelector = state => {
+    return state.authReducer.isProfileUpdate
+};

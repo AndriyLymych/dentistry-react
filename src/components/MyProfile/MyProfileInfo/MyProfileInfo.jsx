@@ -5,7 +5,10 @@ import style from "../../OurDoctors/OurDoctorsCard/DoctorProfile/DoctoreProfile.
 import {reduxForm} from "redux-form";
 import UpdateMyProfileInfoForm from "./UpdateMyProfileInfoForm/UpdateMyProfileInfoForm";
 import {connect} from "react-redux";
-import {updateUserDates} from "../../../redux/reducers/authReducer";
+import {updateDoctorProfilePhoto, updateUserDates} from "../../../redux/reducers/authReducer";
+import {isProfileUpdateSelector} from "../../../redux/selectors/authSelectors";
+import Preloader from "../../Preloader/Preloader";
+
 
 const UpdateMyProfileInfoReduxForm = reduxForm({
     form: 'update-my-profile-info'
@@ -23,55 +26,81 @@ const MyProfileInfo = ({
                                }
                            },
                            avatar,
-                           updateUserDates
+                           updateUserDates,
+                           isProfileUpdate,
+                           updateDoctorProfilePhoto
                        }) => {
 
     const [editMode, setEditMode] = useState(false);
 
-    const onSubmit = data => {
+    const onUserProfileUpdate = data => {
         updateUserDates(data);
         setEditMode(false)
     };
 
+    const onUpdateDoctorAvatar = (e) => {
+        if (e.target.files.length) {
+            updateDoctorProfilePhoto(e.target.files[0]);
+        }
+
+    };
+
+    if (!isProfileUpdate) {
+        return <Preloader/>
+    }
 
     return (
         <div>
             {
+                USER_ROLE.DOCTOR &&
+                <div>
+                    <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
+                         alt="avatar"/>
+                    <input type="file" onChange={onUpdateDoctorAvatar}/>
+
+                </div>
+            }
+            {
                 !editMode && <div>
-                    {
-                        userRole === USER_ROLE.DOCTOR &&
-                        <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
-                             alt="avatar"/>
-                    }
+
                     <p>{name}</p>
                     <p>{middleName}</p>
                     <p>{surname}</p>
                     <p>{age}</p>
                     <p>{city}</p>
-                </div>
-            }
+                    <button onClick={() => {
+                        setEditMode(true)
+                    }}>редагувати
+                    </button>
+                </div>}
 
             {
                 editMode && <div>
+
+
+                    <UpdateMyProfileInfoReduxForm
+                        onSubmit={onUserProfileUpdate}
+                        initialValues={{name, middleName, surname, age, city}}
+                        avatar={avatar} userRole={userRole}
+                    />
                     <button onClick={() => {
                         setEditMode(false)
                     }}>Відмінити
                     </button>
-
-                    <UpdateMyProfileInfoReduxForm
-                        onSubmit={onSubmit}
-                        initialValues={{name, middleName, surname, age, city}}
-                        avatar={avatar} userRole={userRole}
-                    />
                 </div>
             }
-            <button onClick={() => {
-                setEditMode(true)
-            }}>редагувати
-            </button>
+
         </div>
 
     )
 };
 
-export default connect(null, {updateUserDates})(MyProfileInfo);
+
+const mapStateToProps = state => {
+    return {
+        isProfileUpdate: isProfileUpdateSelector(state)
+    }
+};
+
+
+export default connect(mapStateToProps, {updateUserDates, updateDoctorProfilePhoto})(MyProfileInfo);

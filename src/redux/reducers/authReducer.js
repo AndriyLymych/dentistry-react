@@ -3,13 +3,15 @@ import {stopSubmit} from "redux-form";
 
 import {
     SET_IS_AUTH,
-    SET_IS_PASSWORD_CHANGED,
+    SET_IS_PASSWORD_CHANGED, SET_IS_PROFILE_UPDATE,
     SET_ME_INFO,
     SET_MY_ID
 } from "../../constant/actionTypes/authAC";
 import {tokenEnum} from "../../constant/authConstant/token.enum";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {userAPI} from "../../api/userAPI";
+import doctorReducer from "./doctorReducer";
+import {doctorsAPI} from "../../api/doctorsAPI";
 
 
 const initialState = {
@@ -17,7 +19,7 @@ const initialState = {
     me: null,
     isAuth: false,
     isPasswordChanged: false,
-    isUpdate:false
+    isProfileUpdate: true
 };
 
 const authReducer = (state = initialState, action) => {
@@ -47,6 +49,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isPasswordChanged: action.payload
             };
+        case SET_IS_PROFILE_UPDATE :
+            return {
+                ...state,
+                isProfileUpdate: action.payload
+            };
 
 
         default :
@@ -59,6 +66,7 @@ const setMeDates = payload => ({type: SET_ME_INFO, payload});
 const setMyID = payload => ({type: SET_MY_ID, payload});
 const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
 const setIsPasswordChanged = payload => ({type: SET_IS_PASSWORD_CHANGED, payload});
+const setIsProfileUpdate = payload => ({type: SET_IS_PROFILE_UPDATE, payload});
 
 export const getMeInfo = () => async dispatch => {
 
@@ -140,13 +148,42 @@ export const resetUserPassword = (data, token) => async () => {
 
 export const updateUserDates = data => async dispatch => {
 
+    dispatch(setIsProfileUpdate(false));
+
     const token = checkAccessTokenPresent();
-    console.log(token);
+
     if (token) {
 
-        await userAPI.updateProfileInfo(token,data);
+        await userAPI.updateProfileInfo(token, data);
+
         const meDates = await authAPI.meInfo(token);
-        dispatch(setMeDates(meDates.data))
+
+        dispatch(setMeDates(meDates.data));
+
+        dispatch(setIsProfileUpdate(true))
+
+    } else {
+        console.log('no token');
+    }
+
+
+};
+
+export const updateDoctorProfilePhoto = avatar => async dispatch => {
+
+    dispatch(setIsProfileUpdate(false));
+
+    const token = checkAccessTokenPresent();
+
+    if (token) {
+
+        await doctorsAPI.updateDoctorAvatar(avatar, token);
+
+        const meDates = await authAPI.meInfo(token);
+
+        dispatch(setMeDates(meDates.data));
+
+        dispatch(setIsProfileUpdate(true))
 
     } else {
         console.log('no token');

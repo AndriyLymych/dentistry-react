@@ -1,3 +1,4 @@
 export const headersEnum = {
-    AUTHORIZATION: 'Authorization'
+    AUTHORIZATION: 'Authorization',
+    CONTENT_TYPE: 'Content-Type'
 }

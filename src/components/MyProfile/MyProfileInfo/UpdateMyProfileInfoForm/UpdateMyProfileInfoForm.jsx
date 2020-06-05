@@ -1,20 +1,13 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {USER_ROLE} from "../../../../constant/userConstant/userRole";
-import style from "../../../OurDoctors/OurDoctorsCard/DoctorProfile/DoctoreProfile.module.css";
-import {configs} from "../../../../config/configs";
 
 const UpdateMyProfileInfoForm = props => {
 
-    const {handleSubmit, submitting, avatar, userRole} = props;
+    const {handleSubmit, submitting} = props;
 
     return (
         <div>
-            {
-                userRole === USER_ROLE.DOCTOR &&
-                <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
-                     alt="avatar"/>
-            }
+
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Змінити імя:</label>
