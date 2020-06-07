@@ -15,7 +15,9 @@ import {
     commentInfoSelector, commentsCountOnPageSelector, currentPageSelector,
     isLoadingCommentsSelector, pageCountSelector,
 } from "../../../../redux/selectors/commentSelectors";
-import {isAuthSelector, meInfoSelector, myIDSelector} from "../../../../redux/selectors/authSelectors";
+import {isAuthSelector, myIDSelector} from "../../../../redux/selectors/authSelectors";
+import {getDoctorMark, isEvaluated, isMarkLoading} from "../../../../redux/selectors/doctorMarkSelectors";
+import {setDoctorMark} from "../../../../redux/reducers/doctorMarkReducer";
 
 
 class DoctorProfileContainer extends React.Component {
@@ -54,6 +56,11 @@ class DoctorProfileContainer extends React.Component {
             myID={this.props.myID}
             deleteChosenComment={this.props.deleteChosenComment}
             editChosenComment={this.props.editChosenComment}
+            setDoctorMark={this.props.setDoctorMark}
+            doctorMark={this.props.doctorMark}
+            isEvaluated={this.props.isEvaluated}
+            isMarkLoading={this.props.isMarkLoading}
+
         />
     }
 
@@ -69,7 +76,10 @@ const mapStateToProps = state => {
         commentsCountOnPage: commentsCountOnPageSelector(state),
         currentPage: currentPageSelector(state),
         isAuth: isAuthSelector(state),
-        myID: myIDSelector(state)
+        myID: myIDSelector(state),
+        doctorMark:getDoctorMark(state),
+        isEvaluated:isEvaluated(state),
+        isMarkLoading:isMarkLoading(state)
     }
 };
 
@@ -80,5 +90,6 @@ export default compose(connect(mapStateToProps, {
     getCommentsFromDB,
     sendComment,
     deleteChosenComment,
-    editChosenComment
+    editChosenComment,
+    setDoctorMark
 })(DoctorProfileContainerWithRouter));

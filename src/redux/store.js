@@ -11,6 +11,7 @@ import appReducer from "./reducers/appReducer";
 import myReceptionReducer from "./reducers/myReceptionReducer";
 import receptionReducer from "./reducers/receptionReducer";
 import commentReducer from "./reducers/commentReducer";
+import doctorMarkReducer from "./reducers/doctorMarkReducer";
 
 const reducers = combineReducers({
     doctorReducer,
@@ -23,7 +24,8 @@ const reducers = combineReducers({
     appReducer,
     myReceptionReducer,
     receptionReducer,
-    commentReducer
+    commentReducer,
+    doctorMarkReducer
 });
 
 

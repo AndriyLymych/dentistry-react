@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Preloader from "../../../Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 import CommentCard from "./CommentCard/CommentCard";
@@ -6,6 +6,10 @@ import style from './DoctoreProfile.module.css'
 import {reduxForm,} from "redux-form";
 import CommentForm from "./CommentForm/CommentForm";
 import {configs} from "../../../../config/configs";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Rating from "material-ui-rating/lib";
+import Star from '@material-ui/core/Icon';
 
 const CommentReduxForm = reduxForm({
     form: 'comment'
@@ -32,7 +36,11 @@ const DoctorProfile = (
         isAuth,
         myID,
         deleteChosenComment,
-        editChosenComment
+        editChosenComment,
+        isMarkLoading,
+        isEvaluated,
+        doctorMark,
+        setDoctorMark
 
 
     }) => {
@@ -44,6 +52,10 @@ const DoctorProfile = (
     const onCommentDelete = (comment_id, doctor_id) => {
         deleteChosenComment(comment_id, doctor_id)
     };
+
+    const [star,setStar] = useState(1);
+
+
 
     return (
         <div>
@@ -65,7 +77,23 @@ const DoctorProfile = (
                         <h3>{age}</h3>
                         <h4>{city}</h4>
 
-                        <br/><br/><br/><br/>
+                       <div>
+                           <Box component="fieldset" mb={3} borderColor="transparent">
+                               <Typography component="legend">Оцініть лікаря</Typography>
+                               <Rating
+                                   name="simple-controlled"
+                                   value={star}
+                                   onChange={( star) => {
+                                       setStar(star)
+                                   }}
+                               />
+                           </Box>
+                       </div>
+
+                        <div>
+                            <Rating name="half-rating-read" value={2.3} precision={0.5} readOnly />
+                        </div>
+                        {/*<br/><br/><br/><br/>*/}
 
                         {
                             isLoadingComments ?
