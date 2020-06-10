@@ -62,7 +62,7 @@ const ReceptionForm = props => {
             <label>Послуга:</label>
 
             <Field name="service_id" component="select">
-                <option disabled >Выберіть послугу</option>
+                <option  defaultChecked>Выберіть послугу</option>
                 {
                     services.map(service => <option value={service.id}>{service.service}</option>)
                 }

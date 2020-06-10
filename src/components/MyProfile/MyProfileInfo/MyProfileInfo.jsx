@@ -52,7 +52,7 @@ const MyProfileInfo = ({
     return (
         <div>
             {
-                USER_ROLE.DOCTOR &&
+                userRole === USER_ROLE.DOCTOR &&
                 <div>
                     <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
                          alt="avatar"/>

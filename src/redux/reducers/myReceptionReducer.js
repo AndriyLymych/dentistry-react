@@ -1,6 +1,7 @@
 import {SET_MY_RECEPTIONS, SET_LOADING_PROGRESS} from "../../constant/actionTypes/myReceptionsAC";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {receptionAPI} from "../../api/receptionAPI";
+import {setIsReceptionSuccess} from "./receptionReducer";
 
 const initialState = {
     receptions: [],
@@ -33,13 +34,57 @@ const setIsLoading = payload => ({type: SET_LOADING_PROGRESS, payload});
 export const getMyProfileReceptions = email => async dispatch => {
 
     dispatch(setIsLoading(true));
+
     const token = checkAccessTokenPresent();
+
     const receptions = await receptionAPI.getMyReception(token, email);
+
     dispatch(setMyReceptions(receptions.data));
+
     dispatch(setIsLoading(false));
 
 
 };
+export const getAllReception = () => async dispatch => {
+
+    dispatch(setIsLoading(true));
+
+    const token = checkAccessTokenPresent();
+
+    const receptions = await receptionAPI.getAllReceptionsRecords(token);
+
+    dispatch(setMyReceptions(receptions.data));
+
+    dispatch(setIsLoading(false));
+
+
+};
+
+export const deleteReceptionRecordByPatient = (id, email) => async dispatch => {
+
+    const token = checkAccessTokenPresent();
+
+    await receptionAPI.dropReceptionRecordByPatient(id, token);
+
+    const receptions = await receptionAPI.getMyReception(token, email);
+
+    dispatch(setMyReceptions(receptions.data))
+
+
+};
+export const deleteReceptionRecordByDoctor = id => async dispatch => {
+
+    const token = checkAccessTokenPresent();
+
+    await receptionAPI.dropReceptionRecordByDoctor(id, token);
+
+    const records = await receptionAPI.getAllReceptionsRecords(token);
+
+    dispatch(setMyReceptions(records.data))
+
+
+};
+
 
 export default myReceptionReducer;
 

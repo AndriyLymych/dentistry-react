@@ -27,6 +27,11 @@ const MyProfile = ({
                                     label === USER_ROLE.PATIENT &&
                                     <li><NavLink to={`/my-profile/my-receptions`}>Мої записи на прийом</NavLink></li>
                                 }
+                                {label===USER_ROLE.DOCTOR &&
+
+                                <li><NavLink to={`/my-profile/receptions`}>Записи на прийом</NavLink></li>
+
+                                }
 
                                 <li><NavLink to={`/my-profile/change-password`}>Змінити пароль</NavLink></li>
                             </ul>
@@ -36,6 +41,11 @@ const MyProfile = ({
                             {
                                 label === USER_ROLE.PATIENT &&
                                 <Route path={`/my-profile/my-receptions`} exact
+                                       render={() => <MyReceptionsContainer/>}/>
+                            }
+                            {
+                                label === USER_ROLE.DOCTOR &&
+                                <Route path={`/my-profile/receptions`} exact
                                        render={() => <MyReceptionsContainer/>}/>
                             }
                             <Route path={`/my-profile/info`} exact render={() => <MyProfileInfo me={me} avatar={me.avatar}/>}/>

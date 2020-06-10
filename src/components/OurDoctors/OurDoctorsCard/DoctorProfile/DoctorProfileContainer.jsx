@@ -17,7 +17,8 @@ import {
 } from "../../../../redux/selectors/commentSelectors";
 import {isAuthSelector, myIDSelector} from "../../../../redux/selectors/authSelectors";
 import {getDoctorMark, isEvaluated, isMarkLoading} from "../../../../redux/selectors/doctorMarkSelectors";
-import {setDoctorMark} from "../../../../redux/reducers/doctorMarkReducer";
+import {getAverageDoctorMark, getIsEvaluatedDoctor, setDoctorMark} from "../../../../redux/reducers/doctorMarkReducer";
+import {checkAccessTokenPresent} from "../../../../helpers/checkAccessTokenPresent";
 
 
 class DoctorProfileContainer extends React.Component {
@@ -27,7 +28,16 @@ class DoctorProfileContainer extends React.Component {
         const id = this.props.match.params.id;
 
         this.props.getDoctorProfile(id);
+
         this.props.getCommentsFromDB(id, this.props.commentsCountOnPage, this.props.currentPage);
+
+        this.props.getAverageDoctorMark(id);
+
+        const token = checkAccessTokenPresent();
+
+        if (token && this.props.isEvaluated){
+            this.props.getIsEvaluatedDoctor(id)
+        }
 
     }
 
@@ -91,5 +101,7 @@ export default compose(connect(mapStateToProps, {
     sendComment,
     deleteChosenComment,
     editChosenComment,
-    setDoctorMark
+    setDoctorMark,
+    getIsEvaluatedDoctor,
+    getAverageDoctorMark
 })(DoctorProfileContainerWithRouter));

@@ -28,5 +28,27 @@ export const userAPI = {
         } catch (e) {
             console.log(e.message);
         }
+    },
+    getIsEvaluated: (access_token,doctor_id) => {
+
+        try {
+
+            return axiosInstance.get(`/users/is-evaluated?doctor_id=${doctor_id}`, {
+                headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+        } catch (e) {
+            console.log(e.message);
+        }
+    },
+    getAVGMark: doctor_id => {
+
+        try {
+
+            return axiosInstance.get(`/users/average-mark?doctor_id=${doctor_id}`)
+        } catch (e) {
+            console.log(e.message);
+        }
     }
 };

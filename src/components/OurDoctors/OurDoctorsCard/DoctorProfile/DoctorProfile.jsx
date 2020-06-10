@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState} from "react";
 import Preloader from "../../../Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 import CommentCard from "./CommentCard/CommentCard";
@@ -9,7 +9,6 @@ import {configs} from "../../../../config/configs";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Rating from "material-ui-rating/lib";
-import Star from '@material-ui/core/Icon';
 
 const CommentReduxForm = reduxForm({
     form: 'comment'
@@ -53,8 +52,14 @@ const DoctorProfile = (
         deleteChosenComment(comment_id, doctor_id)
     };
 
-    const [star,setStar] = useState(1);
+    const [star, setStar] = useState(1);
 
+    if (!isMarkLoading) {
+        return <Preloader/>
+    }
+    const evaluateDoctor = star => {
+        setDoctorMark(star, doctorId)
+    };
 
 
     return (
@@ -68,8 +73,9 @@ const DoctorProfile = (
                             </button>
                         </NavLink>
 
-                        <div >
-                            <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`} alt="ava"/>
+                        <div>
+                            <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
+                                 alt="ava"/>
                         </div>
                         <h2>{name}</h2>
                         <h2>{middleName}</h2>
@@ -77,24 +83,33 @@ const DoctorProfile = (
                         <h3>{age}</h3>
                         <h4>{city}</h4>
 
-                       <div>
-                           <Box component="fieldset" mb={3} borderColor="transparent">
-                               <Typography component="legend">Оцініть лікаря</Typography>
-                               <Rating
-                                   name="simple-controlled"
-                                   value={star}
-                                   onChange={( star) => {
-                                       setStar(star)
-                                   }}
-                               />
-                           </Box>
-                       </div>
 
                         <div>
-                            <Rating name="half-rating-read" value={2.3} precision={0.5} readOnly />
-                        </div>
-                        {/*<br/><br/><br/><br/>*/}
 
+                            {
+                                !isEvaluated && isAuth && <div>
+                                    <Box component="fieldset" mb={3} borderColor="transparent">
+                                        <Typography component="legend">Оцініть лікаря</Typography>
+                                        <Rating
+                                            name="simple-controlled"
+                                            value={star}
+                                            onChange={(star) => {
+                                                setStar(star);
+                                                evaluateDoctor(star)
+                                            }}
+                                        />
+                                    </Box>
+                                </div>
+
+                            }
+
+                            {
+                                (isEvaluated || !isAuth) && <div>
+                                    <Typography component="legend">Середня оцінка</Typography>
+                                    <Rating name="half-rating-read" value={doctorMark} precision={0.5} readOnly/>
+                                </div>
+                            }
+                        </div>
                         {
                             isLoadingComments ?
                                 <Preloader/> :

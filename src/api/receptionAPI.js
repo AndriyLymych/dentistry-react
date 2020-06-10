@@ -3,7 +3,7 @@ import {headersEnum as headerEnum} from "../constant/authConstant/header.enum";
 
 export const receptionAPI = {
 
-    getMyReception: (access_token,email) => {
+    getMyReception: (access_token, email) => {
 
         try {
 
@@ -22,6 +22,47 @@ export const receptionAPI = {
         try {
 
             return axiosInstance.post(`patients/reception`, reception_data)
+
+        } catch (e) {
+            console.log(e.message);
+        }
+    },
+    dropReceptionRecordByPatient: (record_id, access_token) => {
+
+        try {
+
+            return axiosInstance.delete(`/receptions/${record_id}`, {
+                headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+
+        } catch (e) {
+            console.log(e.message);
+        }
+    },
+    dropReceptionRecordByDoctor: (record_id, access_token) => {
+
+        try {
+
+            return axiosInstance.delete(`/receptions/by-doctor/${record_id}`, {
+                headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+
+        } catch (e) {
+            console.log(e.message);
+        }
+    },
+    getAllReceptionsRecords: access_token => {
+        try {
+
+            return axiosInstance.get(`/receptions`, {
+                headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
 
         } catch (e) {
             console.log(e.message);
