@@ -18,6 +18,7 @@ import {USER_ROLE} from "../../constant/userConstant/userRole";
 
 import {deleteReceptionRecordConfirm} from "../../constant/confirmText/comfirmText";
 import {ConfirmWindow} from "../Confirm/Confirm";
+import dayjs from "dayjs";
 
 const MyReceptions = (
     {
@@ -44,15 +45,31 @@ const MyReceptions = (
         setOpen(false);
     };
 
-    const onDeleteRecord = (id, email) => {
-        user_role === USER_ROLE.DOCTOR ?
-            deleteReceptionRecordByDoctor(id, email) :
-            deleteReceptionRecordByPatient(id)
+    const onDeleteRecord = () => {
+
+        let i = 0;
+
+        if (user_role === USER_ROLE.PATIENT) {
+            deleteReceptionRecordByPatient(receptions[i].id, receptions[i].email)
+        }
+        if (user_role === USER_ROLE.DOCTOR) {
+            deleteReceptionRecordByDoctor(receptions[i].id)
+        }
+        handleClose()
     };
+
 
     return (
 
         <div>
+            {ConfirmWindow(
+                open,
+                handleClose,
+                deleteReceptionRecordConfirm.deleteReceptionRecordTitle,
+                deleteReceptionRecordConfirm.deleteReceptionRecordText,
+                onDeleteRecord
+            )}
+
             {isLoading && isAuth ? <Preloader/> :
                 <div>
 
@@ -61,63 +78,72 @@ const MyReceptions = (
                             <div>
                                 <TableContainer component={Paper}>
                                     <Table aria-label="caption table">
-                                        <caption>Мої записи на прийом</caption>
+                                        {user_role === USER_ROLE.DOCTOR ?
+                                            <caption>Записи на прийом</caption> :
+                                            <caption>Мої записи на прийом</caption>
+                                        }
 
                                         <TableHead>
                                             <TableRow>
-                                                {user_role === USER_ROLE.DOCTOR && <TableCell>Ім'я</TableCell>}
+                                                {
+                                                    user_role === USER_ROLE.DOCTOR &&
+                                                    <TableCell >Ім'я</TableCell>
+                                                }
                                                 {user_role === USER_ROLE.DOCTOR &&
                                                 <TableCell align="right">Електронна адреса</TableCell>}
                                                 {user_role === USER_ROLE.DOCTOR &&
                                                 <TableCell align="right">Номер телефону</TableCell>}
-
-                                                <TableCell>Послуга</TableCell>
+                                                {
+                                                    user_role === USER_ROLE.DOCTOR ?
+                                                        <TableCell align="right">Послуга</TableCell> :
+                                                        <TableCell>Послуга</TableCell>
+                                                }
                                                 <TableCell align="right">Ціна</TableCell>
                                                 <TableCell align="right">Час</TableCell>
-                                                <TableCell align="right">Змінити запис</TableCell>
+                                                <TableCell align="right">Видалити запис</TableCell>
 
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {receptions.map(row => (
+
+                                            {receptions.map(row =>
 
                                                 <TableRow>
+
                                                     {user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell component="th" scope="row">{row.name}</TableCell>}
+                                                    <TableCell  className={style.field} component="th"
+                                                               scope="row">{row.name}</TableCell>}
                                                     {user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell align="right">{row.email}</TableCell>}
+                                                    <TableCell  align="right">{row.email}</TableCell>}
                                                     {user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell align="right">{row.phone_number}</TableCell>}
+                                                    <TableCell  align="right">{row.phone_number}</TableCell>}
                                                     {user_role === USER_ROLE.DOCTOR ?
-                                                        <TableCell align="right">
+                                                        <TableCell  align="right">
                                                             {row.MedicalService.service}
                                                         </TableCell> :
-                                                        <TableCell component="th" scope="row">
+                                                        <TableCell  component="th" scope="row">
                                                             {row.MedicalService.service}
                                                         </TableCell>
                                                     }
-                                                    <TableCell align="right">{row.MedicalService.price}</TableCell>
-                                                    <TableCell align="right">{row.date}</TableCell>
-                                                    <TableCell align="right">
-                                                        <div title={'Видалити'} onClick={handleClickOpen}>
-                                                            <DeleteForeverIcon className={style.changeRecord}/>
-                                                        </div>
-                                                        {user_role === USER_ROLE.DOCTOR && <div title={'Редагувати'}>
-                                                            <EditIcon title={'edit'} className={style.changeRecord}/>
-                                                        </div>}
+                                                    <TableCell
+
+                                                        align="right">{row.MedicalService.price}</TableCell>
+                                                    <TableCell contentEditable align="right">
+                                                        {dayjs(row.date).format('HH:mm MM/DD/YYYY')}
                                                     </TableCell>
-                                                </TableRow>
-                                            ))}
+                                                    <TableCell  align="right">
+                                                        <div title={'Видалити'} onClick={handleClickOpen}>
+                                                            <DeleteForeverIcon
+                                                                className={style.changeRecord}/>
+                                                        </div>
+                                                    </TableCell>
+
+                                                </TableRow>)}
                                         </TableBody>
                                     </Table>
+
                                 </TableContainer>
-                                {ConfirmWindow(
-                                    open,
-                                    handleClose,
-                                    deleteReceptionRecordConfirm.deleteReceptionRecordTitle,
-                                    deleteReceptionRecordConfirm.deleteReceptionRecordText,
-                                    onDeleteRecord()
-                                )}
+
                             </div>
                             :
                             <div>

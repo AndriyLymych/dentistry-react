@@ -16,7 +16,8 @@ const CommentCard = (
         onCommentDelete,
         doctorId,
         editChosenComment,
-        isAuth
+        isAuth,
+        isDoctor
     }
 ) => {
 
@@ -69,13 +70,14 @@ const CommentCard = (
             {
                 isOwner && isAuth && <div>
                     <button className={style.edit} onClick={turnEditMode}>Редагувати</button>
-                    {' '}
-                    <button className={style.delete} onClick={() => {
-                        onCommentDelete(commentId, doctorId)
-                    }}>Видалити
-                    </button>
+
                 </div>
             }
+            {(isDoctor || isOwner) && isAuth && <button className={style.delete} onClick={() => {
+                onCommentDelete(commentId, doctorId)
+            }}>Видалити
+            </button>}
+
             <div>{commentTime}</div>
             <br/><br/>
         </div>

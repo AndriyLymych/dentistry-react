@@ -127,6 +127,7 @@ const DoctorProfile = (
                                                         commentTime={comment.created_at}
                                                         commentator={comment["Commentator"]}
                                                         isOwner={myID === comment.user_id}
+                                                        isDoctor={myID===comment.doctor_id}
                                                         onCommentDelete={onCommentDelete}
                                                         doctorId={doctorId}
                                                         editChosenComment={editChosenComment}

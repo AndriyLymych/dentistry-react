@@ -23,7 +23,7 @@ class MyReceptionsContainer extends React.Component {
         if (this.props.isAuth && (this.props.me.UserRole.label === USER_ROLE.DOCTOR)){
             this.props.getAllReception()
         }
-        if (this.props.isAuth && (this.props.me.UserRole.label === USER_ROLE.DOCTOR)){
+        if (this.props.isAuth && (this.props.me.UserRole.label === USER_ROLE.PATIENT)){
             this.props.getMyProfileReceptions(this.props.me.email)
         }
         if (!this.props.isAuth){
@@ -38,8 +38,8 @@ class MyReceptionsContainer extends React.Component {
                 receptions={this.props.receptions}
                 isLoading={this.props.isLoading}
                 me={this.props.me}
-                deleteReceptionRecordByPatient={deleteReceptionRecordByPatient}
-                deleteReceptionRecordByDoctor={deleteReceptionRecordByDoctor}
+                deleteReceptionRecordByPatient={this.props.deleteReceptionRecordByPatient}
+                deleteReceptionRecordByDoctor={this.props.deleteReceptionRecordByDoctor}
             />
 
         )

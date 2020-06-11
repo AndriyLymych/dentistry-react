@@ -35,7 +35,7 @@ class DoctorProfileContainer extends React.Component {
 
         const token = checkAccessTokenPresent();
 
-        if (token && this.props.isEvaluated){
+        if (token){
             this.props.getIsEvaluatedDoctor(id)
         }
 

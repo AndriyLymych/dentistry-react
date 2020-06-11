@@ -11,7 +11,7 @@ export function ConfirmWindow(
     closeWindow,
     alertTitle,
     alertText,
-    onAcceptMethod
+    onConfirm
 ) {
 
     return (
@@ -33,7 +33,7 @@ export function ConfirmWindow(
                     <Button onClick={closeWindow} color="primary">
                         Відхилити
                     </Button>
-                    <Button onClick={onAcceptMethod} color="primary" autoFocus>
+                    <Button onClick={onConfirm} color="primary" autoFocus>
                         Прийняти
                     </Button>
                 </DialogActions>

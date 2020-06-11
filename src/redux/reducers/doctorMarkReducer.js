@@ -61,12 +61,8 @@ export const getIsEvaluatedDoctor = doctor_id => async dispatch => {
 
     const isEvaluated = await userAPI.getIsEvaluated(token, doctor_id);
 
+    dispatch(setIsEvaluated(isEvaluated.data));
 
-    if (isEvaluated.data!==null){
-
-        dispatch(setIsEvaluated(isEvaluated.data.isEvaluated));
-
-    }
 
     dispatch(setIsMarkLoading(true));
 
