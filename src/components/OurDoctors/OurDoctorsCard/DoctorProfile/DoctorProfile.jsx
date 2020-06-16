@@ -39,13 +39,14 @@ const DoctorProfile = (
         isMarkLoading,
         isEvaluated,
         doctorMark,
-        setDoctorMark
+        setDoctorMark,
+        commentsCountOnPage
 
 
     }) => {
 
     const onSendComment = data => {
-        sendComment(data, doctorId)
+        sendComment(data, doctorId,commentsCountOnPage,currentPage)
     };
 
     const onCommentDelete = (comment_id, doctor_id) => {
@@ -132,6 +133,8 @@ const DoctorProfile = (
                                                         doctorId={doctorId}
                                                         editChosenComment={editChosenComment}
                                                         isAuth={isAuth}
+                                                        commentsCountOnPage={commentsCountOnPage}
+                                                        currentPage={currentPage}
                                                     />
                                             )
                                         }

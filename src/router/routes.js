@@ -14,7 +14,7 @@ import SendMailForRememberPassword
     from "../components/ForgotPassword/SendMailForRememberPassword/SendMailForRememberPassword";
 import ResetPassword from "../components/ForgotPassword/ResetPassword/ResetPassword";
 
-const routes = ()=> {
+const routes = () => {
     return (
 
         <Switch>
@@ -26,11 +26,12 @@ const routes = ()=> {
             <Route path='/our-doctors/:id' render={() => <DoctorProfileContainer/>}/>
             <Route path='/our-services' exact render={() => <OurServicesContainer/>}/>
             <Route path='/our-services/:id' render={() => <ServiceProfileContainer/>}/>
-            <Route path='/my-profile'  render={() => <MyProfileContainer/>}/>
-            <Route path='/reception-service'  render={() => <Reception/>}/>
-            <Route path='/forgot-password'  render={() => <SendMailForRememberPassword/>}/>
-            <Route path='/auth/password-refresh/:token'  render={() => <ResetPassword/>}/>
-            <Route path='*'  render={() => <h1>404 error</h1>}/>
+            <Route path='/my-profile' render={() => <MyProfileContainer/>}/>
+            <Route path='/reception-service' render={() => <Reception/>}/>
+            <Route path='/forgot-password' render={() => <SendMailForRememberPassword/>}/>
+            <Route path='/auth/password-refresh/:token' render={() => <ResetPassword/>}/>
+            <Route path='/auth/admin' render={() => <Login/>}/>
+            <Route path='*' render={() => <h1>404 error</h1>}/>
         </Switch>
     )
 };

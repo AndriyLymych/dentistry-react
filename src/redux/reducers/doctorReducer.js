@@ -2,10 +2,12 @@ import {doctorsAPI} from "../../api/doctorsAPI";
 
 const SET_DOCTORS = 'dentistry-rect/doctor-reducer/set-doctors';
 const SET_IS_LOADING = 'dentistry-rect/doctor-reducer/set-isLoading';
+const SET_SPECIALITY = 'dentistry-rect/doctor-reducer/set-speciality';
 
 const initialState = {
     doctors: [],
-    isLoading: false
+    isLoading: false,
+    specialities: []
 };
 
 
@@ -14,7 +16,12 @@ const doctorReducer = (state = initialState, action) => {
         case SET_DOCTORS :
             return {
                 ...state,
-                doctors: action.doctors
+                doctors: action.payload
+            };
+        case SET_SPECIALITY :
+            return {
+                ...state,
+                specialities: action.payload
             };
         case SET_IS_LOADING:
             return {
@@ -27,8 +34,8 @@ const doctorReducer = (state = initialState, action) => {
 
 };
 
-export const setDoctors = doctors => ({type: SET_DOCTORS, doctors});
-
+export const setDoctors = payload => ({type: SET_DOCTORS, payload});
+export const setSpecialities = payload => ({type: SET_SPECIALITY, payload});
 export const setIsLoading = isLoading => ({type: SET_IS_LOADING, isLoading});
 
 export const getDoctors = () => async dispatch => {
@@ -38,6 +45,18 @@ export const getDoctors = () => async dispatch => {
     let doctors = await doctorsAPI.getDoctors();
 
     dispatch(setDoctors(doctors.data));
+
+    dispatch(setIsLoading(false));
+
+};
+
+export const getSpecialities = () => async dispatch => {
+
+    dispatch(setIsLoading(true));
+
+    let specialities = await doctorsAPI.getDoctorSpecialities();
+
+    dispatch(setSpecialities(specialities.data));
 
     dispatch(setIsLoading(false));
 

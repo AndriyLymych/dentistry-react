@@ -10,8 +10,8 @@ import {
 import {tokenEnum} from "../../constant/authConstant/token.enum";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {userAPI} from "../../api/userAPI";
-import doctorReducer from "./doctorReducer";
 import {doctorsAPI} from "../../api/doctorsAPI";
+import {adminAPI} from "../../api/adminAPI";
 
 
 const initialState = {
@@ -98,6 +98,25 @@ export const login = (email, password) => async dispatch => {
         //TODO при частій логінації meDates === undefined
 
         const meDates = await authAPI.meInfo(token);
+
+        dispatch(setMyID(meDates.data.id));
+        dispatch(setMeDates(meDates.data));
+        dispatch(setIsAuth(true));
+    }
+};
+
+export const loginAdmin = (email, password) => async dispatch => {
+
+    const authData = await adminAPI.authAdmin(email, password);
+
+    if (authData) {
+
+        localStorage.setItem(tokenEnum.access_token, authData.data[tokenEnum.access_token]);
+        localStorage.setItem(tokenEnum.refresh_token, authData.data[tokenEnum.refresh_token]);
+
+        const token = checkAccessTokenPresent();
+
+        const meDates = await adminAPI.adminInfo(token);
 
         dispatch(setMyID(meDates.data.id));
         dispatch(setMeDates(meDates.data));

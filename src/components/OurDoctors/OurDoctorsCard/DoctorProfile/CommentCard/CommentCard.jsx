@@ -17,7 +17,9 @@ const CommentCard = (
         doctorId,
         editChosenComment,
         isAuth,
-        isDoctor
+        isDoctor,
+        commentsCountOnPage,
+        currentPage
     }
 ) => {
 
@@ -74,7 +76,7 @@ const CommentCard = (
                 </div>
             }
             {(isDoctor || isOwner) && isAuth && <button className={style.delete} onClick={() => {
-                onCommentDelete(commentId, doctorId)
+                onCommentDelete(commentId, doctorId,commentsCountOnPage,currentPage)
             }}>Видалити
             </button>}
 

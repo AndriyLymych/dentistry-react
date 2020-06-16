@@ -1,7 +1,8 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 
-const OurDoctorsCard = ({doctor: {id, name, surname, UserSpeciality: {label}}}) => {
+const OurDoctorsCard = ({doctor: {id, name, surname,UserSpeciality:{label}}}) => {
+    console.log(label);
     return (
         <div>
 

@@ -12,6 +12,16 @@ export const doctorsAPI = {
         }
 
     },
+    getDoctorSpecialities: () => {
+
+        try {
+            return axiosInstance.get('/doctors/specialities')
+
+        } catch (e) {
+            console.log(e.message)
+        }
+
+    },
 
     getDoctorById: id => {
         try {

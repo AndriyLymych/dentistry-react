@@ -76,21 +76,20 @@ export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async
 
 };
 
-export const sendComment = (data, doctor_id) => async dispatch => {
+export const sendComment = (data, doctor_id, commentCount, currentPage) => async dispatch => {
 
+    await commentAPI.postComment(data, doctor_id);
 
-    const comment = await commentAPI.postComment(data, doctor_id);
-
-    dispatch(setCommentInfo(comment.data));
+    getCommentsFromDB(doctor_id, commentCount, currentPage);
 
     dispatch(reset('comment'))
 
 };
-export const deleteChosenComment = (comment_id, doctorId) => async dispatch => {
+export const deleteChosenComment = (comment_id, doctorId, commentCount, currentPage) => async dispatch => {
 
+    await commentAPI.deleteComment(comment_id, doctorId);
 
-    const comment = await commentAPI.deleteComment(comment_id, doctorId);
-    dispatch(setCommentInfo(comment.data));
+    getCommentsFromDB(doctorId, commentCount, currentPage);
 
 };
 

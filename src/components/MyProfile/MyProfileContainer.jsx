@@ -7,8 +7,10 @@ import {isAuthSelector, meInfoSelector} from "../../redux/selectors/authSelector
 
 class MyProfileContainer extends React.Component {
 
+
     render() {
-        return <MyProfile id={this.props.match.params.id} isAuth={this.props.isAuth} me={this.props.me}/>;
+
+        return <MyProfile isAuth={this.props.isAuth} me={this.props.me}/>;
     }
 }
 
