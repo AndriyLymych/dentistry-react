@@ -1,4 +1,5 @@
 import axiosInstance from "../helpers/axiosInstance";
+import {headersEnum as headerEnum} from "../constant/authConstant/header.enum";
 
 export const medicalServicesAPI = {
     getAllMedicalServices: async () => {
@@ -20,5 +21,37 @@ export const medicalServicesAPI = {
             console.log(e.message)
         }
 
-    }
+    },
+    addService: async (service, description, photo, price, access_token) => {
+
+        const formData = new FormData();
+
+        formData.append('service', service);
+        formData.append('description', description);
+        formData.append('image', photo);
+        formData.append('price', price);
+
+
+        try {
+            return await axiosInstance.post('/admin/services/add', formData, {
+                headers: {
+                    [headerEnum.CONTENT_TYPE]: 'multipart/form-data',
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    deleteService: async (id, access_token) => {
+        try {
+            return await axiosInstance.delete(`/admin/services/delete/${id}`, {
+                headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    },
 };

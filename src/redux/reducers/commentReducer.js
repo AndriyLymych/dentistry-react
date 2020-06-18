@@ -76,29 +76,52 @@ export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async
 
 };
 
-export const sendComment = (data, doctor_id, commentCount, currentPage) => async dispatch => {
+export const sendComment = (data, doctor_id, commentCount) => async dispatch => {
+
+    dispatch(setIsLoading(true));
 
     await commentAPI.postComment(data, doctor_id);
 
-    getCommentsFromDB(doctor_id, commentCount, currentPage);
+    const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctor_id, commentCount);
+
+    dispatch(setCommentInfo(commentsInfo.data.comments));
+
+    dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
+
+    dispatch(setIsLoading(false));
 
     dispatch(reset('comment'))
 
 };
 export const deleteChosenComment = (comment_id, doctorId, commentCount, currentPage) => async dispatch => {
 
-    await commentAPI.deleteComment(comment_id, doctorId);
+    dispatch(setIsLoading(true));
 
-    getCommentsFromDB(doctorId, commentCount, currentPage);
+    await commentAPI.deleteComment(comment_id);
+
+    dispatch(setCurrentPage(currentPage));
+
+    const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentCount, currentPage);
+
+    dispatch(setCommentInfo(commentsInfo.data.comments));
+    dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
+    dispatch(setIsLoading(false));
 
 };
 
-export const editChosenComment = (comment_id, doctorId, newComment) => async dispatch => {
+export const editChosenComment = (comment_id, doctorId, newComment, commentCount, currentPage) => async dispatch => {
 
+    dispatch(setIsLoading(true));
 
-    const comment = await commentAPI.editComment(comment_id, doctorId, newComment);
-    console.log(comment);
-    dispatch(setCommentInfo(comment.data));
+    await commentAPI.editComment(comment_id, doctorId, newComment);
+
+    dispatch(setCurrentPage(currentPage));
+
+    const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentCount, currentPage);
+
+    dispatch(setCommentInfo(commentsInfo.data.comments));
+    dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
+    dispatch(setIsLoading(false));
 
 };
 

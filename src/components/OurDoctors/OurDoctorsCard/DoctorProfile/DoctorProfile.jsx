@@ -46,12 +46,10 @@ const DoctorProfile = (
     }) => {
 
     const onSendComment = data => {
-        sendComment(data, doctorId,commentsCountOnPage,currentPage)
+        sendComment(data, doctorId,commentsCountOnPage)
     };
 
-    const onCommentDelete = (comment_id, doctor_id) => {
-        deleteChosenComment(comment_id, doctor_id)
-    };
+
 
     const [star, setStar] = useState(1);
 
@@ -129,7 +127,7 @@ const DoctorProfile = (
                                                         commentator={comment["Commentator"]}
                                                         isOwner={myID === comment.user_id}
                                                         isDoctor={myID===comment.doctor_id}
-                                                        onCommentDelete={onCommentDelete}
+                                                        deleteChosenComment={deleteChosenComment}
                                                         doctorId={doctorId}
                                                         editChosenComment={editChosenComment}
                                                         isAuth={isAuth}

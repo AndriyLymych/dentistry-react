@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.3.4",
     "axios": "^0.19.2",
     "dayjs": "^1.8.28",
     "material-ui-icons": "^1.0.0-beta.36",
@@ -17,6 +18,7 @@
     "react-router": "latest",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-select-search": "^2.0.3",
     "redux": "^4.0.5",
     "redux-form": "^8.3.5",
     "redux-thunk": "^2.3.0"

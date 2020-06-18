@@ -4,7 +4,7 @@ import {checkAccessTokenPresent} from "../helpers/checkAccessTokenPresent";
 
 export const commentAPI = {
 
-    getAllCommentsForEveryDoctor: async (doctorId, commentsCount, currentPage) => {
+    getAllCommentsForEveryDoctor: async (doctorId, commentsCount, currentPage=1) => {
 
         try {
             return await axiosInstance.get(`/comments/doctors/${doctorId}?limit=${commentsCount}&page=${currentPage}`)
@@ -31,12 +31,12 @@ export const commentAPI = {
         }
 
     },
-    deleteComment: async (comment_id, doctor_id) => {
+    deleteComment: async comment_id => {
 
         try {
             const token = checkAccessTokenPresent();
 
-            return await axiosInstance.delete(`/comments/${comment_id}?doc=${doctor_id}`, {
+            return await axiosInstance.delete(`/comments/${comment_id}`, {
                 headers: {
 
                     [headerEnum.AUTHORIZATION]: token

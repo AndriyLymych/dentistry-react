@@ -29,7 +29,7 @@ export const userAPI = {
             console.log(e.message);
         }
     },
-    getIsEvaluated: (access_token,doctor_id) => {
+    getIsEvaluated: (access_token, doctor_id) => {
 
         try {
 
@@ -47,6 +47,15 @@ export const userAPI = {
         try {
 
             return axiosInstance.get(`/users/average-mark?doctor_id=${doctor_id}`)
+        } catch (e) {
+            console.log(e.message);
+        }
+    },
+    getAllUsers: (name = '') => {
+
+        try {
+
+            return axiosInstance.get(`/users?name=${name}`)
         } catch (e) {
             console.log(e.message);
         }

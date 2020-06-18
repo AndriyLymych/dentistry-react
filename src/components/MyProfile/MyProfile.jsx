@@ -6,6 +6,10 @@ import ChangePasswordContainer from "./ChangePassword/ChangePasswordContainer";
 import {USER_ROLE} from "../../constant/userConstant/userRole";
 import Register from "../Register/Register";
 import RegisterDoctor from "../RegisterDoctor/RegisterDoctor";
+import BlockUserContainer from "../BlockUser/BlockUserContainer";
+import UnlockUserContainer from "../UnlockUser/UnlockUserContainer";
+import AddMedicalService from "../AddMedicalService/AddMedicalService";
+import DeleteMedicalService from "../DeleteMedicalService/DeleteMedicalService";
 
 
 const MyProfile = ({
@@ -44,9 +48,34 @@ const MyProfile = ({
                                         адміністратора</NavLink></li>
 
                                 }
+
                                 {
                                     label === USER_ROLE.ADMIN &&
                                     <li><NavLink to={`/my-profile/register-doctor`}>Зареєструвати лікаря</NavLink></li>
+
+                                }
+
+                                {
+                                    label === USER_ROLE.ADMIN &&
+                                    <li><NavLink to={`/my-profile/block-user`}>Заблокувати користувача</NavLink></li>
+
+                                }
+
+                                {
+                                    label === USER_ROLE.ADMIN &&
+                                    <li><NavLink to={`/my-profile/unlock-user`}>Розблокувати користувача</NavLink></li>
+
+                                }
+                                {
+                                    label === USER_ROLE.ADMIN &&
+                                    <li><NavLink to={`/my-profile/add-service`}>Додати нову медичну послугу</NavLink>
+                                    </li>
+
+                                }
+                                {
+                                    label === USER_ROLE.ADMIN &&
+                                    <li><NavLink to={`/my-profile/delete-service`}>Видалити медичну послугу</NavLink>
+                                    </li>
 
                                 }
 
@@ -80,6 +109,27 @@ const MyProfile = ({
                             {
                                 label === USER_ROLE.ADMIN &&
                                 <Route path={`/my-profile/register-doctor`} exact render={() => <RegisterDoctor/>}/>
+
+                            }
+
+                            {
+                                label === USER_ROLE.ADMIN &&
+                                <Route path={`/my-profile/block-user`} exact render={() => <BlockUserContainer/>}/>
+
+                            }
+                            {
+                                label === USER_ROLE.ADMIN &&
+                                <Route path={`/my-profile/unlock-user`} exact render={() => <UnlockUserContainer/>}/>
+
+                            }
+                            {
+                                label === USER_ROLE.ADMIN &&
+                                <Route path={`/my-profile/add-service`} exact render={() => <AddMedicalService/>}/>
+
+                            }
+                            {
+                                label === USER_ROLE.ADMIN &&
+                                <Route path={`/my-profile/delete-service`} exact render={() => <DeleteMedicalService/>}/>
 
                             }
 

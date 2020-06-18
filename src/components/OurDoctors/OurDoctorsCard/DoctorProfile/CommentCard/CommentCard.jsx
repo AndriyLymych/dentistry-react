@@ -13,15 +13,18 @@ const CommentCard = (
             avatar
         },
         isOwner,
-        onCommentDelete,
         doctorId,
         editChosenComment,
         isAuth,
         isDoctor,
         commentsCountOnPage,
-        currentPage
+        currentPage,
+        deleteChosenComment
     }
 ) => {
+    const onCommentDelete = () => {
+        deleteChosenComment(commentId, doctorId, commentsCountOnPage, currentPage)
+    };
 
     const [editMode, setEditMode] = useState(false);
     const [comment, setComment] = useState(commentText);
@@ -39,7 +42,7 @@ const CommentCard = (
     };
 
     const updateComment = () => {
-        editChosenComment(commentId, doctorId, comment);
+        editChosenComment(commentId, doctorId, comment,commentsCountOnPage,currentPage);
         setEditMode(!editMode)
     };
 
@@ -75,9 +78,7 @@ const CommentCard = (
 
                 </div>
             }
-            {(isDoctor || isOwner) && isAuth && <button className={style.delete} onClick={() => {
-                onCommentDelete(commentId, doctorId,commentsCountOnPage,currentPage)
-            }}>Видалити
+            {(isDoctor || isOwner) && isAuth && <button className={style.delete} onClick={onCommentDelete}>Видалити
             </button>}
 
             <div>{commentTime}</div>

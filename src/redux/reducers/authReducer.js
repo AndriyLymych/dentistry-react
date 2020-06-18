@@ -99,9 +99,13 @@ export const login = (email, password) => async dispatch => {
 
         const meDates = await authAPI.meInfo(token);
 
-        dispatch(setMyID(meDates.data.id));
-        dispatch(setMeDates(meDates.data));
-        dispatch(setIsAuth(true));
+        if (meDates){
+            dispatch(setMyID(meDates.data.id));
+            dispatch(setMeDates(meDates.data));
+            dispatch(setIsAuth(true));
+        }
+
+
     }
 };
 
