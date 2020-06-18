@@ -33,7 +33,7 @@ export const medicalServicesAPI = {
 
 
         try {
-            return await axiosInstance.post('/admin/services/add', formData, {
+            return await axiosInstance.post('/admin/services', formData, {
                 headers: {
                     [headerEnum.CONTENT_TYPE]: 'multipart/form-data',
                     [headerEnum.AUTHORIZATION]: access_token
@@ -45,7 +45,26 @@ export const medicalServicesAPI = {
     },
     deleteService: async (id, access_token) => {
         try {
-            return await axiosInstance.delete(`/admin/services/delete/${id}`, {
+            return await axiosInstance.delete(`/admin/services/${id}`, {
+                headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    updateService: async (data, id, access_token) => {
+
+        try {
+            const formData = new FormData();
+
+            formData.append('service', data.service);
+            formData.append('description', data.description);
+            formData.append('image', data.photo);
+            formData.append('price', data.price);
+
+            return await axiosInstance.put(`/admin/services/${id}`, formData, {
                 headers: {
                     [headerEnum.AUTHORIZATION]: access_token
                 }

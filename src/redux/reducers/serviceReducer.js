@@ -1,5 +1,5 @@
 import {
-    SET_IS_DELETED,
+    SET_IS_DELETED, SET_IS_SERVICE_UPDATED,
     SET_IS_SERVICE_WORK_DONE,
     SET_LOADING_PROGRESS,
     SET_MEDICAL_SERVICES
@@ -11,7 +11,8 @@ const initialState = {
     services: [],
     isLoading: false,
     isServiceWorkDone: false,
-    isDeleted: false
+    isDeleted: false,
+    isServiceUpdated: false
 };
 
 const serviceReducer = (state = initialState, action) => {
@@ -37,6 +38,11 @@ const serviceReducer = (state = initialState, action) => {
                 ...state,
                 isDeleted: action.payload
             };
+        case  SET_IS_SERVICE_UPDATED :
+            return {
+                ...state,
+                isServiceUpdated: action.payload
+            };
 
         default :
             return state
@@ -47,6 +53,7 @@ export const setServices = payload => ({type: SET_MEDICAL_SERVICES, payload});
 export const setLoadingProgress = payload => ({type: SET_LOADING_PROGRESS, payload});
 export const setIsServiceWorkDone = payload => ({type: SET_IS_SERVICE_WORK_DONE, payload});
 export const setIsDeleted = payload => ({type: SET_IS_DELETED, payload});
+export const setIsServiceUpdated = payload => ({type: SET_IS_SERVICE_UPDATED, payload});
 
 
 export const getServicesFromDB = () => async dispatch => {
@@ -94,6 +101,24 @@ export const deleteMedicalService = id => async dispatch => {
         if (deleteService) {
 
             dispatch(setIsDeleted(true));
+            dispatch(setLoadingProgress(false));
+        }
+
+    }
+};
+export const updateMedicalService = (data, id) => async dispatch => {
+
+    dispatch(setLoadingProgress(true));
+
+    const token = checkAccessTokenPresent();
+
+    if (token) {
+
+        const updateService = await medicalServicesAPI.updateService(data, id, token);
+
+        if (updateService) {
+
+            dispatch(setIsServiceUpdated(true));
             dispatch(setLoadingProgress(false));
         }
 

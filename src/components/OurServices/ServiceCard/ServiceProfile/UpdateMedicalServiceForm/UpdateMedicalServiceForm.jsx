@@ -1,6 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import MyFile from "../../MyFile/MyFile";
+import MyFile from "../../../../MyFile/MyFile";
 
 const UpdateMedicalServiceForm = props => {
 
@@ -26,6 +26,7 @@ const UpdateMedicalServiceForm = props => {
                         <Field
                             name="service"
                             component="input"
+                            autoFocus={true}
                         />
                     </div>
                 </div>

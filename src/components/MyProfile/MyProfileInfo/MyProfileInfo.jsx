@@ -40,7 +40,6 @@ const MyProfileInfo = ({
 
     const onUpdateDoctorAvatar = (e) => {
         if (e.target.files.length) {
-            console.log(e.target.files);
             updateDoctorProfilePhoto(e.target.files[0]);
         }
 

@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import {isLoadingProfileSelector, serviceProfileSelector} from "../../../../redux/selectors/serviceProfileSelectors";
 import {getServiceProfile} from "../../../../redux/reducers/serviceProfileReducer";
 import {withRouter} from "react-router-dom";
+import {meInfoSelector} from "../../../../redux/selectors/authSelectors";
+import {updateMedicalService} from "../../../../redux/reducers/serviceReducer";
 
 class ServiceProfileContainer extends React.Component {
 
@@ -16,7 +18,12 @@ class ServiceProfileContainer extends React.Component {
     }
 
     render() {
-        return <ServiceProfile serviceProfile={this.props.serviceProfile} isLoading={this.props.isLoading}/>
+        return <ServiceProfile
+            serviceProfile={this.props.serviceProfile}
+            isLoading={this.props.isLoading}
+            userRole={this.props.me.UserRole.label}
+            updateMedicalService={this.props.updateMedicalService}
+        />
     }
 
 }
@@ -24,10 +31,11 @@ class ServiceProfileContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         serviceProfile: serviceProfileSelector(state),
-        isLoading: isLoadingProfileSelector(state)
+        isLoading: isLoadingProfileSelector(state),
+        me:meInfoSelector(state)
     }
 };
 
 const ServiceProfileContainerWithRouter = withRouter(ServiceProfileContainer);
 
-export default compose(connect(mapStateToProps, {getServiceProfile})(ServiceProfileContainerWithRouter));
+export default compose(connect(mapStateToProps, {getServiceProfile,updateMedicalService})(ServiceProfileContainerWithRouter));
