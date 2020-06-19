@@ -31,7 +31,6 @@ export const medicalServicesAPI = {
         formData.append('image', photo);
         formData.append('price', price);
 
-
         try {
             return await axiosInstance.post('/admin/services', formData, {
                 headers: {
@@ -57,15 +56,25 @@ export const medicalServicesAPI = {
     updateService: async (data, id, access_token) => {
 
         try {
-            const formData = new FormData();
-
-            formData.append('service', data.service);
-            formData.append('description', data.description);
-            formData.append('image', data.photo);
-            formData.append('price', data.price);
-
-            return await axiosInstance.put(`/admin/services/${id}`, formData, {
+            
+            return await axiosInstance.put(`/admin/services/${id}`, data, {
                 headers: {
+                    [headerEnum.AUTHORIZATION]: access_token
+                }
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    updateServicePhoto: async (photo, id, access_token) => {
+
+        try {
+            const formData = new FormData();
+            formData.append('image', photo);
+
+            return await axiosInstance.put(`/admin/services/photo/${id}`, formData, {
+                headers: {
+                    [headerEnum.CONTENT_TYPE]: 'multipart/form-data',
                     [headerEnum.AUTHORIZATION]: access_token
                 }
             })

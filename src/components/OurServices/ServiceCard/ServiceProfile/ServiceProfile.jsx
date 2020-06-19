@@ -11,10 +11,29 @@ const UpdateMedicalServiceReduxForm = reduxForm({
     form: 'update-medical-service'
 })(UpdateMedicalServiceForm);
 
-const ServiceProfile = ({isLoading, serviceProfile: {photo, service, description, price}, userRole, updateMedicalService}) => {
+const ServiceProfile = ({
+                            isLoading,
+                            serviceProfile: {
+                                id,
+                                photo,
+                                service,
+                                description,
+                                price
+                            },
+                            userRole,
+                            updateMedicalService
+                        }) => {
 
     const [editMode, setEditMode] = useState(false);
 
+    const onSubmit = data => {
+
+        const isUpdate = updateMedicalService(data, id);
+
+        if (isUpdate) {
+            setEditMode(!editMode)
+        }
+    };
 
     return (
         <div>
@@ -49,7 +68,9 @@ const ServiceProfile = ({isLoading, serviceProfile: {photo, service, description
                         }
                         {editMode && userRole === USER_ROLE.ADMIN &&
                         <div>
-                            < UpdateMedicalServiceReduxForm initialValues={{service, description, price}}/>
+                            < UpdateMedicalServiceReduxForm
+                                onSubmit={onSubmit}
+                                initialValues={{service, description, price}}/>
                             <button onClick={() => {
                                 setEditMode(!editMode);
                             }}>Відхилити

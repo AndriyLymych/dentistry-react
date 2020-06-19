@@ -32,10 +32,13 @@ const mapStateToProps = state => {
     return {
         serviceProfile: serviceProfileSelector(state),
         isLoading: isLoadingProfileSelector(state),
-        me:meInfoSelector(state)
+        me: meInfoSelector(state)
     }
 };
 
 const ServiceProfileContainerWithRouter = withRouter(ServiceProfileContainer);
 
-export default compose(connect(mapStateToProps, {getServiceProfile,updateMedicalService})(ServiceProfileContainerWithRouter));
+export default compose(connect(mapStateToProps, {
+    getServiceProfile,
+    updateMedicalService
+})(ServiceProfileContainerWithRouter));

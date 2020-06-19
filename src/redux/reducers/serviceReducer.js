@@ -6,6 +6,7 @@ import {
 } from "../../constant/actionTypes/servicesAC";
 import {medicalServicesAPI} from "../../api/medicalServicesAPI";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
+import {setServiceProfile} from "./serviceProfileReducer";
 
 const initialState = {
     services: [],
@@ -38,11 +39,6 @@ const serviceReducer = (state = initialState, action) => {
                 ...state,
                 isDeleted: action.payload
             };
-        case  SET_IS_SERVICE_UPDATED :
-            return {
-                ...state,
-                isServiceUpdated: action.payload
-            };
 
         default :
             return state
@@ -53,7 +49,6 @@ export const setServices = payload => ({type: SET_MEDICAL_SERVICES, payload});
 export const setLoadingProgress = payload => ({type: SET_LOADING_PROGRESS, payload});
 export const setIsServiceWorkDone = payload => ({type: SET_IS_SERVICE_WORK_DONE, payload});
 export const setIsDeleted = payload => ({type: SET_IS_DELETED, payload});
-export const setIsServiceUpdated = payload => ({type: SET_IS_SERVICE_UPDATED, payload});
 
 
 export const getServicesFromDB = () => async dispatch => {
@@ -115,10 +110,30 @@ export const updateMedicalService = (data, id) => async dispatch => {
     if (token) {
 
         const updateService = await medicalServicesAPI.updateService(data, id, token);
+        const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
 
-        if (updateService) {
+        if (updateService && serviceProfile) {
 
-            dispatch(setIsServiceUpdated(true));
+            dispatch(setServiceProfile(serviceProfile.data));
+            dispatch(setLoadingProgress(false));
+        }
+
+    }
+};
+export const updateMedicalServicePhoto = (photo, id) => async dispatch => {
+
+    dispatch(setLoadingProgress(true));
+
+    const token = checkAccessTokenPresent();
+
+    if (token) {
+
+        const updateService = await medicalServicesAPI.updateServicePhoto(photo, id, token);
+        const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
+
+        if (updateService && serviceProfile) {
+
+            dispatch(setServiceProfile(serviceProfile.data));
             dispatch(setLoadingProgress(false));
         }
 

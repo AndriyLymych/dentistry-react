@@ -25,7 +25,7 @@ class AddMedicalService extends React.Component {
         const {addMedicalService, isServiceWorkDone} = this.props;
 
         const onSubmit = data => {
-            console.log(data.photo[0]);
+
             addMedicalService(data.service, data.description, data.photo[0], data.price)
         };
 

@@ -28,7 +28,7 @@ const serviceProfileReducer = (state = initialState, action) => {
     }
 };
 
-const setServiceProfile = payload => ({type: SET_SERVICE_PROFILE, payload});
+export const setServiceProfile = payload => ({type: SET_SERVICE_PROFILE, payload});
 const isServiceProfileLoading = payload => ({type: SET_LOADING_PROGRESS, payload});
 
 export const getServiceProfile = id => async dispatch => {
