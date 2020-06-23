@@ -40,7 +40,11 @@ const MyProfileInfo = ({
 
     const onUpdateDoctorAvatar = (e) => {
         if (e.target.files.length) {
-            updateDoctorProfilePhoto(e.target.files[0]);
+            const isUpdate = updateDoctorProfilePhoto(e.target.files[0]);
+            Promise.all([isUpdate]).then(()=>{
+                    window.location.reload()
+                }
+            );
         }
 
     };

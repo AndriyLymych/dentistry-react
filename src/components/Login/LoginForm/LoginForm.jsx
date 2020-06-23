@@ -2,10 +2,20 @@ import React from "react";
 import {Field} from 'redux-form'
 import {InputCreator} from "../../../helpers/FormCreator/FormCreator";
 import style from './LoginForm.module.css'
+import {
+    emailValidator,
+    maxLengthValidator,
+    minLengthValidator, passwordValidator,
+    requiredValidator
+} from "../../../validators/validators";
 
+const maxLength = maxLengthValidator(40);
+const minLength = minLengthValidator(2);
+const minPasswordLength = minLengthValidator(8);
 
 
 export const LoginForm = props => {
+
 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -17,7 +27,7 @@ export const LoginForm = props => {
                     name={"email"}
                     component={InputCreator}
                     placeholder={"Введіть емейл..."}
-                    // validate={[requiredField, maxLengthEmail]}
+                    validate={[requiredValidator,minLength,maxLength,emailValidator]}
                     type={"email"}
                 />
             </div>
@@ -29,7 +39,7 @@ export const LoginForm = props => {
                     name={"password"}
                     component={InputCreator}
                     placeholder={"Введіть пароль..."}
-                    // validate={[requiredField, maxLengthPassword]}
+                    validate={[requiredValidator,minPasswordLength,passwordValidator]}
                     type={"password"}
                 />
             </div>

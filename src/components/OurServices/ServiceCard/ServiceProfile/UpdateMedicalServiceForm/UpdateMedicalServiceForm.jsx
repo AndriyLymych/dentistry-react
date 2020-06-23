@@ -1,6 +1,5 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import MyFile from "../../../../MyFile/MyFile";
 
 const UpdateMedicalServiceForm = props => {
 

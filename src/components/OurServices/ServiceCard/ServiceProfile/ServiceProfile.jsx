@@ -6,10 +6,15 @@ import {configs} from "../../../../config/configs";
 import {USER_ROLE} from "../../../../constant/userConstant/userRole";
 import {reduxForm} from "redux-form";
 import UpdateMedicalServiceForm from "./UpdateMedicalServiceForm/UpdateMedicalServiceForm";
+import UpdateMedicalServicePhotoForm from "./UpdateMedicalServicePhotoForm/UpdateMedicalServiceFormPhoto";
 
 const UpdateMedicalServiceReduxForm = reduxForm({
     form: 'update-medical-service'
 })(UpdateMedicalServiceForm);
+
+const UpdateMedicalServicePhotoReduxForm = reduxForm({
+    form: 'update-medical-service-photo'
+})(UpdateMedicalServicePhotoForm);
 
 const ServiceProfile = ({
                             isLoading,
@@ -20,8 +25,10 @@ const ServiceProfile = ({
                                 description,
                                 price
                             },
-                            userRole,
-                            updateMedicalService
+                            me,
+                            updateMedicalService,
+                            updateMedicalServicePhoto,
+                            isAuth
                         }) => {
 
     const [editMode, setEditMode] = useState(false);
@@ -33,6 +40,15 @@ const ServiceProfile = ({
         if (isUpdate) {
             setEditMode(!editMode)
         }
+    };
+    const onPhotoChange = data => {
+
+        const isUpdate = updateMedicalServicePhoto(data.photo[0], id);
+
+        Promise.all([isUpdate]).then(() => {
+                window.location.reload()
+            }
+        );
     };
 
     return (
@@ -50,6 +66,10 @@ const ServiceProfile = ({
                             <div>
                                 <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${photo}`}
                                      alt="ava"/>
+                                {
+                                    isAuth && me.UserRole.label === USER_ROLE.ADMIN &&
+                                    <UpdateMedicalServicePhotoReduxForm onChange={onPhotoChange}/>
+                                }
                             </div>
                             {!editMode &&
                             <div>
@@ -61,12 +81,12 @@ const ServiceProfile = ({
 
                         </div>
 
-                        {!editMode && userRole === USER_ROLE.ADMIN &&
+                        {isAuth && !editMode && me.UserRole.label === USER_ROLE.ADMIN &&
                         <button onClick={() => {
                             setEditMode(!editMode);
                         }}>Редагувати послугу</button>
                         }
-                        {editMode && userRole === USER_ROLE.ADMIN &&
+                        {isAuth && editMode && me.UserRole.label === USER_ROLE.ADMIN &&
                         <div>
                             < UpdateMedicalServiceReduxForm
                                 onSubmit={onSubmit}

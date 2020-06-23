@@ -31,6 +31,7 @@ export const medicalServicesAPI = {
         formData.append('image', photo);
         formData.append('price', price);
 
+
         try {
             return await axiosInstance.post('/admin/services', formData, {
                 headers: {

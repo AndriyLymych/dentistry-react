@@ -43,15 +43,19 @@ export const setDoctorMark = (mark, doctor_id) => async dispatch => {
 
     const token = checkAccessTokenPresent();
 
-    const markData = await userAPI.setMark(token, mark, doctor_id);
+    const postMark = await userAPI.setMark(token, mark, doctor_id);
 
-    dispatch(setMark(markData.data.avgMark));
+    const avgMark = await userAPI.getAVGMark(doctor_id);
+    const isEvaluated = await userAPI.getIsEvaluated(token, doctor_id);
 
-    dispatch(setIsEvaluated(markData.data.isEvaluated));
+    Promise.all([postMark, avgMark, isEvaluated]).then(() => {
 
-    dispatch(setIsMarkLoading(true));
+        dispatch(setMark(avgMark.data.average_doctor_mark));
+        dispatch(setIsEvaluated(isEvaluated.data));
+        dispatch(setIsMarkLoading(true));
 
 
+    });
 };
 export const getIsEvaluatedDoctor = doctor_id => async dispatch => {
 

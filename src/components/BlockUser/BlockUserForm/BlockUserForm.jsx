@@ -1,6 +1,6 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {UserBox} from "../../UserBox/UserBox";
+import UserBox from "../../UserBox/UserBox";
 
 const BlockUserForm = props => {
 

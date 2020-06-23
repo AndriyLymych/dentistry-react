@@ -13,7 +13,7 @@ import receptionReducer from "./reducers/receptionReducer";
 import commentReducer from "./reducers/commentReducer";
 import doctorMarkReducer from "./reducers/doctorMarkReducer";
 import adminReducer from "./reducers/adminReducer";
-
+//TODO винести в rootReducer
 const reducers = combineReducers({
     doctorReducer,
     authReducer,

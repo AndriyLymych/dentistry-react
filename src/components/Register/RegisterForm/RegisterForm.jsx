@@ -1,9 +1,18 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import {
+    emailValidator,
+    maxLengthValidator,
+    minLengthValidator,
+    requiredValidator
+} from "../../../validators/validators";
+
+const maxLength = maxLengthValidator(40);
+const minLength = minLengthValidator(2);
 
 const RegisterForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting,genders} = props;
+    const {handleSubmit, pristine, reset, submitting, genders} = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -15,6 +24,7 @@ const RegisterForm = props => {
                         component="input"
                         type="email"
                         placeholder="Введіть ваш емейл..."
+                        validate={[requiredValidator, minLength, maxLength, emailValidator]}
                     />
                 </div>
             </div>
@@ -99,7 +109,6 @@ const RegisterForm = props => {
                                     <Field name="gender_id" component="input" type="radio" value={gender.id}/>
                                     {gender.label}
                                 </label>
-
                         )
                     }
 

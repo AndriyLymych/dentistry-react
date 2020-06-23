@@ -74,11 +74,11 @@ export const addMedicalService = (service, description, photo, price) => async d
 
         const addService = await medicalServicesAPI.addService(service, description, photo, price, token);
 
-        if (addService) {
-
-            dispatch(setIsServiceWorkDone(true));
-            dispatch(setLoadingProgress(false));
-        }
+        Promise.all([addService]).then(() => {
+                dispatch(setIsServiceWorkDone(true));
+                dispatch(setLoadingProgress(false));
+            }
+        );
 
     }
 };
@@ -92,12 +92,10 @@ export const deleteMedicalService = id => async dispatch => {
     if (token) {
 
         const deleteService = await medicalServicesAPI.deleteService(id, token);
-
-        if (deleteService) {
-
+        Promise.all([deleteService]).then(() => {
             dispatch(setIsDeleted(true));
             dispatch(setLoadingProgress(false));
-        }
+        });
 
     }
 };
@@ -112,11 +110,11 @@ export const updateMedicalService = (data, id) => async dispatch => {
         const updateService = await medicalServicesAPI.updateService(data, id, token);
         const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
 
-        if (updateService && serviceProfile) {
-
+        Promise.all([updateService, serviceProfile]).then(() => {
             dispatch(setServiceProfile(serviceProfile.data));
             dispatch(setLoadingProgress(false));
-        }
+        });
+
 
     }
 };
@@ -131,11 +129,13 @@ export const updateMedicalServicePhoto = (photo, id) => async dispatch => {
         const updateService = await medicalServicesAPI.updateServicePhoto(photo, id, token);
         const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
 
-        if (updateService && serviceProfile) {
+
+        Promise.all([updateService, serviceProfile]).then(() => {
 
             dispatch(setServiceProfile(serviceProfile.data));
             dispatch(setLoadingProgress(false));
-        }
+        });
+
 
     }
 };
