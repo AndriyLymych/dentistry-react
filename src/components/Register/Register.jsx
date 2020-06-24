@@ -5,9 +5,8 @@ import {registerPatient, getGenders} from "../../redux/reducers/registerReducer"
 import RegisterForm from "./RegisterForm/RegisterForm";
 import {
     getAllGendersSelector,
-    getIsRegisterSuccessSelector
+    getIsRegisterSuccessSelector, getRegisterLoadingSelector
 } from "../../redux/selectors/registerSelectors";
-import {getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
 import {registerAdmin} from "../../redux/reducers/adminReducer";
 import Preloader from "../Preloader/Preloader";
 import {withRouter} from "react-router-dom";
@@ -19,7 +18,6 @@ const RegisterReduxForm = reduxForm({
 })(RegisterForm);
 
 
-
 class Register extends React.Component {
 
     componentDidMount() {
@@ -29,10 +27,11 @@ class Register extends React.Component {
     }
 
     render() {
-        if (this.props.isCreateByAdmin) {
+        if (!this.props.registerLoading) {
             return <Preloader/>
         }
         const {registerPatient, isRegisterSuccess, registerAdmin} = this.props;
+
 
         const onSubmit = data => {
             if (this.props.match.path === '/register') {
@@ -68,7 +67,7 @@ const mapStateToProps = state => {
     return {
         isRegisterSuccess: getIsRegisterSuccessSelector(state),
         genders: getAllGendersSelector(state),
-        isCreateByAdmin: getIsCreateByAdmin(state),
+        registerLoading: getRegisterLoadingSelector(state)
     }
 };
 

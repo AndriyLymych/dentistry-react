@@ -1,6 +1,16 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import MyFile from "../../MyFile/MyFile";
+import {InputCreator, TextareaCreator} from "../../../helpers/FormCreator/FormCreator";
+import {
+    isNumberValidator,
+    minLengthValidator,
+    minPriceValidator,
+    requiredValidator
+} from "../../../validators/validators";
+
+const minPrice = minPriceValidator(1);
+const minLength = minLengthValidator(2);
 
 const AddMedicalServiceForm = props => {
 
@@ -25,8 +35,10 @@ const AddMedicalServiceForm = props => {
                 <div>
                     <Field
                         name="service"
-                        component="input"
+                        component={InputCreator}
                         placeholder="Введіть назву послуги..."
+                        validate={[requiredValidator, minLength]}
+
                     />
                 </div>
             </div>
@@ -35,8 +47,10 @@ const AddMedicalServiceForm = props => {
                 <div>
                     <Field
                         name="description"
-                        component="input"
+                        component={TextareaCreator}
                         placeholder="Опишіть послугу..."
+                        validate={[requiredValidator, minLength]}
+
                     />
                 </div>
             </div>
@@ -45,8 +59,9 @@ const AddMedicalServiceForm = props => {
                 <div>
                     <Field
                         name="price"
-                        component="input"
+                        component={InputCreator}
                         placeholder="Введіть ціну послуги..."
+                        validate={[requiredValidator, isNumberValidator, minPrice]}
                     />
                 </div>
             </div>

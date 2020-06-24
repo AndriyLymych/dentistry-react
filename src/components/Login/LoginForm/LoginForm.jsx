@@ -1,7 +1,6 @@
 import React from "react";
 import {Field} from 'redux-form'
 import {InputCreator} from "../../../helpers/FormCreator/FormCreator";
-import style from './LoginForm.module.css'
 import {
     emailValidator,
     maxLengthValidator,
@@ -9,7 +8,9 @@ import {
     requiredValidator
 } from "../../../validators/validators";
 
-const maxLength = maxLengthValidator(40);
+import style from '../../../App.module.css'
+
+const maxLength = maxLengthValidator(100);
 const minLength = minLengthValidator(2);
 const minPasswordLength = minLengthValidator(8);
 
@@ -21,7 +22,7 @@ export const LoginForm = props => {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <div>
-                    <label htmlFor="email">Email: </label>
+                    <label htmlFor="email">Email  <span className={style.requiredStar}>*</span> : </label>
                 </div>
                 <Field
                     name={"email"}
@@ -33,7 +34,7 @@ export const LoginForm = props => {
             </div>
             <div>
                 <div>
-                    <label htmlFor="password">Password: </label>
+                    <label htmlFor="password">Password  <span className={style.requiredStar}>*</span> : </label>
                 </div>
                 <Field
                     name={"password"}

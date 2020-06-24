@@ -1,9 +1,26 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import {InputCreator, SelectCreator} from "../../../helpers/FormCreator/FormCreator";
+import {
+    emailValidator, isCorrectSpecialityValidator, isNumberValidator,
+    maxAgeValidator,
+    maxLengthValidator,
+    minAgeValidator,
+    minLengthValidator, passwordValidator,
+    requiredValidator
+} from "../../../validators/validators";
+
+const maxLength = maxLengthValidator(100);
+const minLength = minLengthValidator(2);
+const minPasswordLength = minLengthValidator(8);
+const minNameLength = minLengthValidator(2);
+const maxNameLength = maxLengthValidator(40);
+const minAge = minAgeValidator(2);
+const maxAge = maxAgeValidator(120);
 
 const RegisterDoctorForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting,genders,specialities} = props;
+    const {handleSubmit, pristine, reset, submitting, genders, specialities} = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -12,9 +29,11 @@ const RegisterDoctorForm = props => {
                 <div>
                     <Field
                         name="email"
-                        component="input"
+                        component={InputCreator}
                         type="email"
                         placeholder="Введіть ваш емейл..."
+                        validate={[requiredValidator, minLength, maxLength, emailValidator]}
+
                     />
                 </div>
             </div>
@@ -23,9 +42,11 @@ const RegisterDoctorForm = props => {
                 <div>
                     <Field
                         name="password"
-                        component="input"
+                        component={InputCreator}
                         type="password"
                         placeholder="Введіть ваш пароль..."
+                        validate={[requiredValidator, minPasswordLength, passwordValidator]}
+
                     />
                 </div>
             </div>
@@ -34,9 +55,11 @@ const RegisterDoctorForm = props => {
                 <div>
                     <Field
                         name="name"
-                        component="input"
+                        component={InputCreator}
                         type="text"
                         placeholder="Введіть ваше ім'я..."
+                        validate={[requiredValidator, minNameLength, maxNameLength]}
+
                     />
                 </div>
             </div>
@@ -45,9 +68,11 @@ const RegisterDoctorForm = props => {
                 <div>
                     <Field
                         name="middleName"
-                        component="input"
+                        component={InputCreator}
                         type="text"
                         placeholder="Введіть ваше по-батькові..."
+                        validate={[requiredValidator, minNameLength, maxNameLength]}
+
                     />
                 </div>
             </div>
@@ -57,9 +82,11 @@ const RegisterDoctorForm = props => {
                 <div>
                     <Field
                         name="surname"
-                        component="input"
+                        component={InputCreator}
                         type="text"
                         placeholder="Введіть ваше прізвище..."
+                        validate={[requiredValidator, minNameLength, maxNameLength]}
+
                     />
                 </div>
             </div>
@@ -70,9 +97,11 @@ const RegisterDoctorForm = props => {
                     <div>
                         <Field
                             name="age"
-                            component="input"
+                            component={InputCreator}
                             type="text"
                             placeholder="Введіть ваше вік..."
+                            validate={[requiredValidator, isNumberValidator, minAge, maxAge]}
+
                         />
                     </div>
                 </div>
@@ -82,9 +111,11 @@ const RegisterDoctorForm = props => {
                     <div>
                         <Field
                             name="city"
-                            component="input"
+                            component={InputCreator}
                             type="text"
                             placeholder="Введіть ваше місто..."
+                            validate={requiredValidator}
+
                         />
                     </div>
                 </div>
@@ -92,24 +123,31 @@ const RegisterDoctorForm = props => {
                 <label>Стать:</label>
 
                 <div>
-                    {
-                        genders.map(
-                            gender =>
-                                <label key={gender.id}>
-                                    <Field name="gender_id" component="input" type="radio" value={gender.id}/>
-                                    {gender.label}
-                                </label>
+                    {/*{*/}
+                    {/*    genders.map(*/}
+                    {/*        gender =>*/}
+                    {/*            <label key={gender.id}>*/}
+                    {/*                <Field name="gender_id" component={InputCreator} type="radio" />*/}
+                    {/*                {gender.label}*/}
+                    {/*            </label>*/}
+                    {/*    )*/}
+                    {/*}*/}
 
-                        )
-                    }
+                    <div>
+                        <label><Field name="gender_id" component={InputCreator} type="radio" value="1"
+                                      validate={requiredValidator}/> Чоловіча</label>
+                        <label><Field name="gender_id" component={InputCreator} type="radio" value="2"
+                                      validate={requiredValidator}/> Жіноча</label>
+                    </div>
 
                 </div>
 
                 <div>
                     <label>Спеціальність:</label>
 
-                    <Field name="speciality_id" component="select">
-                        <option  defaultChecked>Виберіть спеціальність:</option>
+                    <Field name="speciality_id" component={SelectCreator}
+                           validate={[requiredValidator, isCorrectSpecialityValidator]}>
+                        <option defaultChecked>Виберіть спеціальність:</option>
                         {
                             specialities.map(speciality => <option value={speciality.id}>{speciality.label}</option>)
                         }

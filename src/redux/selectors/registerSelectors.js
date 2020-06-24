@@ -5,3 +5,6 @@ export const getIsRegisterSuccessSelector = state => {
 export const getAllGendersSelector = state => {
     return state.registerReducer.genders;
 };
+export const getRegisterLoadingSelector = state => {
+    return state.registerReducer.registerLoading;
+};

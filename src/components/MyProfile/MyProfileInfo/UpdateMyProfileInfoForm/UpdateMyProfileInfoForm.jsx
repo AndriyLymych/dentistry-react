@@ -1,5 +1,17 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import {InputCreator} from "../../../../helpers/FormCreator/FormCreator";
+import {
+    isNumberValidator, maxAgeValidator,
+    maxLengthValidator, minAgeValidator,
+    minLengthValidator,
+    requiredValidator
+} from "../../../../validators/validators";
+
+const minNameLength = minLengthValidator(2);
+const maxNameLength = maxLengthValidator(40);
+const minAge = minAgeValidator(2);
+const maxAge = maxAgeValidator(120);
 
 const UpdateMyProfileInfoForm = props => {
 
@@ -14,8 +26,10 @@ const UpdateMyProfileInfoForm = props => {
                     <div>
                         <Field
                             name="name"
-                            component="input"
+                            component={InputCreator}
                             autoFocus
+                            validate={[requiredValidator, minNameLength, maxNameLength]}
+
                         />
                     </div>
 
@@ -25,7 +39,9 @@ const UpdateMyProfileInfoForm = props => {
                     <div>
                         <Field
                             name="middleName"
-                            component="input"
+                            component={InputCreator}
+                            validate={[requiredValidator, minNameLength, maxNameLength]}
+
                         />
                     </div>
                 </div>
@@ -34,7 +50,8 @@ const UpdateMyProfileInfoForm = props => {
                     <div>
                         <Field
                             name="surname"
-                            component="input"
+                            component={InputCreator}
+                            validate={[requiredValidator, minNameLength, maxNameLength]}
                         />
                     </div>
                 </div>
@@ -45,7 +62,9 @@ const UpdateMyProfileInfoForm = props => {
                     <div>
                         <Field
                             name="age"
-                            component="input"
+                            component={InputCreator}
+                            validate={[requiredValidator, isNumberValidator, minAge, maxAge]}
+
                         />
                     </div>
                 </div>
@@ -55,7 +74,8 @@ const UpdateMyProfileInfoForm = props => {
                     <div>
                         <Field
                             name="city"
-                            component="input"
+                            component={InputCreator}
+                            validate={requiredValidator}
                         />
                     </div>
                 </div>

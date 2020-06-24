@@ -19,6 +19,12 @@ import {USER_ROLE} from "../../constant/userConstant/userRole";
 import {deleteReceptionRecordConfirm} from "../../constant/confirmText/comfirmText";
 import {ConfirmWindow} from "../Confirm/Confirm";
 import dayjs from "dayjs";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
 
 const MyReceptions = (
     {
@@ -45,15 +51,13 @@ const MyReceptions = (
         setOpen(false);
     };
 
-    const onDeleteRecord = () => {
-
-        let i = 0;
+    const onDeleteRecord = (id, email) => {
 
         if (user_role === USER_ROLE.PATIENT) {
-            deleteReceptionRecordByPatient(receptions[i].id, receptions[i].email)
+            deleteReceptionRecordByPatient(id, email)
         }
         if (user_role === USER_ROLE.DOCTOR) {
-            deleteReceptionRecordByDoctor(receptions[i].id)
+            deleteReceptionRecordByDoctor(id)
         }
         handleClose()
     };
@@ -62,13 +66,8 @@ const MyReceptions = (
     return (
 
         <div>
-            {ConfirmWindow(
-                open,
-                handleClose,
-                deleteReceptionRecordConfirm.deleteReceptionRecordTitle,
-                deleteReceptionRecordConfirm.deleteReceptionRecordText,
-                onDeleteRecord
-            )}
+
+
 
             {isLoading && isAuth ? <Preloader/> :
                 <div>
@@ -87,7 +86,7 @@ const MyReceptions = (
                                             <TableRow>
                                                 {
                                                     user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell >Ім'я</TableCell>
+                                                    <TableCell>Ім'я</TableCell>
                                                 }
                                                 {user_role === USER_ROLE.DOCTOR &&
                                                 <TableCell align="right">Електронна адреса</TableCell>}
@@ -99,7 +98,7 @@ const MyReceptions = (
                                                         <TableCell>Послуга</TableCell>
                                                 }
                                                 <TableCell align="right">Ціна</TableCell>
-                                                <TableCell align="right">Час</TableCell>
+                                                <TableCell align="right">Час та дата</TableCell>
                                                 <TableCell align="right">Видалити запис</TableCell>
 
                                             </TableRow>
@@ -111,17 +110,17 @@ const MyReceptions = (
                                                 <TableRow>
 
                                                     {user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell  className={style.field} component="th"
+                                                    <TableCell className={style.field} component="th"
                                                                scope="row">{row.name}</TableCell>}
                                                     {user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell  align="right">{row.email}</TableCell>}
+                                                    <TableCell align="right">{row.email}</TableCell>}
                                                     {user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell  align="right">{row.phone_number}</TableCell>}
+                                                    <TableCell align="right">{row.phone_number}</TableCell>}
                                                     {user_role === USER_ROLE.DOCTOR ?
-                                                        <TableCell  align="right">
+                                                        <TableCell align="right">
                                                             {row.MedicalService.service}
                                                         </TableCell> :
-                                                        <TableCell  component="th" scope="row">
+                                                        <TableCell component="th" scope="row">
                                                             {row.MedicalService.service}
                                                         </TableCell>
                                                     }
@@ -131,14 +130,43 @@ const MyReceptions = (
                                                     <TableCell contentEditable align="right">
                                                         {dayjs(row.date).format('HH:mm MM/DD/YYYY')}
                                                     </TableCell>
-                                                    <TableCell  align="right">
+                                                    <TableCell align="right">
                                                         <div title={'Видалити'} onClick={handleClickOpen}>
                                                             <DeleteForeverIcon
                                                                 className={style.changeRecord}/>
                                                         </div>
                                                     </TableCell>
+                                                    <div>
 
-                                                </TableRow>)}
+                                                        <Dialog
+                                                            open={open}
+                                                            onClose={handleClose}
+                                                            aria-labelledby="alert-dialog-title"
+                                                            aria-describedby="alert-dialog-description"
+                                                        >
+                                                            <DialogTitle
+                                                                id="alert-dialog-title">{deleteReceptionRecordConfirm.deleteReceptionRecordTitle}</DialogTitle>
+                                                            <DialogContent>
+                                                                <DialogContentText id="alert-dialog-description">
+                                                                    {deleteReceptionRecordConfirm.deleteReceptionRecordText}
+                                                                </DialogContentText>
+                                                            </DialogContent>
+                                                            <DialogActions>
+                                                                <Button onClick={handleClose} color="primary">
+                                                                    Відхилити
+                                                                </Button>
+                                                                <Button
+                                                                    onClick={() => onDeleteRecord(row.id, row.email)}
+                                                                    color="primary"
+                                                                    autoFocus>
+                                                                    Прийняти
+                                                                </Button>
+                                                            </DialogActions>
+                                                        </Dialog>
+                                                    </div>
+                                                </TableRow>)
+
+                                            }
                                         </TableBody>
                                     </Table>
 

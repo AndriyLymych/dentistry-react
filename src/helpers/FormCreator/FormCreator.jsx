@@ -28,3 +28,18 @@ export const InputCreator = (props) => {
     </FormCreator>
 
 };
+export const SelectCreator = (props) => {
+
+    return <FormCreator {...props}>
+        <select {...props.input} {...props}/>
+    </FormCreator>
+
+};
+export const TextareaCreator = (props) => {
+
+    return <FormCreator {...props}>
+        <textarea {...props.input
+        } {...props} style={{'resize': 'none'}} rows="7" cols="50"/>
+    </FormCreator>
+
+};

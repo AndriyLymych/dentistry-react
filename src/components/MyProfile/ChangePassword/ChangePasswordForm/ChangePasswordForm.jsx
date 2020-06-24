@@ -1,5 +1,10 @@
 import React from "react";
 import {Field} from "redux-form";
+import {InputCreator} from "../../../../helpers/FormCreator/FormCreator";
+import {minLengthValidator, passwordValidator, requiredValidator} from "../../../../validators/validators";
+
+
+const minPasswordLength = minLengthValidator(8);
 
 export const ChangePasswordForm = props => {
 
@@ -12,8 +17,11 @@ export const ChangePasswordForm = props => {
                 <div>
                     <Field
                         name="password"
-                        component="input"
+                        type="password"
+                        component={InputCreator}
                         placeholder="Введіть старий пароль..."
+                        validate={[requiredValidator, minPasswordLength, passwordValidator]}
+
                     />
                 </div>
             </div>
@@ -22,8 +30,11 @@ export const ChangePasswordForm = props => {
                 <div>
                     <Field
                         name="newPassword"
-                        component="input"
+                        type="password"
+                        component={InputCreator}
                         placeholder="Введіть новий пароль..."
+                        validate={[requiredValidator, minPasswordLength, passwordValidator]}
+
                     />
                 </div>
             </div>
@@ -32,8 +43,11 @@ export const ChangePasswordForm = props => {
                 <div>
                     <Field
                         name="newPasswordAgain"
-                        component="input"
+                        type="password"
+                        component={InputCreator}
                         placeholder="Введіть новий пароль ще раз..."
+                        validate={[requiredValidator, minPasswordLength, passwordValidator]}
+
                     />
                 </div>
             </div>

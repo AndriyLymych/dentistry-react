@@ -7,4 +7,6 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
+.requiredStar{
+  color: red;
+}

@@ -1,5 +1,17 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import {
+    emailValidator,
+    isNumberValidator,
+    maxLengthValidator,
+    minLengthValidator, phoneNumberValidator,
+    requiredValidator
+} from "../../../validators/validators";
+import {InputCreator, SelectCreator} from "../../../helpers/FormCreator/FormCreator";
+import style from "../../../App.module.css";
+
+const minNameLength = minLengthValidator(2);
+const maxNameLength = maxLengthValidator(40);
 
 const ReceptionForm = props => {
 
@@ -7,64 +19,62 @@ const ReceptionForm = props => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <div>
-                    <label>Як до Вас звертатися:</label>
-                    <div>
-                        <Field
-                            name="name"
-                            component="input"
-                            placeholder="Як до Вас звертатися..."
-                        />
-                    </div>
-                </div>
-
-            </div>
-            <div>
-                <label>Номер телефону:</label>
+                <label>Як до Вас звертатися <span className={style.requiredStar}>*</span> :</label>
                 <div>
                     <Field
-                        name="phone_number"
-                        component="input"
-                        placeholder="Введіть ваш номер телефону..."
-
+                        name="name"
+                        component={InputCreator}
+                        placeholder="Як до Вас звертатися..."
+                        validate={[requiredValidator, minNameLength, maxNameLength]}
                     />
                 </div>
+
             </div>
             <div>
-                <label>Електронна пошта:</label>
+                <label>Номер телефону <span className={style.requiredStar}>*</span> :</label>
+
+                <Field
+                    name="phone_number"
+                    component={InputCreator}
+                    placeholder="Введіть ваш номер телефону..."
+                    validate={[requiredValidator, phoneNumberValidator]}
+
+                />
+            </div>
+            <div>
+                <label>Електронна пошта <span className={style.requiredStar}>*</span> :</label>
                 <div>
                     <Field
                         name="email"
-                        component="input"
+                        component={InputCreator}
                         type="email"
                         placeholder="Введіть ваш емейл..."
+                        validate={[requiredValidator, emailValidator]}
                     />
                 </div>
             </div>
 
 
             <div>
-                <label>Час прийому:</label>
+                <label>Час прийому <span className={style.requiredStar}>*</span> :</label>
                 <div>
                     <Field
                         name="date"
-                        component="input"
+                        component={InputCreator}
                         type="datetime-local"
                         placeholder="Виберіть час прийому..."
+                        validate={requiredValidator}
                     />
                 </div>
             </div>
 
 
+            <label>Послуга <span className={style.requiredStar}>*</span> : </label>
 
-
-
-            <label>Послуга:</label>
-
-            <Field name="service_id" component="select">
-                <option  defaultChecked>Выберіть послугу</option>
+            <Field name="service_id" component={SelectCreator} validate={requiredValidator}>
+                <option >Виберіть послугу:</option>
                 {
-                    services.map(service => <option value={service.id}>{service.service}</option>)
+                    services.map(service => <option key={service.id} value={service.id}>{service.service}</option>)
                 }
 
             </Field>

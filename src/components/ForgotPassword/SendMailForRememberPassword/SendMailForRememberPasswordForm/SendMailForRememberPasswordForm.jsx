@@ -1,5 +1,7 @@
 import React from "react";
 import {Field} from 'redux-form'
+import {emailValidator, requiredValidator} from "../../../../validators/validators";
+import {InputCreator} from "../../../../helpers/FormCreator/FormCreator";
 
 export const SendMailForRememberPasswordForm = props => {
 
@@ -11,13 +13,13 @@ export const SendMailForRememberPasswordForm = props => {
                 </div>
                 <Field
                     name={"email"}
-                    component={'input'}
+                    component={InputCreator}
                     placeholder={"Введіть емейл..."}
                     type={"email"}
                     autoFocus
+                    validate={[requiredValidator,emailValidator]}
                 />
             </div>
-            {/*{props.error && <div className={style.error}>{props.error}</div>}*/}
 
             <button type={"submit"}>Підтвердити</button>
 
