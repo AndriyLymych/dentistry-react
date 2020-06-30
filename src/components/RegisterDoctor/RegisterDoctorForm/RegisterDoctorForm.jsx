@@ -9,6 +9,7 @@ import {
     minLengthValidator, passwordValidator,
     requiredValidator
 } from "../../../validators/validators";
+import style from "../../../App.module.css";
 
 const maxLength = maxLengthValidator(100);
 const minLength = minLengthValidator(2);
@@ -20,7 +21,7 @@ const maxAge = maxAgeValidator(120);
 
 const RegisterDoctorForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting, genders, specialities} = props;
+    const {handleSubmit, pristine, reset, submitting, genders, specialities, errorMessage} = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -92,18 +93,16 @@ const RegisterDoctorForm = props => {
             </div>
 
             <div>
+                <label>Вік:</label>
                 <div>
-                    <label>Вік:</label>
-                    <div>
-                        <Field
-                            name="age"
-                            component={InputCreator}
-                            type="text"
-                            placeholder="Введіть ваше вік..."
-                            validate={[requiredValidator, isNumberValidator, minAge, maxAge]}
+                    <Field
+                        name="age"
+                        component={InputCreator}
+                        type="text"
+                        placeholder="Введіть ваше вік..."
+                        validate={[requiredValidator, isNumberValidator, minAge, maxAge]}
 
-                        />
-                    </div>
+                    />
                 </div>
 
                 <div>
@@ -156,6 +155,7 @@ const RegisterDoctorForm = props => {
                 </div>
 
             </div>
+            {errorMessage && <div className={style.requiredStar}>{errorMessage}</div>}
             <div>
                 <button type="submit" disabled={pristine || submitting}>
                     Підтвердити

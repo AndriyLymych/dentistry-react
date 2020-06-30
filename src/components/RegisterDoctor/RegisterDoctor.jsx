@@ -1,7 +1,7 @@
 import React from "react";
 import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import { getGenders} from "../../redux/reducers/registerReducer";
+import {getGenders} from "../../redux/reducers/registerReducer";
 
 import {
     getAllGendersSelector,
@@ -14,6 +14,7 @@ import {getSpecialities} from "../../redux/reducers/doctorReducer";
 import {getDoctorsSpecialitiesSelector} from "../../redux/selectors/doctorSelectors";
 import Alert from "@material-ui/lab/Alert";
 import RegisterDoctorForm from "./RegisterDoctorForm/RegisterDoctorForm";
+import {getErrorMsgSelector} from "../../redux/selectors/errorSelectors";
 
 
 const RegisterDoctorReduxForm = reduxForm({
@@ -35,6 +36,7 @@ class RegisterDoctor extends React.Component {
         if (this.props.isCreateByAdmin) {
             return <Preloader/>
         }
+
         const {registerDoctor, isRegisterDoctorSuccess} = this.props;
 
         const onSubmit = data => {
@@ -54,7 +56,9 @@ class RegisterDoctor extends React.Component {
                             <RegisterDoctorReduxForm
                                 onSubmit={onSubmit}
                                 genders={this.props.genders}
-                                specialities={this.props.specialities}/>
+                                specialities={this.props.specialities}
+                                errorMessage={this.props.errorMessage}
+                            />
                         </div> :
                         <Alert severity="success">Реєстрація пройшла успішно!</Alert>
 
@@ -72,7 +76,8 @@ const mapStateToProps = state => {
         genders: getAllGendersSelector(state),
         isCreateByAdmin: getIsCreateByAdmin(state),
         specialities: getDoctorsSpecialitiesSelector(state),
-        isRegisterDoctorSuccess: getIsRegisterDoctorSuccess(state)
+        isRegisterDoctorSuccess: getIsRegisterDoctorSuccess(state),
+        errorMessage: getErrorMsgSelector(state)
     }
 };
 

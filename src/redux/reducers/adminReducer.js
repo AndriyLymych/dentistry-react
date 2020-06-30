@@ -3,12 +3,13 @@ import {adminAPI} from "../../api/adminAPI";
 import {IS_CREATE_BY_ADMIN, IS_REGISTER_DOCTOR_SUCCESS, SET_USERS} from "../../constant/actionTypes/adminAC";
 import {setIsRegisterSuccess} from "./registerReducer";
 import {userAPI} from "../../api/userAPI";
+import {setErrorMsg} from "./errorReducer";
+import {customErrors} from "../../constant/customErrors/customErrors";
 
 const initialState = {
     isCreateByAdmin: false,
     isRegisterDoctorSuccess: false,
     users: []
-
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -39,36 +40,56 @@ export const setUsers = payload => ({type: SET_USERS, payload});
 
 export const registerDoctor = data => async dispatch => {
 
-    dispatch(setCreateLoadingByAdmin(true));
+    try {
+        dispatch(setCreateLoadingByAdmin(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    if (token) {
+        if (token) {
 
-        const isCreated = await adminAPI.createDoctor(token, data);
+            await adminAPI.createDoctor(token, data);
 
-        if (isCreated){
             dispatch(setCreateLoadingByAdmin(false));
-
             dispatch(setIsRegisterDoctorSuccess(true));
+            dispatch(setErrorMsg(null))
+
+        } else {
+            dispatch(setCreateLoadingByAdmin(false))
+        }
+    } catch (e) {
+        dispatch(setCreateLoadingByAdmin(false));
+
+        if (e.response.data.code) {
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
 
         }
-
     }
 };
 
 export const registerAdmin = data => async dispatch => {
 
-    dispatch(setCreateLoadingByAdmin(true));
+    try {
+        dispatch(setCreateLoadingByAdmin(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    if (token) {
-        await adminAPI.createAdmin(token, data);
+        if (token) {
+            await adminAPI.createAdmin(token, data);
+
+            dispatch(setCreateLoadingByAdmin(false));
+            dispatch(setIsRegisterSuccess(true));
+
+        }else {
+            dispatch(setCreateLoadingByAdmin(false));
+        }
+    } catch (e) {
 
         dispatch(setCreateLoadingByAdmin(false));
-        dispatch(setIsRegisterSuccess(true));
 
+        if (e.response.data.code) {
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+
+        }
     }
 };
 

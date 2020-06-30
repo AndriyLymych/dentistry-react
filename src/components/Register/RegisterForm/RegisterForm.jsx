@@ -20,7 +20,7 @@ const maxAge = maxAgeValidator(120);
 
 const RegisterForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting, genders} = props;
+    const {handleSubmit, pristine, reset, submitting, genders, errorMessage} = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -137,7 +137,7 @@ const RegisterForm = props => {
 
 
             </div>
-            {props.error && <div className={style.requiredStar}>{props.error}</div>}
+            {errorMessage && <div className={style.requiredStar}>{errorMessage}</div>}
 
             <div>
                 <button type="submit" disabled={pristine || submitting}>
