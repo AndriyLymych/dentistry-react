@@ -16,3 +16,12 @@ export const isPasswordChangedSelector = state => {
 export const isProfileUpdateSelector = state => {
     return state.authReducer.isProfileUpdate
 };
+export const isSentMailSelector = state => {
+    return state.authReducer.isSentMail
+};
+export const isLoadingSelector = state => {
+    return state.authReducer.isLoading
+};
+export const isResetPasswordSelector = state => {
+    return state.authReducer.isResetPassword
+};

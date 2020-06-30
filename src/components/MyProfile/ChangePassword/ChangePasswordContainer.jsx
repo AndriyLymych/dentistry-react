@@ -2,8 +2,10 @@ import React from "react";
 import {ChangePasswordForm} from "./ChangePasswordForm/ChangePasswordForm";
 import {connect} from "react-redux";
 import {changeUserPassword} from "../../../redux/reducers/authReducer";
-import {isPasswordChangedSelector} from "../../../redux/selectors/authSelectors";
+import {isLoadingSelector, isPasswordChangedSelector} from "../../../redux/selectors/authSelectors";
 import {reduxForm} from "redux-form";
+import {getErrorMsgSelector} from "../../../redux/selectors/errorSelectors";
+import Preloader from "../../Preloader/Preloader";
 
 
 const ChangePasswordReduxForm = reduxForm({
@@ -13,18 +15,22 @@ const ChangePasswordReduxForm = reduxForm({
 
 class ChangePasswordContainer extends React.Component {
 
-
-
     render() {
-       const onSubmit = data => {
+
+        if (this.props.isLoading) {
+            return <Preloader/>
+        }
+
+        const onSubmit = data => {
 
             this.props.changeUserPassword(data)
         };
+
         return (
             <div>
                 {
                     !this.props.isPasswordChanged ?
-                        <ChangePasswordReduxForm onSubmit={onSubmit}/> :
+                        <ChangePasswordReduxForm onSubmit={onSubmit} errorMessage={this.props.errorMessage}/> :
                         <h1>пароль успышно змінено</h1>
                 }
             </div>
@@ -34,7 +40,9 @@ class ChangePasswordContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isPasswordChanged: isPasswordChangedSelector(state)
+        isPasswordChanged: isPasswordChangedSelector(state),
+        isLoading: isLoadingSelector(state),
+        errorMessage: getErrorMsgSelector(state)
     }
 };
 export default connect(mapStateToProps, {changeUserPassword})(ChangePasswordContainer)

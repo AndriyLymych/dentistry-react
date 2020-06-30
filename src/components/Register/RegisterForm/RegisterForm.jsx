@@ -125,7 +125,8 @@ const RegisterForm = props => {
                         genders.map(
                             gender =>
                                 <label key={gender.id}>
-                                    <Field name="gender_id" component={InputCreator} type="radio" value={gender.id} validate={requiredValidator}/>
+                                    <Field name="gender_id" component={InputCreator} type="radio" value={gender.id}
+                                           validate={requiredValidator}/>
                                     {gender.label}
                                 </label>
                         )
@@ -136,6 +137,8 @@ const RegisterForm = props => {
 
 
             </div>
+            {props.error && <div className={style.requiredStar}>{props.error}</div>}
+
             <div>
                 <button type="submit" disabled={pristine || submitting}>
                     Підтвердити

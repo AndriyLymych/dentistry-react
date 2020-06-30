@@ -1,6 +1,8 @@
 import {patientAPI} from "../../api/patientAPI";
 import {SET_IS_REGISTER_SUCCESS, SET_GENDERS, SET_REGISTER_LOADING} from "../../constant/actionTypes/registerAC";
 import {genderAPI} from "../../api/genderAPI";
+import {stopSubmit} from "redux-form";
+import {customErrors} from "../../constant/customErrors/customErrors";
 
 const initialState = {
         isRegisterSuccess: false,
@@ -32,12 +34,6 @@ const registerReducer = (state = initialState, action) => {
                 registerLoading: action.payload
             };
 
-            return {
-                ...state,
-                genders: action.payload
-            };
-
-
         default :
             return state
 
@@ -51,12 +47,20 @@ export const setGenders = payload => ({type: SET_GENDERS, payload});
 
 export const registerPatient = payload => async dispatch => {
 
-    dispatch(setRegisterLoading(false));
+    try {
+        dispatch(setRegisterLoading(false));
 
-    await patientAPI.registerPatient(payload);
+        await patientAPI.registerPatient(payload);
+        dispatch(setIsRegisterSuccess(true));
+        dispatch(setRegisterLoading(true));
 
-    dispatch(setRegisterLoading(true));
-    dispatch(setIsRegisterSuccess(true));
+
+    } catch (e) {
+        dispatch(setRegisterLoading(true));
+
+        dispatch(stopSubmit('register', {_error: customErrors[e.response.data.code].message}))
+
+    }
 
 };
 

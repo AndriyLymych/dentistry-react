@@ -4,70 +4,53 @@ import {checkAccessTokenPresent} from "../helpers/checkAccessTokenPresent";
 
 export const commentAPI = {
 
-    getAllCommentsForEveryDoctor: async (doctorId, commentsCount, currentPage=1) => {
+    getAllCommentsForEveryDoctor: (doctorId, commentsCount, currentPage = 1) => {
 
-        try {
-            return await axiosInstance.get(`/comments/doctors/${doctorId}?limit=${commentsCount}&page=${currentPage}`)
+        return axiosInstance.get(`/comments/doctors/${doctorId}?limit=${commentsCount}&page=${currentPage}`)
 
-        } catch (e) {
-            console.log(e.message)
-        }
 
     },
 
-    postComment: async (commentData, doctor_id) => {
+    postComment: (commentData, doctor_id) => {
 
-        try {
-            const token = checkAccessTokenPresent();
-            return await axiosInstance.post(`/comments?doc=${doctor_id}`, commentData, {
+
+        const token = checkAccessTokenPresent();
+        return axiosInstance.post(`/comments?doc=${doctor_id}`, commentData, {
+            headers: {
+
+                [headerEnum.AUTHORIZATION]: token
+            }
+        })
+
+
+    },
+    deleteComment: comment_id => {
+
+        const token = checkAccessTokenPresent();
+
+        return axiosInstance.delete(`/comments/${comment_id}`, {
+            headers: {
+
+                [headerEnum.AUTHORIZATION]: token
+            }
+        })
+
+    },
+
+    editComment: (comment_id, doctor_id, newComment) => {
+
+        const token = checkAccessTokenPresent();
+
+        return axiosInstance.put(
+            `/comments/${comment_id}?doc=${doctor_id}`,
+            {commentText: newComment},
+            {
                 headers: {
 
                     [headerEnum.AUTHORIZATION]: token
                 }
             })
 
-        } catch (e) {
-            console.log(e.message)
-        }
-
-    },
-    deleteComment: async comment_id => {
-
-        try {
-            const token = checkAccessTokenPresent();
-
-            return await axiosInstance.delete(`/comments/${comment_id}`, {
-                headers: {
-
-                    [headerEnum.AUTHORIZATION]: token
-                }
-            })
-        } catch (e) {
-
-            console.log(e.message)
-
-        }
-    },
-
-    editComment: async (comment_id, doctor_id, newComment) => {
-
-        try {
-            const token = checkAccessTokenPresent();
-
-            return await axiosInstance.put(
-                `/comments/${comment_id}?doc=${doctor_id}`,
-                {commentText: newComment},
-                {
-                    headers: {
-
-                        [headerEnum.AUTHORIZATION]: token
-                    }
-                })
-        } catch (e) {
-
-            console.log(e.message)
-
-        }
     }
 
 };

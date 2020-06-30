@@ -3,64 +3,41 @@ import {headersEnum as headerEnum} from "../constant/authConstant/header.enum";
 
 export const adminAPI = {
 
-    authAdmin: async (email, password) => {
+    authAdmin: (email, password) => {
 
-        try {
+        return axiosInstance.post(`/admin/auth`, {email, password})
 
-            return await axiosInstance.post(`/admin/auth`, {email, password})
-
-        } catch (e) {
-
-            console.log(e.message)
-
-        }
     },
 
 
-    adminInfo: async access_token => {
-        try {
+    adminInfo: access_token => {
 
-            return await axiosInstance.get('/admin/auth/me', {
-                headers: {
+        return axiosInstance.get('/admin/auth/me', {
+            headers: {
 
-                    [headerEnum.AUTHORIZATION]: access_token
-                }
-            })
-
-        } catch (e) {
-
-            console.log(e.message)
-        }
+                [headerEnum.AUTHORIZATION]: access_token
+            }
+        })
     },
-    createDoctor: async (access_token, data) => {
-        try {
+    createDoctor: (access_token, data) => {
 
-            return await axiosInstance.post('/admin/create-doctor', data, {
-                headers: {
+        return axiosInstance.post('/admin/create-doctor', data, {
+            headers: {
 
-                    [headerEnum.AUTHORIZATION]: access_token
-                }
-            })
+                [headerEnum.AUTHORIZATION]: access_token
+            }
+        })
 
-        } catch (e) {
-
-            console.log(e.message)
-        }
     },
-    createAdmin: async (access_token, data) => {
-        try {
+    createAdmin: (access_token, data) => {
 
-            return await axiosInstance.post('/admin', data, {
-                headers: {
+        return axiosInstance.post('/admin', data, {
+            headers: {
 
-                    [headerEnum.AUTHORIZATION]: access_token
-                }
-            })
+                [headerEnum.AUTHORIZATION]: access_token
+            }
+        })
 
-        } catch (e) {
-
-            console.log(e.message)
-        }
     },
 
 };

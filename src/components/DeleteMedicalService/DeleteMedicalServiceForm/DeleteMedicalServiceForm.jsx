@@ -2,6 +2,7 @@ import React from 'react'
 import {Field} from 'redux-form'
 import {SelectCreator} from "../../../helpers/FormCreator/FormCreator";
 import {isCorrectSpecialityValidator} from "../../../validators/validators";
+import style from "../../../App.module.css";
 
 const DeleteMedicalServiceForm = props => {
 
@@ -25,6 +26,9 @@ const DeleteMedicalServiceForm = props => {
                         }
 
                     </Field>
+
+                    {props.error && <div className={style.requiredStar}>{props.error}</div>}
+
                     <div>
                         <button type="submit" disabled={pristine || submitting}>
                             Видалити послугу

@@ -1,9 +1,9 @@
 import {authAPI} from "../../api/authAPI";
-import {stopSubmit} from "redux-form";
 
 import {
-    SET_IS_AUTH,
-    SET_IS_PASSWORD_CHANGED, SET_IS_PROFILE_UPDATE,
+
+    SET_IS_AUTH, SET_IS_LOADING,
+    SET_IS_PASSWORD_CHANGED, SET_IS_PROFILE_UPDATE, SET_IS_RESET_PASSWORD, SET_IS_SENT_MAIL,
     SET_ME_INFO,
     SET_MY_ID
 } from "../../constant/actionTypes/authAC";
@@ -12,6 +12,8 @@ import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {userAPI} from "../../api/userAPI";
 import {doctorsAPI} from "../../api/doctorsAPI";
 import {adminAPI} from "../../api/adminAPI";
+import {customErrors} from "../../constant/customErrors/customErrors";
+import {setErrorMsg} from "./errorReducer";
 
 
 const initialState = {
@@ -19,7 +21,10 @@ const initialState = {
     me: null,
     isAuth: false,
     isPasswordChanged: false,
-    isProfileUpdate: true
+    isProfileUpdate: true,
+    isSentMail: false,
+    isLoading: false,
+    isResetPassword: false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -44,18 +49,35 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: action.payload
             };
+
         case SET_IS_PASSWORD_CHANGED :
             return {
                 ...state,
                 isPasswordChanged: action.payload
             };
+
         case SET_IS_PROFILE_UPDATE :
             return {
                 ...state,
                 isProfileUpdate: action.payload
             };
 
+        case SET_IS_SENT_MAIL :
+            return {
+                ...state,
+                isSentMail: action.payload
+            };
 
+        case SET_IS_LOADING :
+            return {
+                ...state,
+                isLoading: action.payload
+            };
+        case SET_IS_RESET_PASSWORD :
+            return {
+                ...state,
+                isResetPassword: action.payload
+            };
         default :
             return state
 
@@ -67,152 +89,272 @@ const setMyID = payload => ({type: SET_MY_ID, payload});
 const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
 const setIsPasswordChanged = payload => ({type: SET_IS_PASSWORD_CHANGED, payload});
 const setIsProfileUpdate = payload => ({type: SET_IS_PROFILE_UPDATE, payload});
+const setIsSentMail = payload => ({type: SET_IS_SENT_MAIL, payload});
+const setIsLoading = payload => ({type: SET_IS_LOADING, payload});
+const setIsResetPassword = payload => ({type: SET_IS_RESET_PASSWORD, payload});
 
 export const getMeInfo = () => async dispatch => {
 
-    const token = checkAccessTokenPresent();
+    try {
 
-    if (token) {
+        dispatch(setIsLoading(true));
+        const token = checkAccessTokenPresent();
 
-        const meDates = await authAPI.meInfo(token);
+        if (token) {
 
-        dispatch(setMeDates(meDates.data));
-        dispatch(setMyID(meDates.data.id));
-        dispatch(setIsAuth(true));
+            const meDates = await authAPI.meInfo(token);
 
-    } else {
-        console.log('no token')
+            dispatch(setMeDates(meDates.data));
+            dispatch(setMyID(meDates.data.id));
+            dispatch(setIsAuth(true));
+            dispatch(setIsLoading(false))
+
+        } else {
+            dispatch(setIsLoading(false))
+
+        }
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
     }
 };
 
 export const login = (email, password) => async dispatch => {
 
-    const authResult = await authAPI.login(email, password);
+    try {
 
-    if (authResult) {
+        dispatch(setIsLoading(true));
+
+        const authResult = await authAPI.login(email, password);
+
 
         localStorage.setItem(tokenEnum.access_token, authResult.data[tokenEnum.access_token]);
         localStorage.setItem(tokenEnum.refresh_token, authResult.data[tokenEnum.refresh_token]);
+
         const token = checkAccessTokenPresent();
 
-        //TODO при частій логінації meDates === undefined
 
         const meDates = await authAPI.meInfo(token);
 
-        if (meDates){
+        if (meDates) {
             dispatch(setMyID(meDates.data.id));
             dispatch(setMeDates(meDates.data));
             dispatch(setIsAuth(true));
+            dispatch(setIsLoading(false));
+            dispatch(setErrorMsg(null))
+
+        } else {
+            setIsLoading(false)
         }
 
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+        if (e.response.data.code) {
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+
+        }
 
     }
+
 };
 
 export const loginAdmin = (email, password) => async dispatch => {
 
-    const authData = await adminAPI.authAdmin(email, password);
+    try {
+        dispatch(setIsLoading(true));
 
-    if (authData) {
+        const authData = await adminAPI.authAdmin(email, password);
 
-        localStorage.setItem(tokenEnum.access_token, authData.data[tokenEnum.access_token]);
-        localStorage.setItem(tokenEnum.refresh_token, authData.data[tokenEnum.refresh_token]);
+        if (authData) {
 
-        const token = checkAccessTokenPresent();
+            localStorage.setItem(tokenEnum.access_token, authData.data[tokenEnum.access_token]);
+            localStorage.setItem(tokenEnum.refresh_token, authData.data[tokenEnum.refresh_token]);
 
-        const meDates = await adminAPI.adminInfo(token);
+            const token = checkAccessTokenPresent();
 
-        dispatch(setMyID(meDates.data.id));
-        dispatch(setMeDates(meDates.data));
-        dispatch(setIsAuth(true));
+            const meDates = await adminAPI.adminInfo(token);
+
+            if (meDates) {
+                dispatch(setMyID(meDates.data.id));
+                dispatch(setMeDates(meDates.data));
+                dispatch(setIsAuth(true));
+                dispatch(setIsLoading(false));
+                dispatch(setErrorMsg(null))
+            } else {
+                dispatch(setIsLoading(false))
+            }
+
+
+        }
+
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+        if (e.response.data.code) {
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+
+        }
     }
+
+
 };
 
 export const logout = () => async dispatch => {
 
-    const token = checkAccessTokenPresent();
+    try {
 
-    await authAPI.logout(token);
+        const token = checkAccessTokenPresent();
 
-    localStorage.removeItem(tokenEnum.access_token);
-    localStorage.removeItem(tokenEnum.refresh_token);
+        await authAPI.logout(token);
 
-    dispatch(setIsAuth(false));
+        localStorage.removeItem(tokenEnum.access_token);
+        localStorage.removeItem(tokenEnum.refresh_token);
 
-    dispatch(setMeDates(null));
+        dispatch(setIsAuth(false));
+
+        dispatch(setMeDates(null));
+
+
+    } catch (e) {
+        console.log(e);
+    }
 
 
 };
 
 export const changeUserPassword = data => async dispatch => {
+    try {
+        dispatch(setIsLoading(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    if (token) {
-        await authAPI.changePassword(token, data);
+        if (token) {
+            await authAPI.changePassword(token, data);
 
-        dispatch(setIsPasswordChanged(true));
-    } else {
-        console.log('no token');
+            dispatch(setIsPasswordChanged(true));
+            dispatch(setIsLoading(false));
+            dispatch(setErrorMsg(null))
+
+        } else {
+            dispatch(setIsLoading(false))
+        }
+    } catch (e) {
+
+        dispatch(setIsLoading(false));
+
+        if (e.response.data.code) {
+
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+
+        }
     }
 };
 
-export const sendEmailForChangeForgotPassword = email => async () => {
+export const sendEmailForChangeForgotPassword = email => async dispatch => {
 
-    await authAPI.sendEmailForChangePassword(email);
+    try {
+        dispatch(setIsLoading(true));
 
+        await authAPI.sendEmailForChangePassword(email);
+
+        dispatch(setIsSentMail(true));
+        dispatch(setIsLoading(false));
+        dispatch(setErrorMsg(null));
+
+    } catch (e) {
+
+        dispatch(setIsLoading(false));
+
+        if (e.response.data.code) {
+
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+
+        }
+    }
 };
 
-export const resetUserPassword = (data, token) => async () => {
+export const resetUserPassword = (data, token) => async dispatch => {
+    try {
+        dispatch(setIsLoading(true));
 
-    await authAPI.resetPassword(data, token);
+        await authAPI.resetPassword(data, token);
+
+        dispatch(setIsResetPassword(true));
+        dispatch(setIsLoading(false));
+        dispatch(setErrorMsg(null));
+
+    } catch (e) {
+
+        dispatch(setIsLoading(false));
+
+        if (e.response.data.code) {
+
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+        }
+    }
 
 };
 
 export const updateUserDates = data => async dispatch => {
+    try {
+        dispatch(setIsProfileUpdate(false));
 
-    dispatch(setIsProfileUpdate(false));
+        const token = checkAccessTokenPresent();
 
-    const token = checkAccessTokenPresent();
+        if (token) {
 
-    if (token) {
+            await userAPI.updateProfileInfo(token, data);
 
-        await userAPI.updateProfileInfo(token, data);
+            const meDates = await authAPI.meInfo(token);
 
-        const meDates = await authAPI.meInfo(token);
+            dispatch(setMeDates(meDates.data));
 
-        dispatch(setMeDates(meDates.data));
+            dispatch(setIsProfileUpdate(true))
 
-        dispatch(setIsProfileUpdate(true))
+        } else {
+            dispatch(setIsProfileUpdate(true));
+        }
 
-    } else {
-        console.log('no token');
+
+    } catch (e) {
+        dispatch(setIsProfileUpdate(true));
+
     }
-
-
 };
 
 export const updateDoctorProfilePhoto = avatar => async dispatch => {
 
-    dispatch(setIsProfileUpdate(false));
+    try {
+        dispatch(setIsProfileUpdate(false));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    if (token) {
+        if (token) {
 
-        await doctorsAPI.updateDoctorAvatar(avatar, token);
+            await doctorsAPI.updateDoctorAvatar(avatar, token);
 
-        const meDates = await authAPI.meInfo(token);
+            const meDates = await authAPI.meInfo(token);
 
-        dispatch(setMeDates(meDates.data));
+            dispatch(setMeDates(meDates.data));
+            dispatch(setErrorMsg(null));
+            dispatch(setIsProfileUpdate(true));
 
-        dispatch(setIsProfileUpdate(true))
+        } else {
+            dispatch(setIsProfileUpdate(true))
+        }
 
-    } else {
-        console.log('no token');
+
+    } catch (e) {
+
+        dispatch(setIsProfileUpdate(true));
+
+        if (e.response.data.code) {
+
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+
+        }
     }
-
-
 };
 
 export default authReducer

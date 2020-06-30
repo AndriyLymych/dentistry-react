@@ -8,6 +8,7 @@ import {
     minPriceValidator,
     requiredValidator
 } from "../../../validators/validators";
+import style from "../../../App.module.css";
 
 const minPrice = minPriceValidator(1);
 const minLength = minLengthValidator(2);
@@ -65,6 +66,7 @@ const AddMedicalServiceForm = props => {
                     />
                 </div>
             </div>
+            {props.error && <div className={style.requiredStar}>{props.error}</div>}
 
             <div>
                 <button type="submit" disabled={pristine || submitting}>

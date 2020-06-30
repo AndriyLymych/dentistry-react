@@ -46,7 +46,7 @@ export const LoginForm = props => {
             </div>
 
 
-            {/*{props.error && <div className={style.error}>{props.error}</div>}*/}
+            {props.errorMessage  && <div className={style.requiredStar}>{props.errorMessage}</div>}
 
             <button type={"submit"}>Увійти</button>
 

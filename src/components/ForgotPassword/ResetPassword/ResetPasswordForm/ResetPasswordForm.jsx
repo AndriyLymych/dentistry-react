@@ -2,6 +2,7 @@ import React from "react";
 import {Field} from 'redux-form'
 import {InputCreator} from "../../../../helpers/FormCreator/FormCreator";
 import {minLengthValidator, passwordValidator, requiredValidator} from "../../../../validators/validators";
+import style from "../../../../App.module.css";
 
 const minPasswordLength = minLengthValidator(8);
 
@@ -35,6 +36,7 @@ export const ResetPasswordForm = props => {
 
                 />
             </div>
+            {props.errorMessage && <div className={style.requiredStar}>{props.errorMessage}</div>}
 
             <button type={"submit"}>Підтвердити</button>
 

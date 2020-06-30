@@ -3,8 +3,10 @@ import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {NavLink, Redirect, withRouter} from "react-router-dom";
 import {resetUserPassword} from "../../../redux/reducers/authReducer";
-import {isAuthSelector} from "../../../redux/selectors/authSelectors";
+import {isAuthSelector, isLoadingSelector, isResetPasswordSelector} from "../../../redux/selectors/authSelectors";
 import {ResetPasswordForm} from "./ResetPasswordForm/ResetPasswordForm";
+import {getErrorMsgSelector} from "../../../redux/selectors/errorSelectors";
+import Preloader from "../../Preloader/Preloader";
 
 const ResetPasswordReduxForm = reduxForm({
     form: 'reset-password'
@@ -13,12 +15,10 @@ const ResetPasswordReduxForm = reduxForm({
 
 const ResetPassword = props => {
 
-    const [isReset, setIsReset] = useState(false);
 
     const onSubmit = data => {
         const token = props.match.params.token;
-        props.resetUserPassword(data,token);
-        setIsReset(true)
+        props.resetUserPassword(data, token);
 
     };
 
@@ -26,13 +26,17 @@ const ResetPassword = props => {
         return <Redirect to={`/`}/>
     }
 
+    if (props.isLoading) {
+        return <Preloader/>
+    }
+
     return (
         <div>
             {
-                !isReset ?
+                !props.isResetPassword ?
                     <div>
                         <h1>Зміна паролю:</h1>
-                        <ResetPasswordReduxForm onSubmit={onSubmit}/>
+                        <ResetPasswordReduxForm onSubmit={onSubmit} errorMessage={props.errorMessage}/>
                     </div> :
 
                     <div>
@@ -49,7 +53,10 @@ const ResetPassword = props => {
 
 const mapStateToProps = state => {
     return {
-        isAuth: isAuthSelector(state)
+        isAuth: isAuthSelector(state),
+        isResetPassword: isResetPasswordSelector(state),
+        isLoading: isLoadingSelector(state),
+        errorMessage: getErrorMsgSelector(state)
     }
 };
 const ResetPasswordWithRouter = withRouter(ResetPassword);

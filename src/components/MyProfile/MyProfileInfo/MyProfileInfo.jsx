@@ -2,12 +2,14 @@ import React, {useState} from "react";
 import {USER_ROLE} from "../../../constant/userConstant/userRole";
 import {configs} from "../../../config/configs";
 import style from "../../OurDoctors/OurDoctorsCard/DoctorProfile/DoctoreProfile.module.css";
+import error from "../../../App.module.css";
 import {reduxForm} from "redux-form";
 import UpdateMyProfileInfoForm from "./UpdateMyProfileInfoForm/UpdateMyProfileInfoForm";
 import {connect} from "react-redux";
 import {updateDoctorProfilePhoto, updateUserDates} from "../../../redux/reducers/authReducer";
 import {isProfileUpdateSelector} from "../../../redux/selectors/authSelectors";
 import Preloader from "../../Preloader/Preloader";
+import {getErrorMsgSelector} from "../../../redux/selectors/errorSelectors";
 
 
 const UpdateMyProfileInfoReduxForm = reduxForm({
@@ -28,7 +30,8 @@ const MyProfileInfo = ({
                            avatar,
                            updateUserDates,
                            isProfileUpdate,
-                           updateDoctorProfilePhoto
+                           updateDoctorProfilePhoto,
+                           errorMessage
                        }) => {
 
     const [editMode, setEditMode] = useState(false);
@@ -40,11 +43,7 @@ const MyProfileInfo = ({
 
     const onUpdateDoctorAvatar = (e) => {
         if (e.target.files.length) {
-            const isUpdate = updateDoctorProfilePhoto(e.target.files[0]);
-            Promise.all([isUpdate]).then(()=>{
-                    window.location.reload()
-                }
-            );
+            updateDoctorProfilePhoto(e.target.files[0])
         }
 
     };
@@ -61,6 +60,7 @@ const MyProfileInfo = ({
                     <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
                          alt="avatar"/>
                     <input type="file" onChange={onUpdateDoctorAvatar}/>
+                    {errorMessage && <div className={error.requiredStar}>{errorMessage}</div>}
 
                 </div>
             }
@@ -102,7 +102,9 @@ const MyProfileInfo = ({
 
 const mapStateToProps = state => {
     return {
-        isProfileUpdate: isProfileUpdateSelector(state)
+        isProfileUpdate: isProfileUpdateSelector(state),
+        errorMessage: getErrorMsgSelector(state)
+
     }
 };
 

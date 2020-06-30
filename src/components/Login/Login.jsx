@@ -4,6 +4,8 @@ import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {login, loginAdmin} from "../../redux/reducers/authReducer";
 import {Redirect, withRouter} from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
+import {getErrorMsgSelector} from "../../redux/selectors/errorSelectors";
 
 const LoginReduxForm = reduxForm({
     form: 'login'
@@ -26,12 +28,15 @@ const Login = props => {
     if (props.isAuth) {
         return <Redirect to={`/`}/>
     }
+    if (props.isLoading) {
+        return <Preloader/>
+    }
 
 
     return (
         <div>
             <h1>Увійти:</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} errorMessage={props.errorMessage}/>
         </div>
     )
 
@@ -44,6 +49,8 @@ const mapStateToProps = (state) => {
 
         userId: state.authReducer.id,
         isAuth: state.authReducer.isAuth,
+        isLoading: state.authReducer.isLoading,
+        errorMessage: getErrorMsgSelector(state)
 
     }
 

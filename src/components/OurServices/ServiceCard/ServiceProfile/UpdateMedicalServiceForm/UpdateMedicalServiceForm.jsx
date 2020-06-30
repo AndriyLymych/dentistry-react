@@ -1,5 +1,15 @@
 import React from 'react'
 import {Field} from 'redux-form'
+import {InputCreator, TextareaCreator} from "../../../../../helpers/FormCreator/FormCreator";
+import {
+    isNumberValidator,
+    minLengthValidator,
+    minPriceValidator,
+    requiredValidator
+} from "../../../../../validators/validators";
+
+const minPrice = minPriceValidator(1);
+const minLength = minLengthValidator(2);
 
 const UpdateMedicalServiceForm = props => {
 
@@ -15,8 +25,10 @@ const UpdateMedicalServiceForm = props => {
                     <div>
                         <Field
                             name="service"
-                            component="input"
+                            component={InputCreator}
                             autoFocus={true}
+                            validate={[requiredValidator, minLength]}
+
                         />
                     </div>
                 </div>
@@ -25,7 +37,9 @@ const UpdateMedicalServiceForm = props => {
                     <div>
                         <Field
                             name="description"
-                            component="input"
+                            component={TextareaCreator}
+                            validate={[requiredValidator, minLength]}
+
                         />
                     </div>
                 </div>
@@ -36,7 +50,9 @@ const UpdateMedicalServiceForm = props => {
                     <div>
                         <Field
                             name="price"
-                            component="input"
+                            component={InputCreator}
+                            validate={[requiredValidator, isNumberValidator, minPrice]}
+
                         />
                     </div>
                 </div>

@@ -1,114 +1,99 @@
 export const customErrors = {
     //+
-    BAD_REQUEST_BLOCK_USER: {
+    4001: {
         message: 'Цей користувач вже заблокований',
-        code: 4001
     },
     //+
-    BAD_REQUEST_UNLOCK_USER: {
+    4002: {
         message: 'Цей користувач вже розблокований',
-        code: 4002
+    },
+    //+ auth user
+    4003: {
+        message: 'Неправильний емейл або пароль',
     },
     //+
-    BAD_REQUEST_USER_NOT_PRESENT: {
-        message: 'Нажаль, такого користувача немає',
-        code: 4003
+    4004: {
+        message: 'Token is not present'
     },
     //+
-    BAD_REQUEST_NO_TOKEN: {
-        message: 'Token is not present',
-        code: 4004
+    4005: {
+        message: 'Нажаль, такий коментар відсутній'
     },
     //+
-    BAD_REQUEST_COMMENT_NOT_PRESENT: {
-        message: 'Нажаль, такий коментар відсутній',
-        code: 4005
+    4006: {
+        message: 'Нажаль, користувач з такою електронною адресою вже присутній '
     },
     //+
-    BAD_REQUEST_USER_ALREADY_PRESENT: {
-        message: 'Нажаль, користувач з такою електронною адресою вже присутній ',
-        code: 4006
+    4007: {
+        message: 'Нажаль, такого лікаря немає'
     },
     //+
-    BAD_REQUEST_DOCTOR_NOT_PRESENT: {
-        message: 'Нажаль, такого лікаря немає',
-        code: 4007
+    4008: {
+        message: 'Ця послуга доступна лише для лікаря'
     },
     //+
-    BAD_REQUEST_YOU_ARE_NOT_DOCTOR: {
-        message: 'Ця послуга доступна лише для лікаря',
-        code: 4008
+    4009: {
+        message: 'Неправильний емейл або пароль'
+    },
+    40011: {
+        message: 'Така адреса електронної пошти відсутня'
     },
     //+
-    BAD_REQUEST_ADMIN_NOT_PRESENT: {
-        message: 'Нажаль, такого адміністратора немає',
-        code: 4009
-    },
-    //+
-    BAD_REQUEST_YOU_ARE_NOT_ADMIN: {
-        message: 'Ця послуга доступна лише для адміністратора',
-        code: 40010
+    40010: {
+        message: 'Ця послуга доступна лише для адміністратора'
     },
 
 
     //401 error code
-    UNAUTHORIZED_USER: {
-        message: 'Авторизуйтесь, щоб продовжити',
-        code: 4011
+    4011: {
+        message: 'Авторизуйтесь, щоб продовжити'
     },
 
-    UNAUTHORIZED_BAD_TOKEN: {
-        message: 'Помилка авторизації',
-        code: 4012
+    4012: {
+        message: 'Помилка авторизації'
+    },
+    4014: {
+        message: 'Помилка відновлення паролю. Час сесії минув'
     },
 
 
     //403 error code
 
     //+
-    FORBIDDEN_MEDICAL_SERVICE_IS_NOT_PRESENT: {
-        message: 'Нажаль, така послуга відсутня',
-        code: 4031
+    4031: {
+        message: 'Нажаль, така послуга відсутня'
     },
 
     //+
-    FORBIDDEN_USER_IS_BLOCKED: {
-        message: 'Нажаль, такий користувач заблокований',
-        code: 4032
+    4032: {
+        message: 'Нажаль, такий користувач заблокований'
     },
     //+
-    FORBIDDEN_PASSWORDS_NOT_MATCH: {
-        message: 'Паролі не співпадають. Спробуйте ще раз.',
-        code: 4033
+    4033: {
+        message: 'Паролі не співпадають. Спробуйте ще раз.'
     },
     //+
-    FORBIDDEN_WRONG_ACTION_TOKEN: {
-        message: 'Помилка відновлення паролю. Час сесії минув. Спробуйте ще раз.',
-        code: 4034
+    4034: {
+        message: 'Помилка відновлення паролю. Час сесії минув.'
     },
     //+
-    FORBIDDEN_NO_SPECIALITIES: {
-        message: 'Немає жодної спеціальності',
-        code: 4035
+    4035: {
+        message: 'Немає жодної спеціальності'
     },
     //+
-    FORBIDDEN_RECORD_NOT_PRESENT: {
-        message: 'Такого запису на прийом не існує',
-        code: 4036
+    4036: {
+        message: 'Такого запису на прийом не існує'
     },
     //+
-    FORBIDDEN_PHOTO_NOT_PRESENT: {
-        message: 'Ви не вибрали жодного фото',
-        code: 4037
-    } ,
+    4037: {
+        message: 'Ви не вибрали жодного фото'
+    },
     //+
-    FORBIDDEN_PHOTO_BIG_SIZE: {
+    4038: {
         message: 'Розмір фото не має перевищувати 5 мегабайт',
-        code: 4038
     },
     //+
-    FORBIDDEN_PHOTO_COUNT: {
-        message: 'Ви можете завантажити лише одне фото',
-        code: 4039
+    4039: {
+        message: 'Ви можете завантажити лише одне фото'
     }
 };
