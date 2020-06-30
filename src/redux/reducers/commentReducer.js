@@ -62,66 +62,89 @@ export const setCurrentPage = payload => ({type: SET_CURRENT_PAGE, payload});
 
 export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    dispatch(setCurrentPage(currentPage));
+        dispatch(setCurrentPage(currentPage));
 
-    const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentsCount, currentPage);
+        const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentsCount, currentPage);
 
-    dispatch(setCommentInfo(commentsInfo.data.comments));
+        dispatch(setCommentInfo(commentsInfo.data.comments));
 
-    dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
+        dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
 
-    dispatch(setIsLoading(false));
+        dispatch(setIsLoading(false));
+    } catch (e) {
+
+        dispatch(setIsLoading(false));
+
+    }
 
 };
 
 export const sendComment = (data, doctor_id, commentCount) => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    await commentAPI.postComment(data, doctor_id);
+        await commentAPI.postComment(data, doctor_id);
 
-    const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctor_id, commentCount);
+        const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctor_id, commentCount);
 
-    dispatch(setCommentInfo(commentsInfo.data.comments));
+        dispatch(setCommentInfo(commentsInfo.data.comments));
 
-    dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
+        dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
 
-    dispatch(setIsLoading(false));
+        dispatch(setIsLoading(false));
 
-    dispatch(reset('comment'))
+        dispatch(reset('comment'))
+
+    } catch (e) {
+        dispatch(setIsLoading(false));
+    }
 
 };
 export const deleteChosenComment = (comment_id, doctorId, commentCount, currentPage) => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    await commentAPI.deleteComment(comment_id);
+        await commentAPI.deleteComment(comment_id);
 
-    dispatch(setCurrentPage(currentPage));
+        dispatch(setCurrentPage(currentPage));
 
-    const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentCount, currentPage);
+        const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentCount, currentPage);
 
-    dispatch(setCommentInfo(commentsInfo.data.comments));
-    dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
-    dispatch(setIsLoading(false));
+        dispatch(setCommentInfo(commentsInfo.data.comments));
+        dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
+        dispatch(setIsLoading(false));
+
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+    }
 
 };
 
 export const editChosenComment = (comment_id, doctorId, newComment, commentCount, currentPage) => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    await commentAPI.editComment(comment_id, doctorId, newComment);
+        await commentAPI.editComment(comment_id, doctorId, newComment);
 
-    dispatch(setCurrentPage(currentPage));
+        dispatch(setCurrentPage(currentPage));
 
-    const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentCount, currentPage);
+        const commentsInfo = await commentAPI.getAllCommentsForEveryDoctor(doctorId, commentCount, currentPage);
 
-    dispatch(setCommentInfo(commentsInfo.data.comments));
-    dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
-    dispatch(setIsLoading(false));
+        dispatch(setCommentInfo(commentsInfo.data.comments));
+        dispatch(setTotalCommentsCount(commentsInfo.data.pageCount));
+        dispatch(setIsLoading(false));
+
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+    }
 
 };
 

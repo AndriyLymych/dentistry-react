@@ -33,54 +33,73 @@ const setIsLoading = payload => ({type: SET_LOADING_PROGRESS, payload});
 
 export const getMyProfileReceptions = email => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    const receptions = await receptionAPI.getMyReception(token, email);
+        const receptions = await receptionAPI.getMyReception(token, email);
 
-    dispatch(setMyReceptions(receptions.data));
+        dispatch(setMyReceptions(receptions.data));
 
-    dispatch(setIsLoading(false));
+        dispatch(setIsLoading(false));
+
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+    }
 
 
 };
 export const getAllReception = () => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    const receptions = await receptionAPI.getAllReceptionsRecords(token);
+        const receptions = await receptionAPI.getAllReceptionsRecords(token);
 
-    dispatch(setMyReceptions(receptions.data));
+        dispatch(setMyReceptions(receptions.data));
 
-    dispatch(setIsLoading(false));
+        dispatch(setIsLoading(false));
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+    }
 
 
 };
 
 export const deleteReceptionRecordByPatient = (id, email) => async dispatch => {
 
-    const token = checkAccessTokenPresent();
+    try {
+        const token = checkAccessTokenPresent();
 
-    await receptionAPI.dropReceptionRecordByPatient(id, token);
+        await receptionAPI.dropReceptionRecordByPatient(id, token);
 
-    const receptions = await receptionAPI.getMyReception(token, email);
+        const receptions = await receptionAPI.getMyReception(token, email);
 
-    dispatch(setMyReceptions(receptions.data))
+        dispatch(setMyReceptions(receptions.data))
+    } catch (e) {
+
+    }
 
 
 };
 export const deleteReceptionRecordByDoctor = id => async dispatch => {
 
-    const token = checkAccessTokenPresent();
+    try {
+        const token = checkAccessTokenPresent();
 
-    await receptionAPI.dropReceptionRecordByDoctor(id, token);
+        await receptionAPI.dropReceptionRecordByDoctor(id, token);
 
-    const records = await receptionAPI.getAllReceptionsRecords(token);
+        const records = await receptionAPI.getAllReceptionsRecords(token);
 
-    dispatch(setMyReceptions(records.data))
+        dispatch(setMyReceptions(records.data))
+    } catch (e) {
+
+    }
 
 
 };

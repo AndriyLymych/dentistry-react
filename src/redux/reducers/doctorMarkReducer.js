@@ -38,49 +38,65 @@ const setIsEvaluated = payload => ({type: SET_IS_EVALUATED, payload});
 const setIsMarkLoading = payload => ({type: SET_IS_MARK_LOADING, payload});
 
 export const setDoctorMark = (mark, doctor_id) => async dispatch => {
+    try {
 
-    dispatch(setIsMarkLoading(false));
+        dispatch(setIsMarkLoading(false));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    const postMark = await userAPI.setMark(token, mark, doctor_id);
+        const postMark = await userAPI.setMark(token, mark, doctor_id);
 
-    const avgMark = await userAPI.getAVGMark(doctor_id);
-    const isEvaluated = await userAPI.getIsEvaluated(token, doctor_id);
+        const avgMark = await userAPI.getAVGMark(doctor_id);
+        const isEvaluated = await userAPI.getIsEvaluated(token, doctor_id);
 
-    Promise.all([postMark, avgMark, isEvaluated]).then(() => {
+        Promise.all([postMark, avgMark, isEvaluated]).then(() => {
 
-        dispatch(setMark(avgMark.data.average_doctor_mark));
-        dispatch(setIsEvaluated(isEvaluated.data));
+            dispatch(setMark(avgMark.data.average_doctor_mark));
+            dispatch(setIsEvaluated(isEvaluated.data));
+            dispatch(setIsMarkLoading(true));
+
+        });
+
+    } catch (e) {
         dispatch(setIsMarkLoading(true));
 
-
-    });
+    }
 };
 export const getIsEvaluatedDoctor = doctor_id => async dispatch => {
 
-    dispatch(setIsMarkLoading(false));
+    try {
+        dispatch(setIsMarkLoading(false));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    const isEvaluated = await userAPI.getIsEvaluated(token, doctor_id);
+        const isEvaluated = await userAPI.getIsEvaluated(token, doctor_id);
 
-    dispatch(setIsEvaluated(isEvaluated.data));
+        dispatch(setIsEvaluated(isEvaluated.data));
 
 
-    dispatch(setIsMarkLoading(true));
+        dispatch(setIsMarkLoading(true));
+    } catch (e) {
+        dispatch(setIsMarkLoading(true));
+
+    }
 
 
 };
 export const getAverageDoctorMark = doctor_id => async dispatch => {
 
-    dispatch(setIsMarkLoading(false));
+    try {
+        dispatch(setIsMarkLoading(false));
 
-    const markData = await userAPI.getAVGMark(doctor_id);
+        const markData = await userAPI.getAVGMark(doctor_id);
 
-    dispatch(setMark(markData.data.average_doctor_mark));
+        dispatch(setMark(markData.data.average_doctor_mark));
 
-    dispatch(setIsMarkLoading(true));
+        dispatch(setIsMarkLoading(true));
+
+    } catch (e) {
+        dispatch(setIsMarkLoading(true));
+
+    }
 
 };
 

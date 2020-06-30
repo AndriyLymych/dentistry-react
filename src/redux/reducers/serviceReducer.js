@@ -7,6 +7,8 @@ import {
 import {medicalServicesAPI} from "../../api/medicalServicesAPI";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {setServiceProfile} from "./serviceProfileReducer";
+import {setErrorMsg} from "./errorReducer";
+import {customErrors} from "../../constant/customErrors/customErrors";
 
 const initialState = {
     services: [],
@@ -53,90 +55,117 @@ export const setIsDeleted = payload => ({type: SET_IS_DELETED, payload});
 
 export const getServicesFromDB = () => async dispatch => {
 
-    dispatch(setLoadingProgress(true));
+    try {
+        dispatch(setLoadingProgress(true));
 
-    let services = await medicalServicesAPI.getAllMedicalServices();
+        let services = await medicalServicesAPI.getAllMedicalServices();
 
-    dispatch(setServices(services.data));
+        dispatch(setServices(services.data));
+        dispatch(setLoadingProgress(false));
 
-    dispatch(setLoadingProgress(false));
+    } catch (e) {
+        dispatch(setLoadingProgress(false));
 
-
+    }
 };
 
 export const addMedicalService = (service, description, photo, price) => async dispatch => {
 
-    dispatch(setLoadingProgress(true));
+    try {
+        dispatch(setLoadingProgress(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    if (token) {
+        if (token) {
 
-        const addService = await medicalServicesAPI.addService(service, description, photo, price, token);
+            const addService = await medicalServicesAPI.addService(service, description, photo, price, token);
 
-        Promise.all([addService]).then(() => {
-                dispatch(setIsServiceWorkDone(true));
-                dispatch(setLoadingProgress(false));
-            }
-        );
+            Promise.all([addService]).then(() => {
+                    dispatch(setIsServiceWorkDone(true));
+                    dispatch(setLoadingProgress(false));
+                }
+            );
+
+        }
+    } catch (e) {
+        dispatch(setLoadingProgress(false));
 
     }
 };
 
 export const deleteMedicalService = id => async dispatch => {
 
-    dispatch(setLoadingProgress(true));
+    try {
+        dispatch(setLoadingProgress(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    if (token) {
+        if (token) {
 
-        const deleteService = await medicalServicesAPI.deleteService(id, token);
-        Promise.all([deleteService]).then(() => {
-            dispatch(setIsDeleted(true));
-            dispatch(setLoadingProgress(false));
-        });
+            const deleteService = await medicalServicesAPI.deleteService(id, token);
+            Promise.all([deleteService]).then(() => {
+                dispatch(setIsDeleted(true));
+                dispatch(setLoadingProgress(false));
+            });
+
+        }
+    } catch (e) {
+        dispatch(setLoadingProgress(false));
 
     }
 };
 export const updateMedicalService = (data, id) => async dispatch => {
+    try {
+        dispatch(setLoadingProgress(true));
 
-    dispatch(setLoadingProgress(true));
+        const token = checkAccessTokenPresent();
 
-    const token = checkAccessTokenPresent();
+        if (token) {
 
-    if (token) {
+            const updateService = await medicalServicesAPI.updateService(data, id, token);
+            const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
 
-        const updateService = await medicalServicesAPI.updateService(data, id, token);
-        const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
+            Promise.all([updateService, serviceProfile]).then(() => {
+                dispatch(setServiceProfile(serviceProfile.data));
+                dispatch(setLoadingProgress(false));
+            });
 
-        Promise.all([updateService, serviceProfile]).then(() => {
-            dispatch(setServiceProfile(serviceProfile.data));
-            dispatch(setLoadingProgress(false));
-        });
-
+        }
+    } catch (e) {
+        dispatch(setLoadingProgress(false));
 
     }
 };
 export const updateMedicalServicePhoto = (photo, id) => async dispatch => {
 
-    dispatch(setLoadingProgress(true));
+    try {
+        dispatch(setLoadingProgress(true));
 
-    const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
-    if (token) {
+        if (token) {
 
-        const updateService = await medicalServicesAPI.updateServicePhoto(photo, id, token);
-        const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
-
-
-        Promise.all([updateService, serviceProfile]).then(() => {
-
-            dispatch(setServiceProfile(serviceProfile.data));
-            dispatch(setLoadingProgress(false));
-        });
+            const updateService = await medicalServicesAPI.updateServicePhoto(photo, id, token);
+            const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
 
 
+            Promise.all([updateService, serviceProfile]).then(() => {
+
+                dispatch(setServiceProfile(serviceProfile.data));
+                dispatch(setLoadingProgress(false));
+                dispatch(setErrorMsg(null))
+
+            });
+        }
+    } catch (e) {
+
+        dispatch(setLoadingProgress(false));
+
+        if (e.response.data.code) {
+
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+
+        }
     }
 };
 

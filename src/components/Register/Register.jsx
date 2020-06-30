@@ -12,6 +12,8 @@ import Preloader from "../Preloader/Preloader";
 import {withRouter} from "react-router-dom";
 
 import Alert from "@material-ui/lab/Alert";
+import {getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
+import {getErrorMsgSelector} from "../../redux/selectors/errorSelectors";
 
 const RegisterReduxForm = reduxForm({
     form: 'register'
@@ -30,7 +32,10 @@ class Register extends React.Component {
         if (!this.props.registerLoading) {
             return <Preloader/>
         }
-        const {registerPatient, isRegisterSuccess, registerAdmin} = this.props;
+        if (this.props.isCreateByAdmin) {
+            return <Preloader/>
+        }
+        const {registerPatient, isRegisterSuccess, registerAdmin, errorMessage} = this.props;
 
 
         const onSubmit = data => {
@@ -50,7 +55,8 @@ class Register extends React.Component {
                     (this.props.match.path === '/my-profile/register-admin' || this.props.match.path === '/register') ?
                         <div>
                             <h1>Реєстрація:</h1>
-                            <RegisterReduxForm onSubmit={onSubmit} genders={this.props.genders}/>
+                            <RegisterReduxForm onSubmit={onSubmit} genders={this.props.genders}
+                                               errorMessage={errorMessage}/>
                         </div> :
                         <Alert severity="success">Реєстрація пройшла успішно!</Alert>
                 }
@@ -67,7 +73,9 @@ const mapStateToProps = state => {
     return {
         isRegisterSuccess: getIsRegisterSuccessSelector(state),
         genders: getAllGendersSelector(state),
-        registerLoading: getRegisterLoadingSelector(state)
+        registerLoading: getRegisterLoadingSelector(state),
+        isCreateByAdmin: getIsCreateByAdmin(state),
+        errorMessage: getErrorMsgSelector(state)
     }
 };
 

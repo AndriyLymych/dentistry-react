@@ -32,13 +32,19 @@ const isDoctorProfileLoading = payload => ({type: SET_LOADING_PROGRESS, payload}
 
 export const getDoctorProfile = id => async dispatch => {
 
-    dispatch(isDoctorProfileLoading(true));
+    try {
+        dispatch(isDoctorProfileLoading(true));
 
-    const doctorProfile = await doctorsAPI.getDoctorById(id);
+        const doctorProfile = await doctorsAPI.getDoctorById(id);
 
-    dispatch(setDoctorProfile(doctorProfile.data));
+        dispatch(setDoctorProfile(doctorProfile.data));
 
-    dispatch(isDoctorProfileLoading(false));
+        dispatch(isDoctorProfileLoading(false));
+
+    } catch (e) {
+        dispatch(isDoctorProfileLoading(false));
+
+    }
 
 
 };

@@ -28,7 +28,8 @@ const ServiceProfile = ({
                             me,
                             updateMedicalService,
                             updateMedicalServicePhoto,
-                            isAuth
+                            isAuth,
+                            errorMessage
                         }) => {
 
     const [editMode, setEditMode] = useState(false);
@@ -43,12 +44,8 @@ const ServiceProfile = ({
     };
     const onPhotoChange = data => {
 
-        const isUpdate = updateMedicalServicePhoto(data.photo[0], id);
+        updateMedicalServicePhoto(data.photo[0], id);
 
-        Promise.all([isUpdate]).then(() => {
-                window.location.reload()
-            }
-        );
     };
 
     return (
@@ -68,7 +65,8 @@ const ServiceProfile = ({
                                      alt="ava"/>
                                 {
                                     isAuth && me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <UpdateMedicalServicePhotoReduxForm onChange={onPhotoChange}/>
+                                    <UpdateMedicalServicePhotoReduxForm onChange={onPhotoChange}
+                                                                        errorMessage={errorMessage}/>
                                 }
                             </div>
                             {!editMode &&

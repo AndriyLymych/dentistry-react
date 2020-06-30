@@ -39,3 +39,7 @@ export const minPriceValidator = minPrice => value => {
 export const isCorrectSpecialityValidator = value => {
     return isNaN(Number(value)) ? `Ви не вибрали жодної спеціальності` : undefined
 };
+
+export const isCorrectServiceValidator = value => {
+    return isNaN(Number(value)) ? `Ви не вибрали жодної послуги` : undefined
+};

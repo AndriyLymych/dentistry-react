@@ -1,10 +1,11 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import MyFile from "../../../../MyFile/MyFile";
+import style from "../../../../../App.module.css";
 
 const UpdateMedicalServicePhotoForm = props => {
 
-    const {handleSubmit} = props;
+    const {handleSubmit, errorMessage} = props;
 
     return (
         <div>
@@ -17,6 +18,7 @@ const UpdateMedicalServicePhotoForm = props => {
                         component={MyFile}
                     />
                 </div>
+                {errorMessage && <div className={style.requiredStar}>{errorMessage}</div>}
 
             </form>
         </div>

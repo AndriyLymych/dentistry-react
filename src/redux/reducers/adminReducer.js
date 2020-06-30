@@ -69,6 +69,7 @@ export const registerDoctor = data => async dispatch => {
 export const registerAdmin = data => async dispatch => {
 
     try {
+
         dispatch(setCreateLoadingByAdmin(true));
 
         const token = checkAccessTokenPresent();
@@ -78,8 +79,9 @@ export const registerAdmin = data => async dispatch => {
 
             dispatch(setCreateLoadingByAdmin(false));
             dispatch(setIsRegisterSuccess(true));
+            dispatch(setErrorMsg(null))
 
-        }else {
+        } else {
             dispatch(setCreateLoadingByAdmin(false));
         }
     } catch (e) {
@@ -95,15 +97,19 @@ export const registerAdmin = data => async dispatch => {
 
 export const getUsers = name => async dispatch => {
 
-    dispatch(setCreateLoadingByAdmin(true));
+    try {
+        dispatch(setCreateLoadingByAdmin(true));
 
-    const users = await userAPI.getAllUsers(name);
+        const users = await userAPI.getAllUsers(name);
 
-    if (users) {
         dispatch(setUsers(users.data));
         dispatch(setCreateLoadingByAdmin(false));
-    }
 
+
+    } catch (e) {
+        dispatch(setCreateLoadingByAdmin(false));
+
+    }
 
 };
 

@@ -7,6 +7,7 @@ import {getServiceProfile} from "../../../../redux/reducers/serviceProfileReduce
 import {withRouter} from "react-router-dom";
 import {isAuthSelector, meInfoSelector} from "../../../../redux/selectors/authSelectors";
 import {updateMedicalService, updateMedicalServicePhoto} from "../../../../redux/reducers/serviceReducer";
+import {getErrorMsgSelector} from "../../../../redux/selectors/errorSelectors";
 
 class ServiceProfileContainer extends React.Component {
 
@@ -25,6 +26,7 @@ class ServiceProfileContainer extends React.Component {
             updateMedicalService={this.props.updateMedicalService}
             updateMedicalServicePhoto={this.props.updateMedicalServicePhoto}
             isAuth={this.props.isAuth}
+            errorMessage={this.props.errorMessage}
         />
     }
 
@@ -35,7 +37,8 @@ const mapStateToProps = state => {
         serviceProfile: serviceProfileSelector(state),
         isLoading: isLoadingProfileSelector(state),
         me: meInfoSelector(state),
-        isAuth: isAuthSelector(state)
+        isAuth: isAuthSelector(state),
+        errorMessage: getErrorMsgSelector(state)
     }
 };
 

@@ -40,25 +40,35 @@ export const setIsLoading = isLoading => ({type: SET_IS_LOADING, isLoading});
 
 export const getDoctors = () => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    let doctors = await doctorsAPI.getDoctors();
+        let doctors = await doctorsAPI.getDoctors();
 
-    dispatch(setDoctors(doctors.data));
+        dispatch(setDoctors(doctors.data));
 
-    dispatch(setIsLoading(false));
+        dispatch(setIsLoading(false));
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+    }
 
 };
 
 export const getSpecialities = () => async dispatch => {
 
-    dispatch(setIsLoading(true));
+    try {
+        dispatch(setIsLoading(true));
 
-    let specialities = await doctorsAPI.getDoctorSpecialities();
+        let specialities = await doctorsAPI.getDoctorSpecialities();
 
-    dispatch(setSpecialities(specialities.data));
+        dispatch(setSpecialities(specialities.data));
 
-    dispatch(setIsLoading(false));
+        dispatch(setIsLoading(false));
+    } catch (e) {
+        dispatch(setIsLoading(false));
+
+    }
 
 };
 

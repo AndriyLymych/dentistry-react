@@ -1,8 +1,7 @@
 import React from 'react'
 import {Field} from 'redux-form'
 import {
-    emailValidator,
-    isNumberValidator,
+    emailValidator, isCorrectServiceValidator,
     maxLengthValidator,
     minLengthValidator, phoneNumberValidator,
     requiredValidator
@@ -71,8 +70,9 @@ const ReceptionForm = props => {
 
             <label>Послуга <span className={style.requiredStar}>*</span> : </label>
 
-            <Field name="service_id" component={SelectCreator} validate={requiredValidator}>
-                <option >Виберіть послугу:</option>
+            <Field name="service_id" component={SelectCreator}
+                   validate={[requiredValidator, isCorrectServiceValidator]}>
+                <option>Виберіть послугу:</option>
                 {
                     services.map(service => <option key={service.id} value={service.id}>{service.service}</option>)
                 }

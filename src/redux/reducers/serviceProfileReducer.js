@@ -33,13 +33,19 @@ const isServiceProfileLoading = payload => ({type: SET_LOADING_PROGRESS, payload
 
 export const getServiceProfile = id => async dispatch => {
 
-    dispatch(isServiceProfileLoading(true));
+    try {
+        dispatch(isServiceProfileLoading(true));
 
-    const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
+        const serviceProfile = await medicalServicesAPI.getMedicalServiceById(id);
 
-    dispatch(setServiceProfile(serviceProfile.data));
+        dispatch(setServiceProfile(serviceProfile.data));
 
-    dispatch(isServiceProfileLoading(false));
+        dispatch(isServiceProfileLoading(false));
+
+    } catch (e) {
+        dispatch(isServiceProfileLoading(false));
+
+    }
 
 
 };
