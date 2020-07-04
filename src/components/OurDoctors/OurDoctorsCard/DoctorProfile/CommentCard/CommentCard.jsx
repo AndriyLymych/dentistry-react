@@ -19,7 +19,8 @@ const CommentCard = (
         isDoctor,
         commentsCountOnPage,
         currentPage,
-        deleteChosenComment
+        deleteChosenComment,
+        me
     }
 ) => {
     const onCommentDelete = () => {
@@ -49,7 +50,7 @@ const CommentCard = (
     return (
         <div>
             <div className={style.commentatorInfo}>
-                {avatar === null ? <div><img src={defaultAvatar} width={'40px'} height={'40px'} alt=""/></div> :
+                {!avatar ? <div><img src={defaultAvatar} width={'40px'} height={'40px'} alt=""/></div> :
                     <div><img src={avatar} alt=""/></div>}
                 <div><span>{name}</span> <span>{surname}</span></div>
             </div>

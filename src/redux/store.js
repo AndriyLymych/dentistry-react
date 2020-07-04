@@ -14,6 +14,7 @@ import commentReducer from "./reducers/commentReducer";
 import doctorMarkReducer from "./reducers/doctorMarkReducer";
 import adminReducer from "./reducers/adminReducer";
 import errorReducer from "./reducers/errorReducer";
+import refreshReducer from "./reducers/refreshReducer";
 //TODO винести в rootReducer
 const reducers = combineReducers({
     doctorReducer,
@@ -29,7 +30,8 @@ const reducers = combineReducers({
     commentReducer,
     doctorMarkReducer,
     adminReducer,
-    errorReducer
+    errorReducer,
+    refreshReducer
 });
 
 

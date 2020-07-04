@@ -15,7 +15,7 @@ import {
     commentInfoSelector, commentsCountOnPageSelector, currentPageSelector,
     isLoadingCommentsSelector, pageCountSelector,
 } from "../../../../redux/selectors/commentSelectors";
-import {isAuthSelector, myIDSelector} from "../../../../redux/selectors/authSelectors";
+import {isAuthSelector, meInfoSelector, myIDSelector} from "../../../../redux/selectors/authSelectors";
 import {getDoctorMark, isEvaluated, isMarkLoading} from "../../../../redux/selectors/doctorMarkSelectors";
 import {getAverageDoctorMark, getIsEvaluatedDoctor, setDoctorMark} from "../../../../redux/reducers/doctorMarkReducer";
 import {checkAccessTokenPresent} from "../../../../helpers/checkAccessTokenPresent";
@@ -35,7 +35,7 @@ class DoctorProfileContainer extends React.Component {
 
         const token = checkAccessTokenPresent();
 
-        if (token){
+        if (token) {
             this.props.getIsEvaluatedDoctor(id)
         }
 
@@ -70,6 +70,7 @@ class DoctorProfileContainer extends React.Component {
             doctorMark={this.props.doctorMark}
             isEvaluated={this.props.isEvaluated}
             isMarkLoading={this.props.isMarkLoading}
+            me={this.props.me}
 
         />
     }
@@ -87,9 +88,10 @@ const mapStateToProps = state => {
         currentPage: currentPageSelector(state),
         isAuth: isAuthSelector(state),
         myID: myIDSelector(state),
-        doctorMark:getDoctorMark(state),
-        isEvaluated:isEvaluated(state),
-        isMarkLoading:isMarkLoading(state)
+        doctorMark: getDoctorMark(state),
+        isEvaluated: isEvaluated(state),
+        isMarkLoading: isMarkLoading(state),
+        me: meInfoSelector(state)
     }
 };
 

@@ -1,15 +1,21 @@
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {adminAPI} from "../../api/adminAPI";
-import {IS_CREATE_BY_ADMIN, IS_REGISTER_DOCTOR_SUCCESS, SET_USERS} from "../../constant/actionTypes/adminAC";
+import {
+    IS_CREATE_BY_ADMIN,
+    IS_REGISTER_DOCTOR_SUCCESS,
+    SET_ACTIVE_USERS, SET_BLOCKED_USERS
+} from "../../constant/actionTypes/adminAC";
 import {setIsRegisterSuccess} from "./registerReducer";
 import {userAPI} from "../../api/userAPI";
 import {setErrorMsg} from "./errorReducer";
 import {customErrors} from "../../constant/customErrors/customErrors";
+import {refreshToken} from "../../helpers/refreshToken";
 
 const initialState = {
     isCreateByAdmin: false,
     isRegisterDoctorSuccess: false,
-    users: []
+    activeUsers: [],
+    blockedUsers: []
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -24,10 +30,15 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
                 isRegisterDoctorSuccess: action.payload
             };
-        case SET_USERS:
+        case SET_ACTIVE_USERS:
             return {
                 ...state,
-                users: action.payload
+                activeUsers: action.payload
+            };
+        case SET_BLOCKED_USERS:
+            return {
+                ...state,
+                blockedUsers: action.payload
             };
         default :
             return state
@@ -36,7 +47,8 @@ const adminReducer = (state = initialState, action) => {
 
 export const setCreateLoadingByAdmin = payload => ({type: IS_CREATE_BY_ADMIN, payload});
 export const setIsRegisterDoctorSuccess = payload => ({type: IS_REGISTER_DOCTOR_SUCCESS, payload});
-export const setUsers = payload => ({type: SET_USERS, payload});
+export const setActiveUsers = payload => ({type: SET_ACTIVE_USERS, payload});
+export const setBlockedUsers = payload => ({type: SET_BLOCKED_USERS, payload});
 
 export const registerDoctor = data => async dispatch => {
 
@@ -61,6 +73,7 @@ export const registerDoctor = data => async dispatch => {
 
         if (e.response.data.code) {
             dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+            await refreshToken(e.response.data.code)
 
         }
     }
@@ -90,27 +103,84 @@ export const registerAdmin = data => async dispatch => {
 
         if (e.response.data.code) {
             dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+            await refreshToken(e.response.data.code)
 
         }
+
     }
 };
 
 export const getUsers = name => async dispatch => {
 
     try {
-        dispatch(setCreateLoadingByAdmin(true));
 
         const users = await userAPI.getAllUsers(name);
 
-        dispatch(setUsers(users.data));
-        dispatch(setCreateLoadingByAdmin(false));
-
+        dispatch(setActiveUsers(users.data.activeUsers));
+        dispatch(setBlockedUsers(users.data.blockedUsers));
 
     } catch (e) {
-        dispatch(setCreateLoadingByAdmin(false));
 
     }
 
 };
 
+
+export const blockUserByAdmin = id => async dispatch => {
+
+    try {
+
+        dispatch(setCreateLoadingByAdmin(true));
+
+        const token = checkAccessTokenPresent();
+
+        if (token) {
+            await adminAPI.blockUser(token, id);
+
+            const users = await userAPI.getAllUsers();
+
+            dispatch(setActiveUsers(users.data.activeUsers));
+            dispatch(setBlockedUsers(users.data.blockedUsers));
+            dispatch(setCreateLoadingByAdmin(false));
+
+        } else {
+            dispatch(setCreateLoadingByAdmin(false));
+        }
+    } catch (e) {
+
+        dispatch(setCreateLoadingByAdmin(false));
+
+        if (e.response.data.code){
+            await refreshToken(e.response.data.code)
+
+        }
+
+    }
+};
+export const unlockUserByAdmin = id => async dispatch => {
+
+    try {
+
+        dispatch(setCreateLoadingByAdmin(true));
+
+        const token = checkAccessTokenPresent();
+
+        if (token) {
+            await adminAPI.unlockUser(token, id);
+            const users = await userAPI.getAllUsers();
+
+            dispatch(setActiveUsers(users.data.activeUsers));
+            dispatch(setBlockedUsers(users.data.blockedUsers));
+            dispatch(setCreateLoadingByAdmin(false));
+
+        } else {
+            dispatch(setCreateLoadingByAdmin(false));
+        }
+    } catch (e) {
+
+        dispatch(setCreateLoadingByAdmin(false));
+        await refreshToken(e.response.data.code)
+
+    }
+};
 export default adminReducer;

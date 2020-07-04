@@ -39,5 +39,25 @@ export const adminAPI = {
         })
 
     },
+    blockUser: (access_token, id) => {
+
+        return axiosInstance.put(`/admin/users/${id}/block`, {}, {
+            headers: {
+
+                [headerEnum.AUTHORIZATION]: access_token
+            }
+        })
+
+    },
+    unlockUser: (access_token, id) => {
+
+        return axiosInstance.put(`/admin/users/${id}/unblock`, {}, {
+            headers: {
+
+                [headerEnum.AUTHORIZATION]: access_token
+            }
+        })
+
+    },
 
 };

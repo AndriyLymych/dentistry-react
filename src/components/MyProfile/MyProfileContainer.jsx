@@ -4,6 +4,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {isAuthSelector, meInfoSelector} from "../../redux/selectors/authSelectors";
+import {getActiveUsers, getBlockedUsers, getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
 
 class MyProfileContainer extends React.Component {
 
@@ -18,10 +19,10 @@ const mapStateToProps = state => {
 
     return {
         isAuth: isAuthSelector(state),
-        me: meInfoSelector(state),
+        me: meInfoSelector(state)
     }
 };
 
 const MyProfileWithRouter = withRouter(MyProfileContainer);
 
-export default compose( connect(mapStateToProps, null))(MyProfileWithRouter);
+export default compose(connect(mapStateToProps, null))(MyProfileWithRouter);

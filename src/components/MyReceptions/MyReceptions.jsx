@@ -176,9 +176,6 @@ const MyReceptions = (
                             :
                             <div>
                                 <div>У вас немає активних записів.Запишіться на прийом</div>
-                                <NavLink to={'/reception-service'}>
-                                    <button>Записатися на прийом</button>
-                                </NavLink>
                             </div>
                     }
 

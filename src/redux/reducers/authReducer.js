@@ -14,6 +14,7 @@ import {doctorsAPI} from "../../api/doctorsAPI";
 import {adminAPI} from "../../api/adminAPI";
 import {customErrors} from "../../constant/customErrors/customErrors";
 import {setErrorMsg} from "./errorReducer";
+import {refreshUserToken} from "./refreshReducer";
 
 
 const initialState = {
@@ -84,9 +85,9 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-const setMeDates = payload => ({type: SET_ME_INFO, payload});
-const setMyID = payload => ({type: SET_MY_ID, payload});
-const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
+export const setMeDates = payload => ({type: SET_ME_INFO, payload});
+export const setMyID = payload => ({type: SET_MY_ID, payload});
+export const setIsAuth = payload => ({type: SET_IS_AUTH, payload});
 const setIsPasswordChanged = payload => ({type: SET_IS_PASSWORD_CHANGED, payload});
 const setIsProfileUpdate = payload => ({type: SET_IS_PROFILE_UPDATE, payload});
 const setIsSentMail = payload => ({type: SET_IS_SENT_MAIL, payload});
@@ -115,6 +116,9 @@ export const getMeInfo = () => async dispatch => {
         }
     } catch (e) {
         dispatch(setIsLoading(false));
+        if (e.response.data.code){
+            dispatch(refreshUserToken(e.response.data.code))
+        }
 
     }
 };

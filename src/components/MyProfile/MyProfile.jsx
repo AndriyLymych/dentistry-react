@@ -10,6 +10,7 @@ import BlockUserContainer from "../BlockUser/BlockUserContainer";
 import UnlockUserContainer from "../UnlockUser/UnlockUserContainer";
 import AddMedicalService from "../AddMedicalService/AddMedicalService";
 import DeleteMedicalService from "../DeleteMedicalService/DeleteMedicalService";
+import Reception from "../Reception/Reception";
 
 
 const MyProfile = ({
@@ -21,6 +22,7 @@ const MyProfile = ({
                            }
                        }
                    }) => {
+
 
     return (
         <div>
@@ -36,9 +38,15 @@ const MyProfile = ({
                                 }
                                 {
                                     label === USER_ROLE.DOCTOR &&
+                                    <li><NavLink to={`/my-profile/reception-patient`}>Записати на прийом</NavLink></li>
+
+                                }
+                                {
+                                    label === USER_ROLE.DOCTOR &&
                                     <li><NavLink to={`/my-profile/receptions`}>Записи на прийом</NavLink></li>
 
                                 }
+
 
                                 <li><NavLink to={`/my-profile/change-password`}>Змінити пароль</NavLink></li>
 
@@ -94,6 +102,11 @@ const MyProfile = ({
                                 <Route path={`/my-profile/receptions`} exact
                                        render={() => <MyReceptionsContainer/>}/>
                             }
+                            {
+                                label === USER_ROLE.DOCTOR &&
+                                <Route path={`/my-profile/reception-patient`} exact
+                                       render={() => <Reception/>}/>
+                            }
                             <Route path={`/my-profile/info`} exact
                                    render={() => <MyProfileInfo me={me} avatar={me.avatar}/>}/>
 
@@ -129,7 +142,8 @@ const MyProfile = ({
                             }
                             {
                                 label === USER_ROLE.ADMIN &&
-                                <Route path={`/my-profile/delete-service`} exact render={() => <DeleteMedicalService/>}/>
+                                <Route path={`/my-profile/delete-service`} exact
+                                       render={() => <DeleteMedicalService/>}/>
 
                             }
 

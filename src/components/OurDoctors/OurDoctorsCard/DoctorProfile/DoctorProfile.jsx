@@ -40,8 +40,8 @@ const DoctorProfile = (
         isEvaluated,
         doctorMark,
         setDoctorMark,
-        commentsCountOnPage
-
+        commentsCountOnPage,
+        me
 
     }) => {
 
@@ -127,6 +127,7 @@ const DoctorProfile = (
                                                         commentator={comment["Commentator"]}
                                                         isOwner={myID === comment.user_id}
                                                         isDoctor={myID===comment.doctor_id}
+                                                        me={me}
                                                         deleteChosenComment={deleteChosenComment}
                                                         doctorId={doctorId}
                                                         editChosenComment={editChosenComment}

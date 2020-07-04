@@ -6,3 +6,4 @@ export const SET_IS_PROFILE_UPDATE = 'dentistry-react/authReducer/set-is-profile
 export const SET_IS_SENT_MAIL = 'dentistry-react/authReducer/set-is-sent-mail';
 export const SET_IS_LOADING = 'dentistry-react/authReducer/set-is-auth_loading';
 export const SET_IS_RESET_PASSWORD = 'dentistry-react/authReducer/set-is-reset-password';
+export const SET_IS_REFRESH_LOADING = 'dentistry-react/authReducer/set-is-refresh-loading';

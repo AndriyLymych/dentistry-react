@@ -11,7 +11,6 @@ const NavMenu = ({isAuth, me, logout}) => {
             <NavLink to={'/about-us'}>Про нас</NavLink>
             <NavLink to={'/our-services'}>Наші послуги</NavLink>
             <NavLink to={'/our-doctors'}>Наші лікарі</NavLink>
-            <NavLink to={'/reception-service'}>Запис на прийом</NavLink>
             <NavLink to={'/contacts'}>Контакти</NavLink>
             {
                 !isAuth ?

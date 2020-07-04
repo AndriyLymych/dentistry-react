@@ -1,34 +1,55 @@
 import React from "react";
 import {connect} from "react-redux";
-import {reduxForm} from "redux-form";
-import {getUsers} from "../../redux/reducers/adminReducer";
+import {blockUserByAdmin, getUsers} from "../../redux/reducers/adminReducer";
 import {getActiveUsers, getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
-import BlockUserForm from "./BlockUserForm/BlockUserForm";
+import style from './BlockUserContainer.module.css'
 
-const BlockUserReduxForm = reduxForm({
-    form: 'block-user'
-})(BlockUserForm);
+import Preloader from "../Preloader/Preloader";
 
 
 class BlockUserContainer extends React.Component {
+
     componentDidMount() {
-        this.props.getUsers()
+        this.props.getUsers();
+
     }
 
-    onSubmit = data => {
-        console.log(data);
+
+    onSearchUsers = (e) => {
+
+        this.props.getUsers(e.target.value);
+    };
+
+    onBlockUser = (id) => {
+        this.props.blockUserByAdmin(id);
+
     };
 
     render() {
-        return <BlockUserReduxForm onSubmit={this.onSubmit} activeUsers={this.props.activeUsers} getUsers={this.props.getUsers}/>;
+
+        if (this.props.isCreateByAdmin) {
+            return <Preloader/>
+        }
+
+        return <div>
+
+            <input type="search" onChange={this.onSearchUsers}/>
+            <div>{this.props.activeUsers.map(user => {
+                return <div className={style.userInfo}>
+                    <div>{user.name + ' ' + user.surname}</div>
+                    <button onClick={() => this.onBlockUser(user.id)}>Заблокувати</button>
+                </div>
+            })}</div>
+        </div>
     }
+
 }
 
 const mapStateToProps = state => {
     return {
-        activeUsers: getActiveUsers(state),
-        isCreateByAdmin: getIsCreateByAdmin(state)
+        isCreateByAdmin: getIsCreateByAdmin(state),
+        activeUsers: getActiveUsers(state)
     }
 };
 
-export default connect(mapStateToProps, {getUsers})(BlockUserContainer)
+export default connect(mapStateToProps, {getUsers, blockUserByAdmin})(BlockUserContainer)

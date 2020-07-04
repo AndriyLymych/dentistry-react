@@ -48,5 +48,14 @@ export const authAPI = {
 
         return axiosInstance.put(`auth/password-refresh/${token}`, data)
 
+    },
+    refreshToken: (refresh_token) => {
+
+        return axiosInstance.post(`auth/refresh`, {}, {
+            headers: {
+                [headerEnum.AUTHORIZATION]: refresh_token
+            }
+        })
+
     }
 };
