@@ -116,7 +116,7 @@ export const getMeInfo = () => async dispatch => {
         }
     } catch (e) {
         dispatch(setIsLoading(false));
-        if (e.response.data.code){
+        if (e.response.data.code) {
             dispatch(refreshUserToken(e.response.data.code))
         }
 
@@ -249,7 +249,8 @@ export const changeUserPassword = data => async dispatch => {
 
         if (e.response.data.code) {
 
-            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message));
+            dispatch(refreshUserToken(e.response.data.code))
 
         }
     }
@@ -323,7 +324,10 @@ export const updateUserDates = data => async dispatch => {
 
     } catch (e) {
         dispatch(setIsProfileUpdate(true));
+        if (e.response.data.code){
+            dispatch(refreshUserToken(e.response.data.code))
 
+        }
     }
 };
 
@@ -348,15 +352,14 @@ export const updateDoctorProfilePhoto = avatar => async dispatch => {
             dispatch(setIsProfileUpdate(true))
         }
 
-
     } catch (e) {
 
         dispatch(setIsProfileUpdate(true));
 
         if (e.response.data.code) {
 
-            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
-
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message));
+            dispatch(refreshUserToken(e.response.data.code))
         }
     }
 };

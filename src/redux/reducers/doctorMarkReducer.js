@@ -1,6 +1,7 @@
 import {SET_DOCTOR_MARK, SET_IS_EVALUATED, SET_IS_MARK_LOADING} from "../../constant/actionTypes/doctorMarkAC";
 import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {userAPI} from "../../api/userAPI";
+import {refreshUserToken} from "./refreshReducer";
 
 const initialState = {
     mark: 1,
@@ -59,6 +60,10 @@ export const setDoctorMark = (mark, doctor_id) => async dispatch => {
 
     } catch (e) {
         dispatch(setIsMarkLoading(true));
+        if (e.response.data.code){
+            dispatch(refreshUserToken(e.response.data.code))
+
+        }
 
     }
 };
@@ -77,7 +82,10 @@ export const getIsEvaluatedDoctor = doctor_id => async dispatch => {
         dispatch(setIsMarkLoading(true));
     } catch (e) {
         dispatch(setIsMarkLoading(true));
+        if (e.response.data.code){
+            dispatch(refreshUserToken(e.response.data.code))
 
+        }
     }
 
 

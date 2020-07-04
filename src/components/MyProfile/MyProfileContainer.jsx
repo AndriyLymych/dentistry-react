@@ -4,7 +4,6 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {isAuthSelector, meInfoSelector} from "../../redux/selectors/authSelectors";
-import {getActiveUsers, getBlockedUsers, getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
 
 class MyProfileContainer extends React.Component {
 

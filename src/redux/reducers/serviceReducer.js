@@ -9,6 +9,7 @@ import {checkAccessTokenPresent} from "../../helpers/checkAccessTokenPresent";
 import {setServiceProfile} from "./serviceProfileReducer";
 import {setErrorMsg} from "./errorReducer";
 import {customErrors} from "../../constant/customErrors/customErrors";
+import {refreshUserToken} from "./refreshReducer";
 
 const initialState = {
     services: [],
@@ -89,7 +90,10 @@ export const addMedicalService = (service, description, photo, price) => async d
         }
     } catch (e) {
         dispatch(setLoadingProgress(false));
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
 
+        }
     }
 };
 
@@ -111,7 +115,10 @@ export const deleteMedicalService = id => async dispatch => {
         }
     } catch (e) {
         dispatch(setLoadingProgress(false));
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
 
+        }
     }
 };
 export const updateMedicalService = (data, id) => async dispatch => {
@@ -133,7 +140,10 @@ export const updateMedicalService = (data, id) => async dispatch => {
         }
     } catch (e) {
         dispatch(setLoadingProgress(false));
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
 
+        }
     }
 };
 export const updateMedicalServicePhoto = (photo, id) => async dispatch => {
@@ -163,7 +173,8 @@ export const updateMedicalServicePhoto = (photo, id) => async dispatch => {
 
         if (e.response.data.code) {
 
-            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message));
+            dispatch(refreshUserToken(e.response.data.code))
 
         }
     }

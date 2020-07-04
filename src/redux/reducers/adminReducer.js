@@ -9,7 +9,7 @@ import {setIsRegisterSuccess} from "./registerReducer";
 import {userAPI} from "../../api/userAPI";
 import {setErrorMsg} from "./errorReducer";
 import {customErrors} from "../../constant/customErrors/customErrors";
-import {refreshToken} from "../../helpers/refreshToken";
+import {refreshUserToken} from "./refreshReducer";
 
 const initialState = {
     isCreateByAdmin: false,
@@ -72,8 +72,8 @@ export const registerDoctor = data => async dispatch => {
         dispatch(setCreateLoadingByAdmin(false));
 
         if (e.response.data.code) {
-            dispatch(setErrorMsg(customErrors[e.response.data.code].message))
-            await refreshToken(e.response.data.code)
+            dispatch(setErrorMsg(customErrors[e.response.data.code].message));
+            dispatch(refreshUserToken(e.response.data.code))
 
         }
     }
@@ -96,6 +96,7 @@ export const registerAdmin = data => async dispatch => {
 
         } else {
             dispatch(setCreateLoadingByAdmin(false));
+
         }
     } catch (e) {
 
@@ -103,28 +104,40 @@ export const registerAdmin = data => async dispatch => {
 
         if (e.response.data.code) {
             dispatch(setErrorMsg(customErrors[e.response.data.code].message))
-            await refreshToken(e.response.data.code)
+            dispatch(refreshUserToken(e.response.data.code));
+            dispatch(refreshUserToken(e.response.data.code))
 
         }
 
     }
 };
 
-export const getUsers = name => async dispatch => {
+export const getActiveUsersFromDB = name => async dispatch => {
 
     try {
 
-        const users = await userAPI.getAllUsers(name);
+        const users = await userAPI.getAllActiveUsers(name);
 
-        dispatch(setActiveUsers(users.data.activeUsers));
-        dispatch(setBlockedUsers(users.data.blockedUsers));
+        dispatch(setActiveUsers(users.data));
 
     } catch (e) {
 
     }
 
 };
+export const getBlockedUsersFromDB = name => async dispatch => {
 
+    try {
+
+        const users = await userAPI.getAllBlockedUsers(name);
+
+        dispatch(setBlockedUsers(users.data));
+
+    } catch (e) {
+
+    }
+
+};
 
 export const blockUserByAdmin = id => async dispatch => {
 
@@ -137,10 +150,9 @@ export const blockUserByAdmin = id => async dispatch => {
         if (token) {
             await adminAPI.blockUser(token, id);
 
-            const users = await userAPI.getAllUsers();
+            const users = await userAPI.getAllActiveUsers();
 
-            dispatch(setActiveUsers(users.data.activeUsers));
-            dispatch(setBlockedUsers(users.data.blockedUsers));
+            dispatch(setActiveUsers(users.data));
             dispatch(setCreateLoadingByAdmin(false));
 
         } else {
@@ -150,13 +162,14 @@ export const blockUserByAdmin = id => async dispatch => {
 
         dispatch(setCreateLoadingByAdmin(false));
 
-        if (e.response.data.code){
-            await refreshToken(e.response.data.code)
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
 
         }
 
     }
 };
+
 export const unlockUserByAdmin = id => async dispatch => {
 
     try {
@@ -167,10 +180,9 @@ export const unlockUserByAdmin = id => async dispatch => {
 
         if (token) {
             await adminAPI.unlockUser(token, id);
-            const users = await userAPI.getAllUsers();
+            const users = await userAPI.getAllBlockedUsers();
 
-            dispatch(setActiveUsers(users.data.activeUsers));
-            dispatch(setBlockedUsers(users.data.blockedUsers));
+            dispatch(setBlockedUsers(users.data));
             dispatch(setCreateLoadingByAdmin(false));
 
         } else {
@@ -179,8 +191,11 @@ export const unlockUserByAdmin = id => async dispatch => {
     } catch (e) {
 
         dispatch(setCreateLoadingByAdmin(false));
-        await refreshToken(e.response.data.code)
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
 
+        }
     }
 };
+
 export default adminReducer;

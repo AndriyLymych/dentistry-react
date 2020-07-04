@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {blockUserByAdmin, getUsers} from "../../redux/reducers/adminReducer";
+import {blockUserByAdmin, getActiveUsersFromDB} from "../../redux/reducers/adminReducer";
 import {getActiveUsers, getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
 import style from './BlockUserContainer.module.css'
 
@@ -10,14 +10,14 @@ import Preloader from "../Preloader/Preloader";
 class BlockUserContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers();
+        this.props.getActiveUsersFromDB();
 
     }
 
 
     onSearchUsers = (e) => {
 
-        this.props.getUsers(e.target.value);
+        this.props.getActiveUsersFromDB(e.target.value);
     };
 
     onBlockUser = (id) => {
@@ -52,4 +52,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {getUsers, blockUserByAdmin})(BlockUserContainer)
+export default connect(mapStateToProps, {getActiveUsersFromDB, blockUserByAdmin})(BlockUserContainer)

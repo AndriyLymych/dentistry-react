@@ -25,3 +25,6 @@ export const isLoadingSelector = state => {
 export const isResetPasswordSelector = state => {
     return state.authReducer.isResetPassword
 };
+export const isRefreshLoadingSelector = state => {
+    return state.authReducer.isRefreshLoading
+};

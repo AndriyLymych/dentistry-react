@@ -9,6 +9,7 @@ import {initializeApp} from "./redux/reducers/appReducer";
 import {compose} from "redux";
 import Preloader from "./components/Preloader/Preloader";
 import routes from "./router/routes";
+import {isRefreshLoadingSelector} from "./redux/selectors/authSelectors";
 
 
 class App extends React.Component {
@@ -18,9 +19,10 @@ class App extends React.Component {
 
     render() {
 
-        if (!this.props.initialized) {
+        if (!this.props.initialized || this.props.isRefreshLoading) {
             return <Preloader/>
         }
+
         return (
 
             <div className={style.appContainer}>
@@ -36,7 +38,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        initialized: state.appReducer.initialized
+        initialized: state.appReducer.initialized,
+        isRefreshLoading: isRefreshLoadingSelector(state)
     }
 };
 

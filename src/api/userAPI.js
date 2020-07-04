@@ -35,9 +35,14 @@ export const userAPI = {
         return axiosInstance.get(`/users/average-mark?doctor_id=${doctor_id}`)
 
     },
-    getAllUsers: (name = '') => {
+    getAllActiveUsers: (name = '') => {
 
-        return axiosInstance.get(`/users?name=${name}`)
+        return axiosInstance.get(`/users/active?name=${name}`)
+
+    },
+    getAllBlockedUsers: (name = '') => {
+
+        return axiosInstance.get(`/users/blocked?name=${name}`)
 
     }
 };

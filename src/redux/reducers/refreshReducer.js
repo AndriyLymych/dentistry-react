@@ -32,10 +32,12 @@ const refreshReducer = (state = initialState, action) => {
 export const setRefreshLoading = payload => ({type: SET_IS_REFRESH_LOADING, payload});
 
 export const refreshUserToken = errCode => async dispatch => {
+
     try {
+        dispatch(setRefreshLoading(true));
+
         if (errCode === customErrors[4012].code) {
-            dispatch(setErrorMsg(null));
-            dispatch(setRefreshLoading(true));
+            dispatch(setErrorMsg('Помилка'));
 
             const refreshToken = checkRefreshTokenPresent();
 

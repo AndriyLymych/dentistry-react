@@ -5,6 +5,7 @@ import {
 } from "../../constant/actionTypes/commentAC";
 import {commentAPI} from "../../api/commentAPI";
 import {reset} from "redux-form";
+import {refreshUserToken} from "./refreshReducer";
 
 
 const initialState = {
@@ -101,6 +102,11 @@ export const sendComment = (data, doctor_id, commentCount) => async dispatch => 
 
     } catch (e) {
         dispatch(setIsLoading(false));
+
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
+
+        }
     }
 
 };
@@ -121,6 +127,10 @@ export const deleteChosenComment = (comment_id, doctorId, commentCount, currentP
 
     } catch (e) {
         dispatch(setIsLoading(false));
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
+
+        }
 
     }
 
@@ -143,6 +153,11 @@ export const editChosenComment = (comment_id, doctorId, newComment, commentCount
 
     } catch (e) {
         dispatch(setIsLoading(false));
+
+        if (e.response.data.code) {
+            dispatch(refreshUserToken(e.response.data.code))
+
+        }
 
     }
 

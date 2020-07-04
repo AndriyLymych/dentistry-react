@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import { getUsers, unlockUserByAdmin} from "../../redux/reducers/adminReducer";
-import { getBlockedUsers, getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
+import {getBlockedUsersFromDB, unlockUserByAdmin} from "../../redux/reducers/adminReducer";
+import {getBlockedUsers, getIsCreateByAdmin} from "../../redux/selectors/adminSelectors";
 import style from '../BlockUser/BlockUserContainer.module.css'
 import Preloader from "../Preloader/Preloader";
 
@@ -9,14 +9,14 @@ import Preloader from "../Preloader/Preloader";
 class UnlockUserContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers();
+        this.props.getBlockedUsersFromDB();
 
     }
 
 
     onSearchUsers = (e) => {
-
-        this.props.getUsers(e.target.value);
+        console.log(e.target.value);
+        this.props.getBlockedUsersFromDB(e.target.value);
     };
 
     onUnlockUser = (id) => {
@@ -33,10 +33,10 @@ class UnlockUserContainer extends React.Component {
 
             <input type="search" onChange={this.onSearchUsers}/>
 
-            <div>{this.props.blockedUsers.map(user => {
+            <div>{this.props.blockedUsers.map(u => {
                 return <div className={style.userInfo}>
-                    <div>{user.name + ' ' + user.surname}</div>
-                    <button onClick={() => this.onUnlockUser(user.id)}>Розблокувати</button>
+                    <div>{u.name + ' ' + u.surname}</div>
+                    <button onClick={() => this.onUnlockUser(u.id)}>Розблокувати</button>
                 </div>
             })}</div>
         </div>
@@ -51,4 +51,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {getUsers, unlockUserByAdmin})(UnlockUserContainer)
+export default connect(mapStateToProps, {getBlockedUsersFromDB, unlockUserByAdmin})(UnlockUserContainer)
