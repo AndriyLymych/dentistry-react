@@ -1,6 +1,5 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import {combineReducers} from "redux";
 import authReducer from "./reducers/authReducer";
-import thunk from "redux-thunk";
 import {reducer as formReducer} from "redux-form"
 import doctorReducer from "./reducers/doctorReducer";
 import registerReducer from "./reducers/registerReducer";
@@ -13,10 +12,10 @@ import receptionReducer from "./reducers/receptionReducer";
 import commentReducer from "./reducers/commentReducer";
 import doctorMarkReducer from "./reducers/doctorMarkReducer";
 import adminReducer from "./reducers/adminReducer";
-import errorReducer from "./reducers/errorReducer";
 import refreshReducer from "./reducers/refreshReducer";
-//TODO винести в rootReducer
-const reducers = combineReducers({
+
+
+export const reducers = combineReducers({
     doctorReducer,
     authReducer,
     registerReducer,
@@ -30,15 +29,7 @@ const reducers = combineReducers({
     commentReducer,
     doctorMarkReducer,
     adminReducer,
-    errorReducer,
     refreshReducer
 });
 
 
-//для розширення хрому - редакс
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunk)));
-
-
-
-export default store

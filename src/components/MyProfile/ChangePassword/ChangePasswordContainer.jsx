@@ -1,11 +1,11 @@
 import React from "react";
 import {ChangePasswordForm} from "./ChangePasswordForm/ChangePasswordForm";
 import {connect} from "react-redux";
-import {changeUserPassword} from "../../../redux/reducers/authReducer";
 import {isLoadingSelector, isPasswordChangedSelector} from "../../../redux/selectors/authSelectors";
 import {reduxForm} from "redux-form";
 import {getErrorMsgSelector} from "../../../redux/selectors/errorSelectors";
 import Preloader from "../../Preloader/Preloader";
+import {changeUserPassword} from "../../../redux/reducers/authReducer";
 
 
 const ChangePasswordReduxForm = reduxForm({

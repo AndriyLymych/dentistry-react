@@ -21,7 +21,7 @@ const maxAge = maxAgeValidator(120);
 
 const RegisterDoctorForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting, genders, specialities, errorMessage} = props;
+    const {handleSubmit, pristine, reset, submitting, specialities, errorMessage} = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -122,16 +122,6 @@ const RegisterDoctorForm = props => {
                 <label>Стать:</label>
 
                 <div>
-                    {/*{*/}
-                    {/*    genders.map(*/}
-                    {/*        gender =>*/}
-                    {/*            <label key={gender.id}>*/}
-                    {/*                <Field name="gender_id" component={InputCreator} type="radio" />*/}
-                    {/*                {gender.label}*/}
-                    {/*            </label>*/}
-                    {/*    )*/}
-                    {/*}*/}
-
                     <div>
                         <label><Field name="gender_id" component={InputCreator} type="radio" value="1"
                                       validate={requiredValidator}/> Чоловіча</label>

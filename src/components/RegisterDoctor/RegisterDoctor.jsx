@@ -6,7 +6,11 @@ import {getGenders} from "../../redux/reducers/registerReducer";
 import {
     getAllGendersSelector,
 } from "../../redux/selectors/registerSelectors";
-import {getIsCreateByAdmin, getIsRegisterDoctorSuccess} from "../../redux/selectors/adminSelectors";
+import {
+    getIsCreateByAdmin,
+    getIsRegisterDoctorSuccess,
+    getRegisterDoctorErrMsgSelector
+} from "../../redux/selectors/adminSelectors";
 import {registerDoctor} from "../../redux/reducers/adminReducer";
 import Preloader from "../Preloader/Preloader";
 import {withRouter} from "react-router-dom";
@@ -77,7 +81,7 @@ const mapStateToProps = state => {
         isCreateByAdmin: getIsCreateByAdmin(state),
         specialities: getDoctorsSpecialitiesSelector(state),
         isRegisterDoctorSuccess: getIsRegisterDoctorSuccess(state),
-        errorMessage: getErrorMsgSelector(state)
+        errorMessage: getRegisterDoctorErrMsgSelector(state)
     }
 };
 

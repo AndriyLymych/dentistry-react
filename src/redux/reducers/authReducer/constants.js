@@ -1,0 +1,15 @@
+export const SET_ME_INFO = 'dentistry-react/authReducer/set-me-info';
+export const SET_IS_AUTH = 'dentistry-react/authReducer/set-is-auth';
+export const SET_MY_ID = 'dentistry-react/authReducer/set-my-id';
+export const SET_IS_PASSWORD_CHANGED = 'dentistry-react/authReducer/set-is-password-changed';
+export const SET_IS_PROFILE_UPDATE = 'dentistry-react/authReducer/set-is-profile-update';
+export const SET_IS_SENT_MAIL = 'dentistry-react/authReducer/set-is-sent-mail';
+export const SET_IS_LOADING = 'dentistry-react/authReducer/set-is-auth_loading';
+export const SET_IS_RESET_PASSWORD = 'dentistry-react/authReducer/set-is-reset-password';
+export const SET_LOGIN_ERR_MSG = 'dentistry-react/authReducer/set-login-err-msg';
+export const SET_LOGIN_FACEBOOK_ERR_MSG = 'dentistry-react/authReducer/set-login-facebook-err-msg';
+export const SET_LOGIN_ADMIN_ERR_MSG = 'dentistry-react/authReducer/set-login-admin-err-msg';
+export const CHANGE_PASSWORD_ERR_MSG = 'dentistry-react/authReducer/change-password-err-msg';
+export const SEND_MAIL_ERR_MSG = 'dentistry-react/authReducer/send-mail-err-msg';
+export const RESET_PASSWORD_ERR_MSG = 'dentistry-react/authReducer/reset-password-err-msg';
+export const UPDATE_DOCTOR_PHOTO_ERR_MSG = 'dentistry-react/authReducer/update-doctor-photo-err-msg';

@@ -8,6 +8,23 @@ export const authAPI = {
         return axiosInstance.post(`/auth`, {email, password})
 
     },
+    loginFacebook: () => {
+           return axiosInstance.get(`/auth/facebook/callback`,{
+               headers:{
+                   'Access-Control-Allow-Origin': axiosInstance
+               }
+           })
+
+    },
+    loginFacebookUrl: () => {
+
+        return axiosInstance.get(`/auth/facebook`,{
+            headers:{
+                'Access-Control-Allow-Origin': axiosInstance
+            }
+        })
+
+    },
 
 
     meInfo: access_token => {

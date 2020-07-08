@@ -84,6 +84,5 @@ const RegisterWithRouter = withRouter(Register);
 export default connect(mapStateToProps, {
     registerPatient,
     getGenders,
-    registerAdmin,
-
+    registerAdmin
 })(RegisterWithRouter)
