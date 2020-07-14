@@ -1,7 +1,6 @@
 import {SET_SERVICE_PROFILE, SET_LOADING_PROGRESS} from "./constants";
 
 const initialState = {
-    services: [],
     serviceProfile: [],
     isLoading: false
 };

@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.module.css';
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/basic/Footer/Footer";
 import style from './App.module.css'
-import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {initializeApp} from "./redux/reducers/appReducer";
+import {initializeApp} from "./redux/reducers/appReducer/thunks";
 import {compose} from "redux";
-import Preloader from "./components/Preloader/Preloader";
+import Preloader from "./components/basic/Preloader/Preloader";
 import routes from "./router/routes";
-import {isRefreshLoadingSelector} from "./redux/selectors/authSelectors";
+import HeaderContainer from "./containers/HeaderContainer/HeaderContainer";
+import Contacts from "./components/pages/Contacts/Contacts";
 
 
 class App extends React.Component {
@@ -29,7 +29,8 @@ class App extends React.Component {
 
                 <HeaderContainer/>
                 {routes()}
-                <Footer/>
+                <Contacts/>
+                {/*<Footer/>*/}
 
             </div>
         );
@@ -39,7 +40,7 @@ class App extends React.Component {
 const mapStateToProps = state => {
     return {
         initialized: state.appReducer.initialized,
-        isRefreshLoading: isRefreshLoadingSelector(state)
+        isRefreshLoading: state.refreshReducer.isRefreshLoading
     }
 };
 

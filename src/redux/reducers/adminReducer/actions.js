@@ -3,7 +3,6 @@ import {
     IS_REGISTER_DOCTOR_SUCCESS,
     SET_ACTIVE_USERS,
     SET_BLOCKED_USERS, 
-    SET_REG_ADMIN_ERR_MSG, 
     SET_REG_DOCTOR_ERR_MSG
 } from "./constants";
 
@@ -12,4 +11,3 @@ export const setIsRegisterDoctorSuccess = payload => ({type: IS_REGISTER_DOCTOR_
 export const setActiveUsers = payload => ({type: SET_ACTIVE_USERS, payload});
 export const setBlockedUsers = payload => ({type: SET_BLOCKED_USERS, payload});
 export const setRegDoctorErrMsg = payload => ({type: SET_REG_DOCTOR_ERR_MSG, payload});
-export const setRegAdminErrMsg = payload => ({type: SET_REG_ADMIN_ERR_MSG, payload});

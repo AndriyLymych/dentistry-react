@@ -1,0 +1,77 @@
+a {
+    width: 401px;
+    color: #1c6c9c;
+    font-family: "Arial MT", serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.signBtn {
+    /* Style for "Rounded Re" */
+    width: 120px;
+    height: 31px;
+    border-radius: 10px;
+    border: 2px solid #1c6c9c;
+    color: #1c6c9c;
+    font-family: "Arial MT", serif;
+    font-size: 19px;
+    font-weight: 400;
+    transition: 0.3s;
+
+}
+
+.signBtn:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    background: #ff4313;
+    border: none;
+}
+
+.sign {
+    display: flex;
+    align-items: center;
+}
+
+.menuForgot {
+    list-style: none;
+    margin-right: 20px;
+}
+
+.menuItem {
+    margin-right: 15px;
+    list-style: none;
+}
+
+.itemLine {
+    transition: 0.2s;
+}
+
+
+.itemLine:hover {
+    transform: scale(1.05);
+    border-bottom: 1px solid #ff4313;
+    transition: 0.2s;
+}
+
+.menuItemLink {
+    transition: 0.3s;
+}
+
+.menuItemLink:hover {
+    transform: scale(1.07);
+    transition: 0.3s;
+}
+
+.link {
+    color: #ffffff;
+}
+.menuItemBtnLink:hover{
+    color: #dedede;
+}

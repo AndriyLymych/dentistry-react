@@ -34,7 +34,6 @@ export const getGenders = () => async dispatch => {
 
         dispatch(setGenders(genders.data));
         dispatch(setRegisterLoading(true));
-
     } catch (e) {
 
         dispatch(setRegisterLoading(true));

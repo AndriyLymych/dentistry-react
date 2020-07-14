@@ -1,0 +1,9 @@
+.logoSlogan {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.logoDescription {
+   margin-left: 10px;
+}

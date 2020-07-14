@@ -2,7 +2,7 @@ import {checkAccessTokenPresent} from "../../../helpers/checkAccessTokenPresent"
 import {adminAPI} from "../../../api/adminAPI";
 import {customErrors} from "../../../constant/customErrors/customErrors";
 import {refreshUserToken} from "../refreshReducer/thunks";
-import {setIsRegisterSuccess} from "../registerReducer/actions";
+import {setIsRegisterSuccess, setRegisterErrMsg} from "../registerReducer/actions";
 import {userAPI} from "../../../api/userAPI";
 
 import {
@@ -10,7 +10,6 @@ import {
     setBlockedUsers,
     setCreateLoadingByAdmin,
     setIsRegisterDoctorSuccess,
-    setRegAdminErrMsg,
     setRegDoctorErrMsg
 } from "./actions";
 
@@ -56,7 +55,7 @@ export const registerAdmin = data => async dispatch => {
 
             dispatch(setCreateLoadingByAdmin(false));
             dispatch(setIsRegisterSuccess(true));
-            dispatch(setRegAdminErrMsg(null))
+            dispatch(setRegisterErrMsg(null))
 
         } else {
             dispatch(setCreateLoadingByAdmin(false));
@@ -67,7 +66,7 @@ export const registerAdmin = data => async dispatch => {
         dispatch(setCreateLoadingByAdmin(false));
 
         if (e.response.data.code) {
-            dispatch(setRegAdminErrMsg(customErrors[e.response.data.code].message));
+            dispatch(setRegisterErrMsg(customErrors[e.response.data.code].message));
             dispatch(refreshUserToken(e.response.data.code));
 
         }

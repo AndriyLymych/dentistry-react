@@ -12,30 +12,29 @@ export const refreshUserToken = errCode => async dispatch => {
     try {
         dispatch(setRefreshLoading(true));
 
-        if (errCode === customErrors[4012].code) {
 
-            const refreshToken = checkRefreshTokenPresent();
+        const refreshToken = checkRefreshTokenPresent();
 
-            const tokens = await authAPI.refreshToken(refreshToken);
+        const tokens = await authAPI.refreshToken(refreshToken);
 
-            localStorage.setItem(tokenEnum.access_token, tokens.data[tokenEnum.access_token]);
-            localStorage.setItem(tokenEnum.refresh_token, tokens.data[tokenEnum.refresh_token]);
+        localStorage.setItem(tokenEnum.access_token, tokens.data[tokenEnum.access_token]);
+        localStorage.setItem(tokenEnum.refresh_token, tokens.data[tokenEnum.refresh_token]);
 
-            const token = checkAccessTokenPresent();
+        const token = checkAccessTokenPresent();
 
 
-            const meDates = await authAPI.meInfo(token);
+        const meDates = await authAPI.meInfo(token);
 
-            if (meDates) {
-                dispatch(setMyID(meDates.data.id));
-                dispatch(setMeDates(meDates.data));
-                dispatch(setIsAuth(true));
-                dispatch(setRefreshLoading(false));
+        if (meDates) {
+            dispatch(setMyID(meDates.data.id));
+            dispatch(setMeDates(meDates.data));
+            dispatch(setIsAuth(true));
+            dispatch(setRefreshLoading(false));
 
-            } else {
-                setRefreshLoading(false);
-            }
+        } else {
+            setRefreshLoading(false);
         }
+
     } catch (e) {
         if (e.response.data.code && e.response.data.code === customErrors[4013].code) {
 

@@ -1,5 +1,6 @@
 import axiosInstance from '../helpers/axiosInstance'
 import {headersEnum as headerEnum} from "../constant/authConstant/header.enum";
+import {HTTP_OPTIONS} from "../helpers/httpHeaders";
 
 export const authAPI = {
 
@@ -9,18 +10,21 @@ export const authAPI = {
 
     },
     loginFacebook: () => {
-           return axiosInstance.get(`/auth/facebook/callback`,{
-               headers:{
-                   'Access-Control-Allow-Origin': axiosInstance
-               }
-           })
+        return axiosInstance.get(`/auth/facebook/callback`, {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
 
+    },
+    loginGoogle: () => {
+        return axiosInstance.get(`/auth/google/callback`)
     },
     loginFacebookUrl: () => {
 
-        return axiosInstance.get(`/auth/facebook`,{
-            headers:{
-                'Access-Control-Allow-Origin': axiosInstance
+        return axiosInstance.get(`/auth/facebook`, {
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:5000'
             }
         })
 

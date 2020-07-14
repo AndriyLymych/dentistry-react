@@ -11,7 +11,8 @@ export const getServicesFromDB = () => async dispatch => {
         dispatch(setLoadingProgress(true));
 
         let services = await medicalServicesAPI.getAllMedicalServices();
-
+        // console.log('1');
+        console.log(services.data);
         dispatch(setServices(services.data));
         dispatch(setLoadingProgress(false));
 

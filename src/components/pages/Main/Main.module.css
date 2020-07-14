@@ -1,0 +1,57 @@
+.mainContainer {
+    width: 100vw;
+    background-image: url("../../../assets/img/Layer_1.png");
+    background-size: cover;
+    background-position: center center;
+    height: 83vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.mainLogo {
+    /* Style for "Vector Sma" */
+    width: 669px;
+    height: 344px;
+}
+.mainInfo{
+    display: flex;
+    flex-direction: column;
+
+}
+.mainTitle{
+    width: 350px;
+    color: #ffffff;
+    font-family: "Arial - Bold MT", serif;
+    font-size: 43px;
+    font-weight: 400;
+}
+.mainDescription{
+    width: 400px;
+    color: #ffffff;
+    font-family: "Arial MT", serif;
+    font-size: 21px;
+    font-weight: 400;
+}
+.mainBtn{
+    width: 112px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    background: transparent;
+    transition: 0.5s;
+}
+
+.mainBtn:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    background:  #ff4313;
+    color:  #ffffff;
+}
+.link{
+    color:  #ffffff;
+
+}
+.link:hover{
+    color:  #ffffff;
+
+}

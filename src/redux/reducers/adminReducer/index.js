@@ -3,7 +3,6 @@ import {
     IS_REGISTER_DOCTOR_SUCCESS,
     SET_ACTIVE_USERS,
     SET_BLOCKED_USERS,
-    SET_REG_ADMIN_ERR_MSG,
     SET_REG_DOCTOR_ERR_MSG
 } from "./constants";
 
@@ -13,7 +12,6 @@ const initialState = {
     activeUsers: [],
     blockedUsers: [],
     registerDoctorErrMsg: null,
-    registerAdminErrMsg: null
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -43,11 +41,7 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
                 registerDoctorErrMsg: action.payload
             };
-        case SET_REG_ADMIN_ERR_MSG:
-            return {
-                ...state,
-                registerAdminErrMsg: action.payload
-            };
+
         default :
             return state
     }

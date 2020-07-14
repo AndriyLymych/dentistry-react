@@ -40,8 +40,9 @@ export const getMeInfo = () => async dispatch => {
         }
     } catch (e) {
         dispatch(setIsLoading(false));
-        if (e.response.data.code) {
+        if (e.response.data.code === customErrors[4012].code) {
             dispatch(refreshUserToken(e.response.data.code))
+            getMeInfo()
         }
 
     }
@@ -120,6 +121,39 @@ export const loginWithFacebook = () => async dispatch => {
     } catch (e) {
         dispatch(setIsLoading(false));
         console.log(e);
+        //
+        // if (e.response.data.code) {
+        //     dispatch(setLoginFacebookErrMsg(customErrors[e.response.data.code].message))
+        //
+        // }
+
+    }
+};
+export const loginWithGoogle = () => async dispatch => {
+
+    try {
+        dispatch(setIsLoading(true));
+
+        const authResult = await authAPI.loginGoogle();
+
+        localStorage.setItem(tokenEnum.access_token, authResult.data[tokenEnum.access_token]);
+        localStorage.setItem(tokenEnum.refresh_token, authResult.data[tokenEnum.refresh_token]);
+
+        const token = checkAccessTokenPresent();
+
+        const meDates = await authAPI.meInfo(token);
+
+        dispatch(setMyID(meDates.data.id));
+        dispatch(setMeDates(meDates.data));
+        dispatch(setIsAuth(true));
+        dispatch(setIsLoading(false));
+        dispatch(setLoginFacebookErrMsg(null));
+        historyRout.push('/')
+
+
+    } catch (e) {
+        dispatch(setIsLoading(false));
+        historyRout.push('/')
         //
         // if (e.response.data.code) {
         //     dispatch(setLoginFacebookErrMsg(customErrors[e.response.data.code].message))
@@ -299,9 +333,9 @@ export const updateUserDates = data => async dispatch => {
 
     } catch (e) {
         dispatch(setIsProfileUpdate(true));
-        if (e.response.data.code) {
+        if (e.response.data.code === customErrors[4012].code) {
             dispatch(refreshUserToken(e.response.data.code))
-
+            await updateUserDates(data)
         }
     }
 };
