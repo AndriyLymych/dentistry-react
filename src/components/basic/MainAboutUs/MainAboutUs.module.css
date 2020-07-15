@@ -1,0 +1,59 @@
+.mainAboutContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffffff;
+    margin: 0 auto;
+
+}
+.mainAboutImg{
+    width: 650px;
+    height: 480px;
+}
+.mainAboutTitle{
+    width: 800px;
+    height: 26px;
+    color: #1c6c9c;
+    font-family: "Arial - Bold MT", sans-serif;
+    font-size: 70px;
+    font-weight: 500;
+    margin-bottom: 50px;
+}
+.mainAboutBtn{
+    width: 170px;
+    color: #1c6c9c;
+    font-family: "Arial MT", serif;
+    font-size: 26px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 2px solid #1c6c9c;
+    padding: 7px 0;
+    transition: 0.4s;
+}
+.mainAboutBtn:hover{
+    transform: scale(1.1);
+    transition: 0.4s;
+    background: #ff4313;
+    color: #ffffff;
+    border: 2px solid transparent;
+
+}
+.mainAboutDescription{
+    width: 600px;
+    height: 146px;
+    color: #1c6c9c;
+    font-family: "Arial MT", serif;
+    font-size: 25px;
+    font-weight: 400;
+}
+.mainAboutInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 50%;
+}

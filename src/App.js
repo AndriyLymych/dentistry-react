@@ -10,6 +10,7 @@ import Preloader from "./components/basic/Preloader/Preloader";
 import routes from "./router/routes";
 import HeaderContainer from "./containers/HeaderContainer/HeaderContainer";
 import Contacts from "./components/pages/Contacts/Contacts";
+import Main from "./components/pages/Main/Main";
 
 
 class App extends React.Component {
@@ -29,7 +30,8 @@ class App extends React.Component {
 
                 <HeaderContainer/>
                 {routes()}
-                <Contacts/>
+
+
                 {/*<Footer/>*/}
 
             </div>

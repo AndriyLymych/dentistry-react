@@ -1,5 +1,5 @@
 .mainContainer {
-    width: 100vw;
+    width: 100%;
     background-image: url("../../../assets/img/Layer_1.png");
     background-size: cover;
     background-position: center center;
@@ -7,33 +7,37 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin: 0 auto;
 }
 
 .mainLogo {
     /* Style for "Vector Sma" */
-    width: 669px;
-    height: 344px;
+    max-width: 669px;
 }
-.mainInfo{
+
+.mainInfo {
     display: flex;
     flex-direction: column;
 
 }
-.mainTitle{
-    width: 350px;
+
+.mainTitle {
+    width: 450px;
     color: #ffffff;
     font-family: "Arial - Bold MT", serif;
-    font-size: 43px;
+    font-size: 55px;
     font-weight: 400;
 }
-.mainDescription{
-    width: 400px;
+
+.mainDescription {
+    width: 450px;
     color: #ffffff;
     font-family: "Arial MT", serif;
-    font-size: 21px;
+    font-size: 24px;
     font-weight: 400;
 }
-.mainBtn{
+
+.mainBtn {
     width: 112px;
     border-radius: 10px;
     border: 2px solid #ffffff;
@@ -41,17 +45,26 @@
     transition: 0.5s;
 }
 
-.mainBtn:hover {
+.link:hover {
     transform: scale(1.1);
     transition: 0.3s;
-    background:  #ff4313;
-    color:  #ffffff;
+    background: #ff4313;
+    color: #ffffff;
 }
-.link{
-    color:  #ffffff;
 
+.link {
+    color: #ffffff;
+    font-size: 23px;
+    width: 112px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    background: transparent;
+    transition: 0.5s;
+    display: block;
+    text-align: center;
+    padding-bottom: 5px;
 }
-.link:hover{
-    color:  #ffffff;
 
+.mainBtn:hover .link {
+    color: #ffffff;
 }

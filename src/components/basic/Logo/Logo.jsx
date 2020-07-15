@@ -6,14 +6,12 @@ import style from './Logo.module.css';
 
 const Logo = () => {
     return (
-        <div>
-            <div className={style.logoSlogan}>
-                <div>
-                    <img src={logo} alt="logo"/>
-                </div>
-                <div className={style.logoDescription}>
-                    <img src={logoText} alt="name"/>
-                </div>
+        <div className={style.logoSlogan}>
+            <div>
+                <img src={logo} alt="logo"/>
+            </div>
+            <div className={style.logoDescription}>
+                <img src={logoText} alt="name"/>
             </div>
         </div>
     )
