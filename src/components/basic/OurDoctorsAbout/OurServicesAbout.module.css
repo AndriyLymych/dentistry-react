@@ -1,0 +1,32 @@
+.ourServicesAboutContainer {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 83vh;
+    background-image: url("../../../assets/img/1212.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.ourServicesAboutTitle {
+    width: 800px;
+    color: #ffffff;
+    font-family: "Arial MT", serif;
+    font-size: 70px;
+    font-weight: 400;
+    padding-top: 100px;
+    text-align: center;
+}
+
+.ourServicesAboutDescription{
+    width: 80%;
+    color: #ffffff;
+    font-family: "Arial MT", serif;
+    font-size: 27px;
+    font-weight: 400;
+    text-align: center;
+
+}

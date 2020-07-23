@@ -2,29 +2,28 @@ import React from "react";
 import {Field} from 'redux-form'
 import {emailValidator, requiredValidator} from "../../../validators/validators";
 import {InputCreator} from "../../../helpers/FormCreator/FormCreator";
-import style from "../../../App.module.css";
+import style from "../../basic/LoginForm/LoginForm.module.css";
 
 export const SendMailForRememberPasswordForm = props => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <div>
-                    <label htmlFor="email">Введіть емейл: </label>
-                </div>
+        <form className={style.loginForm} onSubmit={props.handleSubmit}>
+            <div className={style.loginFormInfo}>
+                <div className={style.label}>Введіть емейл <span className={style.requiredStar}>*</span> :</div>
                 <Field
                     name={"email"}
                     component={InputCreator}
                     placeholder={"Введіть емейл..."}
                     type={"email"}
                     autoFocus
-                    validate={[requiredValidator,emailValidator]}
+                    validate={[requiredValidator, emailValidator]}
                 />
-                {props.errorMessage && <div className={style.requiredStar}>{props.errorMessage}</div>}
-
             </div>
 
-            <button type={"submit"}>Підтвердити</button>
+            {props.errorMessage && <div className={style.errMsg}>{props.errorMessage}</div>}
+
+
+            <button className={style.loginSubmit} type={"submit"}>Підтвердити</button>
 
         </form>
     )

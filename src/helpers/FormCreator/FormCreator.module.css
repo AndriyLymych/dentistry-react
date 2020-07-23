@@ -1,8 +1,13 @@
 .errorMsg input {
     color: red;
-    border: 2px solid red;
+    border-bottom: 2px solid red;
+    font-style: italic;
+    font-size: 17px;
 }
 
 .errorMsg div {
     color: red;
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 600;
 }

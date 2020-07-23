@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from "react";
 import defaultAvatar from '../../../assets/img/default avatar.jpg';
 import style from './CommentCard.module.css'
+import dayjs from "dayjs";
+import {configs} from "../../../config/configs";
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from "@material-ui/core/Button";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import EditIcon from '@material-ui/icons/Edit';
 
 const CommentCard = (
     {
@@ -22,6 +28,14 @@ const CommentCard = (
         deleteChosenComment
     }
 ) => {
+
+    const useStyles = makeStyles((theme) => ({
+        button: {
+            margin: theme.spacing(1),
+        },
+    }));
+    const classes = useStyles();
+
     const onCommentDelete = () => {
         deleteChosenComment(commentId, doctorId, commentsCountOnPage, currentPage)
     };
@@ -42,48 +56,81 @@ const CommentCard = (
     };
 
     const updateComment = () => {
-        editChosenComment(commentId, doctorId, comment,commentsCountOnPage,currentPage);
+        editChosenComment(commentId, doctorId, comment, commentsCountOnPage, currentPage);
         setEditMode(!editMode)
     };
 
     return (
-        <div>
+        <div className={style.commentCardContainer}>
             <div className={style.commentatorInfo}>
-                {!avatar ? <div><img src={defaultAvatar} width={'40px'} height={'40px'} alt=""/></div> :
-                    <div><img src={avatar} alt=""/></div>}
-                <div><span>{name}</span> <span>{surname}</span></div>
+                {
+                    !avatar ? <img src={defaultAvatar} className={style.avatar} alt="avatar"/> :
+                        <img className={style.avatar} src={`${configs.HOST}:${configs.PORT}/${avatar}`} alt="avatar"/>
+                }
+                <div className={style.commentatorName}>{name} {surname}</div>
+
             </div>
 
-            {
-                !editMode ?
-                    <div>{commentText}</div> :
-                    <div>
-                        <div>
-                            <input
-                                onChange={onChangeComment}
-                                autoFocus
-                                value={comment}
-                            />
-                        </div>
-                        <div>
-                            <button onClick={turnEditMode}>відхилити</button>
-                            <button onClick={updateComment}>прийняти</button>
-                        </div>
-                    </div>
-            }
-            <br/>
-            {
-                isOwner && isAuth && <div>
-                    <button className={style.edit} onClick={turnEditMode}>Редагувати</button>
+            <div className={style.commentInformation}>
+                <div className={style.commentCommon}/>
 
-                </div>
-            }
-            {(isDoctor || isOwner) && isAuth && <button className={style.delete} onClick={onCommentDelete}>Видалити
-            </button>}
+                {
 
-            <div>{commentTime}</div>
-            <br/><br/>
+                    !editMode ?
+                        <div className={style.commentText}>{commentText}</div> :
+                        <div className={style.editAreaContainer}>
+                            <div className={style.editAreaText}>
+                                <textarea
+                                    className={style.editArea}
+                                    onChange={onChangeComment}
+                                    autoFocus
+                                    value={comment}
+                                />
+                            </div>
+
+                            <div>
+                                <button className={style.editCancel} onClick={turnEditMode}>ВІДХИЛИТИ</button>
+                                <button className={style.editConfirm} onClick={updateComment}>ПРИЙНЯТИ</button>
+                            </div>
+                        </div>
+                }
+                <br/>
+               <div className={style.changeText}>
+                   {
+                       isOwner && isAuth && <div>
+                           <Button
+                               variant="contained"
+                               color="primary"
+                               className={classes.button}
+                               startIcon={<EditIcon/>}
+                               onClick={turnEditMode}
+
+                           >
+                               Редагувати
+                           </Button>
+
+
+                       </div>
+                   }
+                   {(isDoctor || isOwner) && isAuth && <div>
+                       <Button
+                           variant="contained"
+                           color="secondary"
+                           className={classes.button}
+                           startIcon={<DeleteIcon/>}
+                           onClick={onCommentDelete}
+                       >
+                           Видалити
+                       </Button>
+                   </div>}
+
+               </div>
+                <div className={style.commentDate}>{dayjs(commentTime).format('HH:mm DD/MM/YYYY')}</div>
+                <br/><br/>
+            </div>
         </div>
+
+
     )
 };
 

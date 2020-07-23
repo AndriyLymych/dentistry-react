@@ -1,7 +1,6 @@
 import React from "react";
 import style from './FormCreator.module.css';
-import Alert from "@material-ui/lab/Alert";
-import TextField from "@material-ui/core/TextField";
+
 
 const FormCreator = ({input, meta, ...props}) => {
 
@@ -31,7 +30,7 @@ export const TextareaCreator = (props) => {
 
     return <FormCreator {...props}>
         <textarea {...props.input
-        } {...props} style={{'resize': 'none'}} rows="7" cols="50"/>
+                  } {...props} style={{'resize': 'none'}} rows="7" cols="50"/>
     </FormCreator>
 
 };

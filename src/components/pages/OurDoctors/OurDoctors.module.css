@@ -1,0 +1,25 @@
+.ourDoctorsContainer{
+    width: 100%;
+    background: #e4e4e4;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+}
+.ourDoctorsTitle{
+    color: #2d74d6;
+    font-family: "Arial - Bold MT", serif;
+    font-size: 45px;
+    font-weight: 600;
+    line-height: 36px;
+    margin-top: 50px;
+}
+.ourDoctorCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}

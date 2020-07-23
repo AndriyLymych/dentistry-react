@@ -8,7 +8,7 @@ import {
     requiredValidator
 } from "../../../validators/validators";
 
-import style from '../../../App.module.css'
+import style from './LoginForm.module.css'
 
 const maxLength = maxLengthValidator(100);
 const minLength = minLengthValidator(2);
@@ -17,38 +17,37 @@ const minPasswordLength = minLengthValidator(8);
 
 export const LoginForm = props => {
 
-
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <div>
-                    <label htmlFor="email">Email  <span className={style.requiredStar}>*</span> : </label>
-                </div>
+        <form className={style.loginForm} onSubmit={props.handleSubmit}>
+            <div className={style.loginFormInfo}>
+                <div className={style.label}>Email <span className={style.requiredStar}>*</span> :</div>
                 <Field
                     name={"email"}
                     component={InputCreator}
                     placeholder={"Введіть емейл..."}
-                    validate={[requiredValidator,minLength,maxLength,emailValidator]}
+                    validate={[requiredValidator, minLength, maxLength, emailValidator]}
                     type={"email"}
                 />
             </div>
-            <div>
-                <div>
-                    <label htmlFor="password">Password  <span className={style.requiredStar}>*</span> : </label>
-                </div>
+            <div className={style.loginFormInfo}>
+                <div className={style.label}>Password <span className={style.requiredStar}>*</span> :</div>
                 <Field
                     name={"password"}
                     component={InputCreator}
                     placeholder={"Введіть пароль..."}
-                    validate={[requiredValidator,minPasswordLength,passwordValidator]}
+                    validate={[requiredValidator, minPasswordLength, passwordValidator]}
                     type={"password"}
                 />
+
             </div>
 
 
-            {props.errorMessage  && <div className={style.requiredStar}>{props.errorMessage}</div>}
+            {props.errorMessage && '/' + window.location.href.split('/').pop() === '/login' &&
+            <div className={style.errMsg}>{props.errorMessage}</div>}
+            {props.adminErrorMessage && '/' + window.location.href.split('/').pop() === '/auth-admin' &&
+            <div className={style.errMsg}>{props.adminErrorMessage}</div>}
 
-            <button type={"submit"}>Увійти</button>
+            <button className={style.loginSubmit} type={"submit"}>Увійти</button>
 
         </form>
     )

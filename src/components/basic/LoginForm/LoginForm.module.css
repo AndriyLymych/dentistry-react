@@ -1,0 +1,59 @@
+.requiredStar {
+    color: red;
+
+}
+
+.loginForm {
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.loginForm input {
+    border: 2px solid #555555;
+    border-radius: 10px;
+    width: 100%;
+    color: #4f4f4f;
+    height: 34px;
+    font-size: 17px;
+    font-style: initial;
+}
+.loginFormInfo{
+    width: 90%;
+    margin-bottom: 15px;
+}
+.label{
+    color:  #555555;
+    background: transparent;
+    font-size: 17px;
+    font-weight: 600;
+}
+.errMsg{
+    color: red;
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 600;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 30px;
+}
+
+.loginSubmit{
+    width: 170px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: #157dc3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.loginSubmit:hover{
+    transition: 0.3s;
+    transform: scale(1.1);
+}

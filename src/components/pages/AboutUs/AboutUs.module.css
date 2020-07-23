@@ -1,0 +1,31 @@
+.aboutUsContainer{
+    height: 83vh;
+    width: 100%;
+    background-image: url("../../../assets/img/1212.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.aboutUsTitle{
+    width: 400px;
+    color: #ffffff;
+    font-family: "Arial MT", serif;
+    font-size: 70px;
+    font-weight: 400;
+    padding-top: 100px;
+    text-align: center;
+
+}
+.aboutUsText{
+    width: 80%;
+    color: #ffffff;
+    font-family: "Arial MT", serif;
+    font-size: 23px;
+    font-weight: 400;
+    text-align: center;
+
+}

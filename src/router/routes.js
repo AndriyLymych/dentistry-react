@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Main from "../components/pages/Main/Main";
 import AboutUs from "../components/pages/AboutUs/AboutUs";
 import RegisterContainer from "../containers/RegisterContainer/RegisterContainer";
@@ -29,8 +29,9 @@ const routes = () => {
             <Route path='/my-profile' render={() => <MyProfileContainer/>}/>
             <Route path='/forgot-password' render={() => <SendMailForRememberPasswordContainer/>}/>
             <Route path='/auth/password-refresh/:token' render={() => <ResetPasswordContainer/>}/>
-            <Route path='/auth/admin' render={() => <LoginContainer/>}/>
-            {/*<Route path='*' render={() => <h1>404 error</h1>}/>*/}
+            <Route path='/auth-admin' render={() => <LoginContainer/>}/>
+            <Route path='/contacts' render={() => <Contacts/>}/>
+            <Route path='*' render={() => <h1>404 error</h1>}/>
         </Switch>
     )
 };

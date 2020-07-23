@@ -1,41 +1,43 @@
-.mainAboutContainer{
+.mainAboutContainer {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #ffffff;
     margin: 0 auto;
-
+    background: #ffffff;
 }
-.mainAboutImg{
+
+.mainAboutImg {
     width: 650px;
     height: 480px;
 }
-.mainAboutTitle{
+
+.mainAboutTitle {
     width: 800px;
-    height: 26px;
     color: #1c6c9c;
     font-family: "Arial - Bold MT", sans-serif;
-    font-size: 70px;
+    font-size: 60px;
     font-weight: 500;
     margin-bottom: 50px;
 }
-.mainAboutBtn{
+
+.mainAboutBtn {
     width: 170px;
     color: #1c6c9c;
     font-family: "Arial MT", serif;
-    font-size: 26px;
+    font-size: 23px;
     font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     border: 2px solid #1c6c9c;
-    padding: 7px 0;
+    padding: 5px 0;
     transition: 0.4s;
 }
-.mainAboutBtn:hover{
+
+.mainAboutBtn:hover {
     transform: scale(1.1);
     transition: 0.4s;
     background: #ff4313;
@@ -43,15 +45,17 @@
     border: 2px solid transparent;
 
 }
-.mainAboutDescription{
+
+.mainAboutDescription {
     width: 600px;
     height: 146px;
     color: #1c6c9c;
     font-family: "Arial MT", serif;
-    font-size: 25px;
+    font-size: 23px;
     font-weight: 400;
 }
-.mainAboutInfo{
+
+.mainAboutInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-around;

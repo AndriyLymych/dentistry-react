@@ -10,7 +10,9 @@ const mapStateToProps = state => {
 
         isAuth: state.authReducer.isAuth,
         isLoading: state.authReducer.isLoading,
-        errorMessage: state.authReducer.loginErrMsg
+        errorMessage: state.authReducer.loginErrMsg,
+        adminErrorMessage: state.authReducer.loginAdminErrMsg,
+
     }
 };
 

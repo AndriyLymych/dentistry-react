@@ -1,3 +1,68 @@
 .noAuth{
     color: red;
+    font-style: italic;
+    align-self: center;
+    font-size: 19px;
+    font-weight: 600;
+    width: 95%;
+}
+textarea{
+    border: 2px solid #2957ac;
+    width: 95%;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    outline: #2d439e;
+    font-size: 17px;
+    color: #6d6d6d;
+}
+textarea::placeholder{
+    font-size: 17px;
+
+}
+.commentForm{
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.commentBtn {
+    width: 120px;
+    height: 32px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    color: #f1f1f1;
+    font-family: "Arial MT", serif;
+    font-size: 23px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ff4313;
+    margin-left: 20px;
+    transition: 0.2s;
+    margin-top: 4%;
+
+}
+.commentBtn:hover{
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+.commentTitle{
+    width: 95%;
+    color: #1c6c9c;
+    font-family: "Arial - Bold MT", serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 3px;
 }

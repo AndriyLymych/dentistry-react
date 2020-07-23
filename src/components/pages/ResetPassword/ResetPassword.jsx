@@ -3,6 +3,7 @@ import {reduxForm} from "redux-form";
 import {NavLink, Redirect} from "react-router-dom";
 import {ResetPasswordForm} from "../../basic/ResetPasswordForm/ResetPasswordForm";
 import Preloader from "../../basic/Preloader/Preloader";
+import style from "../Login/Login.module.css";
 
 const ResetPasswordReduxForm = reduxForm({
     form: 'reset-password'
@@ -25,11 +26,11 @@ const ResetPassword = ({isAuth, isResetPassword, isLoading, errorMessage,match,r
     }
 
     return (
-        <div>
+        <div className={style.loginContainer}>
             {
                 !isResetPassword ?
                     <div>
-                        <h1>Зміна паролю:</h1>
+                        <div className={style.loginTitle }>Зміна паролю:</div>
                         <ResetPasswordReduxForm onSubmit={onSubmit} errorMessage={errorMessage}/>
                     </div> :
 

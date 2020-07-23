@@ -20,7 +20,7 @@ const NavMenu = ({isAuth, logout}) => {
                 <NavLink className={style.menuItemLink} to={'/our-doctors'}>Наші лікарі</NavLink>
             </li>
             <li className={style.menuItem + ' ' + style.itemLine}>
-                <a href={"#contacts"} className={style.menuItemLink}>Контакти</a>
+                <NavLink to={'/contacts'} className={style.menuItemLink}>Контакти</NavLink>
             </li>
             {
                 !isAuth ?
@@ -41,11 +41,10 @@ const NavMenu = ({isAuth, logout}) => {
 
                     </div>
                     :
-                    <div>
-                        <button><NavLink className={style.menuItemProfile} to={`/my-profile`}>Особистий
+                    <div className={style.menuProfile}>
+                        <NavLink className={style.menuItemProfile} to={`/my-profile`}>Особистий
                             кабінет</NavLink>
-                        </button>
-                        <button className={style.menuItemProfile} onClick={logout}>logaut</button>
+                        <button className={style.menuItemLogout} onClick={logout}>Вийти</button>
 
                     </div>
             }

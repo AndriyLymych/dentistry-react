@@ -7,9 +7,9 @@ import {reduxForm,} from "redux-form";
 import CommentForm from "../../basic/CommentForm/CommentForm";
 import {configs} from "../../../config/configs";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import Rating from "material-ui-rating/lib";
 import {checkAccessTokenPresent} from "../../../helpers/checkAccessTokenPresent";
+import Footer from "../../basic/Footer/Footer";
 
 const CommentReduxForm = reduxForm({
     form: 'comment'
@@ -21,12 +21,16 @@ const DoctorProfile = (
         doctorProfile,
         doctorProfile: {
             id: doctorId,
+            email,
             name,
             middleName,
             surname,
             avatar,
             age,
-            city
+            city,
+            experience,
+            room,
+            // UserSpeciality['label']
         },
         isLoadingComments,
         commentInfo,
@@ -47,20 +51,19 @@ const DoctorProfile = (
         getDoctorProfile,
         getCommentsFromDB,
         getIsEvaluatedDoctor,
-        getAverageDoctorMark
+        getAverageDoctorMark,
+
     }) => {
 
     useEffect(() => {
         const id = match.params.id;
-        console.log(doctorMark);
+
         if (!doctorProfile.length) {
             getDoctorProfile(id);
         }
 
-        if (!commentInfo.length) {
-            getCommentsFromDB(id, commentsCountOnPage, currentPage);
+        getCommentsFromDB(id, commentsCountOnPage, currentPage);
 
-        }
         getAverageDoctorMark(id);
 
         const token = checkAccessTokenPresent();
@@ -94,60 +97,98 @@ const DoctorProfile = (
 
     return (
         <div>
-            {
-                isLoading ? <Preloader/> :
-                    <div>
-                        <NavLink to={'/our-doctors'}>
-                            <button>
+            <div>
+                {
+                    isLoading ? <Preloader/> :
+                        <div className={style.docProfileContainer}>
+                            <NavLink className={style.backBtn} to={'/our-doctors'}>
                                 назад
-                            </button>
-                        </NavLink>
+                            </NavLink>
 
-                        <div>
-                            <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
-                                 alt="ava"/>
-                        </div>
-                        <h2>{name}</h2>
-                        <h2>{middleName}</h2>
-                        <h2>{surname}</h2>
-                        <h3>{age}</h3>
-                        <h4>{city}</h4>
+                            <div className={style.docInfo}>
+                                <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
+                                     alt="ava"/>
+                                <div className={style.docInfoData}>
+                                    <div className={style.mainInfo}>
+                                        <div className={style.docInfoDataName}>
+                                            <p className={style.name}>{name} </p>
+                                            <p className={style.name}>{middleName}</p>
+                                            <p className={style.name}>{surname}</p>
+                                        </div>
+                                        <div className={style.restInfoData + ' ' + style.position}>Position</div>
+                                        <div className={style.restInfoContainer}>
+                                            <div className={style.docInfoTitle}>Вік:</div>
+                                            <div className={style.restInfoData}>{age} років</div>
+                                        </div>
+                                        <div className={style.restInfoContainer}>
+                                            <div className={style.docInfoTitle}>Місто:</div>
+                                            <div className={style.restInfoData}>{city}</div>
+                                        </div>
+                                        <div className={style.restInfoContainer}>
+                                            <div className={style.docInfoTitle}>Електронна адреса:</div>
+                                            <div className={style.restInfoData}>{email}</div>
+                                        </div>
 
+                                        {
+                                            !isEvaluated && isAuth && <div className={style.rate}>
+                                                <Box component="fieldset" mb={3} borderColor="transparent">
+                                                    <div className={style.ratingTitle}>Оцініть лікаря:</div>
+                                                    <Rating
+                                                        name="simple-controlled"
+                                                        value={star}
+                                                        onChange={(star) => {
+                                                            setStar(star);
+                                                            evaluateDoctor(star)
+                                                        }}
+                                                    />
+                                                </Box>
+                                            </div>
 
-                        <div>
+                                        }
 
-                            {
-                                !isEvaluated && isAuth && <div>
-                                    <Box component="fieldset" mb={3} borderColor="transparent">
-                                        <Typography component="legend">Оцініть лікаря</Typography>
-                                        <Rating
-                                            name="simple-controlled"
-                                            value={star}
-                                            onChange={(star) => {
-                                                setStar(star);
-                                                evaluateDoctor(star)
-                                            }}
-                                        />
-                                    </Box>
+                                        {
+                                            (isEvaluated || !isAuth) && <div>
+                                                <div className={style.ratingTitle}>Середня
+                                                    оцінка:
+                                                </div>
+                                                <Rating name="half-rating-read" value={doctorMark}
+                                                        precision={0.5}
+                                                        readOnly/>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div className={style.docInfoLine}/>
+                                    <div className={style.restInfo}>
+                                        <div className={style.restInfoContainer}>
+                                            <div className={style.restInfoTitle}>Графік:</div>
+                                            <div className={style.restInfoData}>9:00 - 20:00</div>
+                                        </div>
+                                        <div className={style.restInfoContainer}>
+                                            <div className={style.restInfoTitle}>Кабінет:</div>
+                                            <div className={style.restInfoData}>{room}</div>
+                                        </div>
+                                        <div className={style.restInfoContainer}>
+                                            <div className={style.restInfoTitle}>
+                                                Стаж:
+                                            </div>
+                                            <div className={style.restInfoData}>
+                                                {experience} років
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                            }
+                            </div>
+
 
                             {
-                                (isEvaluated || !isAuth) && <div>
-                                    <Typography component="legend">Середня оцінка</Typography>
-                                    <Rating name="half-rating-read" value={doctorMark} precision={0.5} readOnly/>
-                                </div>
-                            }
-                        </div>
-                        {
-                            isLoadingComments ?
-                                <Preloader/> :
-                                <div>
-                                    <CommentReduxForm onSubmit={onSendComment} isAuth={isAuth}/>
-                                    <div>
+                                isLoadingComments ?
+                                    <Preloader/> :
+                                    <div className={style.commentContainer}>
+                                        <div className={style.commentArea}>
+                                            <CommentReduxForm onSubmit={onSendComment} isAuth={isAuth}/>
+                                        </div>
 
-                                        <br/>
                                         {
                                             commentInfo.map(
                                                 comment =>
@@ -168,29 +209,30 @@ const DoctorProfile = (
                                                     />
                                             )
                                         }
-                                    </div>
-                                    {currentPage > 1 ?
-                                        <button onClick={() => {
-                                            onChangePage(currentPage = currentPage - 1)
-                                        }}>Показати попередні</button>
-                                        : null
-                                    }
-                                    {
-                                        commentInfo.length > 0 && currentPage !== pageCount ?
-                                            <button onClick={() => {
-                                                onChangePage(currentPage = currentPage + 1)
-                                            }}>Показати ще</button>
+                                        {currentPage > 1 ?
+                                            <button className={style.nextPage} onClick={() => {
+                                                onChangePage(currentPage = currentPage - 1)
+                                            }}>Попередня сторінка</button>
                                             : null
-                                    }
+                                        }
+                                        {
+                                            commentInfo.length > 0 && currentPage !== pageCount ?
+                                                <button className={style.nextPage} onClick={() => {
+                                                    onChangePage(currentPage = currentPage + 1)
+                                                }}>Наступна сторінка</button>
+                                                : null
+                                        }
 
 
-                                </div>
+                                    </div>
 
 
-                        }
+                            }
 
-                    </div>
-            }
+                        </div>
+                }
+            </div>
+            <Footer/>
         </div>
     )
 };

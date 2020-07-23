@@ -1,0 +1,37 @@
+.registerContainer{
+    margin: 0 auto;
+    width: 100%;
+    height: 83vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../../assets/img/register.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    align-items: center;
+    justify-content: center;
+}
+.regImg{
+    margin-top: -220px;
+    margin-left: 150px;
+}
+.regInfo{
+    width: 100%;
+    height: 100%;
+    border-radius: 35px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.regTitle{
+    height: 55px;
+    color: #f1f1f1;
+    /*color: #1c6c9c;*/
+    font-family: "Arial MT", serif;
+    font-size: 45px;
+    font-weight: bolder;
+    margin: 0;
+}

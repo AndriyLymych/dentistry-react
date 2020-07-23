@@ -5,19 +5,20 @@
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
-    background-color: #ffffff;
+    background: linear-gradient(to right, #a1c4fd, #5893b6);
+
 
 }
 .contactTitle{
     color: #1c6c9c;
     font-family: "Arial - Bold MT", serif;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 400;
     margin-top: 50px;
 }
 .contactsInfo{
     color: #1c6c9c;
     font-family: "Arial MT", serif;
-    font-size: 25px;
+    font-size: 21px;
     font-weight: 400;
 }

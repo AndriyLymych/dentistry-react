@@ -1,18 +1,19 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import s from './OurDoctorsCard.module.css'
+import {configs} from "../../../config/configs";
 
-const OurDoctorsCard = ({doctor: {id, name, surname,UserSpeciality:{label}}}) => {
+const OurDoctorsCard = ({doctor: {avatar, id, name, surname, UserSpeciality: {label}}}) => {
 
     return (
-        <div>
-
-            <h1>{name}</h1>
-            <h1>{surname}</h1>
-            <div>{label}</div>
-            <NavLink to={`/our-doctors/${id}`}>
-                <button>Детальніше</button>
+        <div className={s.docInfo}>
+            <img className={s.docAva} src={`${configs.HOST}:${configs.PORT}/${avatar}`} alt=""/>
+            <div className={s.docName}>{name}</div>
+            <div className={s.docName}>{surname}</div>
+            <div className={s.docSpec}>{label}</div>
+            <NavLink className={s.docMoreInfo} to={`/our-doctors/${id}`}>
+                Детальніше
             </NavLink>
-
 
         </div>
     )

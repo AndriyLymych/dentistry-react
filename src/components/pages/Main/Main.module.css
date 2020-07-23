@@ -1,8 +1,6 @@
 .mainContainer {
     width: 100%;
-    background-image: url("../../../assets/img/Layer_1.png");
-    background-size: cover;
-    background-position: center center;
+    background: linear-gradient(45deg, #2694d6,#2d439e);
     height: 83vh;
     display: flex;
     align-items: center;
@@ -11,7 +9,6 @@
 }
 
 .mainLogo {
-    /* Style for "Vector Sma" */
     max-width: 669px;
 }
 
@@ -25,7 +22,7 @@
     width: 450px;
     color: #ffffff;
     font-family: "Arial - Bold MT", serif;
-    font-size: 55px;
+    font-size: 50px;
     font-weight: 400;
 }
 
@@ -33,7 +30,7 @@
     width: 450px;
     color: #ffffff;
     font-family: "Arial MT", serif;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
 }
 
@@ -54,7 +51,7 @@
 
 .link {
     color: #ffffff;
-    font-size: 23px;
+    font-size: 21px;
     width: 112px;
     border-radius: 10px;
     border: 2px solid #ffffff;

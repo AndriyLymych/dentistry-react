@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Preloader from "../../basic/Preloader/Preloader";
-import {NavLink} from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";

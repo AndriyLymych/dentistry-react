@@ -1,5 +1,10 @@
 footer{
-    background: #abb1b8;
-    height: 40px;
-
+    background: #b1bdc2;
+    color: #ffffff;
+    font-family: "Arial MT", serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 36px;
+    padding: 30px 0 30px 0;
+    text-align: center;
 }

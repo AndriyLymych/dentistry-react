@@ -4,54 +4,44 @@ import style from './CommentForm.module.css';
 
 const CommentForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting,isAuth} = props;
+    const {handleSubmit, pristine, submitting, isAuth} = props;
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+        <form  className={style.commentForm} onSubmit={handleSubmit}>
 
-                    {
-                        isAuth?
-                            <div>
-                            <div>
-                                <label>Напишіть відгук</label>
-                            </div>
+                {
+                    isAuth ?
+                        <div className={style.formInfo}>
+                                <div className={style.commentTitle}>ВІДГУК:</div>
 
-                                <Field
+                            <Field
+                                name="commentText"
+                                component="textarea"
+                                placeholder="Введіть ваше повідомлення..."
+                                autoFocus={true}
+                            />
 
-                                    name="commentText"
-                                    component="textarea"
-                                    placeholder="Введіть ваше повыдомлення..."
-                                    autoFocus={true}
-                                />
+                        </div>
+                        :
+                        <div className={style.formInfo}>
+                            <Field
+                                component="textarea"
+                                disabled
+                            />
+                            <div className={style.noAuth}>Залишати відгуки можуть лише авторизовані користувачі</div>
 
-                            </div>
-                           :
-                            <div>
-                                <div className={style.noAuth}>Залишати коментары можуть лиш авторизованы користувачы</div>
-                                <Field
-                                    component="textarea"
-                                    disabled
-                                />
-                            </div>
+                        </div>
 
-                    }
+                }
 
                 <div>
-                    {isAuth ?
+                    {isAuth &&
                         <div>
-                            <button type="submit" disabled={pristine || submitting}>
+                            <button className={style.commentBtn} type="submit" disabled={pristine || submitting}>
                                 Надіслати
                             </button>
-                            <button type="button" disabled={pristine || submitting} onClick={reset}>
-                                Очистити текст
-                            </button>
-                        </div>:
-                        <button type="submit" disabled>
-                            Надіслати
-                        </button>
+                        </div>
                     }
-                </div>
                 </div>
 
 

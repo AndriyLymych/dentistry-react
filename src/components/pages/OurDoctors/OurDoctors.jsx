@@ -1,6 +1,9 @@
 import React, {useEffect} from "react";
 import Preloader from "../../basic/Preloader/Preloader";
 import OurDoctorsCard from "../../basic/OurDoctorsCard/OurDoctorsCard";
+import s from './OurDoctors.module.css'
+import CommonContacts from "../../basic/CommonContacts/CommonContacts";
+import Footer from "../../basic/Footer/Footer";
 
 const OurDoctors = ({isLoading, doctors, getDoctors}) => {
 
@@ -16,11 +19,17 @@ const OurDoctors = ({isLoading, doctors, getDoctors}) => {
                 isLoading ?
                     <Preloader/> :
 
-                    <div>
-                        <div>Нашы лыкары</div>
-                        {doctors.map(doctor => <OurDoctorsCard key={doctor.id} doctor={doctor}/>)}
-                    </div>
+                  <div>
+                      <div className={s.ourDoctorsContainer}>
+                          <h2 className={s.ourDoctorsTitle}>Наша команда</h2>
+                          <div className={s.ourDoctorCard}>
+                              {doctors.map(doctor => <OurDoctorsCard key={doctor.id} doctor={doctor}/>)}
+                          </div>
 
+                      </div>
+                      <CommonContacts/>
+                      <Footer/>
+                  </div>
             }
         </div>
     )

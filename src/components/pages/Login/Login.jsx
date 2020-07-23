@@ -5,28 +5,30 @@ import {NavLink, Redirect} from "react-router-dom";
 import Preloader from "../../basic/Preloader/Preloader";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import style from "../../basic/NavMenu/NavMenu.module.css";
+import style from "./Login.module.css";
+import signGoogle from '../../../assets/img/Google__G__Logo.png'
+import signFacebook from '../../../assets/img/Facebook_F_icon.png'
+import Footer from "../../basic/Footer/Footer";
 
 const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm);
 
 
-const Login = ({isAuth, isLoading, errorMessage,match,login,loginAdmin,loginWithFacebook,loginWithGoogle}) => {
-    const onRes = (data) => {
-        loginWithFacebook();
-        console.log(data);
-    };
-    const withGoogle = () => {
-        loginWithGoogle()
-    };
+const Login = ({isAuth, isLoading, errorMessage, match, login, loginAdmin, loginWithFacebook, loginWithGoogle, adminErrorMessage}) => {
+    // const onRes = (data) => {
+    //     loginWithFacebook();
+    // };
+    // const withGoogle = () => {
+    //     loginWithGoogle()
+    // };
     const onSubmit = data => {
 
         if (match.path === '/login') {
             login(data.email, data.password)
         }
 
-        if (match.path === '/auth/admin') {
+        if (match.path === '/auth-admin') {
             loginAdmin(data.email, data.password)
         }
     };
@@ -41,26 +43,36 @@ const Login = ({isAuth, isLoading, errorMessage,match,login,loginAdmin,loginWith
 
     return (
         <div>
-            <h1>Увійти:</h1>
-            <LoginReduxForm onSubmit={onSubmit} errorMessage={errorMessage}/>
-            <a href={'http://localhost:5000/auth/google'}>Увійти з гугл</a>
-            <a href={'http://localhost:5000/auth/facebook'}>Увійти з facebook</a>
-            <li className={style.menuForgot + ' ' + style.itemLine}>
-                <NavLink className={style.menuItemLink} to={'/forgot-password'}>Забули пароль?</NavLink>
-            </li>
-            <GoogleLogin
-                clientId="426897079068-knie738h207bd6sj4biq8129iem19kvf.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={withGoogle}
-                onFailure={withGoogle}
-            >
-            </GoogleLogin>
-            <FacebookLogin
-                appId="3295493364010175"
-                // autoLoad={true}
-                fields="name,picture"
-                // onClick={onCl}
-                callback={onRes}/>
+            <div className={style.loginContainer}>
+                <div className={style.loginInfoContainer}>
+                    <div className={style.loginInfo}>
+                        <div className={style.loginTitle}>УВІЙТИ</div>
+                        <div className={style.withText}>через</div>
+                        <div className={style.signWithContainer}>
+                            <a className={style.signWith} href={'http://localhost:5000/auth/google'}>
+                                <div className={style.signGoogle}>
+                                    <img src={signGoogle} alt=""/>
+                                </div>
+                            </a>
+                            <a className={style.signWith} href={'http://localhost:5000/auth/facebook'}>
+                                <div className={style.signFacebook}>
+                                    <img src={signFacebook} alt=""/>
+                                </div>
+                            </a>
+                        </div>
+                        <div className={style.withText}>
+                            або
+                        </div>
+                        <LoginReduxForm onSubmit={onSubmit} errorMessage={errorMessage} adminErrorMessage={adminErrorMessage}/>
+
+
+                        <NavLink className={style.menuItemLink} to={'/forgot-password'}>Забули пароль?</NavLink>
+                    </div>
+                    <div className={style.modalImg}/>
+                </div>
+
+            </div>
+            <Footer/>
         </div>
     )
 
