@@ -37,7 +37,7 @@ const SendMailForRememberPassword = ({isAuth, isSentMail, isLoading, errorMessag
                     !isSentMail ?
                         <div className={style.loginInfoContainer}>
 
-                            <div className={ s.loginInfo}>
+                            <div className={s.loginInfo}>
                                 <div className={style.loginTitle + ' ' + s.loginTitle}>Введіть ваш емейл:</div>
                                 <SendMailForRememberPasswordReduxForm onSubmit={onSubmit} errorMessage={errorMessage}/>
                             </div>

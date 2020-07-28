@@ -7,7 +7,10 @@ import {USER_ROLE} from "../../../constant/userConstant/userRole";
 import {reduxForm} from "redux-form";
 import UpdateMedicalServiceForm from "../../basic/UpdateMedicalServiceForm/UpdateMedicalServiceForm";
 import UpdateMedicalServicePhotoForm from "../../basic/UpdateMedicalServicePhotoForm/UpdateMedicalServiceFormPhoto";
-import {getServiceProfile} from "../../../redux/reducers/serviceProfileReducer/thunks";
+import s from './ServiceProfile.module.css';
+import Footer from "../../basic/Footer/Footer";
+import Button from "@material-ui/core/Button";
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const UpdateMedicalServiceReduxForm = reduxForm({
     form: 'update-medical-service'
@@ -40,7 +43,7 @@ const ServiceProfile = ({
 
         const id = match.params.id;
 
-        if (!serviceProfile.length){
+        if (!serviceProfile.length) {
             getServiceProfile(id)
         }
 
@@ -66,54 +69,68 @@ const ServiceProfile = ({
         <div>
             {
                 isLoading ? <Preloader/> :
-                    <div>
-                        <NavLink to={'/our-services'}>
-                            <button>
-                                назад
-                            </button>
+                    <div className={s.serviceContainer}>
+                        <NavLink className={s.backBtn} to={'/our-services'}>
+                            назад
                         </NavLink>
 
-                        <div>
-                            <div>
-                                <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${photo}`}
+                        <div className={s.profileContainer}>
+                            <div className={s.avatarBlock}>
+                                <img className={s.avatar}
+                                     src={`${configs.HOST}:${configs.PORT}/${photo}`}
                                      alt="ava"/>
                                 {
-                                    isAuth && me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <UpdateMedicalServicePhotoReduxForm onChange={onPhotoChange}
-                                                                        errorMessage={errorMessage}/>
+                                    isAuth && me.UserRole.label === USER_ROLE.ADMIN && <div className={s.editPhoto}>
+                                        <UpdateMedicalServicePhotoReduxForm onChange={onPhotoChange}
+                                                                            errorMessage={errorMessage}/>
+                                    </div>
+
                                 }
                             </div>
-                            {!editMode &&
-                            <div>
-                                <p>{service}</p>
-                                <p>{description}</p>
-                                <p>{price}</p>
+                            <div className={s.profileInfo}>
+
+                                {!editMode &&
+                                <div >
+                                    <p className={s.profileInfoTitle}>{service}</p>
+                                    <p className={s.profileInfoText}>{description}</p>
+                                    {price > 0 ?
+                                        <p className={s.profileInfoText}><i>Ціна: від <strong>{price} </strong>грн</i>
+                                        </p> :
+                                        <p className={s.profileInfoText}><i>Ціна: <strong>безкоштовно</strong></i></p>}
+                                </div>
+                                }
+                                {isAuth && !editMode && me.UserRole.label === USER_ROLE.ADMIN &&
+                                <button className={s.editBtn} onClick={() => {
+                                    setEditMode(!editMode);
+                                }}>Редагувати послугу</button>
+                                }
+                                {isAuth && editMode && me.UserRole.label === USER_ROLE.ADMIN &&
+                                <div className={s.updateForm}>
+                                    < UpdateMedicalServiceReduxForm
+                                        onSubmit={onSubmit}
+                                        initialValues={{service, description, price}}/>
+
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        startIcon={<CancelIcon/>}
+                                        onClick={() => setEditMode(!editMode)}
+                                    >
+                                        Відхилити
+                                    </Button>
+                                </div>
+                                }
                             </div>
-                            }
 
                         </div>
 
-                        {isAuth && !editMode && me.UserRole.label === USER_ROLE.ADMIN &&
-                        <button onClick={() => {
-                            setEditMode(!editMode);
-                        }}>Редагувати послугу</button>
-                        }
-                        {isAuth && editMode && me.UserRole.label === USER_ROLE.ADMIN &&
-                        <div>
-                            < UpdateMedicalServiceReduxForm
-                                onSubmit={onSubmit}
-                                initialValues={{service, description, price}}/>
-                            <button onClick={() => {
-                                setEditMode(!editMode);
-                            }}>Відхилити
-                            </button>
-                        </div>
-                        }
+
                     </div>
             }
 
-
+            <Footer/>
         </div>
+
     )
 };
 

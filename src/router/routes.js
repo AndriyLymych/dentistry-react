@@ -13,6 +13,7 @@ import SendMailForRememberPasswordContainer
 import ResetPasswordContainer from "../containers/ResetPasswordContainer/ResetPasswordContainer";
 import OurDoctorsContainer from "../containers/OurDoctorsContainer/OurDoctorsContainer";
 import Contacts from "../components/pages/Contacts/Contacts";
+import Page404 from "../components/pages/Page404/Page404";
 
 const routes = () => {
     return (
@@ -31,7 +32,7 @@ const routes = () => {
             <Route path='/auth/password-refresh/:token' render={() => <ResetPasswordContainer/>}/>
             <Route path='/auth-admin' render={() => <LoginContainer/>}/>
             <Route path='/contacts' render={() => <Contacts/>}/>
-            <Route path='*' render={() => <h1>404 error</h1>}/>
+            <Route path='*' render={() => <Page404/>}/>
         </Switch>
     )
 };

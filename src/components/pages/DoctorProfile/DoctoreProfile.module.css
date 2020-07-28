@@ -144,6 +144,8 @@
     margin-left: 20px;
     transition: 0.2s;
     margin-bottom: 30px;
+    cursor: pointer;
+
 }
 .nextPage:hover{
     transform: scale(1.05);

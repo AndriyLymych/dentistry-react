@@ -31,7 +31,7 @@ const BlockUser = ({isCreateByAdmin, activeUsers, getActiveUsersFromDB, blockUse
 
         <input type="search" onChange={onSearchUsers}/>
 
-        <div>{this.props.activeUsers.map(user => {
+        <div>{activeUsers.map(user => {
             return <div className={style.userInfo}>
                 <div>{user.name + ' ' + user.surname}</div>
                 <button onClick={() => onBlockUser(user.id)}>Заблокувати</button>

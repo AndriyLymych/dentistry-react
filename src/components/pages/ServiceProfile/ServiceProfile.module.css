@@ -1,0 +1,110 @@
+.avatar {
+    width: 400px;
+    height: 450px;
+    border-radius: 40px;
+    position: absolute;
+    z-index: 1;
+}
+.avatarBlock{
+    width: 400px;
+    height: 450px;
+    position: relative;
+    z-index: 0;
+
+}
+.profileContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    border-radius: 40px;
+    background-color: #ffffff;
+    padding: 0 15px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.serviceContainer {
+    margin: 0 auto;
+    width: 100%;
+    background-image: url("../../../assets/img/docProfile.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    min-height: 87vh;
+    padding: 5px 0 0 0 ;
+}
+
+.backBtn {
+    width: 120px;
+    height: 32px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    color: #f1f1f1;
+    font-family: "Arial MT", serif;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ff4313;
+    margin: 20px 0 20px 20px;
+    transition: 0.2s;
+}
+
+.backBtn:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+.editBtn{
+    width: 160px;
+    height: 36px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    color: #f1f1f1;
+    font-family: "Arial MT", serif;
+    font-size: 17px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ff4313;
+    margin: 20px 0 20px 0px;
+    transition: 0.2s;
+    outline: none;
+    cursor: pointer;
+}
+.editBtn:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+.profileInfoTitle{
+    color: #2957ac;
+    font-family: "Arial MT", serif;
+    font-size: 43px;
+    font-weight: 400;
+}
+
+.profileInfoText{
+    color: #2957ac;
+    font-family: "Arial MT", serif;
+    font-size: 21px;
+    font-weight: 400;
+}
+.updateForm{
+    width: 100%;
+    height: 90%;
+    margin-left: 10px;
+}
+.editPhoto{
+    display: none;
+}
+.avatarBlock:hover .editPhoto{
+    display: block;
+
+}

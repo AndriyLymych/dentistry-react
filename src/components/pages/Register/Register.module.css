@@ -1,37 +1,55 @@
-.registerContainer{
+.registerContainer {
     margin: 0 auto;
     width: 100%;
-    height: 83vh;
+    min-height: 83vh;
     display: flex;
     flex-direction: column;
-    background-image: url("../../../assets/img/register.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background-image: linear-gradient(-73deg, #2a409d 0%, #2694d6 100%);
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 2;
 }
-.regImg{
-    margin-top: -220px;
-    margin-left: 150px;
-}
-.regInfo{
+
+.regImg {
     width: 100%;
     height: 100%;
-    border-radius: 35px;
-    background-color: transparent;
+    opacity: 0.7;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.regInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 35%;
+    min-height: 97%;
+    border-radius: 15%;
+    background-color: #ffffff;
+    background-image: linear-gradient(-92deg, #9b9b9b 0%, #f3f3f3 100%);
+    z-index: 4;
+    opacity: 0.7;
+}
 
+.regTitle {
+    color: #2958ac;
+    font-family: "Arial - Bold MT", serif;
+    font-size: 27px;
+    font-weight: 600;
 }
-.regTitle{
-    height: 55px;
-    color: #f1f1f1;
-    /*color: #1c6c9c;*/
-    font-family: "Arial MT", serif;
-    font-size: 45px;
-    font-weight: bolder;
-    margin: 0;
+
+.regLogo {
+    height: 100%;
 }
+.success{
+    width: 30%;
+    height: 30%;
+    background-image: linear-gradient(-92deg, #9b9b9b 0%, #f3f3f3 100%);
+    opacity: 1;
+}
+

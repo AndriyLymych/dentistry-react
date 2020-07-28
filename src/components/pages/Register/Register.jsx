@@ -4,7 +4,7 @@ import RegisterForm from "../../basic/RegisterForm/RegisterForm";
 import Preloader from "../../basic/Preloader/Preloader";
 import Alert from "@material-ui/lab/Alert";
 import style from './Register.module.css';
-import regImg from '../../../assets/img/reg-img.png';
+import regImg from '../../../assets/img/regImg.png';
 
 const RegisterReduxForm = reduxForm({
     form: 'register'
@@ -47,7 +47,9 @@ const Register = ({
     };
     return (
         <div className={style.registerContainer}>
-
+            <div className={style.regImg}>
+                <img className={style.regLogo} src={regImg} alt=""/>
+            </div>
             {
                 !isRegisterSuccess &&
                 (match.path === '/my-profile/register-admin' || match.path === '/register') ?
@@ -56,11 +58,11 @@ const Register = ({
                         <RegisterReduxForm  onSubmit={onSubmit} genders={genders}
                                            errorMessage={errorMessage}/>
                     </div> :
-                    <Alert severity="success">Реєстрація пройшла успішно!</Alert>
+                   <div className={style.success}>
+                       <Alert severity="success">Реєстрація пройшла успішно!</Alert>
+                   </div>
             }
-            {/*<div className={style.regImg}>*/}
-            {/*    <img src={regImg} alt=""/>*/}
-            {/*</div>*/}
+
 
         </div>
     )

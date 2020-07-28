@@ -24,7 +24,7 @@ const UnlockUser = ({isCreateByAdmin, blockedUsers, getBlockedUsersFromDB, unloc
 
         <input type="search" onChange={onSearchUsers}/>
 
-        <div>{this.props.blockedUsers.map(u => {
+        <div>{blockedUsers.map(u => {
             return <div className={style.userInfo}>
                 <div>{u.name + ' ' + u.surname}</div>
                 <button onClick={() => onUnlockUser(u.id)}>Розблокувати</button>

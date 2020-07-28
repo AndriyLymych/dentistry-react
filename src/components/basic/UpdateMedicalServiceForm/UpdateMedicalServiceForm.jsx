@@ -4,67 +4,70 @@ import {InputCreator, TextareaCreator} from "../../../helpers/FormCreator/FormCr
 import {
     isNumberValidator,
     minLengthValidator,
-    minPriceValidator,
     requiredValidator
 } from "../../../validators/validators";
+import s from '../LoginForm/LoginForm.module.css'
+import style from './UpdateMedicalServiceForm.module.css';
+import Button from "@material-ui/core/Button";
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
-const minPrice = minPriceValidator(1);
 const minLength = minLengthValidator(2);
 
 const UpdateMedicalServiceForm = props => {
 
-    const {handleSubmit, submitting} = props;
+    const {handleSubmit} = props;
 
     return (
-        <div>
+        <form className={s.loginForm +' '+style.updateForm} onSubmit={handleSubmit}>
 
-            <form onSubmit={handleSubmit}>
-
+            <div className={s.loginFormInfo}>
+                <div className={s.label}> Змінити назву:</div>
                 <div>
-                    <label>Змінити назву:</label>
-                    <div>
-                        <Field
-                            name="service"
-                            component={InputCreator}
-                            autoFocus={true}
-                            validate={[requiredValidator, minLength]}
+                    <Field
+                        name="service"
+                        component={InputCreator}
+                        autoFocus={true}
+                        validate={[requiredValidator, minLength]}
 
-                        />
-                    </div>
+                    />
                 </div>
+            </div>
+            <div className={s.loginFormInfo}>
+                <div className={s.label}>Змінити опис:</div>
                 <div>
-                    <label>Змінити опис:</label>
-                    <div>
-                        <Field
-                            name="description"
-                            component={TextareaCreator}
-                            validate={[requiredValidator, minLength]}
+                    <Field
+                        name="description"
+                        component={TextareaCreator}
+                        validate={[requiredValidator, minLength]}
 
-                        />
-                    </div>
+                    />
                 </div>
+            </div>
 
 
+            <div className={s.loginFormInfo}>
+                <div className={s.label}>Змінити ціну:</div>
                 <div>
-                    <label>Змінити ціну:</label>
-                    <div>
-                        <Field
-                            name="price"
-                            component={InputCreator}
-                            validate={[requiredValidator, isNumberValidator, minPrice]}
+                    <Field
+                        name="price"
+                        component={InputCreator}
+                        validate={[requiredValidator, isNumberValidator]}
 
-                        />
-                    </div>
+                    />
                 </div>
+            </div>
 
-                <div>
-                    <button type="submit" disabled={submitting}>
-                        Підтвердити
-                    </button>
+            <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                startIcon={<CheckCircleOutlineIcon/>}
 
-                </div>
-            </form>
-        </div>
+            >
+                Підтвердити
+            </Button>
+
+        </form>
     )
 };
 

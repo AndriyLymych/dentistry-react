@@ -31,7 +31,7 @@ const DeleteMedicalService = ({isDeleted, isLoading, services,getServicesFromDB,
                 !isDeleted ?
                     <div>
                         <h1>Видалити медичну послугу:</h1>
-                        <AddMedicalServiceReduxForm onSubmit={onSubmit} services={this.props.services}/>
+                        <AddMedicalServiceReduxForm onSubmit={onSubmit} services={services}/>
                     </div> :
                     <Alert severity="success">Послуга успішно видалена!</Alert>
             }

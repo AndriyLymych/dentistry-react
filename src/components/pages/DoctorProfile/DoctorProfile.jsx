@@ -14,7 +14,7 @@ import Footer from "../../basic/Footer/Footer";
 const CommentReduxForm = reduxForm({
     form: 'comment'
 })(CommentForm);
-
+//TODO speciality err
 const DoctorProfile = (
     {
         isLoading,
@@ -29,8 +29,7 @@ const DoctorProfile = (
             age,
             city,
             experience,
-            room,
-            // UserSpeciality['label']
+            room
         },
         isLoadingComments,
         commentInfo,
@@ -58,9 +57,9 @@ const DoctorProfile = (
     useEffect(() => {
         const id = match.params.id;
 
-        if (!doctorProfile.length) {
             getDoctorProfile(id);
-        }
+
+
 
         getCommentsFromDB(id, commentsCountOnPage, currentPage);
 
@@ -115,7 +114,7 @@ const DoctorProfile = (
                                             <p className={style.name}>{middleName}</p>
                                             <p className={style.name}>{surname}</p>
                                         </div>
-                                        <div className={style.restInfoData + ' ' + style.position}>Position</div>
+                                        {/*<div className={style.restInfoData + ' ' + style.position}>{doctorProfile.UserSpeciality.label}</div>*/}
                                         <div className={style.restInfoContainer}>
                                             <div className={style.docInfoTitle}>Вік:</div>
                                             <div className={style.restInfoData}>{age} років</div>
@@ -130,7 +129,7 @@ const DoctorProfile = (
                                         </div>
 
                                         {
-                                            !isEvaluated && isAuth && <div className={style.rate}>
+                                            !isEvaluated && isAuth && <div >
                                                 <Box component="fieldset" mb={3} borderColor="transparent">
                                                     <div className={style.ratingTitle}>Оцініть лікаря:</div>
                                                     <Rating

@@ -41,7 +41,7 @@ export const getMeInfo = () => async dispatch => {
     } catch (e) {
         dispatch(setIsLoading(false));
         if (e.response.data.code === customErrors[4012].code) {
-            dispatch(refreshUserToken(e.response.data.code))
+            dispatch(refreshUserToken(e.response.data.code));
             getMeInfo()
         }
 
@@ -294,8 +294,8 @@ export const resetUserPassword = (data, token) => async dispatch => {
 
         await authAPI.resetPassword(data, token);
 
-        dispatch(setIsResetPassword(true));
         dispatch(setIsLoading(false));
+        dispatch(setIsResetPassword(true));
         dispatch(resetPasswordErrMsg(null));
 
     } catch (e) {

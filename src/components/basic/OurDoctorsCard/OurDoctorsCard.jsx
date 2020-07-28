@@ -8,8 +8,10 @@ const OurDoctorsCard = ({doctor: {avatar, id, name, surname, UserSpeciality: {la
     return (
         <div className={s.docInfo}>
             <img className={s.docAva} src={`${configs.HOST}:${configs.PORT}/${avatar}`} alt=""/>
-            <div className={s.docName}>{name}</div>
-            <div className={s.docName}>{surname}</div>
+            <div className={s.nameContainer}>
+                <div className={s.docName}>{name}</div>
+                <div className={s.docName}>{surname}</div>
+            </div>
             <div className={s.docSpec}>{label}</div>
             <NavLink className={s.docMoreInfo} to={`/our-doctors/${id}`}>
                 Детальніше

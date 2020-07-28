@@ -1,46 +1,50 @@
 .docInfo {
-    width: 80%;
+    width: 20%;
     height: 370px;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     background: #ffffff;
     border-radius: 20px;
-    margin: 40px 150px;
+    margin: 40px 0;
+    text-align: center;
 }
 
 .docAva {
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
 
 .docName {
-    width: 137px;
     color: #1c6c9c;
     font-family: "Arial MT", serif;
-    font-size: 27px;
+    font-size: 22px;
     font-weight: 500;
     text-transform: uppercase;
-
+    margin-right: 8px;
 }
-
+.nameContainer{
+    display: flex;
+}
 .docSpec{
     color: #1c6c9c;
     font-family: "Arial MT", sans-serif;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 400;
     line-height: 14px;
     font-style: italic;
 }
 .docMoreInfo{
-    width: 150px;
+    width: 110px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #2957ac;
     font-family: "Arial MT", serif;
-    font-size: 27px;
+    font-size: 20px;
+    padding: 3px 0;
     font-weight: 400;
     border-radius: 10px;
     border: 2px solid #2957ac;

@@ -1,37 +1,74 @@
-input {
-    border: none;
-    border-bottom: 2px solid #1987ff;
-    background: transparent;
-    outline: none;
-    border-radius: 3px;
-    color: #cccccc;
-    font-size: 20px;
-    font-family: Tahoma, serif;
-    font-style: italic;
-    height: 40px;
-}
-
-form {
+.regForm {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    /*justify-content: center;*/
-    /*align-items: center;*/
+    align-items: center;
 }
 
 .inputInfo {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    margin-bottom: 10px;
     display: flex;
-    justify-content: center;
-}
-.genderInfo{
-    margin-right: 50px;
+    justify-content: space-between;
+    align-items: start;
 }
 
-label {
-    font-size: 22px;
-    color: #f1f1f1;
-    width: 13%;
+.regForm input {
+    border: 1px solid #6c9ab9;
+    border-radius: 5px;
+    width: 100%;
+    height: 20px;
+    outline: none;
+}
+
+.regForm input:focus {
+    box-shadow: 0 0 8px #88D5E9;
+    border: 2px solid #88D5E9;
+}
+
+.regInput {
+    width: 70%;
+    height: 70%;
+
+}
+
+.inputInfoLabel {
+    color: #2958ac;
+    font-family: "Arial - Bold MT", serif;
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.requiredStar {
+    color: red;
+}
+
+.regFormBtn {
+    width: 130px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #156caf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.regFormBtn:hover {
+    transition: 0.5s;
+    transform: scale(1.05);
+
+}
+
+.gender input{
+    width: 10px;
+    height: 15px;
 }

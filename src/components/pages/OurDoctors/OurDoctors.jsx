@@ -2,8 +2,8 @@ import React, {useEffect} from "react";
 import Preloader from "../../basic/Preloader/Preloader";
 import OurDoctorsCard from "../../basic/OurDoctorsCard/OurDoctorsCard";
 import s from './OurDoctors.module.css'
-import CommonContacts from "../../basic/CommonContacts/CommonContacts";
 import Footer from "../../basic/Footer/Footer";
+import CommonContacts from "../../basic/CommonContacts/CommonContacts";
 
 const OurDoctors = ({isLoading, doctors, getDoctors}) => {
 

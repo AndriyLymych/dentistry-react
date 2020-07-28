@@ -82,7 +82,7 @@
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
-    height: 150px;
+    height: 75px;
 }
 .editAreaContainer{
     display: flex;
@@ -106,6 +106,7 @@
     margin-left: -15px;
     margin-top: 15px;
     transition: 0.3s;
+    cursor: pointer;
 }
 .editConfirm{
     background: #283593;
@@ -117,6 +118,8 @@
     font-size: 18px;
     margin-top: 15px;
     margin-left: 10px;
+    cursor: pointer;
+
 }
  .editCancel:hover{
     transform: scale(1.05);

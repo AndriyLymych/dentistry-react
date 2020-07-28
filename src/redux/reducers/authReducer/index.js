@@ -110,7 +110,7 @@ const authReducer = (state = initialState, action) => {
         case RESET_PASSWORD_ERR_MSG :
             return {
                 ...state,
-                sendMailErrMsg: action.payload
+                resetPasswordErrMsg: action.payload
             };
         case UPDATE_DOCTOR_PHOTO_ERR_MSG :
             return {
