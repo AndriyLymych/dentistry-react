@@ -3,7 +3,6 @@ import logo from '../../../assets/img/logo.png'
 import logoText from '../../../assets/img/Сімстомат.png'
 import style from './Logo.module.css';
 
-
 const Logo = () => {
     return (
         <div className={style.logoSlogan}>
@@ -11,7 +10,7 @@ const Logo = () => {
                 <img src={logo} alt="logo"/>
             </div>
             <div className={style.logoDescription}>
-                <img src={logoText} alt="name"/>
+                <img  src={logoText} alt="name"/>
             </div>
         </div>
     )

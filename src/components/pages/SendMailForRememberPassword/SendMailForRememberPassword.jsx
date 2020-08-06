@@ -32,16 +32,21 @@ const SendMailForRememberPassword = ({isAuth, isSentMail, isLoading, errorMessag
 
     return (
         <div>
-            <div className={style.loginContainer}>
+            <div className={s.loginContainer}>
                 {
                     !isSentMail ?
-                        <div className={style.loginInfoContainer}>
+                        <div className={s.loginInfoContainer}>
 
-                            <div className={s.loginInfo}>
-                                <div className={style.loginTitle + ' ' + s.loginTitle}>Введіть ваш емейл:</div>
-                                <SendMailForRememberPasswordReduxForm onSubmit={onSubmit} errorMessage={errorMessage}/>
+                            <div className={s.loginInfoWrapper}>
+                                <div className={s.loginInfo}>
+                                    <div className={style.loginTitle + ' ' + s.loginTitle}>Введіть ваш емейл:</div>
+                                    <SendMailForRememberPasswordReduxForm onSubmit={onSubmit}
+                                                                          errorMessage={errorMessage}/>
+                                </div>
                             </div>
-                            <div className={style.modalImg}/>
+                            <div className={s.imgWrapper}>
+                                <div className={s.modalImg}/>
+                            </div>
 
 
                         </div> :

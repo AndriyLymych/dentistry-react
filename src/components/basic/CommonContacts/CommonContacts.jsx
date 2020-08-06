@@ -5,7 +5,7 @@ import s from './CommonContacts.module.css';
 const CommonContacts = () => {
     return(
         <div className={s.commonContactsContainer}>
-            <div >
+            <div className={s.commonContactsInfoContainer} >
                 <h3 className={s.commonContactsInfoTitle}>ЗАПИСАТИСЬ НА ПРИЙОМ:</h3>
                 <div>
                     <p className={s.commonContactsInfoData} >Номери телефону: <br/><br/>
@@ -15,7 +15,7 @@ const CommonContacts = () => {
                         Скринька: simstomat@gmail.com</p>
                 </div>
             </div>
-            <img  src={commonContactsImg} alt=""/>
+            <img  className={s.commonContactsImg} src={commonContactsImg} alt=""/>
         </div>
     )
 };

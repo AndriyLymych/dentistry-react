@@ -1,6 +1,6 @@
 .errorMsg input {
     color: red;
-    border-bottom: 2px solid red;
+    border: 2px solid red;
     font-style: italic;
     font-size: 15px;
 }

@@ -42,7 +42,7 @@ export const getMeInfo = () => async dispatch => {
         dispatch(setIsLoading(false));
         if (e.response.data.code === customErrors[4012].code) {
             dispatch(refreshUserToken(e.response.data.code));
-            getMeInfo()
+            dispatch(getMeInfo())
         }
 
     }

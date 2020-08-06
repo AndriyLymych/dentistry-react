@@ -8,20 +8,21 @@ import {
     minPriceValidator,
     requiredValidator
 } from "../../../validators/validators";
-import style from "../../../App.module.css";
+import s from './AddMedicalServiceForm.module.css'
 
 const minPrice = minPriceValidator(1);
-const minLength = minLengthValidator(2);
+const minNameLength = minLengthValidator(2);
+const minLength = minLengthValidator(6);
 
 const AddMedicalServiceForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting} = props;
+    const {handleSubmit, pristine, submitting} = props;
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={s.updateForm} onSubmit={handleSubmit}>
             <div>
-                <label>Виберіть фото для послуги:</label>
-                <div>
+                <div className={s.label}>Виберіть фото для послуги:</div>
+                <div className={s.photo}>
                     <Field
                         name="photo"
                         component={MyFile}
@@ -32,19 +33,31 @@ const AddMedicalServiceForm = props => {
                 </div>
             </div>
             <div>
-                <label>Введіть назву послуги:</label>
+                <div className={s.label}>Введіть назву послуги:</div>
                 <div>
                     <Field
                         name="service"
                         component={InputCreator}
                         placeholder="Введіть назву послуги..."
+                        validate={[requiredValidator, minNameLength]}
+
+                    />
+                </div>
+            </div>
+            <div >
+                <div className={s.label}>Введіть короткий опис послуги:</div>
+                <div>
+                    <Field
+                        name="small_description"
+                        component={TextareaCreator}
+                        placeholder="Короткий опис..."
                         validate={[requiredValidator, minLength]}
 
                     />
                 </div>
             </div>
-            <div>
-                <label>Опишіть послугу:</label>
+            <div >
+                <div className={s.label}>Опишіть послугу:</div>
                 <div>
                     <Field
                         name="description"
@@ -56,7 +69,7 @@ const AddMedicalServiceForm = props => {
                 </div>
             </div>
             <div>
-                <label>Введіть ціну послуги:</label>
+                <div className={s.label}>Введіть ціну послуги:</div>
                 <div>
                     <Field
                         name="price"
@@ -66,16 +79,11 @@ const AddMedicalServiceForm = props => {
                     />
                 </div>
             </div>
-            {props.error && <div className={style.requiredStar}>{props.error}</div>}
+            {props.error && <div className={s.err}>{props.error}</div>}
 
-            <div>
-                <button type="submit" disabled={pristine || submitting}>
-                    Підтвердити
-                </button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>
-                    Очистити дані
-                </button>
-            </div>
+            <button className={s.check} type="submit" disabled={pristine || submitting}>
+                Підтвердити
+            </button>
         </form>
     )
 };

@@ -44,7 +44,7 @@ const Login = ({isAuth, isLoading, errorMessage, match, login, loginAdmin, login
     return (
         <div>
             <div className={style.loginContainer}>
-                <div className={style.loginInfoContainer}>
+                <div className={style.loginData}>
                     <div className={style.loginInfo}>
                         <div className={style.loginTitle}>УВІЙТИ</div>
                         <div className={style.withText}>через</div>
@@ -63,11 +63,14 @@ const Login = ({isAuth, isLoading, errorMessage, match, login, loginAdmin, login
                         <div className={style.withText}>
                             або
                         </div>
-                        <LoginReduxForm onSubmit={onSubmit} errorMessage={errorMessage} adminErrorMessage={adminErrorMessage}/>
+                        <LoginReduxForm onSubmit={onSubmit} errorMessage={errorMessage}
+                                        adminErrorMessage={adminErrorMessage}/>
 
 
                         <NavLink className={style.menuItemLink} to={'/forgot-password'}>Забули пароль?</NavLink>
                     </div>
+                </div>
+                <div className={style.modalImgContainer}>
                     <div className={style.modalImg}/>
                 </div>
 

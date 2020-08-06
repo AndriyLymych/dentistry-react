@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import {USER_ROLE} from "../../../constant/userConstant/userRole";
 import {configs} from "../../../config/configs";
-import style from "../DoctorProfile/DoctoreProfile.module.css";
 import error from "../../../App.module.css";
 import {reduxForm} from "redux-form";
 import UpdateMyProfileInfoForm from "../../basic/UpdateMyProfileInfoForm/UpdateMyProfileInfoForm";
 import Preloader from "../../basic/Preloader/Preloader";
+import style from './MyProfileInfo.module.css'
+import infoImg from '../../../assets/img/infoImg.png'
 
 const UpdateMyProfileInfoReduxForm = reduxForm({
     form: 'update-my-profile-info'
@@ -30,7 +31,7 @@ const MyProfileInfo = ({
                        }) => {
 
     const [editMode, setEditMode] = useState(false);
-    console.log(isProfileUpdate);
+
     const onUserProfileUpdate = data => {
         updateUserDates(data);
         setEditMode(false)
@@ -48,47 +49,50 @@ const MyProfileInfo = ({
     }
 
     return (
-        <div>
-            {
-                userRole === USER_ROLE.DOCTOR &&
-                <div>
-                    <img className={style.avatarBlock} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
-                         alt="avatar"/>
-                    <input type="file" onChange={onUpdateDoctorAvatar}/>
-                    {errorMessage && <div className={error.requiredStar}>{errorMessage}</div>}
+        <div className={style.infoContainer}>
+            <div className={style.infoData}>
+                {
+                    userRole === USER_ROLE.DOCTOR &&
+                    <div  className={style.avatarBlock}>
+                        <img  className={style.ava} src={`${configs.HOST}:${configs.PORT}/${avatar}`}
+                              alt="avatar"/>
+                       <div className={style.changePhoto}>
+                           <input  type="file" onChange={onUpdateDoctorAvatar}/>
+                       </div>
+                        {errorMessage && <div className={error.requiredStar}>{errorMessage}</div>}
 
-                </div>
-            }
-            {
-                !editMode && <div>
+                    </div>
+                }
+                {
+                    !editMode && <div className={style.majorInfo}>
+                        <div className={style.infoTitle}>Інформація про мене:</div>
+                        <p className={style.infoItem}>{name}</p>
+                        <p className={style.infoItem}>{middleName}</p>
+                        <p className={style.infoItem}>{surname}</p>
+                        <p className={style.infoItem}>{age} р.</p>
+                        <p className={style.infoItem}>м.{city}</p>
+                        <button className={style.editInfo} onClick={() => {
+                            setEditMode(true)
+                        }}>Редагувати
+                        </button>
+                    </div>}
 
-                    <p>{name}</p>
-                    <p>{middleName}</p>
-                    <p>{surname}</p>
-                    <p>{age}</p>
-                    <p>{city}</p>
-                    <button onClick={() => {
-                        setEditMode(true)
-                    }}>редагувати
-                    </button>
-                </div>}
-
-            {
-                editMode && <div>
-
-
-                    <UpdateMyProfileInfoReduxForm
-                        onSubmit={onUserProfileUpdate}
-                        initialValues={{name, middleName, surname, age, city}}
-                        avatar={avatar} userRole={userRole}
-                    />
-                    <button onClick={() => {
-                        setEditMode(false)
-                    }}>Відмінити
-                    </button>
-                </div>
-            }
-
+                {
+                    editMode && <div>
+                        <div className={style.infoTitle}>Інформація про мене:</div>
+                        <UpdateMyProfileInfoReduxForm
+                            onSubmit={onUserProfileUpdate}
+                            initialValues={{name, middleName, surname, age, city}}
+                            avatar={avatar} userRole={userRole}
+                        />
+                        <button className={style.cancel} onClick={() => {
+                            setEditMode(false)
+                        }}>Відмінити
+                        </button>
+                    </div>
+                }
+            </div>
+            <img src={infoImg} alt=""/>
         </div>
 
     )

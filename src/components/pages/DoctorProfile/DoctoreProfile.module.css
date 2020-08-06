@@ -1,29 +1,27 @@
-.area{
+.area {
     resize: none;
 }
-.avatarBlock{
+
+.avatarBlock {
     height: 350px;
     width: 350px;
     border-radius: 50%;
 }
-.docInfoLine{
-    width: 1px;
-    height: 80%;
-    opacity: 0.5;
-    background: #2957ac;
-}
-.docInfo{
+
+
+.docInfo {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin-top: 4%;
 }
-.docProfileContainer{
+.rate{
+    align-self: start;
+}
+.docProfileContainer {
     width: 100%;
     margin: 0 auto;
-    background-image: url("../../../assets/img/docProfile.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: linear-gradient(45deg, #2694d6, #2d439e);
     padding-top: 10px;
     min-height: 100vh;
     display: flex;
@@ -31,41 +29,44 @@
 
 }
 
-.docInfoData{
-    width: 55%;
+.docInfoData {
+    width: 40%;
     border-radius: 40px;
     background-color: #ffffff;
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     align-items: center;
+    text-align: center;
 }
-.docInfoDataName{
+
+.docInfoDataName {
     color: #2957ac;
     font-family: "Arial MT", serif;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 400;
     display: flex;
-    height: 100px;
-    margin-bottom: 20px;
 }
-.mainInfo{
+
+.mainInfo {
     width: 60%;
     height: 100%;
     margin-left: 30px;
 }
 
-.restInfoContainer{
+.restInfoContainer {
     display: flex;
     width: 100%;
 }
-.restInfo{
+
+.restInfo {
     display: flex;
     height: 100%;
     width: 30%;
     flex-direction: column;
     justify-content: center;
 }
-.restInfoTitle{
+
+.restInfoTitle {
     color: #2957ac;
     font-family: "Arial - Bold MT", serif;
     font-size: 21px;
@@ -73,7 +74,8 @@
     margin-bottom: 10px;
     margin-right: 10px;
 }
-.restInfoData{
+
+.restInfoData {
     color: #2957ac;
     font-family: "Arial MT", serif;
     font-size: 19px;
@@ -82,22 +84,25 @@
 
 }
 
-.ratingTitle{
+.ratingTitle {
     color: #2d74d6;
     font-weight: bold;
     font-style: italic;
     font-size: 18px;
 }
-.name{
+
+.name {
     margin-right: 5px;
 
 }
-.position{
+
+.position {
     font-weight: 600;
-    margin-bottom: 18px;
+    margin-bottom: 17px;
+    text-align: start;
 }
 
-.docInfoTitle{
+.docInfoTitle {
     color: #2957ac;
     font-family: "Arial MT", serif;
     font-size: 19px;
@@ -105,6 +110,7 @@
     font-style: italic;
     margin-right: 10px;
     margin-bottom: 20px;
+    text-align: start;
 }
 
 .backBtn {
@@ -124,10 +130,12 @@
     transition: 0.2s;
 
 }
-.backBtn:hover{
+
+.backBtn:hover {
     transform: scale(1.05);
     transition: 0.2s;
 }
+
 .nextPage {
     width: 200px;
     height: 45px;
@@ -147,11 +155,13 @@
     cursor: pointer;
 
 }
-.nextPage:hover{
+
+.nextPage:hover {
     transform: scale(1.05);
     transition: 0.2s;
 }
-.commentContainer{
+
+.commentContainer {
     align-self: center;
     margin-top: 30px;
     display: flex;
@@ -159,7 +169,8 @@
     width: 100%;
     align-items: center;
 }
-.commentArea{
+
+.commentArea {
     width: 80%;
     height: 130px;
     border-radius: 40px;
@@ -168,4 +179,94 @@
     display: flex;
     margin-bottom: 30px;
 
+}
+
+@media (max-width: 1200px) {
+    .docInfo {
+        flex-direction: column;
+        margin-left: 30px;
+    }
+
+    .avatarBlock {
+        margin-bottom: 20px;
+    }
+
+    .docInfoData {
+        width: 620px;
+    }
+
+}
+
+@media (max-width: 680px) {
+
+    .docInfoData {
+        width: 80%;
+        align-self: center;
+
+    }
+    .avatarBlock{
+        align-self: center;
+    }
+    .docInfoDataName{
+        width: 80%;
+    }
+    .mainInfo{
+        width: 100%;
+    }
+}
+@media (max-width: 550px) {
+
+
+    .docInfoDataName{
+        font-size: 25px;
+    }
+    .restInfoData{
+        font-size: 18px;
+    }
+    .docInfoTitle{
+        font-size: 18px;
+        width: 35%;
+    }
+    .restInfoTitle{
+        font-size: 18px;
+    }
+
+    .docInfoData {
+        width: 95%;
+        margin: 0 10px 20px 10px;
+    }
+    .docInfo{
+        margin-left: 0;
+    }
+
+}
+
+@media (max-width: 350px) {
+
+
+    .docInfoDataName{
+        font-size: 20px;
+    }
+    .avatarBlock {
+        height: 260px;
+        width: 260px;
+        border-radius: 50%;
+    }
+}
+@media (max-width: 320px) {
+
+
+    .docInfoDataName{
+        font-size: 19px;
+    }
+    .restInfoData{
+        font-size: 16px;
+    }
+    .docInfoTitle{
+        font-size: 16px;
+        width: 35%;
+    }
+    .restInfoTitle{
+        font-size: 16px;
+    }
 }

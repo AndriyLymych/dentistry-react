@@ -1,9 +1,10 @@
 import React from "react";
 import {reduxForm} from "redux-form";
 import Preloader from "../../basic/Preloader/Preloader";
-import Alert from "@material-ui/lab/Alert";
 import AddMedicalServiceForm from "../../basic/AddMedicalServiceForm/AddMedicalServiceForm";
-
+import s from '../ChangePassword/ChangePassword.module.css';
+import style from './AddMedicalService.module.css';
+import serviceImg from '../../../assets/img/newService.png'
 
 const AddMedicalServiceReduxForm = reduxForm({
     form: 'add-service'
@@ -17,18 +18,21 @@ const AddMedicalService = ({addMedicalService, isServiceWorkDone, isLoading}) =>
     }
 
     const onSubmit = data => {
-        addMedicalService(data.service, data.description, data.photo[0], data.price)
+        addMedicalService(data.service, data.small_description, data.description, data.photo?.[0], data.price)
     };
 
     return (
         <div>
             {
                 !isServiceWorkDone ?
-                    <div>
-                        <h1>Додати послугу:</h1>
-                        <AddMedicalServiceReduxForm onSubmit={onSubmit}/>
+                    <div className={s.changePasswordContainer}>
+                        <div>
+                            <div className={s.changePasswordTitle}>Додати послугу:</div>
+                            <AddMedicalServiceReduxForm onSubmit={onSubmit}/>
+                        </div>
+                        <img className={style.serviceImg} src={serviceImg} alt=""/>
                     </div> :
-                    <Alert severity="success">Послуга успішно додана!</Alert>
+                    <div className={s.success}>Послуга успішно додана!</div>
             }
 
         </div>

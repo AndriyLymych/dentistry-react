@@ -1,5 +1,5 @@
 .docInfo {
-    width: 20%;
+    width: 250px;
     height: 370px;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     align-items: center;
     background: #ffffff;
     border-radius: 20px;
-    margin: 40px 0;
+    margin: 40px 20px;
     text-align: center;
 }
 

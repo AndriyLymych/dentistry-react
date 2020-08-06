@@ -14,7 +14,7 @@ import Footer from "../../basic/Footer/Footer";
 const CommentReduxForm = reduxForm({
     form: 'comment'
 })(CommentForm);
-//TODO speciality err
+
 const DoctorProfile = (
     {
         isLoading,
@@ -29,7 +29,8 @@ const DoctorProfile = (
             age,
             city,
             experience,
-            room
+            room,
+            UserSpeciality
         },
         isLoadingComments,
         commentInfo,
@@ -57,8 +58,7 @@ const DoctorProfile = (
     useEffect(() => {
         const id = match.params.id;
 
-            getDoctorProfile(id);
-
+        getDoctorProfile(id);
 
 
         getCommentsFromDB(id, commentsCountOnPage, currentPage);
@@ -114,7 +114,8 @@ const DoctorProfile = (
                                             <p className={style.name}>{middleName}</p>
                                             <p className={style.name}>{surname}</p>
                                         </div>
-                                        {/*<div className={style.restInfoData + ' ' + style.position}>{doctorProfile.UserSpeciality.label}</div>*/}
+                                        <div
+                                            className={style.restInfoData + ' ' + style.position}>{UserSpeciality?.label}</div>
                                         <div className={style.restInfoContainer}>
                                             <div className={style.docInfoTitle}>Вік:</div>
                                             <div className={style.restInfoData}>{age} років</div>
@@ -127,9 +128,24 @@ const DoctorProfile = (
                                             <div className={style.docInfoTitle}>Електронна адреса:</div>
                                             <div className={style.restInfoData}>{email}</div>
                                         </div>
-
+                                            <div className={style.restInfoContainer}>
+                                                <div className={style.restInfoTitle}>Графік:</div>
+                                                <div className={style.restInfoData}>9:00 - 20:00</div>
+                                            </div>
+                                            <div className={style.restInfoContainer}>
+                                                <div className={style.restInfoTitle}>Кабінет:</div>
+                                                <div className={style.restInfoData}>{room}</div>
+                                            </div>
+                                            <div className={style.restInfoContainer}>
+                                                <div className={style.restInfoTitle}>
+                                                    Стаж:
+                                                </div>
+                                                <div className={style.restInfoData}>
+                                                    {experience} років
+                                                </div>
+                                            </div>
                                         {
-                                            !isEvaluated && isAuth && <div >
+                                            !isEvaluated && isAuth && <div>
                                                 <Box component="fieldset" mb={3} borderColor="transparent">
                                                     <div className={style.ratingTitle}>Оцініть лікаря:</div>
                                                     <Rating
@@ -146,7 +162,7 @@ const DoctorProfile = (
                                         }
 
                                         {
-                                            (isEvaluated || !isAuth) && <div>
+                                            (isEvaluated || !isAuth) && <div className={style.rate}>
                                                 <div className={style.ratingTitle}>Середня
                                                     оцінка:
                                                 </div>
@@ -156,25 +172,7 @@ const DoctorProfile = (
                                             </div>
                                         }
                                     </div>
-                                    <div className={style.docInfoLine}/>
-                                    <div className={style.restInfo}>
-                                        <div className={style.restInfoContainer}>
-                                            <div className={style.restInfoTitle}>Графік:</div>
-                                            <div className={style.restInfoData}>9:00 - 20:00</div>
-                                        </div>
-                                        <div className={style.restInfoContainer}>
-                                            <div className={style.restInfoTitle}>Кабінет:</div>
-                                            <div className={style.restInfoData}>{room}</div>
-                                        </div>
-                                        <div className={style.restInfoContainer}>
-                                            <div className={style.restInfoTitle}>
-                                                Стаж:
-                                            </div>
-                                            <div className={style.restInfoData}>
-                                                {experience} років
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
 
                             </div>

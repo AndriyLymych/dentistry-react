@@ -36,7 +36,8 @@ export const registerDoctor = data => async dispatch => {
 
         if (e.response.data.code) {
             dispatch(setRegDoctorErrMsg(customErrors[e.response.data.code].message));
-            dispatch(refreshUserToken(e.response.data.code))
+
+            // dispatch(refreshUserToken(e.response.data.code))
 
         }
     }

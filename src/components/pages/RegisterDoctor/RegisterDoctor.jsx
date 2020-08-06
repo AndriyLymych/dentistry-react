@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import {reduxForm} from "redux-form";
 import Preloader from "../../basic/Preloader/Preloader";
-import Alert from "@material-ui/lab/Alert";
 import RegisterDoctorForm from "../../basic/RegisterDoctorForm/RegisterDoctorForm";
+import style from './RegisterDoctor.module.css';
 
 const RegisterDoctorReduxForm = reduxForm({
     form: 'register-doctor'
@@ -42,12 +42,12 @@ const RegisterDoctor = ({
 
     };
     return (
-        <div>
+        <div className={style.regContainer}>
 
             {
                 !isRegisterDoctorSuccess ?
-                    <div>
-                        <h1>Реєстрація лікаря:</h1>
+                    <div className={style.regInfo}>
+                        <div className={style.regTitle}>Реєстрація лікаря:</div>
                         <RegisterDoctorReduxForm
                             onSubmit={onSubmit}
                             genders={genders}
@@ -55,7 +55,7 @@ const RegisterDoctor = ({
                             errorMessage={errorMessage}
                         />
                     </div> :
-                    <Alert severity="success">Реєстрація пройшла успішно!</Alert>
+                    <div className={style.successReg} >Реєстрація лікаря пройшла успішно!</div>
 
             }
         </div>

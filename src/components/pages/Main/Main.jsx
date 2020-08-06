@@ -4,7 +4,6 @@ import mainImg from '../../../assets/img/Vector_Smart_Object.png'
 import {NavLink} from "react-router-dom";
 import Contacts from "../Contacts/Contacts";
 import MainAboutUs from "../../basic/MainAboutUs/MainAboutUs";
-import Footer from "../../basic/Footer/Footer";
 
 const Main = () => {
     return (

@@ -30,22 +30,27 @@ const ResetPassword = ({isAuth, isResetPassword, isLoading, errorMessage, match,
 
     return (
         <div>
-            <div className={style.loginContainer}>
+            <div className={s.resetContainer}>
                 {
                     !isResetPassword ?
-                        <div className={style.loginInfoContainer}>
+                        <div className={s.resetInfoContainer}>
 
-                            <div className={s.resetInfo}>
-                                <div className={s.resetTitle}>Зміна паролю:</div>
-                                <ResetPasswordReduxForm onSubmit={onSubmit} errorMessage={errorMessage}/>
+                         <div className={s.resetInfoWrapper}>
+                             <div className={s.resetInfo}>
+                                 <div className={s.resetTitle}>Зміна паролю:</div>
+                                 <ResetPasswordReduxForm onSubmit={onSubmit} errorMessage={errorMessage}/>
+                             </div>
+                         </div>
+                            <div className={s.imgWrapper}>
+                                <div className={s.modalImg}/>
                             </div>
-                            <div className={style.modalImg}/>
+
 
                         </div> :
 
-                        <div>
-                            <p style={styleSuccess.sentSuccess}>Пароль успішно змінено!</p>
-                            <NavLink to={"/login"}>Авторизуватись</NavLink>
+                        <div className={s.successInfo}>
+                            <p className={s.sentSuccess}>Пароль успішно змінено!</p>
+                            <NavLink className={s.loginBtnLink} to={"/login"}>Авторизуватись</NavLink>
                         </div>
 
                 }

@@ -7,6 +7,7 @@ import {
     minLengthValidator,
     requiredValidator
 } from "../../../validators/validators";
+import style from './UpdateMyProfileInfo.module.css'
 
 const minNameLength = minLengthValidator(2);
 const maxNameLength = maxLengthValidator(40);
@@ -18,77 +19,72 @@ const UpdateMyProfileInfoForm = props => {
     const {handleSubmit, submitting} = props;
 
     return (
-        <div>
-
-            <form onSubmit={handleSubmit}>
+        <form className={style.updateForm} onSubmit={handleSubmit}>
+            <div>
+                <div className={style.label}>Змінити імя:</div>
                 <div>
-                    <label>Змінити імя:</label>
-                    <div>
-                        <Field
-                            name="name"
-                            component={InputCreator}
-                            autoFocus
-                            validate={[requiredValidator, minNameLength, maxNameLength]}
+                    <Field
+                        name="name"
+                        component={InputCreator}
+                        autoFocus
+                        validate={[requiredValidator, minNameLength, maxNameLength]}
 
-                        />
-                    </div>
-
-                </div>
-                <div>
-                    <label>Змінити по батькові:</label>
-                    <div>
-                        <Field
-                            name="middleName"
-                            component={InputCreator}
-                            validate={[requiredValidator, minNameLength, maxNameLength]}
-
-                        />
-                    </div>
-                </div>
-                <div>
-                    <label>Змінити прізвище:</label>
-                    <div>
-                        <Field
-                            name="surname"
-                            component={InputCreator}
-                            validate={[requiredValidator, minNameLength, maxNameLength]}
-                        />
-                    </div>
+                    />
                 </div>
 
-
+            </div>
+            <div>
+                <div className={style.label}>Змінити по батькові:</div>
                 <div>
-                    <label>Змінити вік:</label>
-                    <div>
-                        <Field
-                            name="age"
-                            component={InputCreator}
-                            validate={[requiredValidator, isNumberValidator, minAge, maxAge]}
+                    <Field
+                        name="middleName"
+                        component={InputCreator}
+                        validate={[requiredValidator, minNameLength, maxNameLength]}
 
-                        />
-                    </div>
+                    />
                 </div>
-
+            </div>
+            <div>
+                <div className={style.label}>Змінити прізвище:</div>
                 <div>
-                    <label>Змінити місто:</label>
-                    <div>
-                        <Field
-                            name="city"
-                            component={InputCreator}
-                            validate={requiredValidator}
-                        />
-                    </div>
+                    <Field
+                        name="surname"
+                        component={InputCreator}
+                        validate={[requiredValidator, minNameLength, maxNameLength]}
+                    />
                 </div>
+            </div>
 
 
+            <div>
+                <div className={style.label}>Змінити вік:</div>
                 <div>
-                    <button type="submit" disabled={submitting}>
-                        Підтвердити
-                    </button>
+                    <Field
+                        name="age"
+                        component={InputCreator}
+                        validate={[requiredValidator, isNumberValidator, minAge, maxAge]}
 
+                    />
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <div>
+                <div className={style.label}>Змінити місто:</div>
+                <div>
+                    <Field
+                        name="city"
+                        component={InputCreator}
+                        validate={requiredValidator}
+                    />
+                </div>
+            </div>
+
+
+            <button className={style.check} type="submit" disabled={submitting}>
+                Підтвердити
+            </button>
+
+        </form>
     )
 };
 

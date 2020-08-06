@@ -14,7 +14,6 @@ const UpdateMedicalServicePhotoForm = props => {
 
             <div>
                 <Field
-
                     name="photo"
                     component={MyFile}
 

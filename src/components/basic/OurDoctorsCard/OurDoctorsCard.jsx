@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import s from './OurDoctorsCard.module.css'
 import {configs} from "../../../config/configs";
 
-const OurDoctorsCard = ({doctor: {avatar, id, name, surname, UserSpeciality: {label}}}) => {
+const OurDoctorsCard = ({doctor: {avatar, id, name, surname, UserSpeciality}}) => {
 
     return (
         <div className={s.docInfo}>
@@ -12,7 +12,7 @@ const OurDoctorsCard = ({doctor: {avatar, id, name, surname, UserSpeciality: {la
                 <div className={s.docName}>{name}</div>
                 <div className={s.docName}>{surname}</div>
             </div>
-            <div className={s.docSpec}>{label}</div>
+            <div className={s.docSpec}>{UserSpeciality?.label}</div>
             <NavLink className={s.docMoreInfo} to={`/our-doctors/${id}`}>
                 Детальніше
             </NavLink>

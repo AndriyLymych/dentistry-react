@@ -68,3 +68,24 @@ textarea::placeholder{
     font-weight: 600;
     margin-bottom: 3px;
 }
+@media (max-width: 800px) {
+    .formInfo textarea{
+        height: 30px;
+    }
+
+}
+@media (max-width: 550px) {
+    .formInfo textarea{
+        height: 26px;
+    }
+
+}
+@media (max-width: 400px) {
+    .formInfo textarea{
+        height: 20px;
+        font-size: 17px;
+    }
+    .noAuth{
+        font-size:14px
+    }
+}

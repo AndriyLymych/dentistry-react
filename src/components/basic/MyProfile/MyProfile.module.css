@@ -1,0 +1,39 @@
+.profileContainer{
+    margin: 0 auto;
+    display: flex;
+}
+.profileMenu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.profileInfoItem{
+    width: 250px;
+    height: 70px;
+    border-radius: 10px;
+    background-color: #2a409d;
+    background-image: linear-gradient(to top, #2a409d 0%, #2694d6 100%);
+    margin: 10px 20px;
+    color: #ffffff;
+    font-family: "Arial - Bold MT", serif;
+    font-size: 24px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: 0.2s;
+}
+.profileInfoItem:hover{
+    background-image: linear-gradient(to top, #9d2a2a 0%, #d62626 100%);
+    transition: 0.2s;
+    transform: scale(1.04);
+}
+
+@media (max-width: 1160px) {
+    .profileInfoItem{
+        width: 150px;
+        font-size: 18px;
+
+    }
+}

@@ -78,7 +78,8 @@ a {
     border: 2px solid #ffffff;
 
 }
-.menuItemProfile{
+
+.menuItemProfile {
     height: 27px;
     border-radius: 10px;
     border: 2px solid #1c6c9c;
@@ -93,6 +94,7 @@ a {
     margin-right: 10px;
     padding: 3px;
 }
+
 .menuItemProfile:hover {
     color: #dedede;
     transition: 0.3s;
@@ -101,7 +103,8 @@ a {
     border: 2px solid #ffffff;
 
 }
-.menuItemLogout{
+
+.menuItemLogout {
     margin-right: 20px;
     height: 37px;
     border-radius: 10px;
@@ -116,16 +119,86 @@ a {
     align-items: center;
     padding: 3px;
     background: #ffffff;
+    cursor: pointer;
 }
-.menuItemLogout:hover{
+
+.menuItemLogout:hover {
     color: #dedede;
     transition: 0.3s;
     transform: scale(1.1);
     background: #ff4313;
     border: 2px solid #ffffff;
 }
-.menuProfile{
+
+.menuProfile {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.burger {
+    height: 30px;
+    width: 30px;
+    display: none;
+}
+
+.burgerItem {
+    height: 15%;
+    background: #5f5f5f;
+    border-radius: 3px;
+}
+
+@media (max-width: 1250px) {
+    .menuItemLink {
+        font-size: 20px;
+    }
+
+    .menuItemBtnLink {
+        font-size: 18px;
+    }
+
+    .menuItemProfile, .menuItemLogout {
+        font-size: 18px;
+    }
+
+    .menuItemProfile {
+        height: 23px;
+    }
+
+    .menuItemLogout {
+        height: 33px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .menu {
+        display: none;
+    }
+
+    .burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        z-index: 20;
+        position: fixed;
+        top: 15px;
+        right: 20px;
+
+    }
+
+    .showMenu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .allMenu {
+        position: fixed;
+        width: 300px;
+        height: 100vh;
+        z-index: 20;
+        background: black;
+        opacity: 0.9;
+        left: 0;
+    }
 }

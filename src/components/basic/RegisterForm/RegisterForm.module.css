@@ -68,7 +68,23 @@
 
 }
 
-.gender input{
+.gender input {
     width: 10px;
     height: 15px;
+}
+
+@media (max-width: 500px) {
+    .inputInfoLabel {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .regForm input::placeholder {
+        font-size: 12px;
+    }
+    .inputInfoLabel {
+        font-size: 13px;
+        font-weight: 600;
+    }
 }

@@ -1,0 +1,100 @@
+.updateForm{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+}
+.updateForm input{
+    border: 2px solid #555555;
+    border-radius: 10px;
+    width: 250px;
+    color: #4f4f4f;
+    height: 50px;
+    font-size: 17px;
+    font-style: initial;
+    text-decoration: none;
+    outline: none;
+
+}
+.updateForm input{
+    height: 25px;
+}
+.photo input{
+    border: 2px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.updateForm textarea:focus,input:focus{
+    box-shadow: 0 0 8px #88D5E9;
+    border: 2px solid  #157dc3;
+}
+.label{
+    color:  #555555;
+    background: transparent;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 5px;
+
+}
+.err{
+    color: red;
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 600;
+}
+.check{
+    height: 30px;
+    width: 120px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to top, #287c1f 0%, #26d668 100%);    outline: none;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    margin: 5px 0;
+}
+.check:hover{
+    opacity: 0.85;
+}
+.regBlock{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.submit{
+    align-self: flex-start;
+}
+.gender input {
+    width: 10px;
+    height: 15px;
+}
+.updateForm select{
+    border: 2px solid #555555;
+    border-radius: 10px;
+    width: 100%;
+    color: #4f4f4f;
+    height: 27px;
+    font-size: 17px;
+    text-decoration: none;
+    outline: none;
+    margin-bottom: 10px;
+    margin-top: 5px;
+
+}
+
+.updateForm select:focus{
+    box-shadow: 0 0 8px #88D5E9;
+    border: 2px solid  #157dc3;
+}

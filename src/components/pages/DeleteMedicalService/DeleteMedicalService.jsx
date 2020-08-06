@@ -1,21 +1,22 @@
 import React, {useEffect} from "react";
 import {reduxForm} from "redux-form";
 import Preloader from "../../basic/Preloader/Preloader";
-import Alert from "@material-ui/lab/Alert";
 import DeleteMedicalServiceForm from "../../basic/DeleteMedicalServiceForm/DeleteMedicalServiceForm";
+import style from './DeleteMedicalService.module.css'
+import img from '../../../assets/img/deleteService.png'
 
 const AddMedicalServiceReduxForm = reduxForm({
     form: 'delete-service'
 })(DeleteMedicalServiceForm);
 
 
-const DeleteMedicalService = ({isDeleted, isLoading, services,getServicesFromDB,deleteMedicalService}) => {
+const DeleteMedicalService = ({isDeleted, isLoading, services, getServicesFromDB, deleteMedicalService}) => {
 
-    useEffect(()=>{
-        if (!services.length){
+    useEffect(() => {
+        if (!services.length) {
             getServicesFromDB()
         }
-    },[services]);
+    }, [services]);
 
     if (isLoading) {
         return <Preloader/>
@@ -26,14 +27,17 @@ const DeleteMedicalService = ({isDeleted, isLoading, services,getServicesFromDB,
     };
 
     return (
-        <div>
+        <div className={style.deleteServiceContainer}>
             {
                 !isDeleted ?
-                    <div>
-                        <h1>Видалити медичну послугу:</h1>
-                        <AddMedicalServiceReduxForm onSubmit={onSubmit} services={services}/>
+                    <div className={style.deleteServiceInfo}>
+                        <div className={style.deleteServiceData}>
+                            <div className={style.deleteServiceTitle}>Видалити медичну послугу:</div>
+                            <AddMedicalServiceReduxForm onSubmit={onSubmit} services={services}/>
+                        </div>
+                        <img src={img} className={style.deleteServiceImg} alt=""/>
                     </div> :
-                    <Alert severity="success">Послуга успішно видалена!</Alert>
+                    <div className={style.sentSuccess}>Послугу успішно видалено!</div>
             }
 
         </div>

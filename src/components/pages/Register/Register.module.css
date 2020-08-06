@@ -4,22 +4,24 @@
     min-height: 83vh;
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(-73deg, #2a409d 0%, #2694d6 100%);
+    background-image: url("../../../assets/img/1212.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
     align-items: center;
     justify-content: center;
-    position: relative;
-    z-index: 2;
+
 }
 
-.regImg {
+.registerDoctorContainer {
+    margin: 0 auto;
     width: 100%;
-    height: 100%;
-    opacity: 0.7;
-    position: absolute;
-    z-index: 3;
+    min-height: 83vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    background: #ffffff;
     align-items: center;
+    justify-content: start;
 }
 
 .regInfo {
@@ -28,12 +30,27 @@
     justify-content: center;
     align-items: center;
     width: 35%;
-    min-height: 97%;
+    min-height: 90%;
     border-radius: 15%;
-    background-color: #ffffff;
     background-image: linear-gradient(-92deg, #9b9b9b 0%, #f3f3f3 100%);
-    z-index: 4;
     opacity: 0.7;
+    margin: 20px 0;
+}
+.regAdminInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    min-height: 90%;
+    border-radius: 15%;
+}
+.regInfoContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .regTitle {
@@ -41,15 +58,78 @@
     font-family: "Arial - Bold MT", serif;
     font-size: 27px;
     font-weight: 600;
+    text-align: center;
 }
 
 .regLogo {
     height: 100%;
 }
-.success{
-    width: 30%;
-    height: 30%;
-    background-image: linear-gradient(-92deg, #9b9b9b 0%, #f3f3f3 100%);
-    opacity: 1;
+
+.success {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.successMsg {
+    color: #ffffff;
+    width: 80%;
+    margin: 0 20px 0 20px;
+    font-weight: bold;
+    font-size: 45px;
+    text-align: center;
+}
+
+.loginBtnLink {
+    width: 170px;
+    height: 44px;
+    border-radius: 15px;
+    border: 2px solid #1c6c9c;
+    color: #1c6c9c;
+    font-family: "Arial MT", serif;
+    font-size: 21px;
+    font-weight: 400;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    margin-top: 20px;
+}
+
+.loginBtnLink:hover {
+    color: #dedede;
+    transition: 0.3s;
+    transform: scale(1.15);
+    background: #ff4313;
+    border: 2px solid #ffffff;
+
+}
+
+@media (max-width: 1300px) {
+    .regInfo {
+        width: 45%;
+    }
+}
+
+@media (max-width: 1100px) {
+    .regInfo {
+        width: 75%;
+    }
+}
+
+@media (max-width: 550px) {
+    .regInfo {
+        width: 90%;
+    }
+}
+
+@media (max-width: 400px) {
+    .regInfo {
+        width: 95%;
+    }
 }
 

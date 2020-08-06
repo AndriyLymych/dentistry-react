@@ -28,14 +28,14 @@ const Reception = ({receptionPatient, isReceptionSuccess, isReceptionLoading, ge
             {
                 !isReceptionSuccess ?
                     <div>
-                        <h1>Запис на прийом:</h1>
+                        <div>Запис на прийом:</div>
                         <ReceptionReduxForm
                             onSubmit={onSubmit}
                             services={services}
                             isAuth={isAuth}
                         />
                     </div> :
-                    <h1>Запис пройшов успішно</h1>
+                    <div>Запис пройшов успішно</div>
             }
         </div>
     )

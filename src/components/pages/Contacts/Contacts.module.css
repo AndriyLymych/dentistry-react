@@ -1,5 +1,5 @@
 .contactsContainer{
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -15,10 +15,27 @@
     font-size: 30px;
     font-weight: 400;
     margin-top: 50px;
+    margin-left: 20px;
 }
 .contactsInfo{
     color: #1c6c9c;
     font-family: "Arial MT", serif;
     font-size: 21px;
     font-weight: 400;
+    margin-left: 20px;
+
+}
+@media (max-width: 820px) {
+    .contactsImg{
+        width: 50%;
+    }
+}
+
+@media (max-width: 500px) {
+    .contactsContainer{
+        flex-direction: column;
+    }
+    .contactsImg{
+        width: 80%;
+    }
 }

@@ -26,7 +26,16 @@
     align-items: center;
     margin-bottom: 5px;
 }
+.loginData{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+}
 .loginTitle {
     width: 116px;
     color: #1c6c9c;
@@ -46,22 +55,17 @@
     text-align: center;
 }
 
-.loginInfoContainer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
 
 .loginContainer {
     width: 100%;
     margin: 0 auto;
     background: linear-gradient(45deg, #2694d6, #2d439e);
-    height: 83vh;
+    min-height: 87vh;
     display: flex;
     justify-content: center;
-
+    align-items: center;
+    position: relative;
+    z-index: 0;
 }
 
 .modalImg {
@@ -70,9 +74,17 @@
     background-image: url("../../../assets/img/reg-img.png");
     background-position: center center;
     background-size: cover;
-    align-self: flex-end;
 }
-
+.modalImgContainer{
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
 .signWith {
     display: flex;
 }
@@ -116,4 +128,40 @@
     display: flex;
     margin-top: 15px;
     margin-bottom: 10px;
+}
+
+@media (max-width: 1200px) {
+    .loginInfo{
+        width: 50%;
+    }
+
+}
+@media (max-width: 1000px) {
+    .loginInfo{
+        width: 50%;
+    }
+
+}
+@media (max-width: 830px) {
+    .loginInfo{
+        width: 70%;
+    }
+}
+@media (max-width: 590px) {
+    .loginInfo{
+        width: 80%;
+    }
+}
+@media (max-width: 520px) {
+    .loginInfo{
+        width: 90%;
+    }
+}
+@media (max-width: 470px) {
+    .loginContainer{
+        min-height: 100vh;
+    }
+    .loginInfo{
+        min-height: 40%;
+    }
 }

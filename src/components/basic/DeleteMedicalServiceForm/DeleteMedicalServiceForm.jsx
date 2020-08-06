@@ -3,41 +3,38 @@ import {Field} from 'redux-form'
 import {SelectCreator} from "../../../helpers/FormCreator/FormCreator";
 import {isCorrectSpecialityValidator} from "../../../validators/validators";
 import style from "../../../App.module.css";
+import s from './DeleteMedicalServiceForm.module.css'
 
 const DeleteMedicalServiceForm = props => {
 
     const {handleSubmit, pristine, submitting, services} = props;
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={s.updateForm} onSubmit={handleSubmit}>
+
             <div>
 
-                <div>
+                <div className={s.label}>Послуга:</div>
 
-                    <label>Послуга:</label>
+                <Field name="service_id" component={SelectCreator}
+                       validate={[isCorrectSpecialityValidator]}>
 
-                    <Field name="service_id" component={SelectCreator}
-                           validate={[isCorrectSpecialityValidator]}>
+                    <option defaultChecked>Виберіть послугу</option>
+                    {
+                        services.map(service => <option key={service.id}
+                                                        value={service.id}>{service.service}</option>)
+                    }
 
-                        <option defaultChecked>Выберіть послугу</option>
-                        {
-                            services.map(service => <option key={service.id}
-                                                            value={service.id}>{service.service}</option>)
-                        }
+                </Field>
 
-                    </Field>
+                {props.error && <div className={style.requiredStar}>{props.error}</div>}
 
-                    {props.error && <div className={style.requiredStar}>{props.error}</div>}
-
-                    <div>
-                        <button type="submit" disabled={pristine || submitting}>
-                            Видалити послугу
-                        </button>
-                    </div>
-                </div>
 
             </div>
 
+            <button className={s.check} type="submit" disabled={pristine || submitting}>
+                Видалити
+            </button>
         </form>
     )
 };

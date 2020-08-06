@@ -1,0 +1,115 @@
+.infoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #ffffff;
+    width: 100%;
+}
+
+.infoTitle {
+    margin-top: 20px;
+    width: 587px;
+    color: #2694d6;
+    font-family: "Arial MT", serif;
+    font-size: 45px;
+    font-weight: 400;
+}
+
+.infoItem {
+    color: #2694d6;
+    font-family: "Arial MT", serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin: 13px 0;
+}
+
+.editInfo {
+    width: 150px;
+    height: 31px;
+    border-radius: 10px;
+    border: 2px solid #d62626;
+    color: #d62626;
+    background: #ffffff;
+    font-family: "Arial MT", serif;
+    font-size: 19px;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.editInfo:hover {
+    transform: scale(1.07);
+    transition: 0.3s;
+}
+
+.cancel {
+    height: 30px;
+    width: 120px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to top, #9d2a2a 0%, #d62626 100%);
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    margin: 5px 0;
+}
+
+.cancel:hover {
+    opacity: 0.85;
+}
+
+.avatarBlock {
+    width: 350px;
+    height: 400px;
+    border-radius: 40px;
+    position: relative;
+    z-index: 0;
+    margin-right: 15px;
+}
+
+.ava {
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    position: absolute;
+    z-index: 1;
+}
+.changePhoto{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background: #6e6e6e;
+    opacity: 0.7;
+    border-radius: 40px;
+    display: none;
+}
+.changePhoto input{
+    border: 2px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+    width: 100px;
+    outline: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.infoData {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.avatarBlock:hover .changePhoto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.majorInfo {
+    width: 57%;
+}

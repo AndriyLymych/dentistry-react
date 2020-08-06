@@ -1,16 +1,7 @@
 import React from "react";
 import {NavLink, Redirect, Route, Switch} from "react-router-dom";
-import MyReceptions from "../../pages/MyReceptions/MyReceptions";
 import MyProfileInfo from "../../pages/MyProfileInfo/MyProfileInfo";
-import ChangePassword from "../../pages/ChangePassword/ChangePassword";
 import {USER_ROLE} from "../../../constant/userConstant/userRole";
-import Register from "../../pages/Register/Register";
-import RegisterDoctor from "../../pages/RegisterDoctor/RegisterDoctor";
-import BlockUser from "../../pages/BlockUser/BlockUser";
-import UnlockUser from "../../pages/UnlockUser/UnlockUser";
-import AddMedicalService from "../../pages/AddMedicalService/AddMedicalService";
-import DeleteMedicalService from "../../pages/DeleteMedicalService/DeleteMedicalService";
-import Reception from "../../pages/Reception/Reception";
 import ReceptionContainer from "../../../containers/ReceptionContainer/ReceptionContainer";
 import MyReceptionsContainer from "../../../containers/MyReceptionsContainer/MyReceptionsContainer";
 import RegisterContainer from "../../../containers/RegisterContainer/RegisterContainer";
@@ -21,6 +12,7 @@ import AddMedicalServiceContainer from "../../../containers/AddMedicalServiceCon
 import DeleteMedicalServiceContainer
     from "../../../containers/DeleteMedicalServiceContainer/DeleteMedicalServiceContainer";
 import ChangePasswordContainer from "../../../containers/ChangePasswordContainer/ChangePasswordContainer";
+import style from './MyProfile.module.css'
 
 const MyProfile = ({
                        isAuth,
@@ -33,72 +25,75 @@ const MyProfile = ({
 
 
     return (
-        <div>
+        <div className={style.profileContainer}  >
             {
                 isAuth ?
                     <div>
-                        <nav>
-                            <ul>
-                                <li><NavLink to={`/my-profile/info`}>Інформація про мене</NavLink></li>
-                                {
-                                    me.UserRole.label === USER_ROLE.PATIENT &&
-                                    <li><NavLink to={`/my-profile/my-receptions`}>Мої записи на прийом</NavLink></li>
-                                }
-                                {
-                                    me.UserRole.label === USER_ROLE.DOCTOR &&
-                                    <li><NavLink to={`/my-profile/reception-patient`}>Записати на прийом</NavLink></li>
+                       <nav className={style.profileMenu}>
+                           <NavLink className={style.profileInfoItem} to={`/my-profile/info`}>Інформація про мене</NavLink>
+                           <NavLink className={style.profileInfoItem} to={`/my-profile/change-password`}>Змінити
+                               пароль</NavLink>
+                           {
+                               me.UserRole.label === USER_ROLE.PATIENT &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/my-receptions`}>Мої записи на
+                                   прийом</NavLink>
+                           }
+                           {
+                               me.UserRole.label === USER_ROLE.DOCTOR &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/reception-patient`}>Записати на
+                                   прийом</NavLink>
 
-                                }
-                                {
-                                    me.UserRole.label === USER_ROLE.DOCTOR &&
-                                    <li><NavLink to={`/my-profile/receptions`}>Записи на прийом</NavLink></li>
+                           }
+                           {
+                               me.UserRole.label === USER_ROLE.DOCTOR &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/receptions`}>Записи на
+                                   прийом</NavLink>
 
-                                }
-
-
-                                <li><NavLink to={`/my-profile/change-password`}>Змінити пароль</NavLink></li>
-
-                                {
-                                    me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <li><NavLink to={`/my-profile/register-admin`}>Зареєструвати нового
-                                        адміністратора</NavLink></li>
-
-                                }
-
-                                {
-                                    me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <li><NavLink to={`/my-profile/register-doctor`}>Зареєструвати лікаря</NavLink></li>
-
-                                }
-
-                                {
-                                    me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <li><NavLink to={`/my-profile/block-user`}>Заблокувати користувача</NavLink></li>
-
-                                }
-
-                                {
-                                    me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <li><NavLink to={`/my-profile/unlock-user`}>Розблокувати користувача</NavLink></li>
-
-                                }
-                                {
-                                    me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <li><NavLink to={`/my-profile/add-service`}>Додати нову медичну послугу</NavLink>
-                                    </li>
-
-                                }
-                                {
-                                    me.UserRole.label === USER_ROLE.ADMIN &&
-                                    <li><NavLink to={`/my-profile/delete-service`}>Видалити медичну послугу</NavLink>
-                                    </li>
-
-                                }
+                           }
 
 
-                            </ul>
-                        </nav>
+                           {
+                               me.UserRole.label === USER_ROLE.ADMIN &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/register-admin`}>Зареєструвати
+                                   нового
+                                   адміністратора</NavLink>
 
+                           }
+
+                           {
+                               me.UserRole.label === USER_ROLE.ADMIN &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/register-doctor`}>Зареєструвати
+                                   лікаря</NavLink>
+
+                           }
+
+                           {
+                               me.UserRole.label === USER_ROLE.ADMIN &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/block-user`}>Заблокувати
+                                   користувача</NavLink>
+
+                           }
+
+                           {
+                               me.UserRole.label === USER_ROLE.ADMIN &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/unlock-user`}>Розблокувати
+                                   користувача</NavLink>
+
+                           }
+                           {
+                               me.UserRole.label === USER_ROLE.ADMIN &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/add-service`}>Додати нову
+                                   медичну послугу</NavLink>
+
+                           }
+                           {
+                               me.UserRole.label === USER_ROLE.ADMIN &&
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/delete-service`}>Видалити
+                                   медичну послугу</NavLink>
+
+                           }
+
+                       </nav>
                         <Switch>
                             {
                                 me.UserRole.label === USER_ROLE.PATIENT &&

@@ -88,7 +88,7 @@ const CommentCard = (
                                 />
                             </div>
 
-                            <div>
+                            <div className={style.editBtnContainer}>
                                 <button className={style.editCancel} onClick={turnEditMode}>ВІДХИЛИТИ</button>
                                 <button className={style.editConfirm} onClick={updateComment}>ПРИЙНЯТИ</button>
                             </div>

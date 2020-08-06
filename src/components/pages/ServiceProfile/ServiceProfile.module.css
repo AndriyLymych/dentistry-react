@@ -5,17 +5,20 @@
     position: absolute;
     z-index: 1;
 }
-.avatarBlock{
+
+.avatarBlock {
     width: 400px;
     height: 450px;
     position: relative;
     z-index: 0;
-
+    margin: 0 20px 40px 20px;
 }
+
 .profileContainer {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .profileInfo {
@@ -26,18 +29,16 @@
     background-color: #ffffff;
     padding: 0 15px;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin: 0 20px 40px 20px;
+
 }
 
 .serviceContainer {
     margin: 0 auto;
     width: 100%;
-    background-image: url("../../../assets/img/docProfile.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background: linear-gradient(45deg, #2694d6, #2d439e);
     min-height: 87vh;
-    padding: 5px 0 0 0 ;
+    padding: 5px 0 0 0;
 }
 
 .backBtn {
@@ -61,7 +62,8 @@
     transform: scale(1.05);
     transition: 0.2s;
 }
-.editBtn{
+
+.editBtn {
     width: 160px;
     height: 36px;
     border-radius: 10px;
@@ -79,32 +81,61 @@
     outline: none;
     cursor: pointer;
 }
+
 .editBtn:hover {
     transform: scale(1.05);
     transition: 0.2s;
 }
-.profileInfoTitle{
+
+.profileInfoTitle {
     color: #2957ac;
     font-family: "Arial MT", serif;
     font-size: 43px;
     font-weight: 400;
 }
 
-.profileInfoText{
+.profileInfoText {
     color: #2957ac;
     font-family: "Arial MT", serif;
     font-size: 21px;
     font-weight: 400;
 }
-.updateForm{
+
+.updateForm {
     width: 100%;
-    height: 90%;
+    min-height: 80%;
     margin-left: 10px;
+    margin-top: 20px;
+
 }
-.editPhoto{
+
+.editPhoto {
     display: none;
 }
-.avatarBlock:hover .editPhoto{
-    display: block;
 
+.avatarBlock:hover .editPhoto {
+    display: block;
+}
+
+@media (max-width: 1456px) {
+    .profileInfo{
+        padding-bottom: 55px;
+    }
+}
+@media (max-width: 435px) {
+    .avatarBlock,.avatar{
+        width: 300px;
+        height: 360px;
+        margin-right: 20px;
+    }
+}
+@media (max-width: 360px) {
+    .avatarBlock,.avatar{
+        width: 240px;
+        height: 300px;
+        margin-right: 20px;
+    }
+    .profileInfoTitle{
+        font-size: 35px;
+    }
 }

@@ -1,8 +1,11 @@
 .serviceCardContainer {
     width: 939px;
-    height: 400px;
+    min-height: 400px;
     box-shadow: -3px -1px 3px 1px transparent;
     background-image: url("../../../assets/img/serviceBg.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -32,6 +35,7 @@
     font-size: 37px;
     font-weight: 400;
     margin-top: 40px;
+    margin-right: 5px;
 }
 
 .serviceInfoDesc {
@@ -40,7 +44,7 @@
     font-family: "Arial MT", serif;
     font-size: 22px;
     font-weight: 400;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .serviceInfoBtn {
@@ -120,4 +124,91 @@
     margin-top: -50px;
     margin-bottom: 7%;
     padding-bottom: 17px;
+}
+
+@media (max-width: 1500px) {
+    .serviceCardContainer:nth-child(n) {
+        margin: 70px 20px 50px 20px;
+        width: 64%;
+    }
+
+    .serviceInfoBtn {
+        font-size: 20px;
+    }
+
+    .serviceInfo {
+        justify-content: center;
+    }
+
+    .serviceInfoTitle {
+        margin-bottom: 10px;
+    }
+
+    .serviceInfoDesc {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 1150px) {
+
+    .serviceInfoTitle {
+        font-size: 33px;
+    }
+
+    .serviceInfoDesc {
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 1010px) {
+    .serviceImg {
+        height: 230px;
+        width: 230px;
+        margin-top: 30px;
+        align-self: center;
+    }
+
+    .serviceInfoBtn {
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+
+    .serviceCardContainer {
+        flex-direction: column;
+        box-shadow: none;
+    }
+
+    .serviceInfo {
+        width: 80%;
+        height: 50%;
+    }
+}
+
+@media (max-width: 570px) {
+    .serviceInfoTitle {
+        font-size: 30px;
+    }
+
+    .serviceInfoDesc {
+        font-size: 17px;
+    }
+    .serviceInfoBtn{
+        height: 32px;
+        font-size: 16px;
+        width: 35%;
+    }
+}
+@media (max-width: 450px) {
+    .serviceImg{
+        height: 180px;
+        width: 180px;
+    }
+    .serviceInfoBtn{
+        height: 32px;
+        font-size: 15px;
+        width: 50%;
+    }
+    .serviceInfoTitle{
+        font-size: 28px;
+    }
 }

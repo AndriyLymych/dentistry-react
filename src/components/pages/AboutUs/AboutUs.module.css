@@ -1,5 +1,5 @@
-.aboutUsContainer{
-    height: 83vh;
+.aboutUsContainer {
+    min-height: 83vh;
     width: 100%;
     background-image: url("../../../assets/img/1212.jpg");
     background-size: cover;
@@ -10,7 +10,8 @@
     flex-direction: column;
     align-items: center;
 }
-.aboutUsTitle{
+
+.aboutUsTitle {
     width: 400px;
     color: #ffffff;
     font-family: "Arial MT", serif;
@@ -20,7 +21,8 @@
     text-align: center;
 
 }
-.aboutUsText{
+
+.aboutUsText {
     width: 80%;
     color: #ffffff;
     font-family: "Arial MT", serif;
@@ -28,4 +30,41 @@
     font-weight: 400;
     text-align: center;
 
+}
+
+@media (max-width: 1400px) {
+    .aboutUsTitle {
+        padding-top: 50px;
+    }
+    .aboutUsText{
+        font-size: 20px;
+    }
+}
+@media (max-width: 720px) {
+    .aboutUsTitle {
+        padding-top: 20px;
+    }
+    .aboutUsText{
+        font-size: 18px;
+    }
+}
+@media (max-width: 520px) {
+    .aboutUsTitle {
+        padding-top: 0;
+        margin: 35px 0;
+    }
+}
+@media (max-width: 420px) {
+    .aboutUsTitle {
+        padding-top: 0;
+        margin: 35px 0;
+    }
+    .aboutUsText{
+        font-size: 16px;
+        width: 90%;
+    }
+    .aboutUsTitle{
+        width: 90%;
+        font-size: 50px;
+    }
 }
