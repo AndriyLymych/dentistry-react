@@ -140,12 +140,36 @@ a {
     height: 30px;
     width: 30px;
     display: none;
+    transition: 0.3s;
+
 }
 
 .burgerItem {
     height: 15%;
-    background: #5f5f5f;
+    background: #636363;
     border-radius: 3px;
+    transition: 0.3s;
+
+}
+
+.burgerFirst {
+    background: #ffffff;
+    transform: rotate(90deg) translateX(20px) rotate(45deg);
+    transition: 0.3s;
+
+}
+
+.burgerSecond {
+    background: #ffffff;
+    transform: translateX(-200%);
+    transition: 0.3s;
+}
+
+.burgerThird {
+    background: #ffffff;
+    transform: rotate(45deg);
+    transition: 0.3s;
+
 }
 
 @media (max-width: 1250px) {
@@ -179,26 +203,56 @@ a {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        z-index: 20;
+        z-index: 22;
         position: fixed;
-        top: 15px;
-        right: 20px;
-
+        left: 15px;
+        top: 40px;
     }
+
 
     .showMenu {
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-
-    .allMenu {
         position: fixed;
         width: 300px;
         height: 100vh;
         z-index: 20;
-        background: black;
+        background-image: linear-gradient(#000000, #000000);
         opacity: 0.9;
         left: 0;
+        top: 0;
+    }
+
+    .menuItem {
+        margin-bottom: 20px;
+    }
+
+    .menuItemLink {
+        color: #ffffff;
+
+    }
+
+    .menuItemProfile {
+        color: #ffffff;
+        border-color: #ffffff;
+    }
+
+    .menuItemLogout {
+        background: transparent;
+        color: #ffffff;
+        border-color: #ffffff;
+    }
+
+    .sign {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .menuItemBtnLink {
+        margin-left: 10%;
+        width: 100px;
+        color: #ffffff;
+        border-color: #ffffff;
     }
 }

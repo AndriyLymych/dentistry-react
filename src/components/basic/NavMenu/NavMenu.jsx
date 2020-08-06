@@ -7,13 +7,13 @@ const NavMenu = ({isAuth, logout}) => {
     const [show, setShow] = useState(false);
 
     return (
-        <div className={style.allMenu}>
-            <div className={!show ? style.burger : style.burger + ' ' + style.burgerShow} onClick={event => {
+        <div>
+            <div className={!show ? style.burger : style.burger } onClick={event => {
                 setShow(!show);
             }}>
                 <div className={!show ? style.burgerItem : style.burgerItem + ' ' + style.burgerFirst}/>
-                <div className={!show ? style.burgerItem : style.burgerItem + ' ' + style.burgerThird}/>
                 <div className={!show ? style.burgerItem : style.burgerItem + ' ' + style.burgerSecond}/>
+                <div className={!show ? style.burgerItem : style.burgerItem + ' ' + style.burgerThird}/>
             </div>
 
             <ul className={!show ? style.menu : style.menu + ' ' + style.showMenu}>
