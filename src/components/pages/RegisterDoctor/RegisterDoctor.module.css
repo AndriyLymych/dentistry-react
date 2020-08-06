@@ -15,6 +15,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    background: #ffffff;
 }
 .successReg {
     height: 100%;
@@ -33,4 +34,16 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+@media (max-width: 526px) {
+    .regTitle{
+        font-size: 45px;
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 370px) {
+    .regTitle{
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
 }

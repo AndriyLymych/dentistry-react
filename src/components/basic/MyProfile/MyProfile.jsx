@@ -55,7 +55,6 @@ const MyProfile = ({
                            {
                                me.UserRole.label === USER_ROLE.ADMIN &&
                                <NavLink className={style.profileInfoItem} to={`/my-profile/register-admin`}>Зареєструвати
-                                   нового
                                    адміністратора</NavLink>
 
                            }

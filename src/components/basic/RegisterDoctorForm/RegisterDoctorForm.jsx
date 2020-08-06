@@ -34,7 +34,7 @@ const RegisterDoctorForm = props => {
                             name="email"
                             component={InputCreator}
                             type="email"
-                            placeholder="Введіть ваш емейл..."
+                            placeholder="Введіть емейл..."
                             validate={[requiredValidator, minLength, maxLength, emailValidator]}
 
                         />
@@ -47,7 +47,7 @@ const RegisterDoctorForm = props => {
                             name="password"
                             component={InputCreator}
                             type="password"
-                            placeholder="Введіть ваш пароль..."
+                            placeholder="Введіть пароль..."
                             validate={[requiredValidator, minPasswordLength, passwordValidator]}
 
                         />
@@ -60,7 +60,7 @@ const RegisterDoctorForm = props => {
                             name="name"
                             component={InputCreator}
                             type="text"
-                            placeholder="Введіть ваше ім'я..."
+                            placeholder="Введіть ім'я..."
                             validate={[requiredValidator, minNameLength, maxNameLength]}
 
                         />
@@ -73,7 +73,7 @@ const RegisterDoctorForm = props => {
                             name="middleName"
                             component={InputCreator}
                             type="text"
-                            placeholder="Введіть ваше по батькові..."
+                            placeholder="Введіть по батькові..."
                             validate={[requiredValidator, minNameLength, maxNameLength]}
 
                         />
@@ -87,7 +87,7 @@ const RegisterDoctorForm = props => {
                             name="surname"
                             component={InputCreator}
                             type="text"
-                            placeholder="Введіть ваше прізвище..."
+                            placeholder="Введіть прізвище..."
                             validate={[requiredValidator, minNameLength, maxNameLength]}
 
                         />
@@ -106,7 +106,7 @@ const RegisterDoctorForm = props => {
                             name="age"
                             component={InputCreator}
                             type="text"
-                            placeholder="Введіть ваше вік..."
+                            placeholder="Введіть вік..."
                             validate={[requiredValidator, isNumberValidator, minAge, maxAge]}
 
                         />
@@ -119,7 +119,7 @@ const RegisterDoctorForm = props => {
                                 name="city"
                                 component={InputCreator}
                                 type="text"
-                                placeholder="Введіть ваше місто..."
+                                placeholder="Введіть місто..."
                                 validate={requiredValidator}
 
                             />

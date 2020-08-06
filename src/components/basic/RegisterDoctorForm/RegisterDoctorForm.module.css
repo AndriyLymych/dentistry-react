@@ -98,3 +98,23 @@
     box-shadow: 0 0 8px #88D5E9;
     border: 2px solid  #157dc3;
 }
+
+@media (max-width: 680px) {
+    .updateForm{
+        justify-content: space-around;
+    }
+}
+@media (max-width: 526px) {
+    .updateForm input{
+        width: 100%;
+    }
+    .updateForm input::placeholder{
+        font-size: 12px;
+    }
+}
+@media (max-width: 526px) {
+
+    .updateForm input::placeholder{
+        font-size: 10px;
+    }
+}

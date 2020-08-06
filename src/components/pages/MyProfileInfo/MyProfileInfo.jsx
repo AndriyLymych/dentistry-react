@@ -92,7 +92,7 @@ const MyProfileInfo = ({
                     </div>
                 }
             </div>
-            <img src={infoImg} alt=""/>
+            <img className={style.infoImg} src={infoImg} alt=""/>
         </div>
 
     )

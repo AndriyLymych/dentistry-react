@@ -37,3 +37,19 @@
 
     }
 }
+@media (max-width: 766px) {
+    .profileInfoItem{
+        width: 110px;
+        font-size: 14px;
+        height: 60px;
+        margin: 10px 10px;
+    }
+}
+@media (max-width: 520px) {
+    .profileInfoItem{
+        width: 80px;
+        font-size: 11px;
+        height: 50px;
+        margin: 5px 5px;
+    }
+}

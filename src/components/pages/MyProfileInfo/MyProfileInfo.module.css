@@ -113,3 +113,27 @@
 .majorInfo {
     width: 57%;
 }
+@media (max-width: 1000px) {
+    .infoImg{
+        width: 280px;
+    }
+}
+@media (max-width: 890px) {
+    .infoContainer{
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .infoData{
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 710px) {
+   .infoImg{
+        width: 250px;
+   }
+    .infoTitle{
+        width: 90%;
+        font-size: 35px;
+
+    }
+}
