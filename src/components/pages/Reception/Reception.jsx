@@ -3,6 +3,7 @@ import {reduxForm} from "redux-form";
 import ReceptionForm from "../../basic/ReceptionForm/ReceptionForm";
 import Preloader from "../../basic/Preloader/Preloader";
 import style from './Reception.module.css';
+import receptionImg from '../../../assets/img/reception.png';
 
 const ReceptionReduxForm = reduxForm({
     form: 'reception'
@@ -29,14 +30,17 @@ const Reception = ({receptionPatient, isReceptionSuccess, isReceptionLoading, ge
         <div className={style.receptionContainer}>
             {
                 !isReceptionSuccess ?
-                    <div>
-                        <div className={style.receptionTitle}>Запис на прийом:</div>
-                        <ReceptionReduxForm
-                            onSubmit={onSubmit}
-                            services={services}
-                            isAuth={isAuth}
-                        />
-                    </div> :
+                   <div className={style.receptionInfo}>
+                       <div>
+                           <div className={style.receptionTitle}>Запис на прийом:</div>
+                           <ReceptionReduxForm
+                               onSubmit={onSubmit}
+                               services={services}
+                               isAuth={isAuth}
+                           />
+                       </div>
+                       <img className={style.receptionImg} src={receptionImg} alt=""/>
+                   </div> :
                     <div className={style.receptionTitle}>Запис пройшов успішно!</div>
             }
         </div>

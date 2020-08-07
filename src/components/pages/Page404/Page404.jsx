@@ -7,6 +7,10 @@ const Page404 = () => {
     return(
         <div>
             <div className={style.page404Container}>
+                <div className={style.page404Error}>
+                    Сторінку
+                    не знайдено
+                </div>
                 <div className={style.page404Logo}>
                     <div className={style.page404LogoNumber}>4</div>
                     <div >
@@ -14,10 +18,7 @@ const Page404 = () => {
                     </div>
                     <div className={style.page404LogoNumber +' '+style.rightNumber}>4</div>
                 </div>
-                <div className={style.page404Error}>
-                    Сторінку
-                    не знайдено
-                </div>
+
             </div>
             <Footer/>
         </div>

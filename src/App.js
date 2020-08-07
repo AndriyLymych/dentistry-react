@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.module.css';
-import Footer from "./components/basic/Footer/Footer";
 import style from './App.module.css'
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
