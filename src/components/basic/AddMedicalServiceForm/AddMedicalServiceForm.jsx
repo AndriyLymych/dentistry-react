@@ -16,7 +16,7 @@ const minLength = minLengthValidator(6);
 
 const AddMedicalServiceForm = props => {
 
-    const {handleSubmit, pristine, submitting} = props;
+    const {handleSubmit, pristine, submitting,error} = props;
 
     return (
         <form className={s.updateForm} onSubmit={handleSubmit}>
@@ -27,6 +27,8 @@ const AddMedicalServiceForm = props => {
                         name="photo"
                         component={MyFile}
                         type="file"
+                        validate={[requiredValidator]}
+
                     >
                     </Field>
 
@@ -79,7 +81,7 @@ const AddMedicalServiceForm = props => {
                     />
                 </div>
             </div>
-            {props.error && <div className={s.err}>{props.error}</div>}
+            {error && <div className={s.err}>{error}</div>}
 
             <button className={s.check} type="submit" disabled={pristine || submitting}>
                 Підтвердити

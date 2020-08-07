@@ -44,3 +44,9 @@
 .check:hover{
     opacity: 0.85;
 }
+
+@media (max-width: 470px) {
+  .updateForm{
+      width: 90%;
+  }
+}

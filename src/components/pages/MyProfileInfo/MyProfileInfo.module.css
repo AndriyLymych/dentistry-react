@@ -4,6 +4,7 @@
     justify-content: space-around;
     background: #ffffff;
     width: 100%;
+    height: 100%;
 }
 
 .infoTitle {
@@ -61,8 +62,8 @@
 }
 
 .avatarBlock {
-    width: 350px;
-    height: 400px;
+    width: 270px;
+    height: 320px;
     border-radius: 40px;
     position: relative;
     z-index: 0;
@@ -90,7 +91,8 @@
     border: 2px solid #ccc;
     padding: 6px 12px;
     cursor: pointer;
-    width: 100px;
+    width: 120px;
+    height: 30px;
     outline: none;
     border-radius: 10px;
     display: flex;
@@ -99,6 +101,7 @@
 }
 .infoData {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     width: 70%;

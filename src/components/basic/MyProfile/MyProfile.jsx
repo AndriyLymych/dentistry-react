@@ -25,145 +25,148 @@ const MyProfile = ({
 
 
     return (
-        <div className={style.profileContainer}  >
-            {
-                isAuth ?
-                    <div>
-                       <nav className={style.profileMenu}>
-                           <NavLink className={style.profileInfoItem} to={`/my-profile/info`}>Інформація про мене</NavLink>
-                           <NavLink className={style.profileInfoItem} to={`/my-profile/change-password`}>Змінити
-                               пароль</NavLink>
-                           {
-                               me.UserRole.label === USER_ROLE.PATIENT &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/my-receptions`}>Мої записи на
-                                   прийом</NavLink>
-                           }
-                           {
-                               me.UserRole.label === USER_ROLE.DOCTOR &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/reception-patient`}>Записати на
-                                   прийом</NavLink>
+       <div>
+           <div className={style.profileContainer}  >
+               {
+                   isAuth ?
+                       <div>
+                           <nav className={style.profileMenu}>
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/info`}>Інформація про мене</NavLink>
+                               <NavLink className={style.profileInfoItem} to={`/my-profile/change-password`}>Змінити
+                                   пароль</NavLink>
+                               {
+                                   me.UserRole.label === USER_ROLE.PATIENT &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/my-receptions`}>Мої записи на
+                                       прийом</NavLink>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.DOCTOR &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/reception-patient`}>Записати на
+                                       прийом</NavLink>
 
-                           }
-                           {
-                               me.UserRole.label === USER_ROLE.DOCTOR &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/receptions`}>Записи на
-                                   прийом</NavLink>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.DOCTOR &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/receptions`}>Записи на
+                                       прийом</NavLink>
 
-                           }
+                               }
 
 
-                           {
-                               me.UserRole.label === USER_ROLE.ADMIN &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/register-admin`}>Зареєструвати
-                                   адміністратора</NavLink>
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/register-admin`}>Зареєструвати
+                                       адміністратора</NavLink>
 
-                           }
+                               }
 
-                           {
-                               me.UserRole.label === USER_ROLE.ADMIN &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/register-doctor`}>Зареєструвати
-                                   лікаря</NavLink>
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/register-doctor`}>Зареєструвати
+                                       лікаря</NavLink>
 
-                           }
+                               }
 
-                           {
-                               me.UserRole.label === USER_ROLE.ADMIN &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/block-user`}>Заблокувати
-                                   користувача</NavLink>
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/block-user`}>Заблокувати
+                                       користувача</NavLink>
 
-                           }
+                               }
 
-                           {
-                               me.UserRole.label === USER_ROLE.ADMIN &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/unlock-user`}>Розблокувати
-                                   користувача</NavLink>
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/unlock-user`}>Розблокувати
+                                       користувача</NavLink>
 
-                           }
-                           {
-                               me.UserRole.label === USER_ROLE.ADMIN &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/add-service`}>Додати нову
-                                   медичну послугу</NavLink>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/add-service`}>Додати нову
+                                       медичну послугу</NavLink>
 
-                           }
-                           {
-                               me.UserRole.label === USER_ROLE.ADMIN &&
-                               <NavLink className={style.profileInfoItem} to={`/my-profile/delete-service`}>Видалити
-                                   медичну послугу</NavLink>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <NavLink className={style.profileInfoItem} to={`/my-profile/delete-service`}>Видалити
+                                       медичну послугу</NavLink>
 
-                           }
+                               }
 
-                       </nav>
-                        <Switch>
-                            {
-                                me.UserRole.label === USER_ROLE.PATIENT &&
-                                <Route path={`/my-profile/my-receptions`} exact
-                                       render={() => <MyReceptionsContainer/>}/>
-                            }
-                            {
-                                me.UserRole.label === USER_ROLE.DOCTOR &&
-                                <Route path={`/my-profile/receptions`} exact
-                                       render={() => <MyReceptionsContainer/>}/>
-                            }
-                            {
-                                me.UserRole.label === USER_ROLE.DOCTOR &&
-                                <Route path={`/my-profile/reception-patient`} exact
-                                       render={() => <ReceptionContainer/>}/>
-                            }
-                            <Route path={`/my-profile/info`} exact
-                                   render={() => <MyProfileInfo me={me} avatar={me.avatar}
-                                                                isProfileUpdate={isProfileUpdate}
-                                                                errorMessage={errorMessage}
-                                                                updateDoctorProfilePhoto={updateDoctorProfilePhoto}
-                                                                updateUserDates={updateUserDates}
-                                   />}/>
+                           </nav>
+                           <Switch>
+                               {
+                                   me.UserRole.label === USER_ROLE.PATIENT &&
+                                   <Route path={`/my-profile/my-receptions`} exact
+                                          render={() => <MyReceptionsContainer/>}/>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.DOCTOR &&
+                                   <Route path={`/my-profile/receptions`} exact
+                                          render={() => <MyReceptionsContainer/>}/>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.DOCTOR &&
+                                   <Route path={`/my-profile/reception-patient`} exact
+                                          render={() => <ReceptionContainer/>}/>
+                               }
+                               <Route path={`/my-profile/info`} exact
+                                      render={() => <MyProfileInfo me={me} avatar={me.avatar}
+                                                                   isProfileUpdate={isProfileUpdate}
+                                                                   errorMessage={errorMessage}
+                                                                   updateDoctorProfilePhoto={updateDoctorProfilePhoto}
+                                                                   updateUserDates={updateUserDates}
+                                      />}/>
 
-                            <Route path={`/my-profile/change-password`} exact
-                                   render={() => <ChangePasswordContainer/>}/>
+                               <Route path={`/my-profile/change-password`} exact
+                                      render={() => <ChangePasswordContainer/>}/>
 
-                            {
-                                me.UserRole.label === USER_ROLE.ADMIN &&
-                                <Route path={`/my-profile/register-admin`} exact render={() => <RegisterContainer/>}/>
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <Route path={`/my-profile/register-admin`} exact render={() => <RegisterContainer/>}/>
 
-                            }
+                               }
 
-                            {
-                                me.UserRole.label === USER_ROLE.ADMIN &&
-                                <Route path={`/my-profile/register-doctor`} exact
-                                       render={() => <RegisterDoctorContainer/>}/>
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <Route path={`/my-profile/register-doctor`} exact
+                                          render={() => <RegisterDoctorContainer/>}/>
 
-                            }
+                               }
 
-                            {
-                                me.UserRole.label === USER_ROLE.ADMIN &&
-                                <Route path={`/my-profile/block-user`} exact render={() => <BlockUserContainer/>}/>
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <Route path={`/my-profile/block-user`} exact render={() => <BlockUserContainer/>}/>
 
-                            }
-                            {
-                                me.UserRole.label === USER_ROLE.ADMIN &&
-                                <Route path={`/my-profile/unlock-user`} exact render={() => <UnlockUserContainer/>}/>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <Route path={`/my-profile/unlock-user`} exact render={() => <UnlockUserContainer/>}/>
 
-                            }
-                            {
-                                me.UserRole.label === USER_ROLE.ADMIN &&
-                                <Route path={`/my-profile/add-service`} exact
-                                       render={() => <AddMedicalServiceContainer/>}/>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <Route path={`/my-profile/add-service`} exact
+                                          render={() => <AddMedicalServiceContainer/>}/>
 
-                            }
-                            {
-                                me.UserRole.label === USER_ROLE.ADMIN &&
-                                <Route path={`/my-profile/delete-service`} exact
-                                       render={() => <DeleteMedicalServiceContainer/>}/>
+                               }
+                               {
+                                   me.UserRole.label === USER_ROLE.ADMIN &&
+                                   <Route path={`/my-profile/delete-service`} exact
+                                          render={() => <DeleteMedicalServiceContainer/>}/>
 
-                            }
+                               }
 
-                            <Route path={`/my-profile`} render={() => <Redirect to={`/my-profile/info`}/>}/>
+                               <Route path={`/my-profile`} render={() => <Redirect to={`/my-profile/info`}/>}/>
 
-                        </Switch>
-                    </div> :
+                           </Switch>
+                       </div> :
 
-                    <Redirect to={'/login'}/>
-            }
-        </div>
+                       <Redirect to={'/login'}/>
+               }
+           </div>
+
+       </div>
     )
 };
 

@@ -43,7 +43,7 @@ export const addMedicalService = (service, description, photo, price) => async d
     } catch (e) {
         dispatch(setLoadingProgress(false));
         if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
+            // dispatch(refreshUserToken(e.response.data.code))
 
         }
     }

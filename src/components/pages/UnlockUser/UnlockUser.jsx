@@ -8,7 +8,7 @@ import {FixedSizeList} from "react-window";
 const UnlockUser = ({isCreateByAdmin, blockedUsers, getBlockedUsersFromDB, unlockUserByAdmin}) => {
 
     useEffect(() => {
-        if (!blockedUsers.length) {
+        if (!blockedUsers.length ) {
             getBlockedUsersFromDB()
         }
     }, [blockedUsers]);

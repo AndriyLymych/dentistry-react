@@ -78,12 +78,12 @@ const MyReceptions = (
 
 
             {isLoading && isAuth ? <Preloader/> :
-                <div>
+                <div className={style.mainInfo}>
 
                     {
                         receptions.length > 0 ?
                             <div>
-                                <TableContainer component={Paper}>
+                                <TableContainer className={style.table} component={Paper}>
                                     <Table aria-label="caption table">
                                         {user_role === USER_ROLE.DOCTOR ?
                                             <caption>Записи на прийом</caption> :
@@ -91,10 +91,10 @@ const MyReceptions = (
                                         }
 
                                         <TableHead>
-                                            <TableRow>
+                                            <TableRow >
                                                 {
                                                     user_role === USER_ROLE.DOCTOR &&
-                                                    <TableCell>Ім'я</TableCell>
+                                                    <TableCell className={style.tableRow}>Ім'я</TableCell>
                                                 }
                                                 {user_role === USER_ROLE.DOCTOR &&
                                                 <TableCell align="right">Електронна адреса</TableCell>}
@@ -115,7 +115,7 @@ const MyReceptions = (
 
                                             {receptions.map(row =>
 
-                                                <TableRow>
+                                                <TableRow >
 
                                                     {user_role === USER_ROLE.DOCTOR &&
                                                     <TableCell className={style.field} component="th"
@@ -136,7 +136,7 @@ const MyReceptions = (
 
                                                         align="right">{row.MedicalService.price}</TableCell>
                                                     <TableCell contentEditable align="right">
-                                                        {dayjs(row.date).format('HH:mm MM/DD/YYYY')}
+                                                        {dayjs(row.date).format('HH:mm DD/MM/YYYY')}
                                                     </TableCell>
                                                     <TableCell align="right">
                                                         <div title={'Видалити'} onClick={handleClickOpen}>
@@ -147,6 +147,7 @@ const MyReceptions = (
                                                     <div>
 
                                                         <Dialog
+
                                                             open={open}
                                                             onClose={handleClose}
                                                             aria-labelledby="alert-dialog-title"
@@ -182,9 +183,7 @@ const MyReceptions = (
 
                             </div>
                             :
-                            <div>
-                                <div>У вас немає активних записів.Запишіться на прийом</div>
-                            </div>
+                            <div className={style.success}>У вас немає активних записів.Запишіться на прийом</div>
                     }
 
                 </div>

@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {reduxForm} from "redux-form";
 import ReceptionForm from "../../basic/ReceptionForm/ReceptionForm";
 import Preloader from "../../basic/Preloader/Preloader";
+import style from './Reception.module.css';
 
 const ReceptionReduxForm = reduxForm({
     form: 'reception'
@@ -22,20 +23,21 @@ const Reception = ({receptionPatient, isReceptionSuccess, isReceptionLoading, ge
     const onSubmit = data => {
         receptionPatient(data)
     };
+    //TODO err reception success
 
     return (
-        <div>
+        <div className={style.receptionContainer}>
             {
                 !isReceptionSuccess ?
                     <div>
-                        <div>Запис на прийом:</div>
+                        <div className={style.receptionTitle}>Запис на прийом:</div>
                         <ReceptionReduxForm
                             onSubmit={onSubmit}
                             services={services}
                             isAuth={isAuth}
                         />
                     </div> :
-                    <div>Запис пройшов успішно</div>
+                    <div className={style.receptionTitle}>Запис пройшов успішно!</div>
             }
         </div>
     )

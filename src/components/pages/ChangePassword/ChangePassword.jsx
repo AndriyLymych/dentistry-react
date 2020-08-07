@@ -25,7 +25,7 @@ const ChangePassword = ({isPasswordChanged, isLoading, errorMessage, changeUserP
             {
                 !isPasswordChanged ?
                     <div className={style.changePasswordContainer}>
-                        <div>
+                        <div className={style.changePasswordInfo}>
                             <div className={style.changePasswordTitle}>Змінити пароль:</div>
                             <ChangePasswordReduxForm onSubmit={onSubmit} errorMessage={errorMessage}/>
                         </div>

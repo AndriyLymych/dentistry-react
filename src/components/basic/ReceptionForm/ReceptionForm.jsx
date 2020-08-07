@@ -8,46 +8,47 @@ import {
 } from "../../../validators/validators";
 import {InputCreator, SelectCreator} from "../../../helpers/FormCreator/FormCreator";
 import style from "../../../App.module.css";
+import s from './ReceptionForm.module.css'
 
 const minNameLength = minLengthValidator(2);
 const maxNameLength = maxLengthValidator(40);
 
 const ReceptionForm = props => {
 
-    const {handleSubmit, pristine, reset, submitting, services} = props;
+    const {handleSubmit, pristine, submitting, services} = props;
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={s.receptionForm} onSubmit={handleSubmit}>
             <div>
-                <label>Як до Вас звертатися <span className={style.requiredStar}>*</span> :</label>
+                <div className={s.label}>Ім'я пацієнта <span className={style.requiredStar}>*</span> :</div>
                 <div>
                     <Field
                         name="name"
                         component={InputCreator}
-                        placeholder="Як до Вас звертатися..."
+                        placeholder="Введіть ім'я..."
                         validate={[requiredValidator, minNameLength, maxNameLength]}
                     />
                 </div>
 
             </div>
             <div>
-                <label>Номер телефону <span className={style.requiredStar}>*</span> :</label>
+                <div className={s.label}>Номер телефону <span className={style.requiredStar}>*</span> :</div>
 
                 <Field
                     name="phone_number"
                     component={InputCreator}
-                    placeholder="Введіть ваш номер телефону..."
+                    placeholder="Введіть номер телефону..."
                     validate={[requiredValidator, phoneNumberValidator]}
 
                 />
             </div>
             <div>
-                <label>Електронна пошта <span className={style.requiredStar}>*</span> :</label>
+                <div className={s.label}>Електронна пошта пацієнта <span className={style.requiredStar}>*</span> :</div>
                 <div>
                     <Field
                         name="email"
                         component={InputCreator}
                         type="email"
-                        placeholder="Введіть ваш емейл..."
+                        placeholder="Введіть емейл..."
                         validate={[requiredValidator, emailValidator]}
                     />
                 </div>
@@ -55,7 +56,7 @@ const ReceptionForm = props => {
 
 
             <div>
-                <label>Час прийому <span className={style.requiredStar}>*</span> :</label>
+                <div className={s.label}>Час прийому <span className={style.requiredStar}>*</span> :</div>
                 <div>
                     <Field
                         name="date"
@@ -68,7 +69,7 @@ const ReceptionForm = props => {
             </div>
 
 
-            <label>Послуга <span className={style.requiredStar}>*</span> : </label>
+            <div className={s.label}>Послуга <span className={style.requiredStar}>*</span> : </div>
 
             <Field name="service_id" component={SelectCreator}
                    validate={[requiredValidator, isCorrectServiceValidator]}>
@@ -78,14 +79,10 @@ const ReceptionForm = props => {
                 }
 
             </Field>
-            <div>
-                <button type="submit" disabled={pristine || submitting}>
-                    Підтвердити
-                </button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>
-                    Очистити дані
-                </button>
-            </div>
+            <button className={s.check} type="submit" disabled={pristine || submitting}>
+                Підтвердити
+            </button>
+
         </form>
     )
 };

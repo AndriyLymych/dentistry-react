@@ -151,7 +151,32 @@ const RegisterDoctorForm = props => {
 
                         </Field>
                     </div>
+                    <div>
+                        <div className={s.label}>Кабінет:</div>
+                        <div>
+                            <Field
+                                name="room"
+                                component={InputCreator}
+                                type="text"
+                                placeholder="Введіть номер кабінету..."
+                                validate={[requiredValidator, isNumberValidator]}
 
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className={s.label}>Стаж роботи:</div>
+                        <div>
+                            <Field
+                                name="experience"
+                                component={InputCreator}
+                                type="text"
+                                placeholder="Введіть стаж..."
+                                validate={[requiredValidator,isNumberValidator]}
+
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
 

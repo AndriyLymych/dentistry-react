@@ -1,11 +1,14 @@
 .profileContainer{
     margin: 0 auto;
     display: flex;
+    justify-content: center;
 }
 .profileMenu{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
+
 }
 .profileInfoItem{
     width: 250px;

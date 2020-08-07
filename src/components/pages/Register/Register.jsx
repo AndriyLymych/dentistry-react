@@ -55,9 +55,9 @@ const Register = ({
                     !isRegisterSuccess &&
                     (match.path === '/my-profile/register-admin' || match.path === '/register') ?
                         <div className={style.regInfoContainer}>
-                            <div className={match.path==='/register'? style.regInfo :style.regAdminInfo}>
+                            <div className={match.path === '/register' ? style.regInfo : style.regAdminInfo}>
                                 {
-                                    match.path === '/register' ? <h1 className={style.regTitle}>Реєстрація:</h1>:
+                                    match.path === '/register' ? <h1 className={style.regTitle}>Реєстрація:</h1> :
                                         <h1 className={style.regTitle}>Реєстрація адміністратора:</h1>
                                 }
 
@@ -75,7 +75,10 @@ const Register = ({
                 }
 
             </div>
-            <Footer/>
+            {
+                match.path === '/register' && <Footer/>
+
+            }
         </div>
     )
 };

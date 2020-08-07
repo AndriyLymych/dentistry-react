@@ -1,0 +1,16 @@
+.receptionTitle{
+    width: 80%;
+    color: #2694d6;
+    font-family: "Arial MT", serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.receptionContainer{
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}

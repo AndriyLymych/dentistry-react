@@ -13,12 +13,13 @@ export const medicalServicesAPI = {
 
 
     },
-    addService: (service, description, photo, price, access_token) => {
+    addService: (service,small_description, description, photo, price, access_token) => {
 
         const formData = new FormData();
 
         formData.append('service', service);
         formData.append('description', description);
+        formData.append('small_description', description);
         formData.append('image', photo);
         formData.append('price', price);
 
