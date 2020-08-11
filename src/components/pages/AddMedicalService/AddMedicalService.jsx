@@ -10,14 +10,14 @@ const AddMedicalServiceReduxForm = reduxForm({
 })(AddMedicalServiceForm);
 
 
-const AddMedicalService = ({addMedicalService, isServiceWorkDone, isLoading,error}) => {
+const AddMedicalService = ({addMedicalService, isServiceWorkDone, isLoading, error}) => {
 
     if (isLoading) {
         return <Preloader/>
     }
 
     const onSubmit = data => {
-        addMedicalService(data.service, data.small_description, data.description, data.photo?.[0], data?.price)
+        addMedicalService(data.service, data.small_description, data.description, data.photo[0], data.price)
     };
 
     return (

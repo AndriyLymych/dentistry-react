@@ -1,6 +1,8 @@
 import {checkAccessTokenPresent} from "../../../helpers/checkAccessTokenPresent";
 import {receptionAPI} from "../../../api/receptionAPI";
 import {setIsLoading, setMyReceptions} from "./actions";
+import {customErrors} from "../../../constant/customErrors/customErrors";
+import {refreshUserToken} from "../refreshReducer/thunks";
 
 export const getMyProfileReceptions = email => async dispatch => {
 
@@ -16,7 +18,10 @@ export const getMyProfileReceptions = email => async dispatch => {
 
     } catch (e) {
         dispatch(setIsLoading(false));
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(getMyProfileReceptions(email))
+        }
     }
 
 
@@ -34,7 +39,10 @@ export const getAllReception = () => async dispatch => {
         dispatch(setIsLoading(false));
     } catch (e) {
         dispatch(setIsLoading(false));
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(getAllReception())
+        }
     }
 };
 
@@ -48,7 +56,10 @@ export const deleteReceptionRecordByPatient = (id, email) => async dispatch => {
 
         dispatch(setMyReceptions(receptions.data))
     } catch (e) {
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(deleteReceptionRecordByPatient(id, email))
+        }
     }
 
 
@@ -63,6 +74,9 @@ export const deleteReceptionRecordByDoctor = id => async dispatch => {
 
         dispatch(setMyReceptions(records.data))
     } catch (e) {
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(deleteReceptionRecordByDoctor(id))
+        }
     }
 };

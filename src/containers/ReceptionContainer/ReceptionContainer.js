@@ -6,7 +6,7 @@ import Reception from "../../components/pages/Reception/Reception";
 const mapStateToProps = state => {
     return {
         services: state.serviceReducer.services,
-        isReceptionSuccess: state.receptionReducer.isRegisterSuccess,
+        isReceptionSuccess: state.receptionReducer.isReceptionSuccess,
         isAuth: state.authReducer.isAuth,
         isReceptionLoading: state.receptionReducer.isReceptionLoading
     }

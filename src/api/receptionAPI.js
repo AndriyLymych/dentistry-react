@@ -1,5 +1,6 @@
 import axiosInstance from '../helpers/axiosInstance'
 import {headersEnum as headerEnum} from "../constant/authConstant/header.enum";
+import {checkAccessTokenPresent} from "../helpers/checkAccessTokenPresent";
 
 export const receptionAPI = {
 
@@ -13,9 +14,15 @@ export const receptionAPI = {
 
     },
 
-    receptionPatientToDB: reception_data => {
+    receptionPatientToDB: (reception_data) => {
 
-        return axiosInstance.post(`patients/reception`, reception_data)
+        const token = checkAccessTokenPresent();
+
+        return axiosInstance.post(`patients/reception`, reception_data,{
+            headers:{
+                [headerEnum.AUTHORIZATION]:token
+            }
+        })
 
     },
     dropReceptionRecordByPatient: (record_id, access_token) => {

@@ -30,7 +30,8 @@
     font-size: 70px;
     text-align: center;
     width: 90%;
-    align-self: end;
+    margin-top: 7%;
+    align-self: center;
 }
 
 @media (max-width: 1060px) {

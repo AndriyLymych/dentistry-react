@@ -28,3 +28,12 @@
     height: 40%;
     align-self: center;
 }
+.receptionSuccess{
+    width: 100%;
+    color: #2694d6;
+    font-family: "Arial MT", serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin-top: 8%;
+    text-align: center;
+}

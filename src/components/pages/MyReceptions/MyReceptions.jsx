@@ -91,7 +91,7 @@ const MyReceptions = (
                                         }
 
                                         <TableHead>
-                                            <TableRow >
+                                            <TableRow>
                                                 {
                                                     user_role === USER_ROLE.DOCTOR &&
                                                     <TableCell className={style.tableRow}>Ім'я</TableCell>
@@ -115,7 +115,7 @@ const MyReceptions = (
 
                                             {receptions.map(row =>
 
-                                                <TableRow >
+                                                <TableRow>
 
                                                     {user_role === USER_ROLE.DOCTOR &&
                                                     <TableCell className={style.field} component="th"

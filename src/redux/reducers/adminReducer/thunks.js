@@ -37,9 +37,13 @@ export const registerDoctor = data => async dispatch => {
         if (e.response.data.code) {
             dispatch(setRegDoctorErrMsg(customErrors[e.response.data.code].message));
 
-            // dispatch(refreshUserToken(e.response.data.code))
-
         }
+
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(registerDoctor(data))
+        }
+
     }
 };
 
@@ -68,8 +72,11 @@ export const registerAdmin = data => async dispatch => {
 
         if (e.response.data.code) {
             dispatch(setRegisterErrMsg(customErrors[e.response.data.code].message));
-            dispatch(refreshUserToken(e.response.data.code));
 
+        }
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(registerAdmin(data))
         }
 
     }
@@ -78,7 +85,7 @@ export const registerAdmin = data => async dispatch => {
 export const getActiveUsersFromDB = name => async dispatch => {
 
     try {
-        
+
         const users = await userAPI.getAllActiveUsers(name);
 
         dispatch(setActiveUsers(users.data));
@@ -126,9 +133,10 @@ export const blockUserByAdmin = id => async dispatch => {
 
         dispatch(setCreateLoadingByAdmin(false));
 
-        if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
 
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(blockUserByAdmin(id))
         }
 
     }
@@ -155,9 +163,10 @@ export const unlockUserByAdmin = id => async dispatch => {
     } catch (e) {
 
         dispatch(setCreateLoadingByAdmin(false));
-        if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
 
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(unlockUserByAdmin(id))
         }
     }
 };

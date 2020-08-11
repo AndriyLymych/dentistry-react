@@ -2,6 +2,7 @@ import {commentAPI} from "../../../api/commentAPI";
 import {reset} from "redux-form";
 import {refreshUserToken} from "../refreshReducer/thunks";
 import {setCommentInfo, setCurrentPage, setIsLoading, setTotalCommentsCount} from "./actions";
+import {customErrors} from "../../../constant/customErrors/customErrors";
 
 export const getCommentsFromDB = (doctorId, commentsCount, currentPage) => async dispatch => {
 
@@ -39,9 +40,9 @@ export const sendComment = (data, doctor_id, commentCount) => async dispatch => 
     } catch (e) {
         dispatch(setIsLoading(false));
 
-        if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(sendComment(data, doctor_id, commentCount))
         }
     }
 
@@ -63,9 +64,10 @@ export const deleteChosenComment = (comment_id, doctorId, commentCount, currentP
 
     } catch (e) {
         dispatch(setIsLoading(false));
-        if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
 
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(deleteChosenComment(comment_id, doctorId, commentCount, currentPage))
         }
 
     }
@@ -90,9 +92,9 @@ export const editChosenComment = (comment_id, doctorId, newComment, commentCount
     } catch (e) {
         dispatch(setIsLoading(false));
 
-        if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(editChosenComment(comment_id, doctorId, newComment, commentCount, currentPage))
         }
 
     }

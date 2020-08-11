@@ -7,8 +7,8 @@ import {setIsAuth, setMeDates, setMyID} from "../authReducer/actions";
 import historyRout from "../../../helpers/history";
 import {setRefreshLoading} from "./actions";
 
-export const refreshUserToken = errCode => async dispatch => {
-//TODO зробити перевірку на рефреш в кетчі редюсерів і викликати ше раз метод рекурсивно
+export const refreshUserToken = () => async dispatch => {
+
     try {
         dispatch(setRefreshLoading(true));
 
@@ -37,6 +37,7 @@ export const refreshUserToken = errCode => async dispatch => {
 
     } catch (e) {
         if (e.response.data.code && e.response.data.code === customErrors[4013].code) {
+            dispatch(setRefreshLoading(false));
 
             localStorage.removeItem(tokenEnum.access_token);
             localStorage.removeItem(tokenEnum.refresh_token);

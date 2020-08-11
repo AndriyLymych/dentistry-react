@@ -145,7 +145,7 @@ const RegisterDoctorForm = props => {
                                validate={[requiredValidator, isCorrectSpecialityValidator]}>
                             <option defaultChecked>Виберіть спеціальність:</option>
                             {
-                                specialities.map(speciality => <option
+                                specialities.map(speciality => <option key={speciality.id}
                                     value={speciality.id}>{speciality.label}</option>)
                             }
 

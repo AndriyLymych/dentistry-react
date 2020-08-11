@@ -2,6 +2,7 @@ import {checkAccessTokenPresent} from "../../../helpers/checkAccessTokenPresent"
 import {userAPI} from "../../../api/userAPI";
 import {refreshUserToken} from "../refreshReducer/thunks";
 import {setIsEvaluated, setIsMarkLoading, setMark} from "./actions";
+import {customErrors} from "../../../constant/customErrors/customErrors";
 
 export const setDoctorMark = (mark, doctor_id) => async dispatch => {
     try {
@@ -25,9 +26,9 @@ export const setDoctorMark = (mark, doctor_id) => async dispatch => {
 
     } catch (e) {
         dispatch(setIsMarkLoading(true));
-        if (e.response.data.code){
-            dispatch(refreshUserToken(e.response.data.code))
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(setDoctorMark(mark, doctor_id))
         }
 
     }
@@ -47,9 +48,10 @@ export const getIsEvaluatedDoctor = doctor_id => async dispatch => {
         dispatch(setIsMarkLoading(true));
     } catch (e) {
         dispatch(setIsMarkLoading(true));
-        if (e.response.data.code){
-            dispatch(refreshUserToken(e.response.data.code))
 
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(getIsEvaluatedDoctor(doctor_id))
         }
     }
 

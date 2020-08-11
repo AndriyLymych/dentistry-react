@@ -141,6 +141,7 @@ a {
     width: 30px;
     display: none;
     transition: 0.3s;
+    cursor: pointer;
 
 }
 

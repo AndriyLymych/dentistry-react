@@ -10,7 +10,7 @@ const mapStateToProps = state => {
     return {
         isServiceWorkDone: state.serviceReducer.isServiceWorkDone,
         isLoading: state.serviceReducer.isLoading,
-        error: state.serviceReducer.updateMedicalServicePhotoErrMsg,
+        error: state.serviceReducer.addMedicalServicePhotoErrMsg,
     }
 };
 const AddMedicalServiceWithRouter = withRouter(AddMedicalService);

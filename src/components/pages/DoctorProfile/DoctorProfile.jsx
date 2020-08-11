@@ -18,7 +18,6 @@ const CommentReduxForm = reduxForm({
 const DoctorProfile = (
     {
         isLoading,
-        doctorProfile,
         doctorProfile: {
             id: doctorId,
             email,
@@ -190,6 +189,7 @@ const DoctorProfile = (
                                             commentInfo.map(
                                                 comment =>
                                                     <CommentCard
+                                                        key={comment.id}
                                                         commentId={comment.id}
                                                         commentText={comment.commentText}
                                                         commentTime={comment.created_at}

@@ -26,7 +26,6 @@ export const getMeInfo = () => async dispatch => {
         const token = checkAccessTokenPresent();
 
         if (token) {
-
             const meDates = await authAPI.meInfo(token);
 
             dispatch(setMeDates(meDates.data));
@@ -41,7 +40,7 @@ export const getMeInfo = () => async dispatch => {
     } catch (e) {
         dispatch(setIsLoading(false));
         if (e.response.data.code === customErrors[4012].code) {
-            dispatch(refreshUserToken(e.response.data.code));
+            dispatch(refreshUserToken());
             dispatch(getMeInfo())
         }
 
@@ -163,14 +162,6 @@ export const loginWithGoogle = () => async dispatch => {
     }
 };
 
-export const loginFacebookUrl = () => async dispatch => {
-
-    try {
-        await authAPI.loginFacebookUrl();
-
-    } catch (e) {
-    }
-};
 
 export const loginAdmin = (email, password) => async dispatch => {
 
@@ -230,7 +221,7 @@ export const logout = () => async dispatch => {
 
 
     } catch (e) {
-        console.log(e);
+
     }
 
 
@@ -259,9 +250,13 @@ export const changeUserPassword = data => async dispatch => {
         if (e.response.data.code) {
 
             dispatch(changePasswordErrMsg(customErrors[e.response.data.code].message));
-            dispatch(refreshUserToken(e.response.data.code))
-
         }
+        if (e.response.data.code === customErrors[4012].code) {
+
+            dispatch(refreshUserToken());
+            dispatch(changeUserPassword(data))
+        }
+
     }
 };
 
@@ -333,9 +328,11 @@ export const updateUserDates = data => async dispatch => {
 
     } catch (e) {
         dispatch(setIsProfileUpdate(true));
+
         if (e.response.data.code === customErrors[4012].code) {
-            dispatch(refreshUserToken(e.response.data.code))
-            await updateUserDates(data)
+
+            dispatch(refreshUserToken());
+            dispatch(updateUserDates(data));
         }
     }
 };
@@ -368,7 +365,11 @@ export const updateDoctorProfilePhoto = avatar => async dispatch => {
         if (e.response.data.code) {
 
             dispatch(updateDoctorPhotoErrMsg(customErrors[e.response.data.code].message));
-            dispatch(refreshUserToken(e.response.data.code))
+        }
+
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(updateDoctorProfilePhoto(avatar))
         }
     }
 };

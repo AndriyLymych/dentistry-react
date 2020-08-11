@@ -1,4 +1,5 @@
 import {
+    ADD_SERVICE_PHOTO_ERR_MSG,
     SET_IS_DELETED,
     SET_IS_SERVICE_WORK_DONE,
     SET_LOADING_PROGRESS,
@@ -11,3 +12,4 @@ export const setLoadingProgress = payload => ({type: SET_LOADING_PROGRESS, paylo
 export const setIsServiceWorkDone = payload => ({type: SET_IS_SERVICE_WORK_DONE, payload});
 export const setIsDeleted = payload => ({type: SET_IS_DELETED, payload});
 export const updateServicePhotoErrMsg = payload => ({type: UPDATE_SERVICE_PHOTO_ERR_MSG, payload});
+export const addServicePhotoErrMsg = payload => ({type: ADD_SERVICE_PHOTO_ERR_MSG, payload});

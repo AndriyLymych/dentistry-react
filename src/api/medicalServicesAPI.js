@@ -13,7 +13,7 @@ export const medicalServicesAPI = {
 
 
     },
-    addService: (service,small_description, description, photo, price, access_token) => {
+    addService: (service, small_description, description, photo, price, access_token) => {
 
         const formData = new FormData();
 

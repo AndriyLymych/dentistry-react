@@ -3,7 +3,14 @@ import {checkAccessTokenPresent} from "../../../helpers/checkAccessTokenPresent"
 import {refreshUserToken} from "../refreshReducer/thunks";
 import {setServiceProfile} from "../serviceProfileReducer/actions";
 import {customErrors} from "../../../constant/customErrors/customErrors";
-import {setIsDeleted, setIsServiceWorkDone, setLoadingProgress, setServices, updateServicePhotoErrMsg} from "./actions";
+import {
+    setIsDeleted,
+    setIsServiceWorkDone,
+    setLoadingProgress,
+    setServices,
+    updateServicePhotoErrMsg,
+    addServicePhotoErrMsg
+} from "./actions";
 
 export const getServicesFromDB = () => async dispatch => {
 
@@ -11,8 +18,7 @@ export const getServicesFromDB = () => async dispatch => {
         dispatch(setLoadingProgress(true));
 
         let services = await medicalServicesAPI.getAllMedicalServices();
-        // console.log('1');
-        console.log(services.data);
+
         dispatch(setServices(services.data));
         dispatch(setLoadingProgress(false));
 
@@ -22,7 +28,7 @@ export const getServicesFromDB = () => async dispatch => {
     }
 };
 
-export const addMedicalService = (service, description, photo, price) => async dispatch => {
+export const addMedicalService = (service, small_description, description, photo, price) => async dispatch => {
 
     try {
         dispatch(setLoadingProgress(true));
@@ -31,10 +37,11 @@ export const addMedicalService = (service, description, photo, price) => async d
 
         if (token) {
 
-            const addService = await medicalServicesAPI.addService(service, description, photo, price, token);
+            const addService = await medicalServicesAPI.addService(service, small_description, description, photo, price, token);
 
             Promise.all([addService]).then(() => {
                     dispatch(setIsServiceWorkDone(true));
+                    dispatch(addServicePhotoErrMsg(null));
                     dispatch(setLoadingProgress(false));
                 }
             );
@@ -42,9 +49,13 @@ export const addMedicalService = (service, description, photo, price) => async d
         }
     } catch (e) {
         dispatch(setLoadingProgress(false));
-        if (e.response.data.code) {
-            // dispatch(refreshUserToken(e.response.data.code))
 
+        if (e.response.data.code===customErrors[4037].code) {
+            dispatch(addServicePhotoErrMsg(customErrors[e.response.data.code].message));
+        }
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(addMedicalService(service, small_description, description, photo, price))
         }
     }
 };
@@ -67,9 +78,9 @@ export const deleteMedicalService = id => async dispatch => {
         }
     } catch (e) {
         dispatch(setLoadingProgress(false));
-        if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(deleteMedicalService(id))
         }
     }
 };
@@ -92,9 +103,9 @@ export const updateMedicalService = (data, id) => async dispatch => {
         }
     } catch (e) {
         dispatch(setLoadingProgress(false));
-        if (e.response.data.code) {
-            dispatch(refreshUserToken(e.response.data.code))
-
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(updateMedicalService(data, id))
         }
     }
 };
@@ -126,8 +137,11 @@ export const updateMedicalServicePhoto = (photo, id) => async dispatch => {
         if (e.response.data.code) {
 
             dispatch(updateServicePhotoErrMsg(customErrors[e.response.data.code].message));
-            dispatch(refreshUserToken(e.response.data.code))
 
+        }
+        if (e.response.data.code === customErrors[4012].code) {
+            dispatch(refreshUserToken());
+            dispatch(updateMedicalServicePhoto(photo, id))
         }
     }
 };

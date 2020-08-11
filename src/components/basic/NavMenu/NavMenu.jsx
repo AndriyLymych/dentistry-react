@@ -8,7 +8,7 @@ const NavMenu = ({isAuth, logout}) => {
 
     return (
         <div>
-            <div className={!show ? style.burger : style.burger } onClick={event => {
+            <div className={!show ? style.burger : style.burger } onClick={() => {
                 setShow(!show);
             }}>
                 <div className={!show ? style.burgerItem : style.burgerItem + ' ' + style.burgerFirst}/>

@@ -1,4 +1,5 @@
 import {
+    ADD_SERVICE_PHOTO_ERR_MSG,
     SET_IS_DELETED,
     SET_IS_SERVICE_WORK_DONE,
     SET_LOADING_PROGRESS,
@@ -11,7 +12,8 @@ const initialState = {
     isServiceWorkDone: false,
     isDeleted: false,
     isServiceUpdated: false,
-    updateMedicalServicePhotoErrMsg: null
+    updateMedicalServicePhotoErrMsg: null,
+    addMedicalServicePhotoErrMsg: null
 };
 
 const serviceReducer = (state = initialState, action) => {
@@ -41,6 +43,11 @@ const serviceReducer = (state = initialState, action) => {
             return {
                 ...state,
                 updateMedicalServicePhotoErrMsg: action.payload
+            };
+        case  ADD_SERVICE_PHOTO_ERR_MSG :
+            return {
+                ...state,
+                addMedicalServicePhotoErrMsg: action.payload
             };
 
         default :

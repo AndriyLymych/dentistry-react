@@ -24,7 +24,6 @@ const Reception = ({receptionPatient, isReceptionSuccess, isReceptionLoading, ge
     const onSubmit = data => {
         receptionPatient(data)
     };
-    //TODO err reception success
 
     return (
         <div className={style.receptionContainer}>
@@ -41,7 +40,7 @@ const Reception = ({receptionPatient, isReceptionSuccess, isReceptionLoading, ge
                        </div>
                        <img className={style.receptionImg} src={receptionImg} alt=""/>
                    </div> :
-                    <div className={style.receptionTitle}>Запис пройшов успішно!</div>
+                    <div className={style.receptionSuccess}>Запис пройшов успішно!</div>
             }
         </div>
     )

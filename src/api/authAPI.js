@@ -20,16 +20,6 @@ export const authAPI = {
     loginGoogle: () => {
         return axiosInstance.get(`/auth/google/callback`)
     },
-    loginFacebookUrl: () => {
-
-        return axiosInstance.get(`/auth/facebook`, {
-            headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:5000'
-            }
-        })
-
-    },
-
 
     meInfo: access_token => {
 
