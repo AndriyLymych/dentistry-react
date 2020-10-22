@@ -14,7 +14,6 @@ export const adminAPI = {
 
         return axiosInstance.get('/admin/auth/me', {
             headers: {
-
                 [headerEnum.AUTHORIZATION]: access_token
             }
         })
@@ -23,7 +22,6 @@ export const adminAPI = {
 
         return axiosInstance.post('/admin/create-doctor', data, {
             headers: {
-
                 [headerEnum.AUTHORIZATION]: access_token
             }
         })

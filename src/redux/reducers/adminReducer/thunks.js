@@ -50,7 +50,6 @@ export const registerDoctor = data => async dispatch => {
 export const registerAdmin = data => async dispatch => {
 
     try {
-
         dispatch(setCreateLoadingByAdmin(true));
 
         const token = checkAccessTokenPresent();

@@ -1,5 +1,5 @@
 import React from "react";
-import {Redirect, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Main from "../components/pages/Main/Main";
 import AboutUs from "../components/pages/AboutUs/AboutUs";
 import RegisterContainer from "../containers/RegisterContainer/RegisterContainer";
