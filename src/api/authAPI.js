@@ -1,6 +1,5 @@
 import axiosInstance from '../helpers/axiosInstance'
 import {headersEnum as headerEnum} from "../constant/authConstant/header.enum";
-import {HTTP_OPTIONS} from "../helpers/httpHeaders";
 
 export const authAPI = {
 
